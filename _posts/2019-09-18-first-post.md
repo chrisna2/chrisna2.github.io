@@ -3,11 +3,8 @@ title: "나의 첫 깃헙 블로그"
 date: 2019-09-18 08:26:28 -0400
 categories: jekyll update
 ---
-https://dreamgonfly.github.io/2018/01/27/jekyll-remote-theme.html
-
-위에 경로를 참조하여 블로그름 만들고 있는 중이다. 
-내가 생각한 네이버 블로그랑은 좀 많이 다른 것 같다.
-역시 프로그래머는 깃헙과 친해 져야 한다. 
+Hello World!
+핫쭈구리로 살다가 진짜 개발자가 되고 싶은 내가 인사한다.
 
 앞으로 블로그를 시작하고자 한다. 
 마음을 다잡고 끊임없이 개발자로 살고자 한다. 나는 개발이 좋다.
@@ -25,3 +22,11 @@ https://dreamgonfly.github.io/2018/01/27/jekyll-remote-theme.html
 
 결국 이렇게 꾸준하게 하지 못하면 아무것도 안되는 거였다.
 결국 모든 것을 걸지 않으면 아무것도 안되는 거였다.
+
+https://dreamgonfly.github.io/2018/01/27/jekyll-remote-theme.html
+
+위에 경로를 참조하여 블로그름 만들고 있는 중이다. 
+내가 생각한 네이버 블로그랑은 좀 많이 다른 것 같다.
+역시 프로그래머는 깃헙과 친해 져야 한다. 
+
+아직 뭐가 없다. 계속 붙여야지.
