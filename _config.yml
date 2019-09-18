@@ -107,11 +107,11 @@ analytics:
 
 # Site Author
 author:
-  name             : "Your Name"
+  name             : "NaHyunKee"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am an **amazing** person."
-  location         : "Somewhere"
-  email            :
+  bio              : "세상을 뒤바꿀 무지막지한 도전기"
+  location         : "Seoul in Korea"
+  email            : "marksman703@gmail.com"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
