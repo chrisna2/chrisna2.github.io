@@ -19,7 +19,7 @@ locale                   : "ko-KO"
 title                    : "Keep Going, Keep Programing"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "NaHyunKee"
+name                     : "Hyun-Kee Na"
 description              : "세상을 뒤바꿀 무지막지한 도전기"
 url                      : "https://chrisna2.github.io"
 baseurl                  : ""
@@ -107,7 +107,7 @@ analytics:
 
 # Site Author
 author:
-  name             : "NaHyunKee"
+  name             : "Hyun-Kee Na"
   avatar           : "/images/DaftPunk.jpg"
   bio              : "세상을 뒤바꿀 무지막지한 도전기"
   location         : "Seoul in Korea"
