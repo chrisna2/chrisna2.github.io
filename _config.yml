@@ -16,10 +16,10 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "ko-KO"
-title                    : "Keep Going, Keep Programig"
+title                    : "Keep Going, Keep Programing"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "Na Hyun Kee"
+name                     : "NaHyunKee"
 description              : "세상을 뒤바꿀 무지막지한 도전기"
 url                      : "https://chrisna2.github.io"
 baseurl                  : ""
