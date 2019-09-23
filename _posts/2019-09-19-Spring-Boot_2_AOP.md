@@ -14,9 +14,9 @@ categories: pointcut AOP
 
 ### Spring Boot안에서 AOP
 
-1. 일단 pom.xml에 의존성 추가
 * * *
-
+일단 pom.xml에 의존성 추가한다.
+* * *
 ```html
 <dependency>
 	<groupId>org.springframework.boot</groupId>
@@ -28,7 +28,8 @@ categories: pointcut AOP
 하지만 기본 웹 설정에서는 들어가지 않고 AOP만 따로 갈거면 위에 의존성을 추가해야 했다.
 다만 위에 의존성이 없더라도 인터셉터는 정상 동작한다.
 
-2. Application 클래스에 어노테이션 추가
+* * *
+Application 클래스에 어노테이션 추가
 * * *
 
 ```java
@@ -40,7 +41,8 @@ public class Application extends SpringBootServletInitializer
 @EnableAspectJAutoProxy 어노테이션은 AOP 클래스를 찾는 클래스이다. 
 위에 설정을 하지 않으면 해당 AOP클래스를 인식하지 못하닌 반드시 먼저 추가할 것
 
-3. AOP 클래스 생성
+* * *
+AOP 클래스 생성
 * * *
 
 ```java
@@ -52,7 +54,7 @@ public class Application extends SpringBootServletInitializer
 public class SimpleAspect {
 ```
 
-4. AOP 메소드 설정
+AOP 메소드 설정
 * * *
 
 ```java
