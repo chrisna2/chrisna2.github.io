@@ -14,6 +14,7 @@ categories: pointcut Exception
 오늘은 아주 간단하게 프로젝트에 Exception을 구성하는 방법에 대해
 정리해보고자 한다. 
 
+* * *
 먼저 Exception 클래스를 정의 해본다.
 * * *
 ```java
@@ -104,6 +105,25 @@ public class CustomException extends RuntimeException{
 ```
 보통 Exception 클래스의 ErrorMsg 혹은 메세지의 경우 DB에 정의 되어 코드를 호출하면 해당 메세지가 출력된다.
 그러나 현재 이 Exception 클래스는 간단하게 구성하는 것이므로 개발자가 직접 메세지를 출력하는 형태로 구성해 보았다.
-이미 runtimeException을 상속 받았기 때문에 상위 클래스의 항목도 포함하고 있다는 점을 주의 하며 일달 간단하게 3개의 
+이미 runtimeException을 상속 받았기 때문에 상위 클래스의 항목도 포함하고 있다는 점을 주의 하며 일단 간단하게 3개의 
 항목을 추가하여 구성했다.
 
+* * *
+Exception 사용법
+* * *
+위와 같이 Exception을 구성했다면 사용법은 간단하다.
+
+'''java
+throw new CustomException("info", "알림창 메세지 출력입니다.");
+throw new CustomException("error", "입력값이 숫자가 아닙니다.");
+```
+이런식으로 로직 상에 브레이크가 필요한 부분에 에러를 던져 주면 된다. 
+필요한 부분에 에러를 던지면 runtimeException으로 인식하여 해당 트랜잭션이 종료된다.
+서비스나 필요 트랜잭션 처리를 했다면 이전에 처리했던 부분도 같이 롤백이 되니 
+이를 신경 써야 한다.
+
+* * *
+예외 처리에 대해 모든 것을 정리해주는 @ExceptionHandler
+* * *
+
+위에서 설명한 예외 처리는 에
