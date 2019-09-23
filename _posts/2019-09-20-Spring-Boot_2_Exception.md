@@ -113,7 +113,7 @@ Exception 사용법
 * * *
 위와 같이 Exception을 구성했다면 사용법은 간단하다.
 
-'''java
+```java
 throw new CustomException("info", "알림창 메세지 출력입니다.");
 throw new CustomException("error", "입력값이 숫자가 아닙니다.");
 ```
