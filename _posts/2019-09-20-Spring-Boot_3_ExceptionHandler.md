@@ -21,10 +21,10 @@ public class ServiceFailHandler {
 	@ResponseBody
 	@ExceptionHandler(Exception.class)
 	public HashMap<String, Object> handle(HttpServletRequest request, Exception ex) throws Throwable {
+ 	
+	msgMap = new HashMap<String, Object>();
     
-    msgMap = new HashMap<String, Object>();
-    
-    //해당 프로젝트 패키지 안에서 발생하는 에러만 추출해서 메세지 출력
+    	//해당 프로젝트 패키지 안에서 발생하는 에러만 추출해서 메세지 출력
 		String stackTrace = "";
 		for(int i = 0; i < ex.getStackTrace().length; i++) {
 			if(ex.getStackTrace()[i].toString().matches(".*com.mymy.project.*")) {
