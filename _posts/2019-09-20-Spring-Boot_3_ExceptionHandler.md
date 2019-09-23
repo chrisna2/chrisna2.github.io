@@ -7,7 +7,7 @@ categories: pointcut ExceptionHandler
 Spring-Boot를 정리하는데 AOP를 정리하고 Exception을 정리한 이유는 바로 ExceptionHandler를 설명하기 위해서였다.
 흔히들 예외 처리를 할 경우 try ~ catch 문을 사용하게 되는데 ExceptionHandler는 try ~ catch 부분에 catch가 하는
 역활들을 한다. 둘 다 에러가 발생할 경우 에러에 대한 후처리를 하는 곳이지만 ExceptionHandlers는 컨트롤러에서 발생하는
-모든 에러들을 캐치해내에 후처리해준다. MVC패턴에 경우 모든 로직의 처리가 Controller에서 발생한다는 점을 생각하면 
+모든 에러들을 캐치하여 후처리를 해준다. MVC패턴에 경우 모든 로직의 처리가 Controller에서 발생한다는 점을 생각하면 
 사실상 프로젝트 전반에 걸쳐 발생하는 에러에 대행 후처리를 한다고 생각해도 무방하다.
 
 ```java
