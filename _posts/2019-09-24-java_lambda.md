@@ -1,6 +1,6 @@
 ---
 title: "Java lambda : 람다식은 언제 쓰이게 될까"
-date: 2019-09-24 08:26:28 -0400
+date: 2019-09-24
 categories: java lambda jdk10 jdk8
 ---
 
