@@ -1,8 +1,9 @@
 ---
-title: Spring-Boot(4) : 배포 기초 정리 스프링부트, appache, tomcat, maven
+title: Spring-Boot(4) : 배포 기초 정리, (스프링부트, appache, tomcat, maven)
 date: 2019-09-27 08:26:28 -0400
 categories: springboot deploy maven
 ---
+
 
 # was? tomcat? apache? 으아아아아!
 회사에 입사하면서 수 많은 java와 스크립트를 써내려 갔지만 아직도 개발자임에도 
@@ -37,9 +38,11 @@ jar로 배포되도 알아서 찰떡 같이 배포를 시켜준다고 한다..�
 ```xml
 <packaging>war</packaging>
 ```
+
 바꿔 준다. 내장 톰캣을 안쓰면
+
 ```xml
-		<dependency>
+	<dependency>
      		<groupId>org.springframework.boot</groupId>
       		<artifactId>spring-boot-starter-tomcat</artifactId>
     		<scope>provided</scope>
@@ -47,6 +50,7 @@ jar로 배포되도 알아서 찰떡 같이 배포를 시켜준다고 한다..�
 ```
 <scope>provided</scope> 설정 추가한다. 
 그리고 Applicatin.java를 설정한다.
+
 ```java
 @EnableAspectJAutoProxy
 @SpringBootApplication
@@ -106,7 +110,6 @@ project -> properties -> Maven -> pom.xml 삭제..
     <중략...>
 
 </Host>
-
 ```
 myservice-0.0.1-SNAPSHOT.war 파일을 wepapp에 올리게 되면 자동으로 
 압축이 해제되어 myservice-0.0.1-SNAPSHOT 폴더가 생성되는데 was에서 그 경로를 인식할수 있게
