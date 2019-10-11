@@ -131,6 +131,12 @@ author:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
+      
+      
+# Site header
+header:
+  image: /images/road-header.jpg
+  image_description: "Long way to go"
 
 # Site Footer
 footer:
