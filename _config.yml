@@ -135,7 +135,7 @@ author:
       
 # Site header
 header:
-  image: /images/road-header.jpg
+  image: /assets/images/road-header.jpg
   image_description: "Long way to go"
 
 # Site Footer
