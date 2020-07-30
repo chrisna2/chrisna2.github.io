@@ -20,7 +20,7 @@ title                    : "Keep Going, Keep Programing"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "MadCowBoy"
-description              : "세상을 뒤바꿀 무지막지한 도전기"
+description              : "나, 아직 살아있네."
 url                      : "https://chrisna2.github.io"
 baseurl                  : ""
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -109,7 +109,7 @@ analytics:
 author:
   name             : "MadCowBoy"
   avatar           : "/images/DaftPunk.jpg"
-  bio              : "세상을 뒤바꿀 무지막지한 도전기"
+  bio              : "나, 아직 살아있네."
   location         : "Seoul in Korea"
   email            : "marksman703@gmail.com"
   links:
