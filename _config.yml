@@ -298,14 +298,3 @@ defaults:
       comments: # true
       share: true
       related: true
-  # _diary
-  - scope:
-      path: ""
-      type: diary
-    values:
-      layout: single
-      author_profile: true
-      read_time: true
-      comments: # true
-      share: true
-      related: true
