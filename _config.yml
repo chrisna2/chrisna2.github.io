@@ -15,24 +15,24 @@ remote_theme             : "mmistakes/minimal-mistakes"
 minimal_mistakes_skin    : "air" # "default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
-locale                   : "ko-KO"
-title                    : "Keep Going, Keep Programing"
-title_separator          : "-"
+locale                   : "ko-KO" # 사이트의 언어
+title                    : "Keep Going, Keep Studying" # 블로그 제목
+title_separator          : "-" # 글 제목 - 블로그 제목 사이트 표시
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "MadCowBoy"
-description              : "keep posting~~"
+name                     : "MadCowBoy" # 사이트 소유자
+description              : "열정은 쓰레기, 나른 믿지말고, 시스템을 믿어라" # 사이트의 대한 간단할 설명
 url                      : "https://chrisna2.github.io"
-baseurl                  : ""
-repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
+baseurl                  : "" #사이트의 베이스 URL
+repository               : "chrisna2/chrisna2.github.io" # GitHub 사용자이름/리포지토리 이름 e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
-comments:
-  provider               : # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "custom"
+comments: # 댓글에 대한 설정
+  provider               :  "disqus" # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "custom"
   disqus:
-    shortname            : # https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
+    shortname            : "chrisna2-madcowboy-github-io-blog" # https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
   discourse:
     server               : # https://meta.discourse.org/t/embedding-discourse-comments-via-javascript/31963 , e.g.: meta.discourse.org
   facebook:
@@ -65,9 +65,11 @@ reCaptcha:
   secret                 :
 atom_feed:
   path                   : # blank (default) uses feed.xml
-search                   : # true, false (default)
-search_full_content      : # true, false (default)
-search_provider          : # lunr (default), algolia, google
+
+# 사이트 내에 검색 설정 부분
+search                   : true # true, false (default)
+search_full_content      : false # true, false (default)
+search_provider          : "lunr" # lunr (default) 추가 설정 필요 없음, algolia, google
 algolia:
   application_id         : # YOUR_APPLICATION_ID
   index_name             : # YOUR_INDEX_NAME
@@ -112,6 +114,8 @@ author:
   bio              : "I just changed"
   location         : "Still living in Seoul"
   email            : "marksman703@gmail.com"
+  uri              : "https://chrisna2.github.io"
+  github           : "chrisna2"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
@@ -131,12 +135,6 @@ author:
     #- label: "Instagram"
     #  icon: "fab fa-fw fa-instagram"
     #  # url: "https://instagram.com/"
-      
-      
-# Site header
-header:
-  image: "/images/road-header.jpg"
-  image_description: "Long way to go"
 
 # Site Footer
 footer:
@@ -228,7 +226,7 @@ sass:
 permalink: /:categories/:title/
 paginate: 10 # amount of posts to show
 paginate_path: /page:num/
-timezone: "JP"
+timezone: "Asia/Seoul" 
 
 
 # Plugins (previously gems:)
@@ -265,26 +263,28 @@ tag_archive:
   type: liquid
   path: /tags/
 # https://github.com/jekyll/jekyll-archives
-# jekyll-archives:
-#   enabled:
-#     - categories
-#     - tags
-#   layouts:
-#     category: archive-taxonomy
-#     tag: archive-taxonomy
-#   permalinks:
-#     category: /categories/:name/
-#     tag: /tags/:name/
+ jekyll-archives:
+   enabled:
+     - categories
+     - tags
+   layouts:
+     category: archive-taxonomy
+     tag: archive-taxonomy
+   permalinks:
+     category: /categories/:name/
+     tag: /tags/:name/
 
 
 # HTML Compression
 # - https://jch.penibelst.de/
 compress_html:
   clippings: all
-  ignore:
-    envs: development
+  # ignore:
+  #  envs: development
 
-
+# Front Matter 설정
+# 페이지 본문에 적용되는 기본 설정들을 정의합니다.
+# path 값으로 경로를 설정해 줍니다.
 # Defaults
 defaults:
   # _posts
@@ -292,9 +292,16 @@ defaults:
       path: ""
       type: posts
     values:
-      layout: single
+      layout: posts
       author_profile: true
       read_time: true
-      comments: # true
+      comments: true
       share: true
       related: true
+
+## default date_format
+date_format:
+  title: "%Y-%m-%d"
+  archive: "%m월"
+  categories: "%Y-%m"
+  tag: "%Y-%m"
