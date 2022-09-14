@@ -16,7 +16,7 @@
 lang: "ko-KO" # 사이트의 언어
 title: "Keep Going" # 블로그 제목
 email:
-description:
+description: "습관을 만들기 위한 뻘짓"
 baseurl: # the optional subpath of your site, e.g. "/blog"
 url: "https://chrisna2.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 author:
