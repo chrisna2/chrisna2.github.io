@@ -1,7 +1,7 @@
 ---
 title: "Spring-Boot(3) : ExceptionHandler정리"
 date: 2019-09-23 08:26:28 -0400
-categories: pointcut ExceptionHandler
+categories: springboot
 ---
 
 Spring-Boot를 정리하는데 AOP를 정리하고 Exception을 정리한 이유는 바로 ExceptionHandler를 설명하기 위해서였다.

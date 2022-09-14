@@ -1,7 +1,7 @@
 ---
 title: "Spring-Boot(1) : AOP정리"
 date: 2019-09-19 08:26:28 -0400
-categories: pointcut AOP
+categories: springboot
 ---
 
 ### 스프링부트

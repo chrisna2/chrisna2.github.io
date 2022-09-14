@@ -1,7 +1,7 @@
 ---
 title: "Spring-Boot(4) : 배포 기초 정리, (스프링부트, appache, tomcat, maven)"
 date: 2019-09-27 08:26:28 -0400
-categories: springboot deploy maven
+categories: springboot
 ---
 
 # was? tomcat? apache? 으아아아아!

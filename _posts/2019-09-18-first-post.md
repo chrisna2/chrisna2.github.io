@@ -1,7 +1,7 @@
 ---
 title: "나의 첫 깃헙 블로그"
 date: 2019-09-18 08:26:28 -0400
-categories: jekyll update
+categories: buzydays
 ---
 Hello World!
 핫쭈구리로 살다가 진짜 개발자가 되고 싶은 내가 인사한다.
