@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-# 다시 풀을 심기 위해서 
-
-잔디 밭이 너무 비었다. 모자람 없이 채우자
-
-# 2020-08-13
-블로그에 글이 포스팅이 안된다.
-그냥 이 페이지가 블로그다.
-
-# 2022-09-13
-2년 동안 빌드 배포가 안된것이 그저 오타 였다니.....
-=======
 # [Basically Basic Jekyll Theme][1]
 
 [![LICENSE](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://github.com/mmistakes/jekyll-theme-basically-basic/blob/master/LICENSE)
@@ -997,4 +985,3 @@ Susy is distributed under the terms of the [BSD 3-clause "New" or "Revised" Lice
 
 Basically Basic incorporates [Breakpoint](http://breakpoint-sass.com/).
 Breakpoint is distributed under the terms of the [MIT/GPL Licenses](http://opensource.org/licenses/MIT).
->>>>>>> c5a8aaf5795aaa9a5fe8322094dd9fe0b3c333ca
