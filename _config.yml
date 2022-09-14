@@ -16,7 +16,7 @@ minimal_mistakes_skin    : "air" # "default", "air", "aqua", "contrast", "dark",
 
 # Site Settings
 locale                   : "ko-KO" # 사이트의 언어
-title                    : "Keep Going, Keep Studying" # 블로그 제목
+title                    : "Keep Going" # 블로그 제목
 title_separator          : "-" # 글 제목 - 블로그 제목 사이트 표시
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "MadCowBoy" # 사이트 소유자
