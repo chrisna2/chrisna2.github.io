@@ -1,6 +1,6 @@
 ---
 title: "[springboot] Spring-Boot(3) : ExceptionHandler정리"
-date: 2019-09-23 08:26:28 -0400
+date: 2019-09-23 08:26:28 +0900
 categories: springboot
 ---
 
