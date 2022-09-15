@@ -2,6 +2,7 @@
 title: "[buzydays] 나의 첫 깃헙 블로그"
 date: 2019-09-18 08:26:28 +0900
 categories: buzydays
+classes: wide
 ---
 Hello World!
 핫쭈구리로 살다가 진짜 개발자가 되고 싶은 내가 인사한다.

@@ -2,6 +2,7 @@
 title: "[springboot] Spring-Boot(1) : AOP정리"
 date: 2019-09-19 08:26:28 +0900
 categories: springboot
+classes: wide
 ---
 
 ### 스프링부트

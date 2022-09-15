@@ -2,6 +2,7 @@
 title: "[springboot] Spring-Boot(2) : Exception 정리"
 date: 2019-09-20 08:26:28 +0900
 categories: springboot
+classes: wide
 ---
 
 기본적으로 Exception은 프로그램 자체 에러를 표현하는 경우도 존재하지만,
