@@ -1,5 +1,5 @@
 ---
-title: "나의 첫 깃헙 블로그"
+title: "[buzydays] 나의 첫 깃헙 블로그"
 date: 2019-09-18 08:26:28 -0400
 categories: buzydays
 ---

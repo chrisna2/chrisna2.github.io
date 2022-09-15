@@ -1,5 +1,5 @@
 ---
-title: "Spring-Boot(2) : Exception 정리"
+title: "[springboot] Spring-Boot(2) : Exception 정리"
 date: 2019-09-20 08:26:28 -0400
 categories: springboot
 ---
