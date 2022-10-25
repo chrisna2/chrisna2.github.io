@@ -13,7 +13,7 @@ classes: wide
 
 ### - Filter > Interceptopr > Aop > Interceptor > Filter
 
-![aop_inter_filter](../images/aop_inter_filter.png)
+![aop_inter_filter](/images/aop_inter_filter.png)
 
 - Interceptor와 Filter는 Servlet 단위에서 실행된다. 
 - 반면 AOP는 메소드 앞에 Proxy패턴의 형태로 실행된다.
