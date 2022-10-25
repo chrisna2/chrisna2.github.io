@@ -109,9 +109,9 @@ analytics:
 
 # Site Author
 author:
-  name             : "MadCowBoy"
+  name             : "HyunKee's Dev Blog"
   avatar           : "/images/Logo_blog.PNG"
-  bio              : "I just changed"
+  bio              : "열정이 아니라 습관을 만들자."
   location         : "Still living in Seoul"
   # email            : "marksman703@gmail.com"
   uri              : "https://chrisna2.github.io"
