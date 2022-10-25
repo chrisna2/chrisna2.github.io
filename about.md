@@ -7,7 +7,7 @@ navigation: true
 author_profile: true
 ---
 
-![my-logo](/images/Logo_blog.png){: width="300px" height="300px"}
+![my-logo](/images/Logo_blog.png)
 
 ## 나현기 (HyunKeeNa) - MadCoyBoy
 
