@@ -56,8 +56,8 @@ classes: wide
 8) Advice의 경우 JointPoint나 ProceedingJointPoint등을 활용해서 호출한다.  
 9) Interceptor의 경우 필터와 같이 HttpServletRequest, HttpServletResponse를 파라미터로 사용함  
 10) AOP의 포인트 컷  
-	- @Before 대상 메서드의 수행전
-	- @After 대상 메서드의 수행후
-	- @After-returning 대상 메서드의 정상적인 수행 후
-	- @After-throwing 예외 발생 후
-	- @Around 대상 메서듸 수행 전/후
+	- @Before 대상 메서드의 수행전  
+	- @After 대상 메서드의 수행후  
+	- @After-returning 대상 메서드의 정상적인 수행 후  
+	- @After-throwing 예외 발생 후  
+	- @Around 대상 메서듸 수행 전/후  
