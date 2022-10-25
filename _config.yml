@@ -18,14 +18,14 @@ minimal_mistakes_skin    : "air" # "default", "air", "aqua", "contrast", "dark",
 locale                   : "ko-KO" # 사이트의 언어
 title                    : "Keep Going" # 블로그 제목
 title_separator          : "-" # 글 제목 - 블로그 제목 사이트 표시
-subtitle                 : "HyunKee's Dev Blog"
+subtitle                 : "HyunKee's Dev Blog - Not Passion, Make System"
 name                     : "MadCowBoy" # 사이트 소유자
 description              : "열정이 아니라 습관을 만들자." # 사이트의 대한 간단할 설명
 url                      : "https://chrisna2.github.io"
 baseurl                  : "" #사이트의 베이스 URL
 repository               : "chrisna2/chrisna2.github.io" # GitHub 사용자이름/리포지토리 이름 e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
-logo                     : "/images/Logo.PNG" # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
+logo                     : "/images/Logo_blog.PNG" # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
@@ -110,7 +110,7 @@ analytics:
 # Site Author
 author:
   name             : "MadCowBoy"
-  avatar           : "/images/Logo.PNG"
+  avatar           : "Logo_blog.PNG"
   bio              : "I just changed"
   location         : "Still living in Seoul"
   # email            : "marksman703@gmail.com"
