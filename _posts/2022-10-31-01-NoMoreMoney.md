@@ -1,6 +1,6 @@
 ---
 title: "[buzydays] 돈이 내 지식을 채워주지 않는다."
-date: 2022-10-31 22:36:00 +0900
+date: 2022-10-31 12:36:00 +0900
 categories: buzydays
 classes: wide
 ---
