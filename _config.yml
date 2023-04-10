@@ -300,7 +300,7 @@ defaults:
       related: true
 
 ## default date_format
-date_format: "%Y년 %m월 %d일 %H시"
+date_format: "%Y년 %m월 %d일 %H시 %M분 %S초"
 ##  title: "%Y-%m-%d"
 ##  archive: "%m월"
 ##  categories: "%Y-%m"
