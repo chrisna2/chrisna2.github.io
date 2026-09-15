@@ -634,6 +634,7 @@ let state = {
   sessionProgress: {}, // id -> reps done today
   manualMode: false,   // if true, skip mic recognition and always use self-report buttons
   answerTimeLimit: 5,  // seconds allowed to answer before auto-marked wrong
+  strictness: 'medium', // 'loose' | 'medium' | 'strict' — how exactly speech must match the target
   frameReps: {}         // frame id -> times practiced
 };
 
@@ -712,11 +713,30 @@ function getSentence(id){ return SENTENCES.find(s=>s.id===id); }
 
 // ---------- SPEECH ----------
 const synth = window.speechSynthesis;
+
+// Cache the list of available English voices so we can pick a random one
+// each time we speak (different browsers/OSes expose different accents).
+let cachedEnVoices = [];
+function loadEnVoices(){
+  if(!synth) return;
+  cachedEnVoices = synth.getVoices().filter(v => v.lang && v.lang.toLowerCase().startsWith('en'));
+}
+if(synth){
+  loadEnVoices();
+  synth.onvoiceschanged = loadEnVoices; // voice list loads async on some browsers
+}
+function randomEnVoice(){
+  if(!cachedEnVoices.length) return null;
+  return cachedEnVoices[Math.floor(Math.random()*cachedEnVoices.length)];
+}
+
 function speak(text, onend){
   if(!synth){ if(onend) onend(); return; }
   synth.cancel();
   const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'en-US';
+  const voice = randomEnVoice();
+  if(voice){ u.voice = voice; u.lang = voice.lang; }
+  else{ u.lang = 'en-US'; }
   u.rate = 0.95;
   if(onend) u.onend = onend;
   synth.speak(u);
@@ -732,13 +752,34 @@ if(sttSupported){
   recognition.maxAlternatives = 1;
 }
 
+// Words the browser's speech recognizer frequently mis-hears for one another
+// (weak/unstressed function words that sound almost identical out loud).
+// Grading treats each group as interchangeable so the person isn't penalized
+// for a recognizer mistake rather than an actual pronunciation mistake.
+const STT_CONFUSION_GROUPS = [
+  ['the','that','than','they'],
+  ['a','uh','of'],
+  ['for','four'],
+  ['to','too','two'],
+  ['is','this'],
+  ['and','an'],
+];
+function collapseConfusable(word){
+  for(const group of STT_CONFUSION_GROUPS){
+    if(group.includes(word)) return group[0];
+  }
+  return word;
+}
+function normWords(s){
+  return s.toLowerCase().replace(/[^a-z0-9' ]/g,'').split(/\s+/).filter(Boolean).map(collapseConfusable);
+}
+
 function wordMatchScore(target, heard){
   // F1-style score: penalizes both missing target words (recall) AND
   // extra/unrelated words in what was heard (precision), so a reply that
   // reuses the sentence "frame" but swaps out the actual content doesn't
   // score artificially high.
-  const norm = s => s.toLowerCase().replace(/[^a-z0-9' ]/g,'').split(/\s+/).filter(Boolean);
-  const t = norm(target), h = norm(heard);
+  const t = normWords(target), h = normWords(heard);
   if(t.length===0 || h.length===0) return 0;
   const tSet = new Set(t), hSet = new Set(h);
   let hitFromTarget = 0;
@@ -754,8 +795,7 @@ function wordMatchScore(target, heard){
 // Strict drill mode: exact word-for-word match required (order doesn't matter,
 // but every word must be present, nothing missing, nothing extra).
 function isExactMatch(target, heard){
-  const norm = s => s.toLowerCase().replace(/[^a-z0-9' ]/g,'').split(/\s+/).filter(Boolean);
-  const t = norm(target), h = norm(heard);
+  const t = normWords(target), h = normWords(heard);
   if(t.length !== h.length) return false;
   const count = {};
   for(const w of t) count[w] = (count[w]||0) + 1;
@@ -764,6 +804,14 @@ function isExactMatch(target, heard){
     count[w]--;
   }
   return Object.values(count).every(c => c === 0);
+}
+
+// Pass/fail decision that respects the user's chosen strictness level.
+function isPass(target, heard){
+  const s = wordMatchScore(target, heard);
+  if(state.strictness === 'strict') return isExactMatch(target, heard);
+  if(state.strictness === 'loose') return s >= 0.55;
+  return s >= 0.8; // 'medium' (default)
 }
 
 // ---------- WAVEFORM ----------
@@ -878,6 +926,14 @@ function renderSession(){
           ${[3,5,7,10,15,0].map(v => `<option value="${v}" ${state.answerTimeLimit===v?'selected':''}>${v===0?'제한 없음':v+'초'}</option>`).join('')}
         </select>
       </label>
+      <label style="display:flex; align-items:center; gap:8px; font-size:11.5px; color:var(--ink-dim); margin-top:10px;">
+        채점 엄격도:
+        <select id="sessStrictness" style="background:var(--bg-soft); color:var(--ink); border:1px solid var(--line); border-radius:8px; padding:4px 8px; font-size:11.5px;">
+          <option value="loose" ${state.strictness==='loose'?'selected':''}>느슨하게</option>
+          <option value="medium" ${state.strictness==='medium'?'selected':''}>보통</option>
+          <option value="strict" ${state.strictness==='strict'?'selected':''}>엄격하게 (정확히 일치)</option>
+        </select>
+      </label>
     </div>`;
 
   buildWave(document.getElementById('sessWave'), 24);
@@ -893,6 +949,10 @@ function renderSession(){
   });
   document.getElementById('sessTimeLimit').addEventListener('change', (e)=>{
     state.answerTimeLimit = parseInt(e.target.value, 10);
+    saveState();
+  });
+  document.getElementById('sessStrictness').addEventListener('change', (e)=>{
+    state.strictness = e.target.value;
     saveState();
   });
 
@@ -968,14 +1028,14 @@ function finishAttempt(s, heard, timedOut){
     return;
   }
   if(heard){
-    const exact = isExactMatch(s.en, heard);
+    const exact = isPass(s.en, heard);
     if(exact){
       feedback.className = 'feedback show ok';
-      feedback.innerHTML = `✓ 정답 (정확히 일치): "${heard}" <span class="override-link" id="sessOverrideBad">아니요, 사실 틀렸어요</span>`;
+      feedback.innerHTML = `✓ 정답 처리: "${heard}" <span class="override-link" id="sessOverrideBad">아니요, 사실 틀렸어요</span>`;
       registerRep(s, true);
     }else{
       feedback.className = 'feedback show retry';
-      feedback.innerHTML = `✗ 오답 (문장이 정확히 일치하지 않음): "${heard}" <span class="override-link" id="sessOverrideGood">아니요, 사실 맞았어요</span>`;
+      feedback.innerHTML = `✗ 오답 처리: "${heard}" <span class="override-link" id="sessOverrideGood">아니요, 사실 맞았어요</span>`;
       registerRep(s, false);
     }
     bindSessOverride(s);
@@ -1134,6 +1194,14 @@ function renderChapterPractice(){
           ${[3,5,7,10,15,0].map(v => `<option value="${v}" ${state.answerTimeLimit===v?'selected':''}>${v===0?'제한 없음':v+'초'}</option>`).join('')}
         </select>
       </label>
+      <label style="display:flex; align-items:center; gap:8px; font-size:11.5px; color:var(--ink-dim); margin-top:10px;">
+        채점 엄격도:
+        <select id="chStrictness" style="background:var(--bg-soft); color:var(--ink); border:1px solid var(--line); border-radius:8px; padding:4px 8px; font-size:11.5px;">
+          <option value="loose" ${state.strictness==='loose'?'selected':''}>느슨하게</option>
+          <option value="medium" ${state.strictness==='medium'?'selected':''}>보통</option>
+          <option value="strict" ${state.strictness==='strict'?'selected':''}>엄격하게 (정확히 일치)</option>
+        </select>
+      </label>
     </div>`;
   buildWave(document.getElementById('chWave'), 24);
   document.getElementById('chListenBtn').addEventListener('click', () => speak(item.en));
@@ -1142,6 +1210,10 @@ function renderChapterPractice(){
   document.getElementById('chBadBtn').addEventListener('click', () => registerChapterRep(item, false));
   document.getElementById('chTimeLimit').addEventListener('change', (e) => {
     state.answerTimeLimit = parseInt(e.target.value, 10);
+    saveState();
+  });
+  document.getElementById('chStrictness').addEventListener('change', (e) => {
+    state.strictness = e.target.value;
     saveState();
   });
   document.getElementById('chManualToggle').addEventListener('change', (e) => {
@@ -1206,14 +1278,14 @@ function finishChapterAttempt(item, heard, timedOut){
     return;
   }
   if(heard){
-    const exact = isExactMatch(item.en, heard);
+    const exact = isPass(item.en, heard);
     if(exact){
       feedback.className = 'feedback show ok';
-      feedback.innerHTML = `✓ 정답 (정확히 일치): "${heard}" <span class="override-link" id="chOverrideBad">아니요, 사실 틀렸어요</span>`;
+      feedback.innerHTML = `✓ 정답 처리: "${heard}" <span class="override-link" id="chOverrideBad">아니요, 사실 틀렸어요</span>`;
       registerChapterRep(item, true);
     }else{
       feedback.className = 'feedback show retry';
-      feedback.innerHTML = `✗ 오답 (문장이 정확히 일치하지 않음): "${heard}" <span class="override-link" id="chOverrideGood">아니요, 사실 맞았어요</span>`;
+      feedback.innerHTML = `✗ 오답 처리: "${heard}" <span class="override-link" id="chOverrideGood">아니요, 사실 맞았어요</span>`;
       registerChapterRep(item, false);
     }
     bindChOverride(item);
@@ -1308,7 +1380,12 @@ function speakSeq(list, onDone){
     if(!synth){ i++; setTimeout(step, 300); return; }
     const item = list[i];
     const u = new SpeechSynthesisUtterance(item.text);
-    u.lang = item.lang;
+    if(item.lang === 'en-US'){
+      const voice = randomEnVoice();
+      if(voice){ u.voice = voice; u.lang = voice.lang; } else { u.lang = item.lang; }
+    }else{
+      u.lang = item.lang;
+    }
     u.rate = item.lang === 'en-US' ? 0.95 : 1.0;
     u.onend = () => { i++; setTimeout(step, 350); };
     synth.speak(u);
@@ -1454,7 +1531,7 @@ function revealLatencyAnswer(){
     recognition.onresult = (e)=>{
       if(handled) return; handled = true;
       const heard = e.results[0][0].transcript;
-      const exact = isExactMatch(latCurrent.en, heard);
+      const exact = isPass(latCurrent.en, heard);
       clearInterval(iv); animateWave(wave, false);
       feedback.className = exact ? 'feedback show ok' : 'feedback show retry';
       feedback.textContent = exact ? `✓ 정답: "${heard}"` : `✗ 오답: "${heard}" → 정답: ${latCurrent.en}`;
@@ -1582,8 +1659,7 @@ function renderTopicPhrases(){
 let frameIdx = 0;
 
 function startsWithFrame(prefix, heard){
-  const norm = s => s.toLowerCase().replace(/[^a-z0-9' ]/g,'').split(/\s+/).filter(Boolean);
-  const p = norm(prefix), h = norm(heard);
+  const p = normWords(prefix), h = normWords(heard);
   if(h.length < p.length) return false;
   for(let i=0;i<p.length;i++){ if(h[i]!==p[i]) return false; }
   return true;
