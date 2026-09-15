@@ -122,6 +122,8 @@
     margin-top:14px; padding:12px 14px; border-radius:12px; font-size:13px; display:none;
   }
   .feedback.show{ display:block; }
+  .override-link{ display:block; margin-top:6px; font-size:11.5px; text-decoration:underline; opacity:0.75; cursor:pointer; }
+  .override-link:hover{ opacity:1; }
   .feedback.ok{ background:rgba(95,217,168,0.12); color:var(--mint); }
   .feedback.retry{ background:rgba(232,101,74,0.12); color:#f2a08e; }
 
@@ -723,22 +725,41 @@ function startSessAttempt(s){
 
 function finishAttempt(s, heard){
   const feedback = document.getElementById('sessFeedback');
+  document.getElementById('sessSelfReport').classList.remove('show');
   if(heard){
     const score = wordMatchScore(s.en, heard);
     if(score >= 0.55){
       feedback.className = 'feedback show ok';
-      feedback.textContent = `✓ 인식됨: "${heard}"`;
+      feedback.innerHTML = `✓ 자동 정답 처리: "${heard}" <span class="override-link" id="sessOverrideBad">아니요, 사실 틀렸어요</span>`;
       registerRep(s, true);
     }else{
       feedback.className = 'feedback show retry';
-      feedback.textContent = `인식됨: "${heard}" — 목표 문장과 차이가 있어요. 다시 한번!`;
+      feedback.innerHTML = `✗ 자동 다시연습 처리: "${heard}" (목표와 차이가 커요) <span class="override-link" id="sessOverrideGood">아니요, 사실 맞았어요</span>`;
       registerRep(s, false);
     }
+    bindSessOverride(s);
   }else{
     feedback.className = 'feedback show retry';
     feedback.textContent = '인식 실패 — 자가 평가로 진행해주세요.';
     document.getElementById('sessSelfReport').classList.add('show');
   }
+}
+
+function bindSessOverride(s){
+  // override only adjusts the "weak sentence" tracking, not the rep count (that's already counted)
+  const bad = document.getElementById('sessOverrideBad');
+  const good = document.getElementById('sessOverrideGood');
+  const feedback = document.getElementById('sessFeedback');
+  if(bad) bad.addEventListener('click', ()=>{
+    state.weak[s.id] = (state.weak[s.id]||0) + 1;
+    saveState();
+    feedback.innerHTML = '✓ 반영했어요 — 이 문장은 취약 문장으로 표시됐어요.';
+  });
+  if(good) good.addEventListener('click', ()=>{
+    state.weak[s.id] = Math.max(0, (state.weak[s.id]||0) - 1);
+    saveState();
+    feedback.innerHTML = '✓ 반영했어요 — 정답으로 정정했어요.';
+  });
 }
 
 function registerRep(s, success){
@@ -919,22 +940,40 @@ function startChapterAttempt(item){
 
 function finishChapterAttempt(item, heard){
   const feedback = document.getElementById('chFeedback');
+  document.getElementById('chSelfReport').classList.remove('show');
   if(heard){
     const score = wordMatchScore(item.en, heard);
     if(score >= 0.5){
       feedback.className = 'feedback show ok';
-      feedback.textContent = `✓ 인식됨: "${heard}"`;
+      feedback.innerHTML = `✓ 자동 정답 처리: "${heard}" <span class="override-link" id="chOverrideBad">아니요, 사실 틀렸어요</span>`;
       registerChapterRep(item, true);
     }else{
       feedback.className = 'feedback show retry';
-      feedback.textContent = `인식됨: "${heard}" — 다시 한번!`;
+      feedback.innerHTML = `✗ 자동 다시연습 처리: "${heard}" (목표와 차이가 커요) <span class="override-link" id="chOverrideGood">아니요, 사실 맞았어요</span>`;
       registerChapterRep(item, false);
     }
+    bindChOverride(item);
   }else{
     feedback.className = 'feedback show retry';
     feedback.textContent = '인식 실패 — 자가 평가로 진행해주세요.';
     document.getElementById('chSelfReport').classList.add('show');
   }
+}
+
+function bindChOverride(item){
+  const bad = document.getElementById('chOverrideBad');
+  const good = document.getElementById('chOverrideGood');
+  const feedback = document.getElementById('chFeedback');
+  if(bad) bad.addEventListener('click', ()=>{
+    state.weak[item.id] = (state.weak[item.id]||0) + 1;
+    saveState();
+    feedback.innerHTML = '✓ 반영했어요 — 취약 문장으로 표시됐어요.';
+  });
+  if(good) good.addEventListener('click', ()=>{
+    state.weak[item.id] = Math.max(0, (state.weak[item.id]||0) - 1);
+    saveState();
+    feedback.innerHTML = '✓ 반영했어요 — 정답으로 정정했어요.';
+  });
 }
 
 function registerChapterRep(item, success){
