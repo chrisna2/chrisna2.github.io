@@ -443,7 +443,8 @@ let state = {
   sessionDate: null,
   sessionIds: [],
   sessionProgress: {}, // id -> reps done today
-  manualMode: false    // if true, skip mic recognition and always use self-report buttons
+  manualMode: false,   // if true, skip mic recognition and always use self-report buttons
+  answerTimeLimit: 5   // seconds allowed to answer before auto-marked wrong
 };
 
 let storageAvailable = true;
@@ -542,13 +543,37 @@ if(sttSupported){
 }
 
 function wordMatchScore(target, heard){
+  // F1-style score: penalizes both missing target words (recall) AND
+  // extra/unrelated words in what was heard (precision), so a reply that
+  // reuses the sentence "frame" but swaps out the actual content doesn't
+  // score artificially high.
   const norm = s => s.toLowerCase().replace(/[^a-z0-9' ]/g,'').split(/\s+/).filter(Boolean);
   const t = norm(target), h = norm(heard);
-  if(t.length===0) return 0;
-  let hit = 0;
-  const hSet = new Set(h);
-  for(const w of t){ if(hSet.has(w)) hit++; }
-  return hit / t.length;
+  if(t.length===0 || h.length===0) return 0;
+  const tSet = new Set(t), hSet = new Set(h);
+  let hitFromTarget = 0;
+  for(const w of t){ if(hSet.has(w)) hitFromTarget++; }
+  let hitFromHeard = 0;
+  for(const w of h){ if(tSet.has(w)) hitFromHeard++; }
+  const recall = hitFromTarget / t.length;      // did they say the target's words?
+  const precision = hitFromHeard / h.length;    // did they avoid adding unrelated words?
+  if(recall + precision === 0) return 0;
+  return 2 * recall * precision / (recall + precision); // F1
+}
+
+// Strict drill mode: exact word-for-word match required (order doesn't matter,
+// but every word must be present, nothing missing, nothing extra).
+function isExactMatch(target, heard){
+  const norm = s => s.toLowerCase().replace(/[^a-z0-9' ]/g,'').split(/\s+/).filter(Boolean);
+  const t = norm(target), h = norm(heard);
+  if(t.length !== h.length) return false;
+  const count = {};
+  for(const w of t) count[w] = (count[w]||0) + 1;
+  for(const w of h){
+    if(!count[w]) return false;
+    count[w]--;
+  }
+  return Object.values(count).every(c => c === 0);
 }
 
 // ---------- WAVEFORM ----------
@@ -655,6 +680,12 @@ function renderSession(){
       <label style="display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ink-dim); margin-top:14px;">
         <input type="checkbox" id="sessManualToggle" ${state.manualMode ? 'checked' : ''}> 마이크 인식이 자꾸 실패하면 체크 — 자가 평가만 사용
       </label>
+      <label style="display:flex; align-items:center; gap:8px; font-size:11.5px; color:var(--ink-dim); margin-top:10px;">
+        답변 제한 시간:
+        <select id="sessTimeLimit" style="background:var(--bg-soft); color:var(--ink); border:1px solid var(--line); border-radius:8px; padding:4px 8px; font-size:11.5px;">
+          ${[3,5,7,10,15,0].map(v => `<option value="${v}" ${state.answerTimeLimit===v?'selected':''}>${v===0?'제한 없음':v+'초'}</option>`).join('')}
+        </select>
+      </label>
     </div>`;
 
   buildWave(document.getElementById('sessWave'), 24);
@@ -666,6 +697,10 @@ function renderSession(){
   document.getElementById('sessBadBtn').addEventListener('click', ()=> registerRep(s, false));
   document.getElementById('sessManualToggle').addEventListener('change', (e)=>{
     state.manualMode = e.target.checked;
+    saveState();
+  });
+  document.getElementById('sessTimeLimit').addEventListener('change', (e)=>{
+    state.answerTimeLimit = parseInt(e.target.value, 10);
     saveState();
   });
 
@@ -689,27 +724,35 @@ function startSessAttempt(s){
   selfReport.classList.remove('show');
 
   if(sttSupported && !state.manualMode){
-    btn.textContent = '● 듣는 중...';
+    const limit = state.answerTimeLimit;
+    btn.textContent = limit > 0 ? `● 듣는 중... (${limit}초 안에)` : '● 듣는 중...';
     btn.classList.add('recording');
     waveIv = animateWave(wave, true);
     let handled = false;
+    const timer = limit > 0 ? setTimeout(()=>{
+      if(handled) return; handled = true;
+      try{ recognition.stop(); }catch(e){}
+      finishAttempt(s, null, true);
+    }, limit * 1000) : null;
     recognition.onresult = (e)=>{
       if(handled) return; handled = true;
+      clearTimeout(timer);
       const heard = e.results[0][0].transcript;
-      finishAttempt(s, heard);
+      finishAttempt(s, heard, false);
     };
     recognition.onerror = ()=>{
       if(handled) return; handled = true;
-      finishAttempt(s, null);
+      clearTimeout(timer);
+      finishAttempt(s, null, false);
     };
     recognition.onend = ()=>{
       btn.textContent = '🎙 말하기';
       btn.classList.remove('recording');
       clearInterval(waveIv);
       animateWave(wave, false);
-      if(!handled){ handled = true; finishAttempt(s, null); }
+      if(!handled){ handled = true; clearTimeout(timer); finishAttempt(s, null, false); }
     };
-    try{ recognition.start(); }catch(e){ finishAttempt(s, null); }
+    try{ recognition.start(); }catch(e){ clearTimeout(timer); finishAttempt(s, null, false); }
   }else{
     // no STT: just give a 4s speaking window then ask self report
     btn.disabled = true;
@@ -723,25 +766,31 @@ function startSessAttempt(s){
   }
 }
 
-function finishAttempt(s, heard){
+function finishAttempt(s, heard, timedOut){
   const feedback = document.getElementById('sessFeedback');
   document.getElementById('sessSelfReport').classList.remove('show');
+  if(timedOut){
+    feedback.className = 'feedback show retry';
+    feedback.textContent = '⏱ 5초 안에 답하지 못해 자동으로 틀린 것으로 처리했어요.';
+    registerRep(s, false);
+    return;
+  }
   if(heard){
-    const score = wordMatchScore(s.en, heard);
-    if(score >= 0.55){
+    const exact = isExactMatch(s.en, heard);
+    if(exact){
       feedback.className = 'feedback show ok';
-      feedback.innerHTML = `✓ 자동 정답 처리: "${heard}" <span class="override-link" id="sessOverrideBad">아니요, 사실 틀렸어요</span>`;
+      feedback.innerHTML = `✓ 정답 (정확히 일치): "${heard}" <span class="override-link" id="sessOverrideBad">아니요, 사실 틀렸어요</span>`;
       registerRep(s, true);
     }else{
       feedback.className = 'feedback show retry';
-      feedback.innerHTML = `✗ 자동 다시연습 처리: "${heard}" (목표와 차이가 커요) <span class="override-link" id="sessOverrideGood">아니요, 사실 맞았어요</span>`;
+      feedback.innerHTML = `✗ 오답 (문장이 정확히 일치하지 않음): "${heard}" <span class="override-link" id="sessOverrideGood">아니요, 사실 맞았어요</span>`;
       registerRep(s, false);
     }
     bindSessOverride(s);
   }else{
     feedback.className = 'feedback show retry';
-    feedback.textContent = '인식 실패 — 자가 평가로 진행해주세요.';
-    document.getElementById('sessSelfReport').classList.add('show');
+    feedback.textContent = '✗ 음성이 인식되지 않아 자동으로 틀린 것으로 처리했어요.';
+    registerRep(s, false);
   }
 }
 
@@ -887,12 +936,22 @@ function renderChapterPractice(){
       <label style="display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ink-dim); margin-top:14px;">
         <input type="checkbox" id="chManualToggle" ${state.manualMode ? 'checked' : ''}> 마이크 인식이 자꾸 실패하면 체크 — 자가 평가만 사용
       </label>
+      <label style="display:flex; align-items:center; gap:8px; font-size:11.5px; color:var(--ink-dim); margin-top:10px;">
+        답변 제한 시간:
+        <select id="chTimeLimit" style="background:var(--bg-soft); color:var(--ink); border:1px solid var(--line); border-radius:8px; padding:4px 8px; font-size:11.5px;">
+          ${[3,5,7,10,15,0].map(v => `<option value="${v}" ${state.answerTimeLimit===v?'selected':''}>${v===0?'제한 없음':v+'초'}</option>`).join('')}
+        </select>
+      </label>
     </div>`;
   buildWave(document.getElementById('chWave'), 24);
   document.getElementById('chListenBtn').addEventListener('click', () => speak(item.en));
   document.getElementById('chRecordBtn').addEventListener('click', () => startChapterAttempt(item));
   document.getElementById('chGoodBtn').addEventListener('click', () => registerChapterRep(item, true));
   document.getElementById('chBadBtn').addEventListener('click', () => registerChapterRep(item, false));
+  document.getElementById('chTimeLimit').addEventListener('change', (e) => {
+    state.answerTimeLimit = parseInt(e.target.value, 10);
+    saveState();
+  });
   document.getElementById('chManualToggle').addEventListener('change', (e) => {
     state.manualMode = e.target.checked;
     saveState();
@@ -909,23 +968,30 @@ function startChapterAttempt(item){
   selfReport.classList.remove('show');
 
   if(sttSupported && !state.manualMode){
-    btn.textContent = '● 듣는 중...';
+    const limit = state.answerTimeLimit;
+    btn.textContent = limit > 0 ? `● 듣는 중... (${limit}초 안에)` : '● 듣는 중...';
     btn.classList.add('recording');
     chapterWaveIv = animateWave(wave, true);
     let handled = false;
+    const timer = limit > 0 ? setTimeout(()=>{
+      if(handled) return; handled = true;
+      try{ recognition.stop(); }catch(e){}
+      finishChapterAttempt(item, null, true);
+    }, limit * 1000) : null;
     recognition.onresult = (e) => {
       if(handled) return; handled = true;
-      finishChapterAttempt(item, e.results[0][0].transcript);
+      clearTimeout(timer);
+      finishChapterAttempt(item, e.results[0][0].transcript, false);
     };
-    recognition.onerror = () => { if(handled) return; handled = true; finishChapterAttempt(item, null); };
+    recognition.onerror = () => { if(handled) return; handled = true; clearTimeout(timer); finishChapterAttempt(item, null, false); };
     recognition.onend = () => {
       btn.textContent = '🎙 말하기';
       btn.classList.remove('recording');
       clearInterval(chapterWaveIv);
       animateWave(wave, false);
-      if(!handled){ handled = true; finishChapterAttempt(item, null); }
+      if(!handled){ handled = true; clearTimeout(timer); finishChapterAttempt(item, null, false); }
     };
-    try{ recognition.start(); }catch(e){ finishChapterAttempt(item, null); }
+    try{ recognition.start(); }catch(e){ clearTimeout(timer); finishChapterAttempt(item, null, false); }
   }else{
     btn.disabled = true;
     chapterWaveIv = animateWave(wave, true);
@@ -938,25 +1004,31 @@ function startChapterAttempt(item){
   }
 }
 
-function finishChapterAttempt(item, heard){
+function finishChapterAttempt(item, heard, timedOut){
   const feedback = document.getElementById('chFeedback');
   document.getElementById('chSelfReport').classList.remove('show');
+  if(timedOut){
+    feedback.className = 'feedback show retry';
+    feedback.textContent = '⏱ 5초 안에 답하지 못해 자동으로 틀린 것으로 처리했어요.';
+    registerChapterRep(item, false);
+    return;
+  }
   if(heard){
-    const score = wordMatchScore(item.en, heard);
-    if(score >= 0.5){
+    const exact = isExactMatch(item.en, heard);
+    if(exact){
       feedback.className = 'feedback show ok';
-      feedback.innerHTML = `✓ 자동 정답 처리: "${heard}" <span class="override-link" id="chOverrideBad">아니요, 사실 틀렸어요</span>`;
+      feedback.innerHTML = `✓ 정답 (정확히 일치): "${heard}" <span class="override-link" id="chOverrideBad">아니요, 사실 틀렸어요</span>`;
       registerChapterRep(item, true);
     }else{
       feedback.className = 'feedback show retry';
-      feedback.innerHTML = `✗ 자동 다시연습 처리: "${heard}" (목표와 차이가 커요) <span class="override-link" id="chOverrideGood">아니요, 사실 맞았어요</span>`;
+      feedback.innerHTML = `✗ 오답 (문장이 정확히 일치하지 않음): "${heard}" <span class="override-link" id="chOverrideGood">아니요, 사실 맞았어요</span>`;
       registerChapterRep(item, false);
     }
     bindChOverride(item);
   }else{
     feedback.className = 'feedback show retry';
-    feedback.textContent = '인식 실패 — 자가 평가로 진행해주세요.';
-    document.getElementById('chSelfReport').classList.add('show');
+    feedback.textContent = '✗ 음성이 인식되지 않아 자동으로 틀린 것으로 처리했어요.';
+    registerChapterRep(item, false);
   }
 }
 
@@ -1176,11 +1248,11 @@ function revealLatencyAnswer(){
     recognition.onresult = (e)=>{
       if(handled) return; handled = true;
       const heard = e.results[0][0].transcript;
-      const score = wordMatchScore(latCurrent.en, heard);
+      const exact = isExactMatch(latCurrent.en, heard);
       clearInterval(iv); animateWave(wave, false);
-      feedback.className = score>=0.5 ? 'feedback show ok' : 'feedback show retry';
-      feedback.textContent = score>=0.5 ? `✓ 좋아요: "${heard}"` : `아쉬워요: "${heard}" → 정답: ${latCurrent.en}`;
-      finishLatencyRound(score>=0.5);
+      feedback.className = exact ? 'feedback show ok' : 'feedback show retry';
+      feedback.textContent = exact ? `✓ 정답: "${heard}"` : `✗ 오답: "${heard}" → 정답: ${latCurrent.en}`;
+      finishLatencyRound(exact);
     };
     recognition.onerror = ()=>{ if(handled) return; handled=true; clearInterval(iv); animateWave(wave,false); finishLatencyRound(false); };
     recognition.onend = ()=>{ if(!handled){ handled=true; clearInterval(iv); animateWave(wave,false); finishLatencyRound(false); } };
