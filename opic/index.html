@@ -1048,13 +1048,27 @@ function bindChOverride(item){
   });
 }
 
+function updateChFill(reps){
+  const fill = document.getElementById('chFill');
+  const count = document.getElementById('chCount');
+  if(fill) fill.style.width = Math.min(100, (reps/TARGET_REPS)*100) + '%';
+  if(count) count.textContent = `${reps}/${TARGET_REPS}`;
+}
+
 function registerChapterRep(item, success){
   const reps = (state.attempts[item.id]||0) + 1;
   state.attempts[item.id] = reps;
   if(!success){ state.weak[item.id] = (state.weak[item.id]||0) + 1; }
   else{ state.weak[item.id] = Math.max(0, (state.weak[item.id]||0) - 0.5); }
   saveState();
-  renderChapterPractice();
+  updateChFill(reps);
+  document.getElementById('chSelfReport').classList.remove('show');
+  if(reps >= TARGET_REPS){
+    // finished this sentence's target reps — give the person a moment to
+    // read the last result before advancing to the next sentence/chapter
+    setTimeout(renderChapterPractice, 1200);
+  }
+  // otherwise: stay on the same sentence/DOM so the feedback stays visible
 }
 
 // ---------- LISTEN-ONLY PANEL ----------
