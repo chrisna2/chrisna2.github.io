@@ -595,7 +595,7 @@ async function run(start){
           await say(sq[0]);
           if(qe)qe.style.color='';
           if(my!==token)return;
-          await sleep(cfg.mode==='listen'?600:1000);if(my!==token)return;
+          await sleep(cfg.mode==='listen'?250:1000);if(my!==token)return;
         }
         if(cfg.mode==='recall'){
           await sleep(total*0.9);if(my!==token)return;
@@ -607,7 +607,7 @@ async function run(start){
           await sleep(450);if(my!==token)return;
         }
         qi=base;
-        await sleep(cfg.mode==='listen'?1000:total*0.8);if(my!==token)return;
+        if(!(cfg.mode==='listen'&&r===cfg.reps)){await sleep(cfg.mode==='listen'?900:total*0.8);if(my!==token)return}
       }
       qi=base+blk.length;
       continue;
@@ -622,7 +622,7 @@ async function run(start){
         await say(sq[0]);
         if(qe)qe.style.color='';
         if(my!==token)return;
-        await sleep(cfg.mode==='listen'?600:1200);if(my!==token)return;
+        await sleep(cfg.mode==='listen'?250:1200);if(my!==token)return;
         setStatus();
       }
     }
