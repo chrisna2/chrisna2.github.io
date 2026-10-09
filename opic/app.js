@@ -85,6 +85,7 @@ const cfg = Object.assign(
     cat: "survey",
     topicOf: {},
     skHint: false,
+    skHideEn: false,
     mode: "shadow",
     rate: 0.9,
     reps: 2,
@@ -1088,20 +1089,29 @@ function renderSkel() {
     h +=
       '<div class="row2"><label class="lbl"><input type="checkbox" id="skHint"' +
       (cfg.skHint ? " checked" : "") +
-      "> 빈칸 힌트 보기 (한글)</label></div>";
+      "> 빈칸 힌트 보기 (한글)</label>" +
+      '<label class="lbl"><input type="checkbox" id="skHideEn"' +
+      (cfg.skHideEn ? " checked" : "") +
+      "> 영어 뼈대 가리기 (키워드·힌트만)</label></div>";
     h +=
       '<div class="ans">' +
       sec.s
         .map(
           (p) =>
-            '<div><div class="e">' +
-            tplHtml(p[0], sk.shown) +
-            "</div>" +
-            (sk.shown
-              ? '<div class="k">' + esc(p[1]) + "</div>"
-              : cfg.skHint && p[3]
-                ? '<div class="k">힌트: ' + esc(p[3]) + "</div>"
-                : "") +
+            "<div>" +
+            (cfg.skHideEn && !sk.shown
+              ? '<div class="k" style="font-weight:600">' +
+                esc(p[2]) +
+                "</div>" +
+                (p[3] ? '<div class="k">힌트: ' + esc(p[3]) + "</div>" : "")
+              : '<div class="e">' +
+                tplHtml(p[0], sk.shown) +
+                "</div>" +
+                (sk.shown
+                  ? '<div class="k">' + esc(p[1]) + "</div>"
+                  : cfg.skHint && p[3]
+                    ? '<div class="k">힌트: ' + esc(p[3]) + "</div>"
+                    : "")) +
             "</div>",
         )
         .join("") +
@@ -1905,8 +1915,8 @@ $("#v-skel").addEventListener("click", (e) => {
 });
 // 응용 탭: 힌트 체크박스
 $("#v-skel").addEventListener("change", (e) => {
-  if (e.target.id === "skHint") {
-    cfg.skHint = e.target.checked;
+  if (e.target.id === "skHint" || e.target.id === "skHideEn") {
+    cfg[e.target.id] = e.target.checked;
     save();
     renderSkel();
   }
