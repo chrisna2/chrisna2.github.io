@@ -2361,3 +2361,219 @@ SKELS.push({
     },
   },
 });
+
+/* ===== L·M. 롤플레이 11번 — 질문하기 (교재 18·19강: 친구편 / 업체편) =====
+ L: 친구에게 약속 잡기 = 용건 → 시간 → 장소 → 활동 → 마무리
+ M: 업체에 문의하기 = 도입 → 종류 → 선호·추천 → 가격 → 결제·할인 → 위치 → 영업시간·주차 → 감사 */
+Object.assign(SK_LABEL, {
+  ACT: "하고 싶은 일",
+  HOOK: "한마디 권유",
+  DO1: "할 일 1",
+  DO2: "할 일 2",
+  REQ: "용건",
+  KIND: "물어볼 종류",
+  KIND2: "물어볼 종류 2",
+  PREF: "원하는 조건",
+});
+SKELS.push(
+  {
+    id: "L",
+    name: "L 친구에게 질문",
+    desc: "약속 잡기: 용건 → 시간 → 장소 → 활동",
+    grp: "롤플레이 11",
+    tag: "RP11",
+    qs: {
+      movie: [
+        "You want to go to see a movie with your friend. Call your friend and ask three or four questions.",
+        "친구와 영화를 보러 가고 싶습니다. 친구에게 전화해서 세네 가지 질문을 하세요.",
+      ],
+      concert: [
+        "You want to go to a concert with your friend. Call your friend and ask three or four questions.",
+        "친구와 콘서트에 가고 싶습니다. 친구에게 전화해서 세네 가지 질문을 하세요.",
+      ],
+      jog: [
+        "You want to go jogging with your friend. Call your friend and ask three or four questions.",
+        "친구와 조깅을 하고 싶습니다. 친구에게 전화해서 세네 가지 질문을 하세요.",
+      ],
+      trip: [
+        "You want to go on a trip with your friend. Call your friend and ask three or four questions.",
+        "친구와 여행을 가고 싶습니다. 친구에게 전화해서 세네 가지 질문을 하세요.",
+      ],
+      cafe: [
+        "You want to hang out at a cafe with your friend. Call your friend and ask three or four questions.",
+        "친구와 카페에서 시간을 보내고 싶습니다. 친구에게 전화해서 세네 가지 질문을 하세요.",
+      ],
+    },
+    parts: [
+      [
+        "Hi, how are you? I'm calling because I want to <ACT> with you this weekend. <HOOK>",
+        "안녕, 잘 지내? 이번 주말에 너랑 <ACT> 전화했어. <HOOK>",
+        "① 용건",
+      ],
+      [
+        "Do you have time this weekend? What about this Saturday? What time is good for you?",
+        "이번 주말에 시간 있어? 토요일은 어때? 몇 시가 괜찮아?",
+        "② 시간",
+      ],
+      [
+        "Let's make it then. Where do you want to meet? How about <PLACE>? What do you think?",
+        "그럼 그때로 하자. 어디서 만날까? <PLACE> 어때? 어떻게 생각해?",
+        "③ 장소",
+      ],
+      [
+        "After that, what do you want to do? Do you want to <DO1>, or do you want to <DO2>? It's up to you.",
+        "그 다음엔 뭐 하고 싶어? <DO1> <DO2> 하고 싶어? 네가 정해도 돼.",
+        "④ 활동",
+      ],
+      [
+        "Is there anything I should bring? Just think about it and let me know. See you then. Bye!",
+        "내가 챙겨 갈 게 있을까? 생각해 보고 알려 줘. 그때 보자. 안녕!",
+        "⑤ 마무리",
+      ],
+    ],
+    slots: {
+      movie: {
+        ACT: ["watch a movie", "영화를 보고 싶어서"],
+        HOOK: ["I think you're going to love it.", "너도 분명 좋아할 거야."],
+        PLACE: ["the theater near my house", "우리 집 근처 영화관"],
+        DO1: ["grab something to eat", "뭘 먹거나"],
+        DO2: ["walk around for a while", "좀 걷거나"],
+      },
+      concert: {
+        ACT: ["go to a concert", "콘서트에 가고 싶어서"],
+        HOOK: ["It's going to be a lot of fun.", "정말 재밌을 거야."],
+        PLACE: ["the entrance of the concert hall", "공연장 입구"],
+        DO1: ["get some dinner", "저녁을 먹거나"],
+        DO2: ["have a drink", "한잔하거나"],
+      },
+      jog: {
+        ACT: ["go jogging", "조깅하러 가고 싶어서"],
+        HOOK: ["It's good for our health, and it's refreshing.", "건강에도 좋고 상쾌할 거야."],
+        PLACE: ["the entrance of the park", "공원 입구"],
+        DO1: ["grab a coffee", "커피를 마시거나"],
+        DO2: ["have breakfast", "아침을 먹거나"],
+      },
+      trip: {
+        ACT: ["go on a trip", "여행을 가고 싶어서"],
+        HOOK: ["I'm sure we'll make great memories.", "분명 좋은 추억이 될 거야."],
+        PLACE: ["the train station", "기차역"],
+        DO1: ["see the sights", "관광지를 구경하거나"],
+        DO2: ["try the local food", "현지 음식을 먹어 보거나"],
+      },
+      cafe: {
+        ACT: ["hang out at a cafe", "카페에서 시간을 보내고 싶어서"],
+        HOOK: ["We can catch up on everything.", "그동안 못한 얘기를 나눌 수 있을 거야."],
+        PLACE: ["the cafe in front of my house", "우리 집 앞 카페"],
+        DO1: ["have some dessert", "디저트를 먹거나"],
+        DO2: ["take a walk", "산책하거나"],
+      },
+    },
+  },
+  {
+    id: "M",
+    name: "M 업체에 질문",
+    desc: "문의하기: 종류 → 가격 → 결제 → 위치 → 영업시간 · 3~4개만 골라 물어요",
+    grp: "롤플레이 11",
+    tag: "RP11",
+    qs: {
+      movie: [
+        "You want to watch a movie. Call the theater and ask three or four questions.",
+        "영화를 보고 싶습니다. 영화관에 전화해서 세네 가지 질문을 하세요.",
+      ],
+      concert: [
+        "You want to see a concert. Call the concert hall and ask three or four questions.",
+        "콘서트를 보고 싶습니다. 공연장에 전화해서 세네 가지 질문을 하세요.",
+      ],
+      trip: [
+        "You want to book a hotel for a trip. Call the hotel and ask three or four questions.",
+        "여행을 위해 호텔을 예약하려 합니다. 호텔에 전화해서 세네 가지 질문을 하세요.",
+      ],
+      jog: [
+        "You want to buy running shoes. Call the store and ask three or four questions.",
+        "러닝화를 사고 싶습니다. 매장에 전화해서 세네 가지 질문을 하세요.",
+      ],
+      cafe: [
+        "You want to reserve a table for a gathering. Call the cafe and ask three or four questions.",
+        "모임을 위해 자리를 예약하려 합니다. 카페에 전화해서 세네 가지 질문을 하세요.",
+      ],
+    },
+    parts: [
+      [
+        "Hello, how are you doing? I'm calling to ask you something. I would like to <REQ>.",
+        "안녕하세요, 문의드릴 게 있어요. <REQ> 전화했어요.",
+        "① 도입 · 용건",
+      ],
+      [
+        "What kinds of <KIND> do you have? And what <KIND2> are available?",
+        "<KIND> 종류는 어떤 게 있나요? <KIND2>도 알려 주세요.",
+        "② 종류",
+      ],
+      [
+        "I'd like to <PREF>, if possible. Do you have any recommendations?",
+        "가능하면 <PREF>. 추천해 주실 만한 게 있나요?",
+        "③ 선호 · 추천",
+      ],
+      [
+        "How much is it? Can I receive a discount?",
+        "가격은 얼마인가요? 할인도 받을 수 있나요?",
+        "④ 가격 · 할인",
+      ],
+      [
+        "Can I use a credit card? I have a BC card. Can I use it?",
+        "신용카드 되나요? 저는 BC카드가 있는데, 사용할 수 있나요?",
+        "⑤ 결제",
+      ],
+      [
+        "Where is the <PLACE> located? Can you tell me how to get there?",
+        "<PLACE> 위치가 어디예요? 어떻게 가는지 알려 주실 수 있나요?",
+        "⑥ 위치",
+      ],
+      [
+        "When do you open, and when do you close? Where is the parking area? Is it free?",
+        "몇 시에 열고 몇 시에 닫나요? 주차장은 어디 있나요? 무료인가요?",
+        "⑦ 영업시간 · 주차",
+      ],
+      ["Thank you. Thank you for your help.", "감사합니다. 도와주셔서 감사해요.", "⑧ 감사"],
+    ],
+    slots: {
+      movie: {
+        REQ: [
+          "buy two tickets for a movie that was just released",
+          "새로 개봉한 영화 표 두 장을 사고 싶어서",
+        ],
+        KIND: ["movies", "영화"],
+        KIND2: ["showtimes", "상영 시간"],
+        PREF: ["sit in the middle row", "가운데 줄에 앉고 싶어요"],
+        PLACE: ["theater", "영화관"],
+      },
+      concert: {
+        REQ: ["buy two tickets for a concert", "콘서트 표 두 장을 사고 싶어서"],
+        KIND: ["seats", "좌석"],
+        KIND2: ["ticket types", "표 종류"],
+        PREF: ["sit close to the stage", "무대 가까이 앉고 싶어요"],
+        PLACE: ["concert hall", "공연장"],
+      },
+      trip: {
+        REQ: ["book a hotel room for two nights", "호텔 객실을 이틀 밤 예약하고 싶어서"],
+        KIND: ["rooms", "객실"],
+        KIND2: ["packages", "패키지"],
+        PREF: ["have a room with an ocean view", "바다가 보이는 방이면 좋겠어요"],
+        PLACE: ["hotel", "호텔"],
+      },
+      jog: {
+        REQ: ["buy a pair of running shoes", "러닝화를 사고 싶어서"],
+        KIND: ["running shoes", "러닝화"],
+        KIND2: ["sizes", "사이즈"],
+        PREF: ["get a light and comfortable pair", "가볍고 편한 걸 원해요"],
+        PLACE: ["store", "매장"],
+      },
+      cafe: {
+        REQ: ["reserve a table for four people", "네 명 자리를 예약하고 싶어서"],
+        KIND: ["tables", "좌석"],
+        KIND2: ["menus", "메뉴"],
+        PREF: ["sit by the window", "창가에 앉고 싶어요"],
+        PLACE: ["cafe", "카페"],
+      },
+    },
+  },
+);

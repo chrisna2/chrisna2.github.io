@@ -282,6 +282,7 @@ const TABS = [
   ["blank", "1단계", "빈칸 채우기"],
   ["kw", "2단계", "키워드 말하기"],
   ["skel", "응용", "뼈대 바꿔끼우기"],
+  ["rp", "롤플레이", "11·12·13번"],
   ["mock", "3단계", "모의고사"],
 ];
 // 상단 탭 버튼 그리기 (현재 뷰는 aria-pressed=true)
@@ -308,9 +309,9 @@ function setView(v) {
   $("#v-listen").hidden = v !== "listen";
   $("#v-blank").hidden = v !== "blank";
   $("#v-kw").hidden = v !== "kw";
-  $("#v-skel").hidden = v !== "skel";
+  $("#v-skel").hidden = v !== "skel" && v !== "rp";
   $("#v-mock").hidden = v !== "mock";
-  $("#chips").hidden = v === "mock" || v === "skel";
+  $("#chips").hidden = v === "mock" || v === "skel" || v === "rp";
   $("#dock").hidden = v !== "listen";
   document.body.classList.toggle("nodock", v !== "listen");
   if (v === "listen") {
@@ -321,8 +322,9 @@ function setView(v) {
     kwBuild();
     renderKw();
   }
-  if (v === "skel") {
+  if (v === "skel" || v === "rp") {
     sk.shown = false;
+    sk.drill = null;
     renderSkel();
   }
   if (v === "mock") renderMock();
@@ -895,26 +897,50 @@ function genSec(skId, key) {
   };
 }
 // 응용 탭 상태: playing 전체 재생 중, shown 정답 표시 여부
-const sk = { playing: false, shown: false };
-// 응용 탭 화면: 뼈대 선택(유형별 그룹) → 주제 선택 → 질문과 채워진 뼈대, 주제별 비교표
+const sk = { playing: false, shown: false, drill: null };
+// 롤플레이 11번 질문 연습: 뼈대에서 가운데 문장 3~4개를 무작위로 뽑는다 (첫 인사·마무리는 항상 포함).
+// 키워드만 보고 직접 질문을 만들어 말한 뒤 모범 질문을 확인한다.
+function drillPick(S) {
+  const key = pick(Object.keys(S.slots));
+  const mid = S.parts.map((p, i) => i).slice(1, S.parts.length - 1);
+  const n = Math.min(mid.length, 3 + Math.floor(Math.random() * 2));
+  const chosen = shuffle(mid.slice())
+    .slice(0, n)
+    .sort((a, b) => a - b);
+  return { id: S.id, key, idx: [0, ...chosen, S.parts.length - 1], shown: false };
+}
+// 롤플레이 뼈대(L·M·H·I·J)인지 판별: tag가 RP11 / RP12 / RP13
+const isRpSk = (S) => S.tag.startsWith("RP");
+// 현재 탭에 보여 줄 뼈대 목록: 롤플레이 탭이면 롤플레이 뼈대만, 응용 탭이면 나머지
+const skList = () => SKELS.filter((s) => isRpSk(s) === (cfg.view === "rp"));
+// 응용 탭 / 롤플레이 탭 화면(같은 렌더러 공유): 뼈대 선택(유형별 그룹) → 주제 선택 → 질문과 채워진 뼈대, 주제별 비교표
 function renderSkel() {
+  const list = skList(),
+    rpv = cfg.view === "rp";
+  // 다른 탭에서 고른 뼈대가 이 탭 목록에 없으면 첫 번째 뼈대로 바꾼다
+  if (!list.some((s) => s.id === cfg.skSk)) cfg.skSk = list[0].id;
   const S = SKELS.find((s) => s.id === cfg.skSk),
     keys = Object.keys(S.slots);
   if (!keys.includes(cfg.skKey)) cfg.skKey = keys[0];
   const sec = genSec(S.id, cfg.skKey);
   let h =
-    '<p class="note">뼈대(고정 문장)는 그대로 두고, 빈칸만 주제에 맞게 바꿔 끼웁니다. 어떤 주제 문제가 나와도 같은 뼈대로 답하는 연습입니다.</p>';
+    '<p class="note">' +
+    (rpv
+      ? "롤플레이는 흐름(순서)이 전부입니다. 11번은 질문 3~4개, 12번은 문제 설명 + 대안 2~3개, 13번은 비슷한 과거 경험입니다. 흐름은 그대로 두고 빈칸만 상황에 맞게 바꿔 끼우세요."
+      : "뼈대(고정 문장)는 그대로 두고, 빈칸만 주제에 맞게 바꿔 끼웁니다. 어떤 주제 문제가 나와도 같은 뼈대로 답하는 연습입니다.") +
+    "</p>";
   h +=
     '<div class="lbl" style="margin-bottom:4px">뼈대 · ' +
-    SKELS.length +
+    list.length +
     "개</div>" +
-    [...new Set(SKELS.map((s) => s.grp))]
+    [...new Set(list.map((s) => s.grp))]
       .map(
         (g) =>
           '<div class="lbl" style="margin:6px 0 4px;font-size:11.5px">' +
           esc(g) +
           '</div><div class="pills">' +
-          SKELS.filter((s) => s.grp === g)
+          list
+            .filter((s) => s.grp === g)
             .map(
               (s) =>
                 '<button class="pill" data-sksk="' +
@@ -946,41 +972,84 @@ function renderSkel() {
       )
       .join("") +
     "</div>";
-  h += qCard(sec, 0, "Q · 뼈대 " + S.name + " × " + kn(S, cfg.skKey));
-  h +=
-    '<div class="row2"><span class="lbl">이 뼈대로 말하세요. 빈칸은 이 주제에 맞는 내용으로 바꿔 끼웁니다.</span></div>';
-  h +=
-    '<div class="row2"><label class="lbl"><input type="checkbox" id="skHint"' +
-    (cfg.skHint ? " checked" : "") +
-    "> 빈칸 힌트 보기 (한글)</label></div>";
-  h +=
-    '<div class="ans">' +
-    sec.s
-      .map(
-        (p) =>
-          '<div><div class="e">' +
-          tplHtml(p[0], sk.shown) +
-          "</div>" +
-          (sk.shown
-            ? '<div class="k">' + esc(p[1]) + "</div>"
-            : cfg.skHint && p[3]
-              ? '<div class="k">힌트: ' + esc(p[3]) + "</div>"
+  const dr = sk.drill && sk.drill.id === S.id ? sk.drill : null;
+  if (S.tag === "RP11") {
+    h +=
+      '<div class="row2"><button class="big' +
+      (dr ? " live" : " pri") +
+      '" data-skdrill="1">' +
+      (dr ? "다시 뽑기 (질문 3~4개)" : "질문 3~4개만 뽑아 연습하기") +
+      "</button>" +
+      (dr ? '<button class="big" data-skdrill="0">연습 끄기</button>' : "") +
+      "</div>";
+  }
+  if (dr) {
+    const dsec = genSec(S.id, dr.key);
+    h += qCard(dsec, 0, "Q · " + S.name + " × " + kn(S, dr.key));
+    h +=
+      '<div class="row2"><span class="lbl">이 순서대로 질문을 만들어 말해 보세요. 키워드만 보입니다.</span></div><div class="ans">' +
+      dr.idx
+        .map((i, n) => {
+          const p = dsec.s[i];
+          return (
+            '<div><div class="k" style="font-weight:600">' +
+            (n + 1) +
+            ". " +
+            esc(p[2]) +
+            "</div>" +
+            (dr.shown
+              ? '<div class="e">' +
+                tplHtml(p[0], true) +
+                '</div><div class="k">' +
+                esc(p[1]) +
+                "</div>"
               : "") +
-          "</div>",
-      )
-      .join("") +
-    "</div>";
-  h +=
-    '<div class="row2"><button class="big pri" data-skshow="1">' +
-    (sk.shown ? "정답 가리기" : "정답 보기 · 읽어 주기") +
-    "</button>" +
-    '<button class="big" data-sknext="1">다음 조합 (랜덤)</button>' +
-    '<button class="big' +
-    (sk.playing ? " live" : "") +
-    '" data-skall="1">' +
-    (sk.playing ? "정지" : "이 뼈대로 모든 주제 이어 듣기") +
-    "</button></div>";
-  h += '<div class="note" id="skStatus"></div>';
+            "</div>"
+          );
+        })
+        .join("") +
+      "</div>" +
+      '<div class="row2"><button class="big pri" data-skdrillshow="1">' +
+      (dr.shown ? "정답 가리기" : "모범 질문 보기 · 읽어 주기") +
+      "</button></div>";
+    h += '<div class="note" id="skStatus"></div>';
+  } else {
+    h += qCard(sec, 0, "Q · 뼈대 " + S.name + " × " + kn(S, cfg.skKey));
+    h +=
+      '<div class="row2"><span class="lbl">이 뼈대로 말하세요. 빈칸은 이 주제에 맞는 내용으로 바꿔 끼웁니다.</span></div>';
+    h +=
+      '<div class="row2"><label class="lbl"><input type="checkbox" id="skHint"' +
+      (cfg.skHint ? " checked" : "") +
+      "> 빈칸 힌트 보기 (한글)</label></div>";
+    h +=
+      '<div class="ans">' +
+      sec.s
+        .map(
+          (p) =>
+            '<div><div class="e">' +
+            tplHtml(p[0], sk.shown) +
+            "</div>" +
+            (sk.shown
+              ? '<div class="k">' + esc(p[1]) + "</div>"
+              : cfg.skHint && p[3]
+                ? '<div class="k">힌트: ' + esc(p[3]) + "</div>"
+                : "") +
+            "</div>",
+        )
+        .join("") +
+      "</div>";
+    h +=
+      '<div class="row2"><button class="big pri" data-skshow="1">' +
+      (sk.shown ? "정답 가리기" : "정답 보기 · 읽어 주기") +
+      "</button>" +
+      '<button class="big" data-sknext="1">다음 조합 (랜덤)</button>' +
+      '<button class="big' +
+      (sk.playing ? " live" : "") +
+      '" data-skall="1">' +
+      (sk.playing ? "정지" : "이 뼈대로 모든 주제 이어 듣기") +
+      "</button></div>";
+    h += '<div class="note" id="skStatus"></div>';
+  }
   const cols = Object.keys(S.slots[keys[0]]);
   h +=
     '<details class="res"><summary><span class="tt">이 뼈대의 주제별 빈칸 값 · 한눈에 비교</span></summary><div style="overflow-x:auto"><table class="tbl"><thead><tr><th>주제</th>' +
@@ -1060,7 +1129,7 @@ function mockClear() {
     if (cfg.view === "mock") renderMock();
   }
 }
-// 모의고사 문제 구성: 묘사 → 습관·비교 → 기억에 남는 경험 → 롤플레이 12·13.
+// 모의고사 문제 구성: 묘사 → 습관·비교 → 기억에 남는 경험 → 롤플레이 11·12·13.
 // 각 문제는 기존 묶음 또는 뼈대 응용(약 50%)으로 무작위 생성.
 function buildMock() {
   const used = new Set(),
@@ -1119,6 +1188,8 @@ function buildMock() {
       sec: genSec(sk0.id, pick(Object.keys(sk0.slots))),
     });
   };
+  // 11번은 질문하기 뼈대(친구편 L / 업체편 M)로 매번 새로 만든다
+  genRP("RP11", "롤플레이 11");
   if (Math.random() < 0.5) genRP("RP12", "롤플레이 12");
   else
     add(
@@ -1142,8 +1213,8 @@ function renderMock() {
       '<p class="note">문제만 음성으로 읽어 줍니다. 아무것도 보지 않고 답하세요. 마이크 녹음은 이 페이지에서 쓸 수 없어서, 말한 시간만 기록합니다.</p>' +
       '<div class="row2"><span class="lbl">구성</span><div class="seg">' +
       [
-        ["full", "전체 11문제"],
-        ["short", "짧게 5문제"],
+        ["full", "전체 12문제"],
+        ["short", "짧게 6문제"],
       ]
         .map(
           (o) =>
@@ -1177,7 +1248,7 @@ function renderMock() {
       '<label class="lbl"><input type="checkbox" id="mAuto"' +
       (cfg.mockAuto ? " checked" : "") +
       "> 시간이 끝나면 자동으로 다음 문제</label></div>" +
-      '<p class="note">전체: 주제 3개 × 3문제(묘사, 습관·비교·최근, 기억에 남는 경험) + 롤플레이 12·13번. 각 문제는 절반쯤의 확률로, 응용 탭의 뼈대를 다른 주제에 바꿔 끼워 답해야 하는 문제로 나옵니다. 문제마다 한 번 다시 들을 수 있습니다.</p>' +
+      '<p class="note">전체: 주제 3개 × 3문제(묘사, 습관·비교·최근, 기억에 남는 경험) + 롤플레이 11·12·13번. 각 문제는 절반쯤의 확률로, 응용 탭의 뼈대를 다른 주제에 바꿔 끼워 답해야 하는 문제로 나옵니다. 문제마다 한 번 다시 들을 수 있습니다.</p>' +
       '<button class="big live" data-mstart="1" style="width:100%">시작</button>';
     return;
   }
@@ -1663,6 +1734,7 @@ $("#v-skel").addEventListener("click", (e) => {
   if (a) {
     stopAll();
     cfg.skSk = a.dataset.sksk;
+    sk.drill = null;
     save();
     sk.shown = false;
     renderSkel();
@@ -1672,6 +1744,7 @@ $("#v-skel").addEventListener("click", (e) => {
   if (b) {
     stopAll();
     cfg.skKey = b.dataset.skkey;
+    sk.drill = null;
     save();
     sk.shown = false;
     renderSkel();
@@ -1681,6 +1754,33 @@ $("#v-skel").addEventListener("click", (e) => {
     stopAll();
     ++token;
     say(sec.q[0]);
+    return;
+  }
+  const dbtn = e.target.closest("[data-skdrill]");
+  if (dbtn) {
+    stopAll();
+    if (dbtn.dataset.skdrill === "0") sk.drill = null;
+    else {
+      sk.drill = drillPick(S);
+      ++token;
+      say(genSec(S.id, sk.drill.key).q[0]);
+    }
+    sk.shown = false;
+    renderSkel();
+    return;
+  }
+  if (e.target.closest("[data-skdrillshow]") && sk.drill) {
+    stopAll();
+    sk.drill.shown = !sk.drill.shown;
+    renderSkel();
+    if (sk.drill.shown) {
+      const ds = genSec(S.id, sk.drill.key),
+        my = ++token;
+      sayAll(
+        sk.drill.idx.map((i) => plain(ds.s[i][0])),
+        my,
+      );
+    }
     return;
   }
   if (e.target.closest("[data-skshow]")) {
@@ -1917,4 +2017,4 @@ if (SYNTH) {
 }
 if (cfg.view === "mock" && mock.phase === "setup") {
 }
-setView(["listen", "blank", "kw", "mock"].includes(cfg.view) ? cfg.view : "listen");
+setView(["listen", "blank", "kw", "skel", "rp", "mock"].includes(cfg.view) ? cfg.view : "listen");
