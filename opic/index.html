@@ -126,6 +126,10 @@ mark{background:transparent;color:var(--accent);font-weight:600;border-bottom:2p
 .res .tt{flex:1;min-width:0;font-weight:500;overflow-wrap:anywhere}
 .res .sec2{font-family:var(--font-mono);font-size:12.5px}
 .low{color:var(--live)}
+.tbl{border-collapse:collapse;font-size:13px;min-width:560px;margin-block:6px 10px}
+.tbl th,.tbl td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.tbl thead th{background:var(--surface2);font-weight:600;color:var(--muted);font-size:12px}
+.tbl tbody th{white-space:nowrap;font-weight:600}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 @media (max-width:420px){.chip{padding-inline:12px}.en{font-size:15.5px}.tabs button{font-size:12.5px}}
 </style>
@@ -150,6 +154,7 @@ mark{background:transparent;color:var(--accent);font-weight:600;border-bottom:2p
   </div>
   <div id="v-blank" hidden></div>
   <div id="v-kw" hidden></div>
+  <div id="v-skel" hidden></div>
   <div id="v-mock" hidden></div>
 </div>
 
@@ -423,7 +428,7 @@ const store={
   get(k,d){try{const v=localStorage.getItem('opicLoop.'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
   set(k,v){try{localStorage.setItem('opicLoop.'+k,JSON.stringify(v))}catch(e){}}
 };
-const cfg=Object.assign({view:'listen',unit:'sent',withQ:true,mode:'shadow',rate:0.9,reps:2,gap:1,loop:true,voice:'',random:false,hideEn:false,scope:'sec',topic:0,sec:0,
+const cfg=Object.assign({view:'listen',unit:'sent',withQ:true,skSk:'A',skKey:'cafe',skHint:false,mode:'shadow',rate:0.9,reps:2,gap:1,loop:true,voice:'',random:false,hideEn:false,scope:'sec',topic:0,sec:0,
   bsec:0,koHint:true,kwScope:'topic',kwShuffle:false,kwHint:'kw',mockMode:'full',mockSecs:60,mockCaption:false,mockAuto:true},store.get('cfg',{}));
 let weak=new Set(store.get('weak',[]));
 let weakSec=new Set(store.get('weakSec',[]));
@@ -484,27 +489,28 @@ function stopAudio(){if(cancelSleep)cancelSleep();if(SYNTH)try{speechSynthesis.c
 async function keepAwake(){try{if(navigator.wakeLock&&!wake){wake=await navigator.wakeLock.request('screen');wake.addEventListener('release',()=>{wake=null})}}catch(e){}}
 function releaseAwake(){try{if(wake){wake.release();wake=null}}catch(e){}}
 function beep(f){try{const C=window.AudioContext||window.webkitAudioContext;const c=new C();const o=c.createOscillator(),g=c.createGain();o.frequency.value=f;g.gain.value=.08;o.connect(g);g.connect(c.destination);o.start();setTimeout(()=>{o.stop();c.close()},180)}catch(e){}}
-function stopAll(){token++;playing=false;curRep=0;mockClear();stopAudio();setPlayIcon();setStatus();releaseAwake()}
+function stopAll(){token++;playing=false;curRep=0;sk.playing=false;mockClear();stopAudio();setPlayIcon();setStatus();releaseAwake()}
 async function sayAll(list,my){ // 정답 문장들을 차례로 읽어 주기
   for(const t of list){if(my!==token)return false;await say(t);if(my!==token)return false;await sleep(350)}
   return my===token;
 }
 
 /* ===== 탭 ===== */
-const TABS=[['listen','듣기','따라 말하기'],['blank','1단계','빈칸 채우기'],['kw','2단계','키워드 말하기'],['mock','3단계','모의고사']];
+const TABS=[['listen','듣기','따라 말하기'],['blank','1단계','빈칸 채우기'],['kw','2단계','키워드 말하기'],['skel','응용','뼈대 바꿔끼우기'],['mock','3단계','모의고사']];
 function renderTabs(){
   $('#tabs').innerHTML=TABS.map(t=>'<button data-v="'+t[0]+'" aria-pressed="'+(cfg.view===t[0])+'">'+t[1]+'<small>'+t[2]+'</small></button>').join('');
 }
 function setView(v){
   stopAll();cfg.view=v;save();
   renderTabs();
-  $('#v-listen').hidden=v!=='listen';$('#v-blank').hidden=v!=='blank';$('#v-kw').hidden=v!=='kw';$('#v-mock').hidden=v!=='mock';
-  $('#chips').hidden=v==='mock';
+  $('#v-listen').hidden=v!=='listen';$('#v-blank').hidden=v!=='blank';$('#v-kw').hidden=v!=='kw';$('#v-skel').hidden=v!=='skel';$('#v-mock').hidden=v!=='mock';
+  $('#chips').hidden=v==='mock'||v==='skel';
   $('#dock').hidden=v!=='listen';
   document.body.classList.toggle('nodock',v!=='listen');
   if(v==='listen'){renderMain()}
   if(v==='blank')renderBlank();
   if(v==='kw'){kwBuild();renderKw()}
+  if(v==='skel'){sk.shown=false;renderSkel()}
   if(v==='mock')renderMock();
   window.scrollTo({top:0});
 }
@@ -729,7 +735,260 @@ function kwGo(n){
   const d=kw.deck[kw.i];const my=++token;say(TOPICS[d.ti].secs[d.si].q[0]);
 }
 
+/* ===== 응용: 뼈대 바꿔끼우기 =====
+ 같은 뼈대(고정 문장)에 주제별 빈칸 값만 바꿔 끼워 어떤 주제 문제에도 답하는 연습 */
+const SK_NAMES={jog:'조깅·걷기',cafe:'카페·술집',concert:'콘서트·공연',movie:'영화',trip:'여행',home:'집',music:'음악',subway:'지하철'};
+const SKEY={'조깅·걷기':'jog','카페·술집':'cafe','콘서트·공연':'concert','영화':'movie','여행':'trip','집':'home','음악':'music'};
+const SK_Q={jog:["while jogging or walking","조깅이나 걷기를 하면서"],cafe:["at a cafe","카페에서"],concert:["at a concert","콘서트에서"],
+  movie:["at the movie theater","영화관에서"],trip:["while traveling","여행하면서"],home:["at home","집에서"],music:["while listening to music","음악을 들으면서"],subway:["on the subway","지하철에서"]};
+const SK_LABEL={DOING:'그때 하던 일',REACT:'그때 한 행동',SHELTER:'비를 피한 곳',ENJOY:'그 시간에 한 일',WHERE:'분실 장소',SPOT:'둔 곳',BACK:'되찾은 방법'};
+const SKELS=[
+{id:'A',name:'노을',desc:'좋은 경험',parts:[
+  ["One of my most memorable experiences was watching a beautiful sunset.","가장 기억에 남는 경험 중 하나는 아름다운 노을을 본 거예요.","노을 본 경험"],
+  ["Two weeks ago, I was <DOING> when I saw a stunning sunset.","2주 전에 <DOING> 멋진 노을을 봤어요.","2주 전 · 하던 일"],
+  ["The sky turned orange and red, so I <REACT>.","하늘이 주황색과 붉은색으로 물들어서 <REACT>.","하늘 색 · 반응"],
+  ["I was so amazed to see the beautiful colors.","아름다운 색을 보고 정말 놀랐어요.","감탄"],
+  ["The moment made me feel peaceful and happy.","그 순간 마음이 평온하고 행복했어요.","평온 · 행복"]],
+ slots:{
+  jog:{DOING:["jogging in Boramae Park","보라매공원에서 조깅하다가"],REACT:["stopped running for a moment","잠깐 달리기를 멈췄어요"]},
+  cafe:{DOING:["having a coffee at Starbucks","스타벅스에서 커피를 마시다가"],REACT:["stopped working for a moment","잠깐 하던 일을 멈췄어요"]},
+  concert:{DOING:["walking out of the concert hall","공연장에서 나오다가"],REACT:["stood still for a moment","잠깐 가만히 서 있었어요"]},
+  movie:{DOING:["coming out of the movie theater","영화관에서 나오다가"],REACT:["stopped walking for a moment","잠깐 걸음을 멈췄어요"]},
+  trip:{DOING:["traveling in Jeju","제주를 여행하다가"],REACT:["sat down on the beach for a moment","잠깐 해변에 앉았어요"]},
+  home:{DOING:["standing on the balcony of my apartment","아파트 베란다에 서 있다가"],REACT:["stayed there for a moment","잠깐 그곳에 서 있었어요"]},
+  music:{DOING:["listening to music on my way home","집에 가는 길에 음악을 듣다가"],REACT:["stopped for a moment and took off my headphones","잠깐 멈춰서 헤드폰을 벗었어요"]}}},
+{id:'B',name:'갑자기 비',desc:'예상 밖 상황',parts:[
+  ["One of my memorable experiences was when it suddenly started raining.","기억에 남는 경험 중 하나는 갑자기 비가 내리기 시작했을 때예요.","갑자기 비"],
+  ["I was <DOING>, and I didn't have an umbrella.","<DOING> 우산이 없었어요.","하던 일 · 우산 없음"],
+  ["I ran to <SHELTER> and waited there until the rain stopped.","<SHELTER> 뛰어가서 비가 그칠 때까지 기다렸어요.","비 피한 곳"],
+  ["Surprisingly, that time wasn't bad at all. I <ENJOY>.","놀랍게도 그 시간은 전혀 나쁘지 않았어요. <ENJOY>.","뜻밖의 여유"],
+  ["I realized that not everything is bad, even in unexpected situations.","예상 밖의 상황에서도 모든 게 나쁘지만은 않다는 걸 깨달았어요.","깨달음"]],
+ slots:{
+  jog:{DOING:["riding my bike in Boramae Park","보라매공원에서 자전거를 타고 있었는데"],SHELTER:["a nearby Starbucks","근처 스타벅스로"],ENJOY:["enjoyed a warm coffee and relaxed","따뜻한 커피를 마시며 쉬었어요"]},
+  cafe:{DOING:["riding my bike to Starbucks","스타벅스에 자전거를 타고 가는 중이었는데"],SHELTER:["the Starbucks near my house","집 근처 스타벅스로"],ENJOY:["enjoyed a warm coffee and relaxed","따뜻한 커피를 마시며 쉬었어요"]},
+  concert:{DOING:["waiting in line outside the concert hall","공연장 밖에서 줄을 서 있었는데"],SHELTER:["a nearby cafe","근처 카페로"],ENJOY:["had a warm coffee and listened to the band's songs","따뜻한 커피를 마시며 그 밴드의 노래를 들었어요"]},
+  movie:{DOING:["walking to the movie theater","영화관에 걸어가고 있었는데"],SHELTER:["the theater","영화관으로"],ENJOY:["enjoyed some popcorn and relaxed","팝콘을 먹으며 쉬었어요"]},
+  trip:{DOING:["walking around Jeju","제주를 걸어 다니고 있었는데"],SHELTER:["a small cafe","작은 카페로"],ENJOY:["enjoyed a warm coffee and watched the rain","따뜻한 커피를 마시며 비 오는 풍경을 봤어요"]},
+  music:{DOING:["walking home with my headphones on","헤드폰을 낀 채 집에 걸어가고 있었는데"],SHELTER:["a nearby convenience store","근처 편의점으로"],ENJOY:["listened to my favorite songs and relaxed","좋아하는 노래를 들으며 쉬었어요"]}}},
+{id:'C',name:'지갑 분실',desc:'나쁜 경험',parts:[
+  ["One of my most memorable experiences was losing my wallet <WHERE>.","가장 기억에 남는 경험 중 하나는 <WHERE> 지갑을 잃어버린 거예요.","지갑 분실 · 장소"],
+  ["One day, I <DOING>, and I realized later that I left my wallet <SPOT>.","어느 날 <DOING> 나중에야 지갑을 <SPOT> 두고 온 걸 알았어요.","하던 일 · 둔 곳"],
+  ["I felt very stressed because my cards were in it.","카드가 들어 있어서 스트레스를 많이 받았어요.","스트레스 · 카드"],
+  ["The experience taught me to be more careful with my belongings.","그 경험으로 소지품을 더 조심해야 한다는 걸 배웠어요.","교훈"],
+  ["Luckily, I got it back <BACK>.","다행히 <BACK> 되찾았어요.","결말: 되찾음"]],
+ slots:{
+  subway:{WHERE:["on the subway","지하철에서"],DOING:["was on the subway","지하철을 타고 있었는데"],SPOT:["on the seat","좌석에"],BACK:["from the lost and found","분실물 센터에서"]},
+  jog:{WHERE:["in Boramae Park","보라매공원에서"],DOING:["was resting in Boramae Park","보라매공원에서 쉬고 있었는데"],SPOT:["on a bench","벤치에"],BACK:["when I went back to look for it","다시 가서 찾아보니"]},
+  cafe:{WHERE:["at Starbucks","스타벅스에서"],DOING:["was working at Starbucks","스타벅스에서 작업하고 있었는데"],SPOT:["on the table","테이블 위에"],BACK:["after I called the store","매장에 전화한 뒤"]},
+  concert:{WHERE:["at a concert","콘서트에서"],DOING:["went to a concert","콘서트에 갔는데"],SPOT:["under my seat","좌석 밑에"],BACK:["from the staff at the hall","공연장 직원에게서"]},
+  movie:{WHERE:["at the movie theater","영화관에서"],DOING:["watched a movie at the theater","영화관에서 영화를 봤는데"],SPOT:["under my seat","좌석 밑에"],BACK:["from the theater staff","영화관 직원에게서"]},
+  trip:{WHERE:["while traveling in Japan","일본을 여행하다가"],DOING:["was traveling in Japan","일본을 여행하고 있었는데"],SPOT:["at a restaurant","식당에"],BACK:["after I called the restaurant","식당에 전화한 뒤"]}}}
+];
+SKELS.forEach(s=>{s.tag='4·7·10';s.grp='기억에 남는 경험 · 4·7·10'});
+Object.assign(SK_LABEL,{PLACE:'장소',HOW:'방법',TIME:'걸리는 시간',FEATURE:'특징',WITH:'누구와',WHEN:'언제',WHY:'이유',CONTEXT:'상황',ACT1:'먼저',ACT2:'그다음',MEANING:'의미',
+  PAST:'어릴 적',FEEL:'그때 느낌',NOW:'지금',CHANGE:'변화',CONCL:'결론',WHAT:'최근에 한 일',ADJ:'분위기',DO1:'있는 동안',DO2:'그 뒤',AGAIN:'다시 하고 싶은 것',
+  PROBLEM:'문제 상황',CANT:'못 하게 된 일',ALT1:'대안 1',ALT2:'대안 2',SITUATION:'상황',REQ1:'요청 1',REQ2:'요청 2',SIT:'상황',WHO:'연락한 곳',EXPL:'설명',ASK:'요청',WHO2:'상대',LESSON:'느낀 점'});
+SKELS.push(
+{id:'D',name:'장소 묘사',desc:'자주 가는 곳',grp:'묘사 · 2·5·8',tag:'2·5·8',
+ qs:{
+  jog:["Tell me about the place where you usually jog or walk. Where is it and what is it like?","주로 조깅이나 산책을 하는 장소에 대해 말해 주세요. 어디에 있고 어떤 곳인가요?"],
+  cafe:["Tell me about a cafe you often visit. Where is it and what is it like?","자주 가는 카페에 대해 말해 주세요. 어디에 있고 어떤 곳인가요?"],
+  concert:["Tell me about the place where you go to see concerts. Where is it and what is it like?","콘서트를 보러 가는 곳에 대해 말해 주세요. 어디에 있고 어떤 곳인가요?"],
+  movie:["Tell me about the movie theater you usually go to. Where is it and what is it like?","자주 가는 영화관에 대해 말해 주세요. 어디에 있고 어떤 곳인가요?"],
+  trip:["Tell me about a place you like to travel to. Where is it and what is it like?","여행 가기 좋아하는 곳에 대해 말해 주세요. 어디에 있고 어떤 곳인가요?"]},
+ parts:[
+  ["I usually go to <PLACE>.","저는 보통 <PLACE> 가요.","자주 가는 곳"],
+  ["I go there <HOW>, and it takes about <TIME>.","<HOW> 가는데 약 <TIME> 걸려요.","이동 · 시간"],
+  ["It's <FEATURE>.","그곳은 <FEATURE>.","특징"],
+  ["I usually go <WITH>, <WHEN>.","보통 <WITH> <WHEN> 가요.","누구와 · 언제"],
+  ["I like it because <WHY>.","<WHY> 그곳이 좋아요.","이유"]],
+ slots:{
+  jog:{PLACE:["Boramae Park","보라매공원에"],HOW:["by bike","자전거로"],TIME:["10 minutes","10분"],FEATURE:["big and well-maintained, and there are many people jogging","크고 잘 관리되어 있고 조깅하는 사람이 많아요"],WITH:["alone","혼자"],WHEN:["mostly when I'm bored","주로 심심할 때"],WHY:["it's refreshing, and I can enjoy the greenery","상쾌하고 초록을 즐길 수 있어서"]},
+  cafe:{PLACE:["the Starbucks near my house","집 근처 스타벅스에"],HOW:["by bike","자전거로"],TIME:["5 minutes","5분"],FEATURE:["quiet and clean, and the seats are comfortable","조용하고 깨끗하고 좌석이 편해요"],WITH:["alone","혼자"],WHEN:["mostly when I'm bored","주로 심심할 때"],WHY:["it's a good place to focus on my work","작업에 집중하기 좋은 곳이라서"]},
+  concert:{PLACE:["a concert hall in Seoul","서울의 공연장에"],HOW:["by subway","지하철로"],TIME:["40 minutes","40분"],FEATURE:["big and well-organized, and the sound is great","크고 잘 정돈돼 있고 음향이 훌륭해요"],WITH:["alone","혼자"],WHEN:["whenever I have time","시간 날 때마다"],WHY:["the live music is full of energy","라이브 음악은 에너지가 넘쳐서"]},
+  movie:{PLACE:["the movie theater near my house","집 근처 영화관에"],HOW:["by bike","자전거로"],TIME:["10 minutes","10분"],FEATURE:["clean and well-maintained, and the seats are comfortable","깨끗하게 관리되고 좌석이 편해요"],WITH:["alone","혼자"],WHEN:["whenever I have free time","시간 날 때마다"],WHY:["action movies are exciting and full of energy","액션 영화는 짜릿하고 에너지가 넘쳐서"]},
+  trip:{PLACE:["Jeju Island","제주도에"],HOW:["by plane","비행기로"],TIME:["an hour","1시간"],FEATURE:["full of beautiful nature, and the sea is amazing","아름다운 자연으로 가득하고 바다가 멋져요"],WITH:["alone","혼자"],WHEN:["once or twice a year","1년에 한두 번"],WHY:["I can plan my own schedule and go at my own pace","제 일정대로 제 속도로 다닐 수 있어서"]}}},
+{id:'E',name:'습관·활동',desc:'보통 무엇을 하나',grp:'습관 · 3',tag:'3',
+ qs:{
+  jog:["What do you usually do when you exercise?","운동할 때 보통 무엇을 하나요?"],
+  cafe:["What do you usually do at a cafe?","카페에서 보통 무엇을 하나요?"],
+  concert:["What do you usually do when you go to a concert?","콘서트에 갈 때 보통 무엇을 하나요?"],
+  movie:["What do you usually do when you go to the movies?","영화를 보러 갈 때 보통 무엇을 하나요?"],
+  music:["How do you usually listen to music?","음악을 보통 어떻게 듣나요?"],
+  home:["What do you usually do at home?","집에서 보통 무엇을 하나요?"],
+  trip:["What do you usually do when you travel?","여행할 때 보통 무엇을 하나요?"]},
+ parts:[
+  ["How I spend my time <CONTEXT> is not special.","<CONTEXT> 시간을 보내는 방식은 특별하지 않아요.","평범한 습관"],
+  ["I usually <ACT1>, and then I <ACT2>.","보통 <ACT1> 그다음 <ACT2>.","먼저 → 그다음"],
+  ["I prefer doing it <WITH> because <WHY>.","<WHY> <WITH> 하는 걸 선호해요.","누구와 · 이유"],
+  ["I do it <WHEN>.","<WHEN> 해요.","언제"],
+  ["For me, it's <MEANING>.","저에게는 <MEANING>.","의미"]],
+ slots:{
+  jog:{CONTEXT:["when I exercise","운동하면서"],ACT1:["warm up near the entrance of the park","공원 입구 근처에서 몸을 풀고"],ACT2:["jog around the park for about 30 minutes","공원을 30분쯤 달려요"],WITH:["alone","혼자"],WHY:["I can set my own pace","제 속도대로 달릴 수 있어서"],WHEN:["a few times a week","일주일에 몇 번"],MEANING:["refreshing and a great stress reliever","상쾌하고 스트레스가 잘 풀리는 시간이에요"]},
+  cafe:{CONTEXT:["at a cafe","카페에서"],ACT1:["get a coffee","커피를 사고"],ACT2:["work on my laptop","노트북으로 작업해요"],WITH:["alone","혼자"],WHY:["I can concentrate better","더 집중할 수 있어서"],WHEN:["when I have time on weekends","주말에 시간 있을 때"],MEANING:["a refreshing break","상쾌한 휴식이에요"]},
+  concert:{CONTEXT:["around a concert","콘서트 전후로"],ACT1:["buy a ticket online","온라인으로 표를 사고"],ACT2:["take the subway to the hall","지하철을 타고 공연장에 가요"],WITH:["alone","혼자"],WHY:["I can focus on the music","음악에 집중할 수 있어서"],WHEN:["whenever a band I like holds a concert","좋아하는 밴드가 콘서트를 열 때마다"],MEANING:["an energy booster","활력소예요"]},
+  movie:{CONTEXT:["when I go to the movies","영화를 보러 갈 때"],ACT1:["buy some popcorn","팝콘을 사고"],ACT2:["write a short review after the movie","영화가 끝난 뒤 짧은 리뷰를 써요"],WITH:["alone","혼자"],WHY:["I can focus on the movie","영화에 집중할 수 있어서"],WHEN:["whenever I have free time","시간 날 때마다"],MEANING:["a great way to relax","긴장을 푸는 좋은 방법이에요"]},
+  music:{CONTEXT:["with music","음악과 함께"],ACT1:["put on my headphones","헤드폰을 끼고"],ACT2:["play my favorite rock songs","좋아하는 록 음악을 틀어요"],WITH:["alone","혼자"],WHY:["I can enjoy the sound better","소리를 더 잘 즐길 수 있어서"],WHEN:["when I'm on my computer","컴퓨터를 쓸 때"],MEANING:["a great stress reliever","스트레스를 풀어 주는 시간이에요"]},
+  home:{CONTEXT:["at home","집에서"],ACT1:["turn on my computer","컴퓨터를 켜고"],ACT2:["play online games","온라인 게임을 해요"],WITH:["alone","혼자"],WHY:["I can focus better","더 집중할 수 있어서"],WHEN:["on the weekends","주말에"],MEANING:["my way to recharge","충전하는 방법이에요"]},
+  trip:{CONTEXT:["when I travel","여행할 때"],ACT1:["plan everything by myself","모든 걸 직접 계획하고"],ACT2:["walk around and try local food","걸어 다니며 현지 음식을 먹어 봐요"],WITH:["alone","혼자"],WHY:["I can go at my own pace","제 속도로 다닐 수 있어서"],WHEN:["once or twice a year","1년에 한두 번"],MEANING:["a source of joy and freedom","기쁨과 자유의 원천이에요"]}}},
+{id:'F',name:'어릴 적 vs 지금',desc:'변화 비교',grp:'비교·최근 · 6·9',tag:'6·9',
+ qs:{
+  movie:["How have your movie preferences changed since you were young?","어릴 때부터 지금까지 영화 취향은 어떻게 변했나요?"],
+  music:["How has your taste in music changed since you were young?","어릴 때부터 지금까지 음악 취향은 어떻게 변했나요?"],
+  concert:["How have your concert-going habits and music tastes changed since you were young?","어릴 때부터 지금까지 콘서트와 음악 취향은 어떻게 변했나요?"],
+  cafe:["How is going to cafes different now from when you were young?","지금 카페에 가는 건 어릴 때와 어떻게 다른가요?"],
+  jog:["How has the way you spend time outdoors changed since you were young?","어릴 때부터 야외에서 시간을 보내는 방식은 어떻게 변했나요?"],
+  trip:["How are your trips now different from the trips you took when you were young?","지금의 여행은 어릴 때 갔던 여행과 어떻게 다른가요?"],
+  home:["How is your home different from the home you lived in when you were young?","지금 집은 어릴 때 살던 집과 어떻게 다른가요?"]},
+ parts:[
+  ["When I was young, I <PAST>.","어릴 때 저는 <PAST>.","어릴 적"],
+  ["<FEEL>.","<FEEL>.","그때 느낌"],
+  ["Now I <NOW>.","지금은 <NOW>.","지금"],
+  ["You can say things have <CHANGE> since then.","그때부터 <CHANGE> 할 수 있어요.","변화"],
+  ["In conclusion, <CONCL>.","결론적으로 <CONCL>.","결론"]],
+ slots:{
+  movie:{PAST:["liked “Titanic” and watched it with my parents","'타이타닉'을 좋아했고 부모님과 같이 봤어요"],FEEL:["I didn't know much about movies then, but I really liked it","그땐 영화를 잘 몰랐지만 정말 좋아했어요"],NOW:["like action movies, especially Tarantino's","액션 영화, 특히 타란티노 영화를 좋아해요"],CHANGE:["changed a little","조금 달라졌다고"],CONCL:["my favorite movies are more intense than before","좋아하는 영화가 예전보다 더 강렬해졌어요"]},
+  music:{PAST:["listened to Toy and Roller Coaster","토이와 롤러코스터를 들었어요"],FEEL:["I still like them now, and they are my favorite artists","지금도 좋아하고 가장 좋아하는 아티스트예요"],NOW:["also like rock bands like Silica Gel","실리카겔 같은 록 밴드도 좋아해요"],CHANGE:["changed a little","조금 달라졌다고"],CONCL:["my favorite music is more varied than before","좋아하는 음악이 예전보다 다양해졌어요"]},
+  concert:{PAST:["liked listening to Toy and Roller Coaster","토이와 롤러코스터를 즐겨 들었어요"],FEEL:["I still like them now","지금도 좋아해요"],NOW:["also enjoy rock bands like Silica Gel, and I go to their concerts","실리카겔 같은 록 밴드도 즐기고 콘서트에도 가요"],CHANGE:["changed a little","조금 달라졌다고"],CONCL:["my taste has become wider than before","취향이 예전보다 넓어졌어요"]},
+  cafe:{PAST:["didn't go to cafes often","카페에 자주 안 갔어요"],FEEL:["But sometimes I went to one with my parents","하지만 가끔 부모님과 갔어요"],NOW:["go to Starbucks once in a while by myself","가끔 혼자 스타벅스에 가요"],CHANGE:["changed a little","조금 달라졌다고"],CONCL:["going to a cafe is refreshing and always an energy booster for me","저에게 카페는 상쾌하고 늘 활력소예요"]},
+  jog:{PAST:["often went to Seoul Grand Park with my parents","부모님과 서울대공원에 자주 갔어요"],FEEL:["We walked around and enjoyed nature","돌아다니며 자연을 즐겼어요"],NOW:["go to Boramae Park by myself to jog or ride my bike","혼자 보라매공원에 가서 조깅하거나 자전거를 타요"],CHANGE:["changed a lot","많이 달라졌다고"],CONCL:["being outdoors is refreshing and always an energy booster for me","저에게 야외 활동은 상쾌하고 늘 활력소예요"]},
+  trip:{PAST:["went to Jeju Island with my family","가족과 제주도에 갔어요"],FEEL:["I can't remember everything, but I remember the sea and the beautiful views","다 기억나진 않지만 바다와 아름다운 경치는 기억나요"],NOW:["travel by myself, to Jeju or Japan","혼자 제주나 일본으로 여행해요"],CHANGE:["changed a lot","많이 달라졌다고"],CONCL:["traveling is refreshing and always an energy booster for me","저에게 여행은 상쾌하고 늘 활력소예요"]},
+  home:{PAST:["lived in an apartment with my family, and it was bigger than my place now","가족과 아파트에 살았고 지금 집보다 더 넓었어요"],FEEL:["I really enjoyed living with my family","가족과 함께 사는 게 정말 좋았어요"],NOW:["live alone in a smaller apartment, and I enjoy my freedom","더 작은 아파트에서 혼자 살며 자유를 즐겨요"],CHANGE:["changed a lot","많이 달라졌다고"],CONCL:["my old home was bigger, but my home now is comfortable for me","예전 집이 더 컸지만 지금 집이 저한테는 편해요"]}}},
+{id:'G',name:'최근 경험',desc:'마지막으로 한 일',grp:'비교·최근 · 6·9',tag:'6·9',
+ qs:{
+  movie:["Tell me about the last movie you saw. What was it like?","마지막으로 본 영화에 대해 말해 주세요. 어땠나요?"],
+  concert:["Tell me about the last concert you went to.","마지막으로 간 콘서트에 대해 말해 주세요."],
+  cafe:["Tell me about the last time you went to a cafe.","마지막으로 카페에 갔던 때를 말해 주세요."],
+  jog:["Tell me about the last time you exercised outdoors.","마지막으로 야외에서 운동한 때를 말해 주세요."],
+  trip:["Tell me about the last trip you took.","마지막으로 다녀온 여행에 대해 말해 주세요."],
+  music:["Tell me about the last time you really enjoyed music.","음악을 마음껏 즐겼던 마지막 때를 말해 주세요."],
+  home:["Tell me about the last time you spent a weekend at home.","마지막으로 주말을 집에서 보낸 때를 말해 주세요."]},
+ parts:[
+  ["Recently, I <WHAT>.","최근에 저는 <WHAT>.","최근에 한 일"],
+  ["It was <ADJ>, and I was really <FEEL>.","<ADJ> 정말 <FEEL>.","분위기 · 느낌"],
+  ["While I was there, I <DO1>.","거기 있는 동안 <DO1>.","있는 동안"],
+  ["After that, I <DO2>.","그 뒤에는 <DO2>.","그 뒤"],
+  ["Thinking about it now, I really want to <AGAIN>.","지금 생각하니 정말 <AGAIN> 싶어요.","마무리"]],
+ slots:{
+  movie:{WHAT:["went to the theater alone and watched “The Odyssey”","혼자 극장에 가서 '오디세이'를 봤어요"],ADJ:["amazing","놀라웠고"],FEEL:["impressed","감명받았어요"],DO1:["ate some popcorn","팝콘을 먹었어요"],DO2:["wrote a review about it","리뷰를 썼어요"],AGAIN:["go to the movies again","또 영화를 보러 가고"]},
+  concert:{WHAT:["went to a Silica Gel concert alone","혼자 실리카겔 콘서트에 갔어요"],ADJ:["powerful","강렬했고"],FEEL:["excited","신났어요"],DO1:["enjoyed the music with the crowd","관객들과 함께 음악을 즐겼어요"],DO2:["hummed their songs on my way home","집에 오는 길에 그들의 노래를 흥얼거렸어요"],AGAIN:["go to another concert","또 콘서트에 가고"]},
+  cafe:{WHAT:["went to Starbucks after riding my bike","자전거를 탄 뒤 스타벅스에 갔어요"],ADJ:["quiet","조용했고"],FEEL:["relaxed","편안했어요"],DO1:["had an iced coffee","아이스 커피를 마셨어요"],DO2:["opened my laptop and studied English","노트북을 열고 영어를 공부했어요"],AGAIN:["spend more time at cafes","카페에서 더 시간을 보내고"]},
+  jog:{WHAT:["rode my bike along the Han River Park","한강공원을 따라 자전거를 탔어요"],ADJ:["a nice day","좋은 날씨였고"],FEEL:["energetic","활기찼어요"],DO1:["took a short break by the river","강가에서 잠깐 쉬었어요"],DO2:["rode back home slowly","천천히 자전거를 타고 집에 왔어요"],AGAIN:["go there again soon","곧 또 거기에 가고"]},
+  trip:{WHAT:["traveled to Jeju alone","혼자 제주로 여행을 갔어요"],ADJ:["beautiful","아름다웠고"],FEEL:["relaxed","편안했어요"],DO1:["walked around and ate local food","걸어 다니며 현지 음식을 먹었어요"],DO2:["took a lot of pictures","사진을 많이 찍었어요"],AGAIN:["travel again","또 여행을 가고"]},
+  music:{WHAT:["listened to Silica Gel's songs for a long time","실리카겔 노래를 오랫동안 들었어요"],ADJ:["cool","멋졌고"],FEEL:["happy","행복했어요"],DO1:["played their songs on my computer","컴퓨터로 그들의 노래를 틀었어요"],DO2:["looked up their next concert","다음 콘서트를 찾아봤어요"],AGAIN:["go to their next concert","다음 콘서트에 가고"]},
+  home:{WHAT:["stayed home and played online games on the weekend","주말에 집에서 온라인 게임을 했어요"],ADJ:["relaxing","편안했고"],FEEL:["refreshed","개운했어요"],DO1:["played with my friends online","친구들과 온라인으로 같이 했어요"],DO2:["listened to rock music","록 음악을 들었어요"],AGAIN:["have another quiet weekend","또 조용한 주말을 보내고"]}}},
+{id:'H',name:'친구에게 전화',desc:'약속 못 지킴 → 대안',grp:'롤플레이 12',tag:'RP12',
+ kn:{concert:'콘서트',movie:'영화',jog:'조깅',trip:'여행',cafe:'카페'},
+ qs:{
+  concert:["You planned to go to a concert with your friend today, but something went wrong. Call your friend, explain the situation, and suggest two or three alternatives.","오늘 친구와 콘서트에 가기로 했는데 문제가 생겼습니다. 친구에게 전화해 상황을 설명하고 대안 두세 가지를 제안하세요."],
+  movie:["You planned to see a movie with your friend today, but something went wrong. Call your friend, explain the situation, and suggest two or three alternatives.","오늘 친구와 영화를 보기로 했는데 문제가 생겼습니다. 친구에게 전화해 상황을 설명하고 대안 두세 가지를 제안하세요."],
+  jog:["You planned to go jogging with your friend today, but something went wrong. Call your friend, explain the situation, and suggest two or three alternatives.","오늘 친구와 조깅하기로 했는데 문제가 생겼습니다. 친구에게 전화해 상황을 설명하고 대안 두세 가지를 제안하세요."],
+  trip:["You planned to go on a trip with your friend today, but something went wrong. Call your friend, explain the situation, and suggest two or three alternatives.","오늘 친구와 여행을 떠나기로 했는데 문제가 생겼습니다. 친구에게 전화해 상황을 설명하고 대안 두세 가지를 제안하세요."],
+  cafe:["You planned to meet your friend at a cafe today, but something went wrong. Call your friend, explain the situation, and suggest two or three alternatives.","오늘 친구와 카페에서 만나기로 했는데 문제가 생겼습니다. 친구에게 전화해 상황을 설명하고 대안 두세 가지를 제안하세요."]},
+ parts:[
+  ["Hello, I'm calling to let you know I have a problem.","안녕, 문제가 생겨서 알려 주려고 전화했어.","인사"],
+  ["<PROBLEM>.","<PROBLEM>.","상황"],
+  ["I'm afraid <CANT>.","미안한데 <CANT> 것 같아.","못 하게 됨"],
+  ["I don't know what to do.","어떻게 해야 할지 모르겠어.","당황"],
+  ["Would you like to <ALT1> instead?","대신 <ALT1> 어때?","대안 1"],
+  ["Or would you like to <ALT2>?","아니면 <ALT2> 어때?","대안 2"],
+  ["Please let me know what you think.","어떻게 생각하는지 알려 줘.","마무리"]],
+ slots:{
+  concert:{PROBLEM:["I'm so sick today. I have a high fever","오늘 많이 아파. 열이 높아"],CANT:["I can't go to the concert with you","너랑 콘서트에 갈 수 없을"],ALT1:["go next weekend","다음 주말에 가는 건"],ALT2:["go with someone else","다른 사람이랑 가는 건"]},
+  movie:{PROBLEM:["My bike has a flat tire, and I can't get there in time","자전거 바퀴가 펑크 나서 제시간에 갈 수가 없어"],CANT:["I can't see the movie with you","너랑 영화를 볼 수 없을"],ALT1:["watch it next Saturday","다음 토요일에 보는 건"],ALT2:["see a later show today","오늘 늦은 시간 상영을 보는 건"]},
+  jog:{PROBLEM:["I hurt my ankle yesterday, and it still hurts","어제 발목을 다쳤는데 아직도 아파"],CANT:["I can't go jogging with you","너랑 조깅하러 갈 수 없을"],ALT1:["go jogging tomorrow","내일 조깅하는 건"],ALT2:["take a slow walk in the park","공원에서 천천히 걷는 건"]},
+  trip:{PROBLEM:["My flight was canceled because of the weather","날씨 때문에 비행기가 취소됐어"],CANT:["I can't go on the trip with you today","오늘 너랑 여행을 갈 수 없을"],ALT1:["leave next weekend","다음 주말에 출발하는 건"],ALT2:["visit a closer place first","가까운 곳부터 가 보는 건"]},
+  cafe:{PROBLEM:["I have a bad cold, and I'm coughing a lot","감기가 심하게 걸려서 기침을 많이 해"],CANT:["I can't meet you at the cafe","카페에서 널 만날 수 없을"],ALT1:["meet tomorrow","내일 만나는 건"],ALT2:["talk on the phone for now","일단 전화로 이야기하는 건"]}}},
+{id:'I',name:'업체에 전화',desc:'교환 → 환불 → 대안',grp:'롤플레이 12',tag:'RP12',
+ kn:{movie:'영화표',concert:'콘서트 표',trip:'호텔 예약'},
+ qs:{
+  movie:["You bought movie tickets, but the clerk gave you the wrong ones. Call the theater, explain the problem, and suggest two or three solutions.","영화표를 샀는데 직원이 잘못된 표를 줬습니다. 영화관에 전화해 문제를 설명하고 해결책 두세 가지를 제안하세요."],
+  concert:["You bought a concert ticket, but you cannot go on that day. Call the ticket office, explain the situation, and suggest two or three solutions.","콘서트 표를 샀는데 그날 갈 수 없게 됐습니다. 예매처에 전화해 상황을 설명하고 해결책 두세 가지를 제안하세요."],
+  trip:["You booked a hotel room, but you have to cancel your trip. Call the hotel, explain the problem, and suggest two or three solutions.","호텔 방을 예약했는데 여행을 취소해야 합니다. 호텔에 전화해 문제를 설명하고 해결책 두세 가지를 제안하세요."]},
+ parts:[
+  ["Hello, I'm calling to let you know I have a problem.","안녕하세요, 문제가 있어서 전화드렸어요.","인사"],
+  ["<SITUATION>.","<SITUATION>.","상황"],
+  ["I'm not sure what to do. Can you tell me what to do?","어떻게 해야 할지 모르겠어요. 알려 주실 수 있나요?","당황"],
+  ["I was wondering if it's possible to <REQ1>.","<REQ1> 수 있는지 궁금해서요.","요청 1: 교환·변경"],
+  ["If not, could I <REQ2>?","안 된다면 <REQ2> 수 있을까요?","요청 2: 환불·취소"],
+  ["Do you have any other solutions? Please let me know.","다른 해결책이 있을까요? 알려 주세요.","만능"],
+  ["Thank you for your understanding. Have a nice day.","이해해 주셔서 감사합니다. 좋은 하루 보내세요.","마무리"]],
+ slots:{
+  movie:{SITUATION:["I bought two tickets for a movie yesterday, but they were for the wrong movie","어제 영화표를 두 장 샀는데 다른 영화 표였어요"],REQ1:["exchange these tickets for a different movie","이 표를 다른 영화로 교환할"],REQ2:["get a refund","환불받을"]},
+  concert:{SITUATION:["I bought a ticket for Saturday's concert, but I can't make it that day","토요일 콘서트 표를 샀는데 그날 갈 수가 없어요"],REQ1:["change my ticket to another day","표를 다른 날로 바꿀"],REQ2:["get a refund","환불받을"]},
+  trip:{SITUATION:["I booked a hotel room for this weekend, but I have to cancel my trip","이번 주말 호텔 방을 예약했는데 여행을 취소해야 해요"],REQ1:["change my reservation to next weekend","예약을 다음 주말로 변경할"],REQ2:["cancel it without a fee","수수료 없이 취소할"]}}},
+{id:'J',name:'비슷한 경험',desc:'문제 → 전화 → 해결',grp:'롤플레이 13',tag:'RP13',
+ kn:{concert:'약속 취소 (콘서트)',movie:'표 교환 (영화)',subway:'분실 (지하철)',trip:'예약 문제 (여행)'},
+ qs:{
+  concert:["Have you ever had to cancel or break a plan because you were sick or had an urgent problem? When did it happen, and how did you solve it?","아프거나 급한 일 때문에 약속을 취소한 적이 있나요? 언제였고 어떻게 해결했나요?"],
+  movie:["Have you ever bought something wrong and had to exchange or return it? What happened and how did you handle it?","잘못 산 물건을 교환하거나 반품한 적이 있나요? 무슨 일이 있었고 어떻게 처리했나요?"],
+  subway:["Have you ever lost something? What did you lose, and how did you handle it?","무언가를 잃어버린 적이 있나요? 무엇을 잃어버렸고 어떻게 처리했나요?"],
+  trip:["Have you ever had a problem with a reservation or a trip? What happened and how did you handle it?","예약이나 여행에서 문제가 생긴 적이 있나요? 무슨 일이 있었고 어떻게 처리했나요?"]},
+ parts:[
+  ["I have experienced a situation like this before.","이런 상황을 겪은 적이 있어요.","도입"],
+  ["I found out that <SIT>.","<SIT> 알게 됐어요.","상황"],
+  ["I immediately called <WHO> to let them know what happened.","바로 <WHO> 전화해서 상황을 알렸어요.","전화"],
+  ["I explained that <EXPL> and asked for <ASK>.","<EXPL> 설명하고 <ASK> 요청했어요.","설명 · 요청"],
+  ["<WHO2> was very understanding, and we managed to <HOW>.","<WHO2> 이해해 줘서 <HOW>.","해결"],
+  ["In the end, everything worked out fine.","결국 모든 게 잘 풀렸어요.","결론"],
+  ["I realized how lucky I was to <LESSON>.","<LESSON> 운이 좋았다고 느꼈어요.","느낀 점"]],
+ slots:{
+  concert:{SIT:["I couldn't go to a concert with my friend because I was sick","몸이 아파서 친구와 콘서트에 갈 수 없다는 걸"],WHO:["my friend","친구에게"],EXPL:["I wasn't feeling well","몸이 안 좋다고"],ASK:["another day","다른 날로 미루는 걸"],WHO2:["My friend","친구가"],HOW:["go the following week","다음 주에 갈 수 있었어요"],LESSON:["have a friend like him","그런 친구가 있어서"]},
+  movie:{SIT:["I had bought the wrong tickets","표를 잘못 샀다는 걸"],WHO:["the theater","영화관에"],EXPL:["I didn't do anything wrong","제가 잘못한 게 없다고"],ASK:["an exchange","교환을"],WHO2:["The staff","직원이"],HOW:["handle it","잘 해결했어요"],LESSON:["get an exchange","교환받을 수 있어서"]},
+  subway:{SIT:["I lost my wallet on the subway","지하철에서 지갑을 잃어버렸다는 걸"],WHO:["the lost and found","분실물 센터에"],EXPL:["I left it on the seat by accident","실수로 좌석에 두고 내렸다고"],ASK:["help finding it","찾는 데 도움을"],WHO2:["The staff","직원이"],HOW:["handle it on the following day","다음 날 해결했어요"],LESSON:["get it back","되찾아서"]},
+  trip:{SIT:["I had booked the wrong dates for my hotel in Japan","일본 호텔 날짜를 잘못 예약했다는 걸"],WHO:["the hotel","호텔에"],EXPL:["I made a mistake with the dates","제가 날짜를 착각했다고"],ASK:["a change","변경을"],WHO2:["The staff","직원이"],HOW:["fix it","바로잡았어요"],LESSON:["have such kind staff","친절한 직원분들을 만나서"]}}}
+);
+const kn=(S,k)=>(S.kn&&S.kn[k])||SK_NAMES[k];
+function genSec(skId,key){
+  const S=SKELS.find(s=>s.id===skId),sl=S.slots[key];
+  const qd=S.qs?S.qs[key]:["Tell me about a memorable experience you had "+SK_Q[key][0]+". What happened?",SK_Q[key][1]+" 겪은 기억에 남는 경험을 말해 주세요. 무슨 일이 있었나요?"];
+  const fill=(t,i,mark)=>t.replace(/<(\w+)>/g,(m,k)=>mark?'{'+sl[k][i]+'}':sl[k][i]);
+  return {t:S.name+' × '+kn(S,key),tag:S.tag,gen:true,
+    q:qd,
+    s:S.parts.map(p=>[fill(p[0],0,true),fill(p[1],1,false),p[2],[...p[0].matchAll(/<(\w+)>/g)].map(m=>sl[m[1]][1]).join(' / ')])};
+}
+const sk={playing:false,shown:false};
+function renderSkel(){
+  const S=SKELS.find(s=>s.id===cfg.skSk),keys=Object.keys(S.slots);
+  if(!keys.includes(cfg.skKey))cfg.skKey=keys[0];
+  const sec=genSec(S.id,cfg.skKey);
+  let h='<p class="note">뼈대(고정 문장)는 그대로 두고, 빈칸만 주제에 맞게 바꿔 끼웁니다. 어떤 주제 문제가 나와도 같은 뼈대로 답하는 연습입니다.</p>';
+  h+='<div class="lbl" style="margin-bottom:4px">뼈대 · '+SKELS.length+'개</div>'+
+    [...new Set(SKELS.map(s=>s.grp))].map(g=>'<div class="lbl" style="margin:6px 0 4px;font-size:11.5px">'+esc(g)+'</div><div class="pills">'+
+      SKELS.filter(s=>s.grp===g).map(s=>'<button class="pill" data-sksk="'+s.id+'" aria-pressed="'+(s.id===S.id)+'">'+esc(s.name)+' · '+esc(s.desc)+'</button>').join('')+'</div>').join('');
+  h+='<div class="lbl" style="margin-bottom:4px">주제 (문제)</div><div class="pills">'+keys.map(k=>'<button class="pill" data-skkey="'+k+'" aria-pressed="'+(k===cfg.skKey)+'">'+esc(kn(S,k))+'</button>').join('')+'</div>';
+  h+=qCard(sec,0,'Q · 뼈대 '+S.name+' × '+kn(S,cfg.skKey));
+  h+='<div class="row2"><span class="lbl">이 뼈대로 말하세요. 빈칸은 이 주제에 맞는 내용으로 바꿔 끼웁니다.</span></div>';
+  h+='<div class="row2"><label class="lbl"><input type="checkbox" id="skHint"'+(cfg.skHint?' checked':'')+'> 빈칸 힌트 보기 (한글)</label></div>';
+  h+='<div class="ans">'+sec.s.map(p=>'<div><div class="e">'+tplHtml(p[0],sk.shown)+'</div>'+
+    (sk.shown?'<div class="k">'+esc(p[1])+'</div>':(cfg.skHint&&p[3]?'<div class="k">힌트: '+esc(p[3])+'</div>':''))+'</div>').join('')+'</div>';
+  h+='<div class="row2"><button class="big pri" data-skshow="1">'+(sk.shown?'정답 가리기':'정답 보기 · 읽어 주기')+'</button>'+
+     '<button class="big" data-sknext="1">다음 조합 (랜덤)</button>'+
+     '<button class="big'+(sk.playing?' live':'')+'" data-skall="1">'+(sk.playing?'정지':'이 뼈대로 모든 주제 이어 듣기')+'</button></div>';
+  h+='<div class="note" id="skStatus"></div>';
+  const cols=Object.keys(S.slots[keys[0]]);
+  h+='<details class="res"><summary><span class="tt">이 뼈대의 주제별 빈칸 값 · 한눈에 비교</span></summary><div style="overflow-x:auto"><table class="tbl"><thead><tr><th>주제</th>'+
+    cols.map(c=>'<th>'+esc(SK_LABEL[c]||c)+'</th>').join('')+'</tr></thead><tbody>'+
+    keys.map(k=>'<tr><th>'+esc(kn(S,k))+'</th>'+cols.map(c=>'<td>'+esc(S.slots[k][c][0])+'</td>').join('')+'</tr>').join('')+'</tbody></table></div></details>';
+  $('#v-skel').innerHTML=h;
+}
+async function skPlayAll(){
+  stopAll();const my=++token;sk.playing=true;renderSkel();
+  const S=SKELS.find(s=>s.id===cfg.skSk);
+  for(const key of Object.keys(S.slots)){
+    if(my!==token)return;
+    const sec=genSec(S.id,key);
+    const st=$('#skStatus');if(st)st.textContent='재생 중: '+kn(S,key);
+    await say(sec.q[0]);if(my!==token)return;
+    await sleep(500);if(my!==token)return;
+    if(!(await sayAll(sec.s.map(p=>plain(p[0])),my)))return;
+    await sleep(900);if(my!==token)return;
+  }
+  if(my===token){sk.playing=false;renderSkel()}
+}
+
 /* ===== 3단계: 모의고사 ===== */
+const secOf=q=>q.gen?q.sec:TOPICS[q.ti].secs[q.si];
 const mock={on:false,qs:[],i:0,phase:'setup',left:0,total:60,iv:null,res:[],replayed:false,t0:0,over:false};
 function mockClear(){if(mock.iv){clearInterval(mock.iv);mock.iv=null}if(mock.on&&mock.phase!=='result'&&mock.phase!=='setup'){mock.on=false;mock.phase='setup';if(cfg.view==='mock')renderMock()}}
 function buildMock(){
@@ -741,11 +1000,16 @@ function buildMock(){
   shuffle(pool.slice()).slice(0,n).forEach(ti=>{
     const secs=qSecs(ti).map(x=>({ti,si:x.i,tag:x.s.tag}));
     const d=secs.filter(x=>x.tag==='2·5·8'),h=secs.filter(x=>x.tag==='3'||x.tag==='6·9'),m=secs.filter(x=>x.tag==='4·7·10');
-    add(d.length?d:secs,'묘사');add(h.length?h:secs,'습관·비교·최근');
-    add(m.length?m:mem,'기억에 남는 경험');
+    const key=SKEY[TOPICS[ti].name];
+    const genQ=(tags,kind)=>{const o=SKELS.filter(s=>tags.includes(s.tag)&&s.slots[key]);if(!key||!o.length)return false;qs.push({ti,si:-1,kind:kind+' (뼈대 응용)',gen:true,sec:genSec(pick(o).id,key)});return true};
+    if(!(Math.random()<0.5&&genQ(['2·5·8'],'묘사')))add(d.length?d:secs,'묘사');
+    if(!(Math.random()<0.5&&genQ(['3','6·9'],'습관·비교·최근')))add(h.length?h:secs,'습관·비교·최근');
+    if(!((!m.length||Math.random()<0.5)&&genQ(['4·7·10'],'기억에 남는 경험')))add(m.length?m:mem,'기억에 남는 경험');
   });
   const rp=qSecs(RP_TI).map(x=>({ti:RP_TI,si:x.i,tag:x.s.tag}));
-  add(rp.filter(x=>x.tag==='RP12'),'롤플레이 12');add(rp.filter(x=>x.tag==='RP13'),'롤플레이 13');
+  const genRP=(tag,kind)=>{const sk0=pick(SKELS.filter(s=>s.tag===tag));qs.push({ti:RP_TI,si:-1,kind:kind+' (뼈대 응용)',gen:true,sec:genSec(sk0.id,pick(Object.keys(sk0.slots)))})};
+  if(Math.random()<0.5)genRP('RP12','롤플레이 12');else add(rp.filter(x=>x.tag==='RP12'),'롤플레이 12');
+  if(Math.random()<0.5)genRP('RP13','롤플레이 13');else add(rp.filter(x=>x.tag==='RP13'),'롤플레이 13');
   return qs;
 }
 function renderMock(){
@@ -759,7 +1023,7 @@ function renderMock(){
       secs.map(s=>'<button data-ms="'+s+'" aria-pressed="'+(cfg.mockSecs===s)+'">'+s+'초</button>').join('')+'</div></div>'+
       '<div class="row2"><label class="lbl"><input type="checkbox" id="mCap"'+(cfg.mockCaption?' checked':'')+'> 문제 자막 보기</label>'+
       '<label class="lbl"><input type="checkbox" id="mAuto"'+(cfg.mockAuto?' checked':'')+'> 시간이 끝나면 자동으로 다음 문제</label></div>'+
-      '<p class="note">전체: 주제 3개 × 3문제(묘사, 습관·비교·최근, 기억에 남는 경험) + 롤플레이 12·13번. 문제마다 한 번 다시 들을 수 있습니다.</p>'+
+      '<p class="note">전체: 주제 3개 × 3문제(묘사, 습관·비교·최근, 기억에 남는 경험) + 롤플레이 12·13번. 각 문제는 절반쯤의 확률로, 응용 탭의 뼈대를 다른 주제에 바꿔 끼워 답해야 하는 문제로 나옵니다. 문제마다 한 번 다시 들을 수 있습니다.</p>'+
       '<button class="big live" data-mstart="1" style="width:100%">시작</button>';
     return;
   }
@@ -768,17 +1032,17 @@ function renderMock(){
     let h='<div class="qcard"><div class="qlab">결과</div><div class="qen">'+mock.qs.length+'문제 · 평균 '+avg+'초 / '+mock.total+'초</div>'+
       '<div class="qko">IM2는 문제당 30초 이상 막힘없이 이어 가는 것이 목표입니다. 너무 짧았던 문제는 빨간색으로 표시됩니다.</div></div>';
     mock.qs.forEach((q,i)=>{
-      const tp=TOPICS[q.ti],sc=tp.secs[q.si],sec=mock.res[i]||0,wk=weakSec.has(q.ti+'.'+q.si);
-      h+='<details class="res"><summary><span class="n">Q'+(i+1)+'</span><span class="tt">'+esc(tp.name)+' · '+esc(sc.t)+'</span><span class="sec2 '+(sec<25?'low':'')+'">'+sec+'초</span></summary>'+
+      const tpn=q.gen?'응용':TOPICS[q.ti].name,sc=secOf(q),sec=mock.res[i]||0,wk=!q.gen&&weakSec.has(q.ti+'.'+q.si);
+      h+='<details class="res"><summary><span class="n">Q'+(i+1)+'</span><span class="tt">'+esc(tpn)+' · '+esc(sc.t)+'</span><span class="sec2 '+(sec<25?'low':'')+'">'+sec+'초</span></summary>'+
         '<div class="qen" style="font-size:15px">'+esc(sc.q[0])+'</div><div class="qko">'+esc(sc.q[1])+'</div>'+
         '<div class="ans">'+sc.s.map(p=>'<div><div class="e">'+tplHtml(p[0],true)+'</div><div class="k">'+esc(p[1])+'</div></div>').join('')+'</div>'+
-        '<div class="row2"><button class="mini" data-rsay="'+i+'">정답 읽어 주기</button><button class="mini" data-rweak="'+i+'">'+(wk?'약한 묶음 ★':'약한 묶음 ☆')+'</button></div></details>';
+        '<div class="row2"><button class="mini" data-rsay="'+i+'">정답 읽어 주기</button>'+(q.gen?'':'<button class="mini" data-rweak="'+i+'">'+(wk?'약한 묶음 ★':'약한 묶음 ☆')+'</button>')+'</div></details>';
     });
     h+='<div class="nav2"><span></span><div class="g"><button class="big" data-mreset="1">설정으로</button><button class="big pri" data-mstart="1">다시 하기</button></div></div>';
     el.innerHTML=h;return;
   }
   // 진행 화면
-  const q=mock.qs[mock.i],sc=TOPICS[q.ti].secs[q.si];
+  const q=mock.qs[mock.i],sc=secOf(q);
   const ph=mock.phase;
   const label={ask:'문제를 듣는 중',ready:'곧 시작합니다',answer:'지금 말하세요',done:'시간 종료'}[ph];
   let h='<div class="stage"><div class="cnt">Q '+(mock.i+1)+' / '+mock.qs.length+' · '+esc(q.kind)+'</div>'+
@@ -810,7 +1074,7 @@ function mockTimer(secs,onEnd){
 }
 async function mockAsk(){
   stopAudio();const my=++token;
-  const q=mock.qs[mock.i],sc=TOPICS[q.ti].secs[q.si];
+  const q=mock.qs[mock.i],sc=secOf(q);
   mock.phase='ask';mock.replayed=false;renderMock();
   await say(sc.q[0]);if(my!==token)return;
   mockReady(my);
@@ -923,6 +1187,26 @@ $('#v-kw').addEventListener('click',e=>{
 });
 $('#v-kw').addEventListener('change',e=>{if(e.target.id==='kwShuf'){cfg.kwShuffle=e.target.checked;save();kwBuild();renderKw()}});
 
+$('#v-skel').addEventListener('click',e=>{
+  const S=SKELS.find(s=>s.id===cfg.skSk),sec=genSec(S.id,cfg.skKey);
+  const a=e.target.closest('[data-sksk]');
+  if(a){stopAll();cfg.skSk=a.dataset.sksk;save();sk.shown=false;renderSkel();return}
+  const b=e.target.closest('[data-skkey]');
+  if(b){stopAll();cfg.skKey=b.dataset.skkey;save();sk.shown=false;renderSkel();return}
+  if(e.target.closest('[data-qsay]')){stopAll();++token;say(sec.q[0]);return}
+  if(e.target.closest('[data-skshow]')){
+    stopAll();sk.shown=!sk.shown;renderSkel();
+    if(sk.shown){const my=++token;sayAll(sec.s.map(p=>plain(p[0])),my)}return}
+  if(e.target.closest('[data-sknext]')){
+    stopAll();
+    const all=[];SKELS.filter(s=>s.grp===S.grp).forEach(s=>Object.keys(s.slots).forEach(k=>{if(!(s.id===cfg.skSk&&k===cfg.skKey))all.push([s.id,k])}));
+    const c=pick(all);cfg.skSk=c[0];cfg.skKey=c[1];save();sk.shown=false;renderSkel();
+    ++token;say(genSec(c[0],c[1]).q[0]);return}
+  if(e.target.closest('[data-skall]')){
+    if(sk.playing){stopAll();renderSkel()}else skPlayAll();return}
+});
+$('#v-skel').addEventListener('change',e=>{if(e.target.id==='skHint'){cfg.skHint=e.target.checked;save();renderSkel()}});
+
 $('#v-mock').addEventListener('click',e=>{
   const mm=e.target.closest('[data-mm]');if(mm){cfg.mockMode=mm.dataset.mm;save();renderMock();return}
   const ms=e.target.closest('[data-ms]');if(ms){cfg.mockSecs=+ms.dataset.ms;save();renderMock();return}
@@ -936,11 +1220,11 @@ $('#v-mock').addEventListener('click',e=>{
     if(mock.replayed)return;mock.replayed=true;
     if(mock.iv){clearInterval(mock.iv);mock.iv=null}
     stopAudio();const my=++token;mock.phase='ask';renderMock();
-    say(TOPICS[mock.qs[mock.i].ti].secs[mock.qs[mock.i].si].q[0]).then(()=>{if(my===token)mockReady(my)});return}
+    say(secOf(mock.qs[mock.i]).q[0]).then(()=>{if(my===token)mockReady(my)});return}
   const rs=e.target.closest('[data-rsay]');
-  if(rs){stopAll();const q=mock.qs[+rs.dataset.rsay];const my=++token;sayAll(TOPICS[q.ti].secs[q.si].s.map(p=>plain(p[0])),my);return}
+  if(rs){stopAll();const q=mock.qs[+rs.dataset.rsay];const my=++token;sayAll(secOf(q).s.map(p=>plain(p[0])),my);return}
   const rw=e.target.closest('[data-rweak]');
-  if(rw){const q=mock.qs[+rw.dataset.rweak];const k=q.ti+'.'+q.si;weakSec.has(k)?weakSec.delete(k):weakSec.add(k);store.set('weakSec',[...weakSec]);
+  if(rw){const q=mock.qs[+rw.dataset.rweak];if(q.gen)return;const k=q.ti+'.'+q.si;weakSec.has(k)?weakSec.delete(k):weakSec.add(k);store.set('weakSec',[...weakSec]);
     rw.textContent=weakSec.has(k)?'약한 묶음 ★':'약한 묶음 ☆'}
 });
 $('#v-mock').addEventListener('change',e=>{
