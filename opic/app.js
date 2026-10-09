@@ -1,7 +1,60 @@
-// 롤플레이 주제(TOPICS의 마지막 항목)의 인덱스
-const RP_TI = TOPICS.length - 1;
+// 대분류: 서베이 / 롤플레이 / 돌발 — 주제(TOPICS)와 뼈대(SKELS)는 각각 하나의 분류에 속한다
+const CATS = [
+  ["survey", "서베이", "내 이야기"],
+  ["rp", "롤플레이", "11·12·13번"],
+  ["surprise", "돌발", "교재 중심"],
+];
+// 분류별 한 줄 안내 (빈도는 2026 상반기 통계 기준)
+const CAT_NOTE = {
+  survey:
+    "내가 고른 주제를 내 경험으로 말합니다. 2026 상반기 인기: 음악감상 · 집 · 해외여행 · 국내여행 · 영화 · 하이킹.",
+  rp: "정해진 상황을 연기합니다. 11번 질문 3~4개 → 12번 문제 설명 + 대안 → 13번 비슷한 과거 경험. 빈출 상황: MP3 · 약속 · 해외여행 · 영화 · 가구.",
+  surprise:
+    "서베이에 없는 주제가 나옵니다. 어렵다 → 많다·중요 → 필수 답변 → 자부심 → 결론의 틀로 답합니다. 빈출: 테크놀로지 · 미용실 · 약속 · 재활용 · 직장 · 호텔 · 산업.",
+};
+// 주제 ti가 속한 분류 (cat 필드가 없으면 서베이)
+const catOf = (ti) => TOPICS[ti].cat || "survey";
+// 분류 c에 속한 주제 인덱스 목록
+const catTopics = (c) => TOPICS.map((t, i) => i).filter((i) => catOf(i) === c);
+// 뼈대가 속한 분류: tag가 RP로 시작하면 롤플레이, SP면 돌발, 나머지는 서베이
+const skCat = (S) => (S.tag.startsWith("RP") ? "rp" : S.tag === "SP" ? "surprise" : "survey");
 // 템플릿의 빈칸 표시 {}를 제거해 읽을 수 있는 순수 문장으로 만든다
 const plain = (s) => s.replace(/[{}]/g, "");
+// 뼈대 S에서 주제 key의 표시 이름 (뼈대별 별칭이 있으면 우선)
+const kn = (S, k) => (S.kn && S.kn[k]) || SK_NAMES[k];
+// 뼈대(skId) × 주제(key) 조합으로 묶음(section) 하나를 만든다.
+// 뼈대의 <슬롯>을 주제별 값으로 채워 {빈칸} 문장, 한글, 키워드를 생성.
+function genSec(skId, key) {
+  const S = SKELS.find((s) => s.id === skId),
+    sl = S.slots[key];
+  const qd = S.qs
+    ? S.qs[key]
+    : [
+        "Tell me about a memorable experience you had " + SK_Q[key][0] + ". What happened?",
+        SK_Q[key][1] + " 겪은 기억에 남는 경험을 말해 주세요. 무슨 일이 있었나요?",
+      ];
+  const fill = (t, i, mark) =>
+    t.replace(/<(\w+)>/g, (m, k) => (mark ? "{" + sl[k][i] + "}" : sl[k][i]));
+  return {
+    t: S.name + " × " + kn(S, key),
+    tag: S.tag,
+    gen: true,
+    q: qd,
+    s: S.parts.map((p) => [
+      fill(p[0], 0, true),
+      fill(p[1], 1, false),
+      p[2],
+      [...p[0].matchAll(/<(\w+)>/g)].map((m) => sl[m[1]][1]).join(" / "),
+    ]),
+  };
+}
+// 뼈대에서 만들어지는 주제(fromSkel)는 시작할 때 주제별 묶음을 생성해 채운다
+TOPICS.forEach((tp) => {
+  if (tp.fromSkel) {
+    const S = SKELS.find((x) => x.id === tp.fromSkel);
+    tp.secs = Object.keys(S.slots).map((k) => genSec(S.id, k));
+  }
+});
 
 /* ===== 상태 ===== */
 // localStorage 래퍼. 사생활 모드 등에서 예외가 나도 앱이 죽지 않도록 try/catch로 감싼다.
@@ -29,6 +82,8 @@ const cfg = Object.assign(
     withQ: true,
     skSk: "A",
     skKey: "cafe",
+    cat: "survey",
+    topicOf: {},
     skHint: false,
     mode: "shadow",
     rate: 0.9,
@@ -68,6 +123,8 @@ TOPICS.forEach((tp, ti) =>
 // id로 문장을 바로 찾기 위한 인덱스
 const byId = Object.fromEntries(ITEMS.map((i) => [i.id, i]));
 if (cfg.topic >= TOPICS.length) cfg.topic = 0;
+cfg.cat = catOf(cfg.topic);
+if (cfg.view === "rp") cfg.view = "skel";
 // 재생 상태: queue 재생 대기열, qi 현재 위치, playing 재생 중 여부,
 // token 비동기 흐름 취소용 번호(바뀌면 이전 흐름이 멈춤), wake 화면 꺼짐 방지 잠금,
 // cancelSleep 대기 즉시 취소 함수, revealed 정답을 펼친 문장, curRep 현재 반복 회차
@@ -282,7 +339,6 @@ const TABS = [
   ["blank", "1단계", "빈칸 채우기"],
   ["kw", "2단계", "키워드 말하기"],
   ["skel", "응용", "뼈대 바꿔끼우기"],
-  ["rp", "롤플레이", "11·12·13번"],
   ["mock", "3단계", "모의고사"],
 ];
 // 상단 탭 버튼 그리기 (현재 뷰는 aria-pressed=true)
@@ -309,9 +365,12 @@ function setView(v) {
   $("#v-listen").hidden = v !== "listen";
   $("#v-blank").hidden = v !== "blank";
   $("#v-kw").hidden = v !== "kw";
-  $("#v-skel").hidden = v !== "skel" && v !== "rp";
+  $("#v-skel").hidden = v !== "skel";
   $("#v-mock").hidden = v !== "mock";
-  $("#chips").hidden = v === "mock" || v === "skel" || v === "rp";
+  $("#chips").hidden = v === "mock" || v === "skel";
+  $("#cats").hidden = $("#catnote").hidden = v === "mock";
+  renderCats();
+  renderChips();
   $("#dock").hidden = v !== "listen";
   document.body.classList.toggle("nodock", v !== "listen");
   if (v === "listen") {
@@ -322,7 +381,7 @@ function setView(v) {
     kwBuild();
     renderKw();
   }
-  if (v === "skel" || v === "rp") {
+  if (v === "skel") {
     sk.shown = false;
     sk.drill = null;
     renderSkel();
@@ -330,18 +389,52 @@ function setView(v) {
   if (v === "mock") renderMock();
   window.scrollTo({ top: 0 });
 }
+// 대분류 선택(서베이 / 롤플레이 / 돌발)과 안내 문구 그리기
+function renderCats() {
+  $("#cats").innerHTML = CATS.map(
+    (c) =>
+      '<button data-cat="' +
+      c[0] +
+      '" aria-pressed="' +
+      (cfg.cat === c[0]) +
+      '">' +
+      c[1] +
+      "<small>" +
+      c[2] +
+      "</small></button>",
+  ).join("");
+  $("#catnote").textContent = CAT_NOTE[cfg.cat];
+}
+// 대분류 전환: 분류별로 마지막에 보던 주제를 기억했다가 복원하고 현재 탭을 다시 그린다
+function setCat(c) {
+  if (c === cfg.cat) return;
+  stopAll();
+  cfg.topicOf[cfg.cat] = cfg.topic;
+  cfg.cat = c;
+  const saved = cfg.topicOf[c];
+  cfg.topic =
+    saved != null && saved < TOPICS.length && catOf(saved) === c ? saved : catTopics(c)[0];
+  cfg.sec = 0;
+  cfg.bsec = 0;
+  brev.clear();
+  save();
+  setView(cfg.view);
+}
 // 주제 칩(기억에 남는 경험, 집, 영화 …) 그리기
 function renderChips() {
-  $("#chips").innerHTML = TOPICS.map(
-    (t, i) =>
-      '<button class="chip" data-t="' +
-      i +
-      '" aria-pressed="' +
-      (i === cfg.topic) +
-      '">' +
-      esc(t.name) +
-      "</button>",
-  ).join("");
+  $("#chips").innerHTML = catTopics(cfg.cat)
+    .map((i) => [TOPICS[i], i])
+    .map(
+      ([t, i]) =>
+        '<button class="chip" data-t="' +
+        i +
+        '" aria-pressed="' +
+        (i === cfg.topic) +
+        '">' +
+        esc(t.name) +
+        "</button>",
+    )
+    .join("");
 }
 
 /* ===== 듣기 탭 ===== */
@@ -483,7 +576,7 @@ function reveal(id, on) {
 // 재생 범위(scope) 설정에 맞는 문장 대기열을 만든다
 function buildQueue() {
   const t = cfg.topic;
-  if (cfg.scope === "all") return ITEMS.slice();
+  if (cfg.scope === "all") return ITEMS.filter((i) => catOf(i.ti) === cfg.cat);
   if (cfg.scope === "weak") return ITEMS.filter((i) => weak.has(i.id));
   if (cfg.scope === "topic") return ITEMS.filter((i) => i.ti === t);
   return ITEMS.filter((i) => i.ti === t && i.si === cfg.sec);
@@ -519,6 +612,8 @@ async function run(start) {
     const it = queue[qi];
     if (it.ti !== cfg.topic) {
       cfg.topic = it.ti;
+      cfg.cat = catOf(it.ti);
+      renderCats();
       renderChips();
       renderMain();
     }
@@ -742,6 +837,7 @@ function kwBuild() {
     tp.secs.forEach((sc, si) => {
       if (!sc.q) return;
       if (cfg.kwScope === "topic" && ti !== cfg.topic) return;
+      if (cfg.kwScope === "all" && catOf(ti) !== cfg.cat) return;
       if (cfg.kwScope === "weak" && !weakSec.has(ti + "." + si)) return;
       d.push({ ti, si });
     }),
@@ -868,34 +964,6 @@ function kwGo(n) {
 
 /* ===== 응용: 뼈대 바꿔끼우기 =====
  같은 뼈대(고정 문장)에 주제별 빈칸 값만 바꿔 끼워 어떤 주제 문제에도 답하는 연습 */
-// 뼈대 S에서 주제 key의 표시 이름 (뼈대별 별칭이 있으면 우선)
-const kn = (S, k) => (S.kn && S.kn[k]) || SK_NAMES[k];
-// 뼈대(skId) × 주제(key) 조합으로 묶음(section) 하나를 만든다.
-// 뼈대의 <슬롯>을 주제별 값으로 채워 {빈칸} 문장, 한글, 키워드를 생성.
-function genSec(skId, key) {
-  const S = SKELS.find((s) => s.id === skId),
-    sl = S.slots[key];
-  const qd = S.qs
-    ? S.qs[key]
-    : [
-        "Tell me about a memorable experience you had " + SK_Q[key][0] + ". What happened?",
-        SK_Q[key][1] + " 겪은 기억에 남는 경험을 말해 주세요. 무슨 일이 있었나요?",
-      ];
-  const fill = (t, i, mark) =>
-    t.replace(/<(\w+)>/g, (m, k) => (mark ? "{" + sl[k][i] + "}" : sl[k][i]));
-  return {
-    t: S.name + " × " + kn(S, key),
-    tag: S.tag,
-    gen: true,
-    q: qd,
-    s: S.parts.map((p) => [
-      fill(p[0], 0, true),
-      fill(p[1], 1, false),
-      p[2],
-      [...p[0].matchAll(/<(\w+)>/g)].map((m) => sl[m[1]][1]).join(" / "),
-    ]),
-  };
-}
 // 응용 탭 상태: playing 전체 재생 중, shown 정답 표시 여부
 const sk = { playing: false, shown: false, drill: null };
 // 롤플레이 11번 질문 연습: 뼈대에서 가운데 문장 3~4개를 무작위로 뽑는다 (첫 인사·마무리는 항상 포함).
@@ -909,14 +977,12 @@ function drillPick(S) {
     .sort((a, b) => a - b);
   return { id: S.id, key, idx: [0, ...chosen, S.parts.length - 1], shown: false };
 }
-// 롤플레이 뼈대(L·M·H·I·J)인지 판별: tag가 RP11 / RP12 / RP13
-const isRpSk = (S) => S.tag.startsWith("RP");
-// 현재 탭에 보여 줄 뼈대 목록: 롤플레이 탭이면 롤플레이 뼈대만, 응용 탭이면 나머지
-const skList = () => SKELS.filter((s) => isRpSk(s) === (cfg.view === "rp"));
-// 응용 탭 / 롤플레이 탭 화면(같은 렌더러 공유): 뼈대 선택(유형별 그룹) → 주제 선택 → 질문과 채워진 뼈대, 주제별 비교표
+// 현재 분류에 속한 뼈대 목록
+const skList = () => SKELS.filter((s) => skCat(s) === cfg.cat);
+// 응용 탭 화면(분류별 뼈대 목록): 뼈대 선택(유형별 그룹) → 주제 선택 → 질문과 채워진 뼈대, 주제별 비교표
 function renderSkel() {
   const list = skList(),
-    rpv = cfg.view === "rp";
+    rpv = cfg.cat === "rp";
   // 다른 탭에서 고른 뼈대가 이 탭 목록에 없으면 첫 번째 뼈대로 바꾼다
   if (!list.some((s) => s.id === cfg.skSk)) cfg.skSk = list[0].id;
   const S = SKELS.find((s) => s.id === cfg.skSk),
@@ -958,7 +1024,9 @@ function renderSkel() {
       )
       .join("");
   h +=
-    '<div class="lbl" style="margin-bottom:4px">주제 (문제)</div><div class="pills">' +
+    '<div class="lbl" style="margin-bottom:4px">' +
+    (rpv ? "상황 (문제)" : "주제 (문제)") +
+    '</div><div class="pills">' +
     keys
       .map(
         (k) =>
@@ -1134,13 +1202,10 @@ function mockClear() {
 function buildMock() {
   const used = new Set(),
     qs = [];
-  const pool = [];
-  TOPICS.forEach((t, i) => {
-    if (!t.rp && t.name !== "기억에 남는 경험") pool.push(i);
-  });
+  const pool = catTopics("survey").filter((i) => TOPICS[i].name !== "기억에 남는 경험");
   const mem = [];
-  TOPICS.forEach((t, ti) =>
-    t.secs.forEach((s, si) => {
+  catTopics("survey").forEach((ti) =>
+    TOPICS[ti].secs.forEach((s, si) => {
       if (s.q && s.tag === "4·7·10") mem.push({ ti, si });
     }),
   );
@@ -1177,11 +1242,21 @@ function buildMock() {
       if (!((!m.length || Math.random() < 0.5) && genQ(["4·7·10"], "기억에 남는 경험")))
         add(m.length ? m : mem, "기억에 남는 경험");
     });
-  const rp = qSecs(RP_TI).map((x) => ({ ti: RP_TI, si: x.i, tag: x.s.tag }));
+  // 돌발 주제: 시설 7단계 / 돌발 기본형 / 신경향 중에서 서로 다른 주제로 뽑는다
+  shuffle(catTopics("surprise"))
+    .slice(0, cfg.mockMode === "short" ? 1 : 2)
+    .forEach((ti) =>
+      add(
+        qSecs(ti).map((x) => ({ ti, si: x.i })),
+        "돌발 주제",
+      ),
+    );
+  const rpTis = catTopics("rp");
+  const rp = rpTis.flatMap((ti) => qSecs(ti).map((x) => ({ ti, si: x.i, tag: x.s.tag })));
   const genRP = (tag, kind) => {
     const sk0 = pick(SKELS.filter((s) => s.tag === tag));
     qs.push({
-      ti: RP_TI,
+      ti: rpTis[0],
       si: -1,
       kind: kind + " (뼈대 응용)",
       gen: true,
@@ -1213,8 +1288,8 @@ function renderMock() {
       '<p class="note">문제만 음성으로 읽어 줍니다. 아무것도 보지 않고 답하세요. 마이크 녹음은 이 페이지에서 쓸 수 없어서, 말한 시간만 기록합니다.</p>' +
       '<div class="row2"><span class="lbl">구성</span><div class="seg">' +
       [
-        ["full", "전체 12문제"],
-        ["short", "짧게 6문제"],
+        ["full", "전체 14문제"],
+        ["short", "짧게 7문제"],
       ]
         .map(
           (o) =>
@@ -1248,7 +1323,7 @@ function renderMock() {
       '<label class="lbl"><input type="checkbox" id="mAuto"' +
       (cfg.mockAuto ? " checked" : "") +
       "> 시간이 끝나면 자동으로 다음 문제</label></div>" +
-      '<p class="note">전체: 주제 3개 × 3문제(묘사, 습관·비교·최근, 기억에 남는 경험) + 롤플레이 11·12·13번. 각 문제는 절반쯤의 확률로, 응용 탭의 뼈대를 다른 주제에 바꿔 끼워 답해야 하는 문제로 나옵니다. 문제마다 한 번 다시 들을 수 있습니다.</p>' +
+      '<p class="note">전체: 서베이 주제 3개 × 3문제(묘사, 습관·비교·최근, 기억에 남는 경험) + 돌발 주제 2문제 + 롤플레이 11·12·13번. 각 문제는 절반쯤의 확률로, 응용 탭의 뼈대를 다른 주제에 바꿔 끼워 답해야 하는 문제로 나옵니다. 문제마다 한 번 다시 들을 수 있습니다.</p>' +
       '<button class="big live" data-mstart="1" style="width:100%">시작</button>';
     return;
   }
@@ -1460,6 +1535,11 @@ $("#tabs").addEventListener("click", (e) => {
   const b = e.target.closest("[data-v]");
   if (b) setView(b.dataset.v);
 });
+// 대분류 선택
+$("#cats").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-cat]");
+  if (b) setCat(b.dataset.cat);
+});
 // 주제 칩 선택
 $("#chips").addEventListener("click", (e) => {
   const b = e.target.closest("[data-t]");
@@ -1625,12 +1705,13 @@ $("#v-blank").addEventListener("click", async (e) => {
     stopAll();
     const l = qSecs(cfg.topic);
     let k = l.findIndex((x) => x.i === cfg.bsec) + +nx.dataset.bnext;
+    const ct = catTopics(cfg.cat);
     if (k >= l.length) {
-      cfg.topic = (cfg.topic + 1) % TOPICS.length;
+      cfg.topic = ct[(ct.indexOf(cfg.topic) + 1) % ct.length];
       cfg.bsec = qSecs(cfg.topic)[0].i;
       renderChips();
     } else if (k < 0) {
-      cfg.topic = (cfg.topic - 1 + TOPICS.length) % TOPICS.length;
+      cfg.topic = ct[(ct.indexOf(cfg.topic) - 1 + ct.length) % ct.length];
       const l2 = qSecs(cfg.topic);
       cfg.bsec = l2[l2.length - 1].i;
       renderChips();
@@ -2017,4 +2098,4 @@ if (SYNTH) {
 }
 if (cfg.view === "mock" && mock.phase === "setup") {
 }
-setView(["listen", "blank", "kw", "skel", "rp", "mock"].includes(cfg.view) ? cfg.view : "listen");
+setView(["listen", "blank", "kw", "skel", "mock"].includes(cfg.view) ? cfg.view : "listen");

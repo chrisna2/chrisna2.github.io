@@ -706,3 +706,10 @@ mark {
     font-size: 12.5px;
   }
 }
+
+.cats {
+  margin-bottom: 6px;
+}
+#catnote {
+  margin: 0 0 10px;
+}

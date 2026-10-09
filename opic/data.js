@@ -1044,9 +1044,226 @@ const TOPICS = [
     ],
   },
   {
-    name: "롤플레이 12·13",
+    name: "롤플레이 11 · 질문하기",
+    cat: "rp",
     rp: true,
     secs: [
+      {
+        t: "11번 친구: 영화 약속",
+        tag: "RP11",
+        s: [
+          [
+            "Hi, how are you? I want to {watch a movie} with you this weekend. {You're going to love it.}",
+            "안녕, 잘 지내? 이번 주말에 너랑 영화 보고 싶어. 너도 분명 좋아할 거야.",
+            "용건",
+          ],
+          [
+            "Do you have time this weekend? What about {this Saturday}? What time is good for you?",
+            "이번 주말에 시간 있어? 토요일은 어때? 몇 시가 괜찮아?",
+            "시간",
+          ],
+          [
+            "{Seven} p.m. would be great. Let's make it then.",
+            "저녁 일곱 시면 좋겠어. 그럼 그때로 하자.",
+            "시간 확정",
+          ],
+          [
+            "Where do you want to meet? Let's meet at {the Gangnam Station exit number 4}. What do you think?",
+            "어디서 만날까? 강남역 4번 출구에서 만나자. 어떻게 생각해?",
+            "장소",
+          ],
+          [
+            "After that, what do you want to do? Do you want to {eat something}, or do you want to {see something}? It's up to you.",
+            "그 다음엔 뭐 하고 싶어? 뭘 먹거나 뭘 보거나 하고 싶어? 네가 정해.",
+            "활동",
+          ],
+          [
+            "Is there anything I should bring? Just think about it and let me know. See you then. Bye.",
+            "내가 챙길 게 있을까? 생각해 보고 알려 줘. 그때 보자. 안녕.",
+            "마무리",
+          ],
+        ],
+        q: [
+          "There is a situation I need you to act out. You want to go see a movie with your friend. Call your friend and ask three or four questions.",
+          "상황을 연기해 주세요. 친구와 영화를 보러 가고 싶습니다. 친구에게 전화해서 세네 가지 질문을 하세요.",
+        ],
+      },
+      {
+        t: "11번 친구: MP3 플레이어 조언",
+        tag: "RP11",
+        s: [
+          [
+            "Hi, how are you? I heard that you bought an {MP3 player} recently.",
+            "안녕, 잘 지내? 너 최근에 MP3 플레이어 샀다고 들었어.",
+            "인사 · 용건",
+          ],
+          [
+            "Where did you get it? How much was it? Was it good?",
+            "어디서 샀어? 얼마였어? 좋았어?",
+            "질문 3개",
+          ],
+          [
+            "I want to buy one, too. Would you go with me?",
+            "나도 하나 사고 싶어. 같이 가 줄래?",
+            "부탁",
+          ],
+          [
+            "Do you have time this weekend? What time is good for you?",
+            "이번 주말에 시간 있어? 몇 시가 괜찮아?",
+            "시간",
+          ],
+          [
+            "Where do you want to meet? Let's meet at {the Gangnam Station exit number 4}.",
+            "어디서 만날까? 강남역 4번 출구에서 만나자.",
+            "장소",
+          ],
+          [
+            "You can call me on my cell. See you then. Bye.",
+            "내 휴대폰으로 전화해도 돼. 그때 보자. 안녕.",
+            "마무리",
+          ],
+        ],
+        q: [
+          "You want to buy an MP3 player, and your friend bought one recently. Before you buy, call your friend and ask three or four questions about it.",
+          "MP3 플레이어를 사고 싶은데 친구가 최근에 샀습니다. 사기 전에 친구에게 전화해서 그것에 대해 세네 가지 질문을 하세요.",
+        ],
+      },
+      {
+        t: "11번 업체: 영화표 문의",
+        tag: "RP11",
+        s: [
+          [
+            "Hello, how are you doing? I'm calling to ask you something. I would like to {buy two tickets for a movie that is newly released}.",
+            "안녕하세요, 문의드릴 게 있어서 전화했어요. 새로 개봉한 영화 표 두 장을 사고 싶어요.",
+            "도입 · 용건",
+          ],
+          [
+            "What kinds of {movies} do you have? What kinds of {times} do you have?",
+            "어떤 영화가 있나요? 어떤 시간대가 있나요?",
+            "종류",
+          ],
+          [
+            "I'd like to {sit in the middle row} if tickets are available. Do you have any recommendations?",
+            "표가 있다면 가운데 줄에 앉고 싶어요. 추천해 주실 만한 게 있나요?",
+            "선호 · 추천",
+          ],
+          [
+            "How much are they? Can I receive a discount?",
+            "얼마인가요? 할인도 받을 수 있나요?",
+            "가격 · 할인",
+          ],
+          [
+            "Can I use a credit card? I have a BC card. Can I use it?",
+            "신용카드 되나요? 저는 BC카드가 있는데 사용할 수 있나요?",
+            "결제",
+          ],
+          [
+            "Where is the {theater} located? Can you tell me how to get there?",
+            "영화관은 어디에 있나요? 어떻게 가는지 알려 주실 수 있나요?",
+            "위치",
+          ],
+          [
+            "I want to know about your operation hours. When do you open, and when do you close?",
+            "영업시간을 알고 싶어요. 몇 시에 열고 몇 시에 닫나요?",
+            "영업시간",
+          ],
+          [
+            "Where is the parking area? Can I use it for free?",
+            "주차장은 어디인가요? 무료로 쓸 수 있나요?",
+            "주차장",
+          ],
+          ["Thank you. Thank you for your help.", "감사합니다. 도와주셔서 감사해요.", "감사"],
+        ],
+        q: [
+          "There is a situation I need you to act out. You are supposed to watch a movie with your friend. Call the theater and ask three or four questions.",
+          "상황을 연기해 주세요. 친구와 영화를 보기로 했습니다. 영화관에 전화해서 세네 가지 질문을 하세요.",
+        ],
+      },
+      {
+        t: "11번 업체: 렌터카 문의",
+        tag: "RP11",
+        s: [
+          [
+            "Hello, how are you doing? I'm calling to ask you something. I want to {rent a car for a week}.",
+            "안녕하세요, 문의드릴 게 있어서 전화했어요. 일주일 동안 차를 빌리고 싶어요.",
+            "도입 · 용건",
+          ],
+          [
+            "What kinds of {cars} do you have? What kinds of {insurance} do you have?",
+            "어떤 차량이 있나요? 어떤 보험이 있나요?",
+            "종류",
+          ],
+          [
+            "I'd like to rent {an SUV for my family}. Do you have any recommendations?",
+            "가족이 탈 SUV를 빌리고 싶어요. 추천해 주실 만한 게 있나요?",
+            "선호 · 추천",
+          ],
+          [
+            "How much is it? Can I receive a discount?",
+            "얼마인가요? 할인도 받을 수 있나요?",
+            "가격 · 할인",
+          ],
+          [
+            "Can I use a credit card? I have a BC card. Can I use it?",
+            "신용카드 되나요? 저는 BC카드가 있는데 사용할 수 있나요?",
+            "결제",
+          ],
+          [
+            "Where is the {office} located? Can you tell me how to get there?",
+            "사무실은 어디에 있나요? 어떻게 가는지 알려 주실 수 있나요?",
+            "위치",
+          ],
+          [
+            "I want to know about your operation hours. When do you open, and when do you close?",
+            "영업시간을 알고 싶어요. 몇 시에 열고 몇 시에 닫나요?",
+            "영업시간",
+          ],
+          ["Thank you. Thank you for your help.", "감사합니다. 도와주셔서 감사해요.", "감사"],
+        ],
+        q: [
+          "You want to rent a car for a week. Call the rental agency and ask three or four questions about renting a car.",
+          "일주일 동안 차를 빌리려 합니다. 렌터카 업체에 전화해서 차를 빌리는 것에 대해 세네 가지 질문을 하세요.",
+        ],
+      },
+    ],
+  },
+  {
+    name: "롤플레이 12 · 문제 해결",
+    cat: "rp",
+    rp: true,
+    secs: [
+      {
+        t: "12번 친구: 길이 막힘",
+        tag: "RP12",
+        s: [
+          [
+            "Hello, I'm calling to let you know I have a problem.",
+            "안녕, 문제가 생겨서 알려 주려고 전화했어.",
+            "인사",
+          ],
+          [
+            "I'm on my way there, but the {traffic} is really heavy.",
+            "지금 가는 중인데 길이 너무 막혀.",
+            "상황",
+          ],
+          [
+            "I don't know what to do. What am I to do?",
+            "어떻게 해야 할지 모르겠어. 어쩌지?",
+            "당황",
+          ],
+          [
+            "Would you like to {see a later show} instead?",
+            "대신 더 늦은 상영을 보는 건 어때?",
+            "대안 1",
+          ],
+          ["Can you wait about {thirty minutes}?", "30분쯤 기다려 줄 수 있어?", "대안 2"],
+          ["Please let me know what you think.", "어떻게 생각하는지 알려 줘.", "마무리"],
+        ],
+        q: [
+          "There is a problem I need you to resolve. You are supposed to watch a movie with your friend, but something unexpected happened. Call your friend, explain the situation, and suggest two or three alternatives.",
+          "해결해야 할 문제가 있습니다. 친구와 영화를 보기로 했는데 예상치 못한 일이 생겼습니다. 친구에게 전화해 상황을 설명하고 대안 두세 가지를 제안하세요.",
+        ],
+      },
       {
         t: "12번 친구: 콘서트에 못 감",
         tag: "RP12",
@@ -1078,6 +1295,33 @@ const TOPICS = [
             "대안2 다른 사람",
           ],
           ["Please let me know what you think.", "어떻게 생각하는지 알려 줘.", "마무리"],
+        ],
+      },
+      {
+        t: "12번 친구: 빌린 MP3 파손",
+        tag: "RP12",
+        s: [
+          [
+            "Hello, I'm calling to let you know I have a problem.",
+            "안녕, 문제가 생겨서 알려 주려고 전화했어.",
+            "인사",
+          ],
+          [
+            "I dropped the {MP3 player}. It is partially broken.",
+            "MP3 플레이어를 떨어뜨렸어. 일부 고장 났어.",
+            "상황",
+          ],
+          ["I don't know what to do.", "어떻게 해야 할지 모르겠어.", "당황"],
+          ["Would you like me to {fix it} for you?", "내가 고쳐 줄까?", "대안 1"],
+          [
+            "I can {wire you the money}. Could you please provide me with the correct bank account details so that I can send you the money right away?",
+            "내가 돈을 보내 줄 수 있어. 바로 보낼 수 있게 정확한 계좌 정보를 알려 줄래?",
+            "대안 2 · 송금",
+          ],
+        ],
+        q: [
+          "You borrowed your friend's MP3 player, but you dropped it and it is partially broken. Call your friend, explain the situation, and suggest two or three solutions.",
+          "친구의 MP3 플레이어를 빌렸는데 떨어뜨려서 일부 고장 났습니다. 친구에게 전화해 상황을 설명하고 해결책 두세 가지를 제안하세요.",
         ],
       },
       {
@@ -1121,6 +1365,60 @@ const TOPICS = [
           ],
         ],
       },
+      {
+        t: "12번 업체: 교환 요청 표현 (5단계)",
+        tag: "RP12",
+        s: [
+          ["I would like to get an {exchange}.", "교환하고 싶습니다.", "① 평서문"],
+          ["Can I get an {exchange}?", "교환받을 수 있나요?", "② 간단한 질문"],
+          ["Can I change it to {another one}?", "다른 걸로 바꿀 수 있나요?", "③ 원하는 질문"],
+          [
+            "Is it possible for me to request an {exchange}?",
+            "교환을 요청하는 게 가능한가요?",
+            "④ 복잡한 질문",
+          ],
+          [
+            "I was wondering if I could get an {exchange}.",
+            "교환받을 수 있을지 궁금해서요.",
+            "⑤ 간접 의문문",
+          ],
+        ],
+      },
+      {
+        t: "12번 업체: 환불·반품 요청 표현",
+        tag: "RP12",
+        s: [
+          ["I would like to get a {refund}.", "환불받고 싶습니다.", "① 평서문"],
+          [
+            "Can I get a {refund}? Can I get a full refund?",
+            "환불받을 수 있나요? 전액 환불되나요?",
+            "② 질문",
+          ],
+          ["May I please request a {refund}?", "환불을 요청해도 될까요?", "③ 정중한 질문"],
+          [
+            "I was wondering if I could get a {refund}.",
+            "환불받을 수 있을지 궁금해서요.",
+            "④ 간접 의문문",
+          ],
+          [
+            "I would like to return it. How can I do that? Can you explain the procedure?",
+            "반품하고 싶어요. 어떻게 하면 되나요? 절차를 설명해 주실 수 있나요?",
+            "반품 방법",
+          ],
+          [
+            "Is there any shipping charge on me? Can you give me the exact address?",
+            "배송료가 제게 부과되나요? 정확한 주소를 알려 주실 수 있나요?",
+            "배송료 · 주소",
+          ],
+        ],
+      },
+    ],
+  },
+  {
+    name: "롤플레이 13 · 비슷한 경험",
+    cat: "rp",
+    rp: true,
+    secs: [
       {
         t: "13번 경험: 아파서 약속 취소",
         tag: "RP13",
@@ -1241,6 +1539,234 @@ const TOPICS = [
             "I realized how lucky I was to {get it back}.",
             "되찾아서 정말 운이 좋았다고 느꼈어요.",
             "느낀 점",
+          ],
+        ],
+      },
+    ],
+  },
+  { name: "시설 (7단계)", cat: "surprise", fromSkel: "N", secs: [] },
+  { name: "돌발 기본 (22~25강)", cat: "surprise", fromSkel: "O", secs: [] },
+  {
+    name: "신경향 · 회사·직장",
+    cat: "surprise",
+    secs: [
+      {
+        t: "선호 회사 Q1 · 묘사",
+        tag: "신경향",
+        q: [
+          "Describe a company you would like to work for. What does it look like?",
+          "일하고 싶은 회사를 묘사해 주세요. 어떤 모습인가요?",
+        ],
+        s: [
+          [
+            "The company I want to work for is {a global IT company}.",
+            "제가 일하고 싶은 회사는 글로벌 IT 회사예요.",
+            "회사 소개",
+          ],
+          [
+            "It's located in {Yeouido}, so {it's easy to get to by subway}.",
+            "여의도에 있어서 지하철로 가기 쉬워요.",
+            "위치",
+          ],
+          [
+            "The office is {modern and bright}, and it has {many meeting rooms and a nice cafeteria}.",
+            "사무실은 현대적이고 밝고, 회의실도 많고 구내식당도 좋아요.",
+            "건물 · 시설",
+          ],
+          [
+            "The people there are {friendly and professional}, and {they respect each other's ideas}.",
+            "그곳 사람들은 친절하고 전문적이고, 서로의 의견을 존중해요.",
+            "사람들",
+          ],
+          [
+            "The reason I like it is that {it has good benefits and a flexible schedule}.",
+            "제가 좋아하는 이유는 복지가 좋고 근무 시간이 유연하기 때문이에요.",
+            "이유",
+          ],
+          [
+            "That's why I think it would be a great place to work.",
+            "그래서 일하기 정말 좋은 곳일 거라고 생각해요.",
+            "마무리",
+          ],
+        ],
+      },
+      {
+        t: "선호 회사 Q2 · 세부 묘사",
+        tag: "신경향",
+        q: [
+          "Tell me more about that company. What do the employees do there, and what makes it special?",
+          "그 회사에 대해 더 말해 주세요. 직원들은 거기서 무엇을 하고, 무엇이 특별한가요?",
+        ],
+        s: [
+          [
+            "First of all, the employees there {develop software for many clients}.",
+            "우선, 그곳 직원들은 많은 고객사를 위한 소프트웨어를 개발해요.",
+            "하는 일",
+          ],
+          [
+            "Also, they work in {small teams}, so {everyone can share ideas easily}.",
+            "또한 작은 팀으로 일해서 모두가 쉽게 아이디어를 나눌 수 있어요.",
+            "일하는 방식",
+          ],
+          [
+            "Plus, the company {offers training programs and pays for courses}.",
+            "게다가 회사가 교육 프로그램을 제공하고 수강료도 지원해요.",
+            "성장 · 복지",
+          ],
+          [
+            "What makes it special is {the culture}. {People leave on time and respect personal time}.",
+            "특별한 점은 문화예요. 정시에 퇴근하고 개인 시간을 존중해요.",
+            "특별한 점",
+          ],
+          [
+            "Overall, I would be proud to work there.",
+            "전반적으로 그곳에서 일하면 자랑스러울 것 같아요.",
+            "마무리",
+          ],
+        ],
+      },
+      {
+        t: "선호 회사 Q3 · 하루 루틴",
+        tag: "신경향",
+        q: [
+          "What would a typical day be like at that company? Describe your daily routine there.",
+          "그 회사에서의 평범한 하루는 어떨까요? 그곳에서의 일과를 말해 주세요.",
+        ],
+        s: [
+          [
+            "I would start my day at {nine} by having {a cup of coffee} with my team.",
+            "아홉 시에 팀원들과 커피 한 잔으로 하루를 시작할 거예요.",
+            "아침",
+          ],
+          [
+            "Then we would have {a short meeting} to share what each person is working on.",
+            "그다음 짧은 회의로 각자 하는 일을 공유할 거예요.",
+            "회의",
+          ],
+          [
+            "After that, I would {focus on coding} until lunch.",
+            "그 후 점심까지 코딩에 집중할 거예요.",
+            "오전 업무",
+          ],
+          [
+            "For lunch, I would {eat at the cafeteria with my coworkers} and {take a short walk}.",
+            "점심은 동료들과 구내식당에서 먹고 잠깐 산책할 거예요.",
+            "점심",
+          ],
+          [
+            "In the afternoon, I would {review code and test the new features}.",
+            "오후에는 코드를 검토하고 새 기능을 테스트할 거예요.",
+            "오후 업무",
+          ],
+          [
+            "I would leave at {six} and feel that it was a productive day.",
+            "여섯 시에 퇴근하고 보람찬 하루였다고 느낄 거예요.",
+            "퇴근 · 마무리",
+          ],
+        ],
+      },
+      {
+        t: "직장 Q1 · 묘사",
+        tag: "신경향",
+        q: [
+          "Describe the place where you work. What does it look like and who works there?",
+          "당신이 일하는 곳을 묘사해 주세요. 어떻게 생겼고 누가 일하나요?",
+        ],
+        s: [
+          [
+            "I work at {an IT company} in {Yeouido}.",
+            "저는 여의도에 있는 IT 회사에서 일해요.",
+            "회사 · 위치",
+          ],
+          [
+            "I have been working there for {about eight years} as {a developer}.",
+            "그곳에서 개발자로 약 8년째 일하고 있어요.",
+            "경력",
+          ],
+          [
+            "The office is {on the tenth floor}, and it has {lots of desks, a few meeting rooms, and a small lounge}.",
+            "사무실은 10층에 있고 책상이 많고 회의실이 몇 개, 작은 휴게 공간이 있어요.",
+            "사무실",
+          ],
+          [
+            "My coworkers are {helpful and hardworking}, and {we often have lunch together}.",
+            "동료들은 잘 도와주고 성실하고, 점심도 자주 같이 먹어요.",
+            "동료",
+          ],
+          [
+            "What I like most about my workplace is {the good people}.",
+            "제 직장에서 가장 좋은 점은 좋은 사람들이에요.",
+            "좋은 점",
+          ],
+        ],
+      },
+      {
+        t: "직장 Q2 · 비교 (예전 vs 지금)",
+        tag: "신경향",
+        q: [
+          "How is your workplace different now compared to when you first started working there?",
+          "처음 일을 시작했을 때와 비교해 지금 직장은 어떻게 다른가요?",
+        ],
+        s: [
+          [
+            "When I first started, {the office was smaller} and {we had fewer people}.",
+            "처음 시작했을 때는 사무실이 더 작았고 사람도 적었어요.",
+            "예전",
+          ],
+          [
+            "Now, {the company has grown} and {we work on bigger projects}.",
+            "지금은 회사가 커졌고 더 큰 프로젝트를 해요.",
+            "지금",
+          ],
+          [
+            "Another difference is {the way we work}. {We use more online tools and work from home sometimes}.",
+            "또 다른 차이는 일하는 방식이에요. 온라인 도구를 더 많이 쓰고 가끔 재택근무도 해요.",
+            "일하는 방식 비교",
+          ],
+          [
+            "Compared to the past, I feel {more comfortable and more confident} at work.",
+            "예전에 비해 일할 때 더 편하고 자신감이 있어요.",
+            "나의 변화",
+          ],
+          [
+            "Overall, I think the change has been {positive}.",
+            "전반적으로 이 변화는 긍정적이라고 생각해요.",
+            "마무리",
+          ],
+        ],
+      },
+      {
+        t: "직장 Q3 · 첫 직장 경험",
+        tag: "신경향",
+        q: [
+          "Tell me about your first job. What was it like, and what did you learn?",
+          "첫 직장에 대해 말해 주세요. 어땠고 무엇을 배웠나요?",
+        ],
+        s: [
+          [
+            "My first job was {at a small software company}, about {eight years ago}.",
+            "제 첫 직장은 약 8년 전 작은 소프트웨어 회사였어요.",
+            "첫 직장",
+          ],
+          [
+            "On my first day, I was {very nervous}, but {my senior coworker was kind and showed me around}.",
+            "첫날은 많이 긴장했지만 선배가 친절하게 안내해 줬어요.",
+            "첫날",
+          ],
+          [
+            "At first, I {made many mistakes} because {everything was new to me}.",
+            "처음엔 모든 게 새로워서 실수를 많이 했어요.",
+            "어려움",
+          ],
+          [
+            "But {my team helped me}, and I slowly {learned how to work as a team}.",
+            "하지만 팀이 도와줘서 팀으로 일하는 법을 조금씩 배웠어요.",
+            "극복",
+          ],
+          [
+            "Looking back, that job {taught me a lot}, and I'm still grateful.",
+            "돌아보면 그 직장에서 많이 배웠고 지금도 감사해요.",
+            "마무리",
           ],
         ],
       },
@@ -1991,263 +2517,6 @@ SKELS.push(
       },
     },
   },
-  {
-    id: "H",
-    name: "친구에게 전화",
-    desc: "약속 못 지킴 → 대안",
-    grp: "롤플레이 12",
-    tag: "RP12",
-    kn: { concert: "콘서트", movie: "영화", jog: "조깅", trip: "여행", cafe: "카페" },
-    qs: {
-      concert: [
-        "You planned to go to a concert with your friend today, but something went wrong. Call your friend, explain the situation, and suggest two or three alternatives.",
-        "오늘 친구와 콘서트에 가기로 했는데 문제가 생겼습니다. 친구에게 전화해 상황을 설명하고 대안 두세 가지를 제안하세요.",
-      ],
-      movie: [
-        "You planned to see a movie with your friend today, but something went wrong. Call your friend, explain the situation, and suggest two or three alternatives.",
-        "오늘 친구와 영화를 보기로 했는데 문제가 생겼습니다. 친구에게 전화해 상황을 설명하고 대안 두세 가지를 제안하세요.",
-      ],
-      jog: [
-        "You planned to go jogging with your friend today, but something went wrong. Call your friend, explain the situation, and suggest two or three alternatives.",
-        "오늘 친구와 조깅하기로 했는데 문제가 생겼습니다. 친구에게 전화해 상황을 설명하고 대안 두세 가지를 제안하세요.",
-      ],
-      trip: [
-        "You planned to go on a trip with your friend today, but something went wrong. Call your friend, explain the situation, and suggest two or three alternatives.",
-        "오늘 친구와 여행을 떠나기로 했는데 문제가 생겼습니다. 친구에게 전화해 상황을 설명하고 대안 두세 가지를 제안하세요.",
-      ],
-      cafe: [
-        "You planned to meet your friend at a cafe today, but something went wrong. Call your friend, explain the situation, and suggest two or three alternatives.",
-        "오늘 친구와 카페에서 만나기로 했는데 문제가 생겼습니다. 친구에게 전화해 상황을 설명하고 대안 두세 가지를 제안하세요.",
-      ],
-    },
-    parts: [
-      [
-        "Hello, I'm calling to let you know I have a problem.",
-        "안녕, 문제가 생겨서 알려 주려고 전화했어.",
-        "인사",
-      ],
-      ["<PROBLEM>.", "<PROBLEM>.", "상황"],
-      ["I'm afraid <CANT>.", "미안한데 <CANT> 것 같아.", "못 하게 됨"],
-      ["I don't know what to do.", "어떻게 해야 할지 모르겠어.", "당황"],
-      ["Would you like to <ALT1> instead?", "대신 <ALT1> 어때?", "대안 1"],
-      ["Or would you like to <ALT2>?", "아니면 <ALT2> 어때?", "대안 2"],
-      ["Please let me know what you think.", "어떻게 생각하는지 알려 줘.", "마무리"],
-    ],
-    slots: {
-      concert: {
-        PROBLEM: ["I'm so sick today. I have a high fever", "오늘 많이 아파. 열이 높아"],
-        CANT: ["I can't go to the concert with you", "너랑 콘서트에 갈 수 없을"],
-        ALT1: ["go next weekend", "다음 주말에 가는 건"],
-        ALT2: ["go with someone else", "다른 사람이랑 가는 건"],
-      },
-      movie: {
-        PROBLEM: [
-          "My bike has a flat tire, and I can't get there in time",
-          "자전거 바퀴가 펑크 나서 제시간에 갈 수가 없어",
-        ],
-        CANT: ["I can't see the movie with you", "너랑 영화를 볼 수 없을"],
-        ALT1: ["watch it next Saturday", "다음 토요일에 보는 건"],
-        ALT2: ["see a later show today", "오늘 늦은 시간 상영을 보는 건"],
-      },
-      jog: {
-        PROBLEM: [
-          "I hurt my ankle yesterday, and it still hurts",
-          "어제 발목을 다쳤는데 아직도 아파",
-        ],
-        CANT: ["I can't go jogging with you", "너랑 조깅하러 갈 수 없을"],
-        ALT1: ["go jogging tomorrow", "내일 조깅하는 건"],
-        ALT2: ["take a slow walk in the park", "공원에서 천천히 걷는 건"],
-      },
-      trip: {
-        PROBLEM: ["My flight was canceled because of the weather", "날씨 때문에 비행기가 취소됐어"],
-        CANT: ["I can't go on the trip with you today", "오늘 너랑 여행을 갈 수 없을"],
-        ALT1: ["leave next weekend", "다음 주말에 출발하는 건"],
-        ALT2: ["visit a closer place first", "가까운 곳부터 가 보는 건"],
-      },
-      cafe: {
-        PROBLEM: [
-          "I have a bad cold, and I'm coughing a lot",
-          "감기가 심하게 걸려서 기침을 많이 해",
-        ],
-        CANT: ["I can't meet you at the cafe", "카페에서 널 만날 수 없을"],
-        ALT1: ["meet tomorrow", "내일 만나는 건"],
-        ALT2: ["talk on the phone for now", "일단 전화로 이야기하는 건"],
-      },
-    },
-  },
-  {
-    id: "I",
-    name: "업체에 전화",
-    desc: "교환 → 환불 → 대안",
-    grp: "롤플레이 12",
-    tag: "RP12",
-    kn: { movie: "영화표", concert: "콘서트 표", trip: "호텔 예약" },
-    qs: {
-      movie: [
-        "You bought movie tickets, but the clerk gave you the wrong ones. Call the theater, explain the problem, and suggest two or three solutions.",
-        "영화표를 샀는데 직원이 잘못된 표를 줬습니다. 영화관에 전화해 문제를 설명하고 해결책 두세 가지를 제안하세요.",
-      ],
-      concert: [
-        "You bought a concert ticket, but you cannot go on that day. Call the ticket office, explain the situation, and suggest two or three solutions.",
-        "콘서트 표를 샀는데 그날 갈 수 없게 됐습니다. 예매처에 전화해 상황을 설명하고 해결책 두세 가지를 제안하세요.",
-      ],
-      trip: [
-        "You booked a hotel room, but you have to cancel your trip. Call the hotel, explain the problem, and suggest two or three solutions.",
-        "호텔 방을 예약했는데 여행을 취소해야 합니다. 호텔에 전화해 문제를 설명하고 해결책 두세 가지를 제안하세요.",
-      ],
-    },
-    parts: [
-      [
-        "Hello, I'm calling to let you know I have a problem.",
-        "안녕하세요, 문제가 있어서 전화드렸어요.",
-        "인사",
-      ],
-      ["<SITUATION>.", "<SITUATION>.", "상황"],
-      [
-        "I'm not sure what to do. Can you tell me what to do?",
-        "어떻게 해야 할지 모르겠어요. 알려 주실 수 있나요?",
-        "당황",
-      ],
-      [
-        "I was wondering if it's possible to <REQ1>.",
-        "<REQ1> 수 있는지 궁금해서요.",
-        "요청 1: 교환·변경",
-      ],
-      ["If not, could I <REQ2>?", "안 된다면 <REQ2> 수 있을까요?", "요청 2: 환불·취소"],
-      [
-        "Do you have any other solutions? Please let me know.",
-        "다른 해결책이 있을까요? 알려 주세요.",
-        "만능",
-      ],
-      [
-        "Thank you for your understanding. Have a nice day.",
-        "이해해 주셔서 감사합니다. 좋은 하루 보내세요.",
-        "마무리",
-      ],
-    ],
-    slots: {
-      movie: {
-        SITUATION: [
-          "I bought two tickets for a movie yesterday, but they were for the wrong movie",
-          "어제 영화표를 두 장 샀는데 다른 영화 표였어요",
-        ],
-        REQ1: ["exchange these tickets for a different movie", "이 표를 다른 영화로 교환할"],
-        REQ2: ["get a refund", "환불받을"],
-      },
-      concert: {
-        SITUATION: [
-          "I bought a ticket for Saturday's concert, but I can't make it that day",
-          "토요일 콘서트 표를 샀는데 그날 갈 수가 없어요",
-        ],
-        REQ1: ["change my ticket to another day", "표를 다른 날로 바꿀"],
-        REQ2: ["get a refund", "환불받을"],
-      },
-      trip: {
-        SITUATION: [
-          "I booked a hotel room for this weekend, but I have to cancel my trip",
-          "이번 주말 호텔 방을 예약했는데 여행을 취소해야 해요",
-        ],
-        REQ1: ["change my reservation to next weekend", "예약을 다음 주말로 변경할"],
-        REQ2: ["cancel it without a fee", "수수료 없이 취소할"],
-      },
-    },
-  },
-  {
-    id: "J",
-    name: "비슷한 경험",
-    desc: "문제 → 전화 → 해결",
-    grp: "롤플레이 13",
-    tag: "RP13",
-    kn: {
-      concert: "약속 취소 (콘서트)",
-      movie: "표 교환 (영화)",
-      subway: "분실 (지하철)",
-      trip: "예약 문제 (여행)",
-    },
-    qs: {
-      concert: [
-        "Have you ever had to cancel or break a plan because you were sick or had an urgent problem? When did it happen, and how did you solve it?",
-        "아프거나 급한 일 때문에 약속을 취소한 적이 있나요? 언제였고 어떻게 해결했나요?",
-      ],
-      movie: [
-        "Have you ever bought something wrong and had to exchange or return it? What happened and how did you handle it?",
-        "잘못 산 물건을 교환하거나 반품한 적이 있나요? 무슨 일이 있었고 어떻게 처리했나요?",
-      ],
-      subway: [
-        "Have you ever lost something? What did you lose, and how did you handle it?",
-        "무언가를 잃어버린 적이 있나요? 무엇을 잃어버렸고 어떻게 처리했나요?",
-      ],
-      trip: [
-        "Have you ever had a problem with a reservation or a trip? What happened and how did you handle it?",
-        "예약이나 여행에서 문제가 생긴 적이 있나요? 무슨 일이 있었고 어떻게 처리했나요?",
-      ],
-    },
-    parts: [
-      ["I have experienced a situation like this before.", "이런 상황을 겪은 적이 있어요.", "도입"],
-      ["I found out that <SIT>.", "<SIT> 알게 됐어요.", "상황"],
-      [
-        "I immediately called <WHO> to let them know what happened.",
-        "바로 <WHO> 전화해서 상황을 알렸어요.",
-        "전화",
-      ],
-      [
-        "I explained that <EXPL> and asked for <ASK>.",
-        "<EXPL> 설명하고 <ASK> 요청했어요.",
-        "설명 · 요청",
-      ],
-      [
-        "<WHO2> was very understanding, and we managed to <HOW>.",
-        "<WHO2> 이해해 줘서 <HOW>.",
-        "해결",
-      ],
-      ["In the end, everything worked out fine.", "결국 모든 게 잘 풀렸어요.", "결론"],
-      ["I realized how lucky I was to <LESSON>.", "<LESSON> 운이 좋았다고 느꼈어요.", "느낀 점"],
-    ],
-    slots: {
-      concert: {
-        SIT: [
-          "I couldn't go to a concert with my friend because I was sick",
-          "몸이 아파서 친구와 콘서트에 갈 수 없다는 걸",
-        ],
-        WHO: ["my friend", "친구에게"],
-        EXPL: ["I wasn't feeling well", "몸이 안 좋다고"],
-        ASK: ["another day", "다른 날로 미루는 걸"],
-        WHO2: ["My friend", "친구가"],
-        HOW: ["go the following week", "다음 주에 갈 수 있었어요"],
-        LESSON: ["have a friend like him", "그런 친구가 있어서"],
-      },
-      movie: {
-        SIT: ["I had bought the wrong tickets", "표를 잘못 샀다는 걸"],
-        WHO: ["the theater", "영화관에"],
-        EXPL: ["I didn't do anything wrong", "제가 잘못한 게 없다고"],
-        ASK: ["an exchange", "교환을"],
-        WHO2: ["The staff", "직원이"],
-        HOW: ["handle it", "잘 해결했어요"],
-        LESSON: ["get an exchange", "교환받을 수 있어서"],
-      },
-      subway: {
-        SIT: ["I lost my wallet on the subway", "지하철에서 지갑을 잃어버렸다는 걸"],
-        WHO: ["the lost and found", "분실물 센터에"],
-        EXPL: ["I left it on the seat by accident", "실수로 좌석에 두고 내렸다고"],
-        ASK: ["help finding it", "찾는 데 도움을"],
-        WHO2: ["The staff", "직원이"],
-        HOW: ["handle it on the following day", "다음 날 해결했어요"],
-        LESSON: ["get it back", "되찾아서"],
-      },
-      trip: {
-        SIT: [
-          "I had booked the wrong dates for my hotel in Japan",
-          "일본 호텔 날짜를 잘못 예약했다는 걸",
-        ],
-        WHO: ["the hotel", "호텔에"],
-        EXPL: ["I made a mistake with the dates", "제가 날짜를 착각했다고"],
-        ASK: ["a change", "변경을"],
-        WHO2: ["The staff", "직원이"],
-        HOW: ["fix it", "바로잡았어요"],
-        LESSON: ["have such kind staff", "친절한 직원분들을 만나서"],
-      },
-    },
-  },
 );
 
 /* ===== K. 만능 묘사 — 교재 4강 "첫문제 258 만능답변" (장소·가족·친구·좋아하는 것) 4블록 =====
@@ -2362,218 +2631,1151 @@ SKELS.push({
   },
 });
 
-/* ===== L·M. 롤플레이 11번 — 질문하기 (교재 18·19강: 친구편 / 업체편) =====
- L: 친구에게 약속 잡기 = 용건 → 시간 → 장소 → 활동 → 마무리
- M: 업체에 문의하기 = 도입 → 종류 → 선호·추천 → 가격 → 결제·할인 → 위치 → 영업시간·주차 → 감사 */
+/* ===== 롤플레이 뼈대 (교재 18~21강: 11번 질문하기 / 12번 문제 해결 / 13번 비슷한 경험) =====
+ 롤플레이는 서베이 주제가 아니라 "상황"으로 나뉜다: 약속 잡기 · 물건 구매 · 물건 빌리기 · 예약하기 · 조언 구하기 · 정보 묻기.
+ 각 뼈대의 키(key)는 그 상황이고, kn[key]가 화면에 표시되는 상황 이름이다. */
 Object.assign(SK_LABEL, {
-  ACT: "하고 싶은 일",
-  HOOK: "한마디 권유",
-  DO1: "할 일 1",
-  DO2: "할 일 2",
+  OPEN: "용건 (첫 말)",
   REQ: "용건",
   KIND: "물어볼 종류",
   KIND2: "물어볼 종류 2",
   PREF: "원하는 조건",
 });
 SKELS.push(
-  {
-    id: "L",
-    name: "L 친구에게 질문",
-    desc: "약속 잡기: 용건 → 시간 → 장소 → 활동",
-    grp: "롤플레이 11",
-    tag: "RP11",
-    qs: {
-      movie: [
-        "You want to go to see a movie with your friend. Call your friend and ask three or four questions.",
-        "친구와 영화를 보러 가고 싶습니다. 친구에게 전화해서 세네 가지 질문을 하세요.",
-      ],
-      concert: [
-        "You want to go to a concert with your friend. Call your friend and ask three or four questions.",
-        "친구와 콘서트에 가고 싶습니다. 친구에게 전화해서 세네 가지 질문을 하세요.",
-      ],
-      jog: [
-        "You want to go jogging with your friend. Call your friend and ask three or four questions.",
-        "친구와 조깅을 하고 싶습니다. 친구에게 전화해서 세네 가지 질문을 하세요.",
-      ],
-      trip: [
-        "You want to go on a trip with your friend. Call your friend and ask three or four questions.",
-        "친구와 여행을 가고 싶습니다. 친구에게 전화해서 세네 가지 질문을 하세요.",
-      ],
-      cafe: [
-        "You want to hang out at a cafe with your friend. Call your friend and ask three or four questions.",
-        "친구와 카페에서 시간을 보내고 싶습니다. 친구에게 전화해서 세네 가지 질문을 하세요.",
-      ],
-    },
-    parts: [
-      [
-        "Hi, how are you? I'm calling because I want to <ACT> with you this weekend. <HOOK>",
-        "안녕, 잘 지내? 이번 주말에 너랑 <ACT> 전화했어. <HOOK>",
-        "① 용건",
-      ],
-      [
-        "Do you have time this weekend? What about this Saturday? What time is good for you?",
-        "이번 주말에 시간 있어? 토요일은 어때? 몇 시가 괜찮아?",
-        "② 시간",
-      ],
-      [
-        "Let's make it then. Where do you want to meet? How about <PLACE>? What do you think?",
-        "그럼 그때로 하자. 어디서 만날까? <PLACE> 어때? 어떻게 생각해?",
-        "③ 장소",
-      ],
-      [
-        "After that, what do you want to do? Do you want to <DO1>, or do you want to <DO2>? It's up to you.",
-        "그 다음엔 뭐 하고 싶어? <DO1> <DO2> 하고 싶어? 네가 정해도 돼.",
-        "④ 활동",
-      ],
-      [
-        "Is there anything I should bring? Just think about it and let me know. See you then. Bye!",
-        "내가 챙겨 갈 게 있을까? 생각해 보고 알려 줘. 그때 보자. 안녕!",
-        "⑤ 마무리",
-      ],
-    ],
-    slots: {
-      movie: {
-        ACT: ["watch a movie", "영화를 보고 싶어서"],
-        HOOK: ["I think you're going to love it.", "너도 분명 좋아할 거야."],
-        PLACE: ["the theater near my house", "우리 집 근처 영화관"],
-        DO1: ["grab something to eat", "뭘 먹거나"],
-        DO2: ["walk around for a while", "좀 걷거나"],
+  ...[
+    {
+      id: "L",
+      name: "L 친구에게 질문",
+      desc: "약속·빌리기·초대: 용건 → 시간 → 장소 → 활동",
+      grp: "롤플레이 11 · 질문하기",
+      tag: "RP11",
+      kn: {
+        movie: "영화 약속",
+        concert: "콘서트 약속",
+        jog: "조깅 약속",
+        trip: "여행 약속",
+        mp3: "MP3 조언",
+        invite: "집 초대",
+        housesit: "집 봐주기",
+        party: "생일파티",
       },
-      concert: {
-        ACT: ["go to a concert", "콘서트에 가고 싶어서"],
-        HOOK: ["It's going to be a lot of fun.", "정말 재밌을 거야."],
-        PLACE: ["the entrance of the concert hall", "공연장 입구"],
-        DO1: ["get some dinner", "저녁을 먹거나"],
-        DO2: ["have a drink", "한잔하거나"],
-      },
-      jog: {
-        ACT: ["go jogging", "조깅하러 가고 싶어서"],
-        HOOK: ["It's good for our health, and it's refreshing.", "건강에도 좋고 상쾌할 거야."],
-        PLACE: ["the entrance of the park", "공원 입구"],
-        DO1: ["grab a coffee", "커피를 마시거나"],
-        DO2: ["have breakfast", "아침을 먹거나"],
-      },
-      trip: {
-        ACT: ["go on a trip", "여행을 가고 싶어서"],
-        HOOK: ["I'm sure we'll make great memories.", "분명 좋은 추억이 될 거야."],
-        PLACE: ["the train station", "기차역"],
-        DO1: ["see the sights", "관광지를 구경하거나"],
-        DO2: ["try the local food", "현지 음식을 먹어 보거나"],
-      },
-      cafe: {
-        ACT: ["hang out at a cafe", "카페에서 시간을 보내고 싶어서"],
-        HOOK: ["We can catch up on everything.", "그동안 못한 얘기를 나눌 수 있을 거야."],
-        PLACE: ["the cafe in front of my house", "우리 집 앞 카페"],
-        DO1: ["have some dessert", "디저트를 먹거나"],
-        DO2: ["take a walk", "산책하거나"],
-      },
-    },
-  },
-  {
-    id: "M",
-    name: "M 업체에 질문",
-    desc: "문의하기: 종류 → 가격 → 결제 → 위치 → 영업시간 · 3~4개만 골라 물어요",
-    grp: "롤플레이 11",
-    tag: "RP11",
-    qs: {
-      movie: [
-        "You want to watch a movie. Call the theater and ask three or four questions.",
-        "영화를 보고 싶습니다. 영화관에 전화해서 세네 가지 질문을 하세요.",
-      ],
-      concert: [
-        "You want to see a concert. Call the concert hall and ask three or four questions.",
-        "콘서트를 보고 싶습니다. 공연장에 전화해서 세네 가지 질문을 하세요.",
-      ],
-      trip: [
-        "You want to book a hotel for a trip. Call the hotel and ask three or four questions.",
-        "여행을 위해 호텔을 예약하려 합니다. 호텔에 전화해서 세네 가지 질문을 하세요.",
-      ],
-      jog: [
-        "You want to buy running shoes. Call the store and ask three or four questions.",
-        "러닝화를 사고 싶습니다. 매장에 전화해서 세네 가지 질문을 하세요.",
-      ],
-      cafe: [
-        "You want to reserve a table for a gathering. Call the cafe and ask three or four questions.",
-        "모임을 위해 자리를 예약하려 합니다. 카페에 전화해서 세네 가지 질문을 하세요.",
-      ],
-    },
-    parts: [
-      [
-        "Hello, how are you doing? I'm calling to ask you something. I would like to <REQ>.",
-        "안녕하세요, 문의드릴 게 있어요. <REQ> 전화했어요.",
-        "① 도입 · 용건",
-      ],
-      [
-        "What kinds of <KIND> do you have? And what <KIND2> are available?",
-        "<KIND> 종류는 어떤 게 있나요? <KIND2>도 알려 주세요.",
-        "② 종류",
-      ],
-      [
-        "I'd like to <PREF>, if possible. Do you have any recommendations?",
-        "가능하면 <PREF>. 추천해 주실 만한 게 있나요?",
-        "③ 선호 · 추천",
-      ],
-      [
-        "How much is it? Can I receive a discount?",
-        "가격은 얼마인가요? 할인도 받을 수 있나요?",
-        "④ 가격 · 할인",
-      ],
-      [
-        "Can I use a credit card? I have a BC card. Can I use it?",
-        "신용카드 되나요? 저는 BC카드가 있는데, 사용할 수 있나요?",
-        "⑤ 결제",
-      ],
-      [
-        "Where is the <PLACE> located? Can you tell me how to get there?",
-        "<PLACE> 위치가 어디예요? 어떻게 가는지 알려 주실 수 있나요?",
-        "⑥ 위치",
-      ],
-      [
-        "When do you open, and when do you close? Where is the parking area? Is it free?",
-        "몇 시에 열고 몇 시에 닫나요? 주차장은 어디 있나요? 무료인가요?",
-        "⑦ 영업시간 · 주차",
-      ],
-      ["Thank you. Thank you for your help.", "감사합니다. 도와주셔서 감사해요.", "⑧ 감사"],
-    ],
-    slots: {
-      movie: {
-        REQ: [
-          "buy two tickets for a movie that was just released",
-          "새로 개봉한 영화 표 두 장을 사고 싶어서",
+      qs: {
+        movie: [
+          "You want to go to see a movie with your friend. Call your friend and ask three or four questions.",
+          "친구와 영화를 보러 가고 싶습니다. 친구에게 전화해서 세네 가지 질문을 하세요.",
         ],
-        KIND: ["movies", "영화"],
-        KIND2: ["showtimes", "상영 시간"],
-        PREF: ["sit in the middle row", "가운데 줄에 앉고 싶어요"],
-        PLACE: ["theater", "영화관"],
+        concert: [
+          "You want to go to a concert with your friend. Call your friend and ask three or four questions.",
+          "친구와 콘서트에 가고 싶습니다. 친구에게 전화해서 세네 가지 질문을 하세요.",
+        ],
+        jog: [
+          "You want to go jogging with your friend. Call your friend and ask three or four questions.",
+          "친구와 조깅을 하고 싶습니다. 친구에게 전화해서 세네 가지 질문을 하세요.",
+        ],
+        trip: [
+          "You want to go on a trip with your friend. Call your friend and ask three or four questions.",
+          "친구와 여행을 가고 싶습니다. 친구에게 전화해서 세네 가지 질문을 하세요.",
+        ],
+        mp3: [
+          "You want to buy an MP3 player, and your friend bought one recently. Before you buy, call your friend and ask three or four questions about it.",
+          "MP3 플레이어를 사고 싶은데 친구가 최근에 샀습니다. 사기 전에 친구에게 전화해서 세네 가지 질문을 하세요.",
+        ],
+        invite: [
+          "You want to invite your friend to your house. Call your friend and ask three or four questions.",
+          "친구를 집에 초대하고 싶습니다. 친구에게 전화해서 세네 가지 질문을 하세요.",
+        ],
+        housesit: [
+          "Your relative is going on vacation, and you agreed to take care of the house. Call your relative and ask three or four questions about what you have to do.",
+          "친척이 휴가를 가서 집을 봐주기로 했습니다. 친척에게 전화해서 해야 할 일에 대해 세네 가지 질문을 하세요.",
+        ],
+        party: [
+          "You want to go to your friend's birthday party, but you haven't been invited. Call your friend and ask three or four questions about the party.",
+          "친구의 생일 파티에 가고 싶은데 초대받지 못했습니다. 친구에게 전화해서 파티에 대해 세네 가지 질문을 하세요.",
+        ],
       },
-      concert: {
-        REQ: ["buy two tickets for a concert", "콘서트 표 두 장을 사고 싶어서"],
-        KIND: ["seats", "좌석"],
-        KIND2: ["ticket types", "표 종류"],
-        PREF: ["sit close to the stage", "무대 가까이 앉고 싶어요"],
-        PLACE: ["concert hall", "공연장"],
-      },
-      trip: {
-        REQ: ["book a hotel room for two nights", "호텔 객실을 이틀 밤 예약하고 싶어서"],
-        KIND: ["rooms", "객실"],
-        KIND2: ["packages", "패키지"],
-        PREF: ["have a room with an ocean view", "바다가 보이는 방이면 좋겠어요"],
-        PLACE: ["hotel", "호텔"],
-      },
-      jog: {
-        REQ: ["buy a pair of running shoes", "러닝화를 사고 싶어서"],
-        KIND: ["running shoes", "러닝화"],
-        KIND2: ["sizes", "사이즈"],
-        PREF: ["get a light and comfortable pair", "가볍고 편한 걸 원해요"],
-        PLACE: ["store", "매장"],
-      },
-      cafe: {
-        REQ: ["reserve a table for four people", "네 명 자리를 예약하고 싶어서"],
-        KIND: ["tables", "좌석"],
-        KIND2: ["menus", "메뉴"],
-        PREF: ["sit by the window", "창가에 앉고 싶어요"],
-        PLACE: ["cafe", "카페"],
+      parts: [
+        ["Hi, how are you? <OPEN>", "안녕, 잘 지내? <OPEN>", "① 용건"],
+        [
+          "Do you have time this weekend? What about this Saturday? What time is good for you?",
+          "이번 주말에 시간 있어? 토요일은 어때? 몇 시가 괜찮아?",
+          "② 시간",
+        ],
+        [
+          "Let's make it then. Where do you want to meet? How about <PLACE>? What do you think?",
+          "그럼 그때로 하자. 어디서 만날까? <PLACE> 어때? 어떻게 생각해?",
+          "③ 장소",
+        ],
+        [
+          "After that, what do you want to do? Do you want to <DO1>, or do you want to <DO2>? It's up to you.",
+          "그 다음엔 뭐 하고 싶어? <DO1> <DO2> 하고 싶어? 네가 정해도 돼.",
+          "④ 활동",
+        ],
+        [
+          "Is there anything I should bring? Just think about it and let me know. See you then. Bye!",
+          "내가 챙겨 갈 게 있을까? 생각해 보고 알려 줘. 그때 보자. 안녕!",
+          "⑤ 마무리",
+        ],
+      ],
+      slots: {
+        movie: {
+          OPEN: [
+            "I want to watch a movie with you this weekend. I think you're going to love it. It's going to be a lot of fun.",
+            "이번 주말에 너랑 영화를 보고 싶어. 너도 분명 좋아할 거야. 정말 재밌을 거야.",
+          ],
+          PLACE: ["the theater near my house", "우리 집 근처 영화관"],
+          DO1: ["grab something to eat", "뭘 먹거나"],
+          DO2: ["walk around for a while", "좀 걷거나"],
+        },
+        concert: {
+          OPEN: [
+            "I want to go to a concert with you this weekend. It's going to be a lot of fun.",
+            "이번 주말에 너랑 콘서트에 가고 싶어. 정말 재밌을 거야.",
+          ],
+          PLACE: ["the entrance of the concert hall", "공연장 입구"],
+          DO1: ["get some dinner", "저녁을 먹거나"],
+          DO2: ["have a drink", "한잔하거나"],
+        },
+        jog: {
+          OPEN: [
+            "I want to go jogging with you this weekend. It's good for our health, and it's refreshing.",
+            "이번 주말에 너랑 조깅하고 싶어. 건강에도 좋고 상쾌할 거야.",
+          ],
+          PLACE: ["the entrance of the park", "공원 입구"],
+          DO1: ["grab a coffee", "커피를 마시거나"],
+          DO2: ["have breakfast", "아침을 먹거나"],
+        },
+        trip: {
+          OPEN: [
+            "I want to go on a trip with you. I'm sure we'll make great memories.",
+            "너랑 여행을 가고 싶어. 분명 좋은 추억이 될 거야.",
+          ],
+          PLACE: ["the train station", "기차역"],
+          DO1: ["see the sights", "관광지를 구경하거나"],
+          DO2: ["try the local food", "현지 음식을 먹어 보거나"],
+        },
+        mp3: {
+          OPEN: [
+            "I heard that you bought an MP3 player recently. Where did you get it? How much was it? Was it good? I want to buy one. Would you go with me?",
+            "너 최근에 MP3 플레이어 샀다고 들었어. 어디서 샀어? 얼마였어? 좋았어? 나도 사고 싶은데 같이 가 줄래?",
+          ],
+          PLACE: ["the electronics store near the subway station", "지하철역 근처 전자제품 매장"],
+          DO1: ["grab lunch", "점심을 먹거나"],
+          DO2: ["look at other gadgets", "다른 기기도 구경하거나"],
+        },
+        invite: {
+          OPEN: [
+            "I'd like to invite you to my house this weekend. I'll cook dinner. It's going to be a lot of fun.",
+            "이번 주말에 너를 우리 집에 초대하고 싶어. 내가 저녁을 만들게. 정말 재밌을 거야.",
+          ],
+          PLACE: ["the subway station near my house", "우리 집 근처 지하철역"],
+          DO1: ["cook together", "같이 요리하거나"],
+          DO2: ["watch a movie at home", "집에서 영화를 보거나"],
+        },
+        housesit: {
+          OPEN: [
+            "I heard you're going on vacation. I'd be happy to take care of your house while you're away. I want to get the key. Can I do that?",
+            "휴가 간다고 들었어요. 안 계시는 동안 제가 집을 봐 드릴게요. 열쇠를 받고 싶은데 가능할까요?",
+          ],
+          PLACE: ["your house", "댁"],
+          DO1: ["show me around the house", "집을 한 번 보여 주시거나"],
+          DO2: ["tell me what to take care of", "제가 챙길 일을 알려 주시거나"],
+        },
+        party: {
+          OPEN: [
+            "I heard you're having a birthday party. I'd love to come. I want to buy you something nice. Would you like to go with me?",
+            "생일 파티 한다고 들었어. 나도 가고 싶어. 좋은 선물을 사 주고 싶은데 같이 갈래?",
+          ],
+          PLACE: ["the shopping mall near the subway station", "지하철역 근처 쇼핑몰"],
+          DO1: ["pick a gift together", "같이 선물을 고르거나"],
+          DO2: ["get something to eat", "뭘 먹거나"],
+        },
       },
     },
-  },
+    {
+      id: "M",
+      name: "M 업체에 질문",
+      desc: "구매·예약: 종류 → 가격 → 결제 → 위치 → 영업시간 (3~4개만 골라 물어요)",
+      grp: "롤플레이 11 · 질문하기",
+      tag: "RP11",
+      kn: {
+        movie: "영화표 구매",
+        concert: "콘서트 표 구매",
+        hotel: "호텔 예약",
+        restaurant: "식당 예약",
+        hospital: "병원 예약",
+        rentcar: "렌터카 예약",
+      },
+      qs: {
+        movie: [
+          "You want to watch a movie. Call the theater and ask three or four questions.",
+          "영화를 보고 싶습니다. 영화관에 전화해서 세네 가지 질문을 하세요.",
+        ],
+        concert: [
+          "You want to see a concert. Call the concert hall and ask three or four questions.",
+          "콘서트를 보고 싶습니다. 공연장에 전화해서 세네 가지 질문을 하세요.",
+        ],
+        hotel: [
+          "You want to book a hotel for a trip. Call the hotel and ask three or four questions.",
+          "여행을 위해 호텔을 예약하려 합니다. 호텔에 전화해서 세네 가지 질문을 하세요.",
+        ],
+        restaurant: [
+          "You want to reserve a table for dinner with your friends. Call the restaurant and ask three or four questions.",
+          "친구들과 저녁 식사를 하려고 자리를 예약합니다. 식당에 전화해서 세네 가지 질문을 하세요.",
+        ],
+        hospital: [
+          "You are not feeling well and need to see a doctor. Call the hospital and ask three or four questions about making an appointment.",
+          "몸이 안 좋아 진료를 받아야 합니다. 병원에 전화해서 예약에 대해 세네 가지 질문을 하세요.",
+        ],
+        rentcar: [
+          "You want to rent a car for a week. Call the rental agency and ask three or four questions about renting a car.",
+          "일주일 동안 차를 빌리려 합니다. 렌터카 업체에 전화해서 세네 가지 질문을 하세요.",
+        ],
+      },
+      parts: [
+        [
+          "Hello, how are you doing? I'm calling to ask you something. I would like to <REQ>.",
+          "안녕하세요, 문의드릴 게 있어요. <REQ> 전화했어요.",
+          "① 도입 · 용건",
+        ],
+        [
+          "What kinds of <KIND> do you have? And what <KIND2> are available?",
+          "<KIND> 종류는 어떤 게 있나요? <KIND2>도 알려 주세요.",
+          "② 종류",
+        ],
+        [
+          "I'd like to <PREF>, if possible. Do you have any recommendations?",
+          "가능하면 <PREF>. 추천해 주실 만한 게 있나요?",
+          "③ 선호 · 추천",
+        ],
+        [
+          "How much is it? Can I receive a discount?",
+          "가격은 얼마인가요? 할인도 받을 수 있나요?",
+          "④ 가격 · 할인",
+        ],
+        [
+          "Can I use a credit card? I have a BC card. Can I use it?",
+          "신용카드 되나요? 저는 BC카드가 있는데, 사용할 수 있나요?",
+          "⑤ 결제",
+        ],
+        [
+          "Where is the <PLACE> located? Can you tell me how to get there?",
+          "<PLACE> 위치가 어디예요? 어떻게 가는지 알려 주실 수 있나요?",
+          "⑥ 위치",
+        ],
+        [
+          "When do you open, and when do you close? Where is the parking area? Is it free?",
+          "몇 시에 열고 몇 시에 닫나요? 주차장은 어디 있나요? 무료인가요?",
+          "⑦ 영업시간 · 주차",
+        ],
+        ["Thank you. Thank you for your help.", "감사합니다. 도와주셔서 감사해요.", "⑧ 감사"],
+      ],
+      slots: {
+        movie: {
+          REQ: [
+            "buy two tickets for a movie that was just released",
+            "새로 개봉한 영화 표 두 장을 사고 싶어서",
+          ],
+          KIND: ["movies", "영화"],
+          KIND2: ["showtimes", "상영 시간"],
+          PREF: ["sit in the middle row", "가운데 줄에 앉고 싶어요"],
+          PLACE: ["theater", "영화관"],
+        },
+        concert: {
+          REQ: ["buy two tickets for a concert", "콘서트 표 두 장을 사고 싶어서"],
+          KIND: ["seats", "좌석"],
+          KIND2: ["ticket types", "표 종류"],
+          PREF: ["sit close to the stage", "무대 가까이 앉고 싶어요"],
+          PLACE: ["concert hall", "공연장"],
+        },
+        hotel: {
+          REQ: ["book a hotel room for two nights", "호텔 객실을 이틀 밤 예약하고 싶어서"],
+          KIND: ["rooms", "객실"],
+          KIND2: ["packages", "패키지"],
+          PREF: ["have a room with an ocean view", "바다가 보이는 방이면 좋겠어요"],
+          PLACE: ["hotel", "호텔"],
+        },
+        restaurant: {
+          REQ: [
+            "reserve a table for four people tonight",
+            "오늘 저녁 네 명 자리를 예약하고 싶어서",
+          ],
+          KIND: ["set menus", "코스 메뉴"],
+          KIND2: ["seating options", "좌석 종류"],
+          PREF: ["sit by the window", "창가에 앉고 싶어요"],
+          PLACE: ["restaurant", "식당"],
+        },
+        hospital: {
+          REQ: ["make an appointment to see a doctor", "진료 예약을 하고 싶어서"],
+          KIND: ["doctors", "진료 가능한 의사 선생님"],
+          KIND2: ["appointment times", "예약 가능한 시간"],
+          PREF: ["see a doctor as soon as possible", "가능한 한 빨리 진료받고 싶어요"],
+          PLACE: ["hospital", "병원"],
+        },
+        rentcar: {
+          REQ: ["rent a car for a week", "일주일 동안 차를 빌리고 싶어서"],
+          KIND: ["cars", "차량"],
+          KIND2: ["insurance options", "보험 종류"],
+          PREF: ["rent an SUV for my family", "가족과 함께 탈 SUV를 빌리고 싶어요"],
+          PLACE: ["rental office", "렌터카 사무실"],
+        },
+      },
+    },
+    {
+      id: "H",
+      name: "H 친구에게 전화",
+      desc: "약속 못 지킴·물건 파손 → 대안 제시",
+      grp: "롤플레이 12 · 문제 해결",
+      tag: "RP12",
+      kn: {
+        late: "약속 · 길이 막힘",
+        sick: "약속 · 아파서",
+        work: "약속 · 급한 회사 일",
+        rain: "약속 · 폭우",
+        mp3: "빌린 MP3 파손",
+      },
+      qs: {
+        late: [
+          "There is a problem I need you to resolve. You are supposed to meet your friend today, but something unexpected happened. Call your friend, explain the situation, and suggest two or three alternatives.",
+          "해결해야 할 문제가 있습니다. 오늘 친구와 만나기로 했는데 예상치 못한 일이 생겼습니다. 친구에게 전화해 상황을 설명하고 대안 두세 가지를 제안하세요.",
+        ],
+        sick: [
+          "There is a problem I need you to resolve. You are supposed to meet your friend today, but something unexpected happened. Call your friend, explain the situation, and suggest two or three alternatives.",
+          "해결해야 할 문제가 있습니다. 오늘 친구와 만나기로 했는데 예상치 못한 일이 생겼습니다. 친구에게 전화해 상황을 설명하고 대안 두세 가지를 제안하세요.",
+        ],
+        work: [
+          "There is a problem I need you to resolve. You are supposed to meet your friend today, but something unexpected happened. Call your friend, explain the situation, and suggest two or three alternatives.",
+          "해결해야 할 문제가 있습니다. 오늘 친구와 만나기로 했는데 예상치 못한 일이 생겼습니다. 친구에게 전화해 상황을 설명하고 대안 두세 가지를 제안하세요.",
+        ],
+        rain: [
+          "There is a problem I need you to resolve. You are supposed to meet your friend today, but something unexpected happened. Call your friend, explain the situation, and suggest two or three alternatives.",
+          "해결해야 할 문제가 있습니다. 오늘 친구와 만나기로 했는데 예상치 못한 일이 생겼습니다. 친구에게 전화해 상황을 설명하고 대안 두세 가지를 제안하세요.",
+        ],
+        mp3: [
+          "You borrowed your friend's MP3 player, but you dropped it and it is partially broken. Call your friend, explain the situation, and suggest two or three solutions.",
+          "친구의 MP3 플레이어를 빌렸는데 떨어뜨려서 일부 고장 났습니다. 친구에게 전화해 상황을 설명하고 해결책 두세 가지를 제안하세요.",
+        ],
+      },
+      parts: [
+        [
+          "Hello, I'm calling to let you know I have a problem.",
+          "안녕, 문제가 생겨서 알려 주려고 전화했어.",
+          "인사",
+        ],
+        ["<PROBLEM>.", "<PROBLEM>.", "상황"],
+        ["I'm afraid <CANT>.", "미안한데 <CANT> 것 같아.", "못 하게 됨"],
+        ["I don't know what to do.", "어떻게 해야 할지 모르겠어.", "당황"],
+        ["Would you like <ALT1>?", "<ALT1> 어때?", "해결책 1"],
+        ["Or would you like <ALT2>?", "아니면 <ALT2> 어때?", "해결책 2"],
+        ["Please let me know what you think.", "어떻게 생각하는지 알려 줘.", "마무리"],
+      ],
+      slots: {
+        late: {
+          PROBLEM: [
+            "I'm on my way there, but the traffic is really heavy",
+            "가는 중인데 길이 너무 막혀",
+          ],
+          CANT: ["I can't make it on time", "제시간에 도착하지 못할"],
+          ALT1: ["to wait for about thirty minutes", "30분쯤 기다려 주는 건"],
+          ALT2: ["to see a later show", "더 늦은 시간 상영을 보는 건"],
+        },
+        sick: {
+          PROBLEM: ["I'm so sick today. I have a high fever", "오늘 많이 아파. 열이 높아"],
+          CANT: ["I can't go out today", "오늘 나갈 수 없을"],
+          ALT1: ["to meet next weekend instead", "대신 다음 주말에 만나는 건"],
+          ALT2: ["to go with someone else", "다른 사람이랑 가는 건"],
+        },
+        work: {
+          PROBLEM: [
+            "I have an urgent problem at work, and I have to stay at the office",
+            "회사에 급한 일이 생겨서 사무실에 남아야 해",
+          ],
+          CANT: ["I can't meet you today", "오늘 널 만날 수 없을"],
+          ALT1: ["to meet tomorrow evening", "내일 저녁에 만나는 건"],
+          ALT2: ["to talk on the phone tonight", "오늘 밤 전화로 이야기하는 건"],
+        },
+        rain: {
+          PROBLEM: [
+            "It's pouring outside, and I can't get a taxi",
+            "밖에 비가 쏟아지는데 택시도 안 잡혀",
+          ],
+          CANT: ["I can't get there today", "오늘 거기 갈 수 없을"],
+          ALT1: ["to watch something at my place instead", "대신 우리 집에서 뭘 보는 건"],
+          ALT2: ["to reschedule for the weekend", "주말로 일정을 바꾸는 건"],
+        },
+        mp3: {
+          PROBLEM: [
+            "I dropped your MP3 player, and it is partially broken",
+            "네 MP3 플레이어를 떨어뜨려서 일부 고장 났어",
+          ],
+          CANT: ["I can't give it back in good condition", "온전한 상태로 돌려줄 수 없을"],
+          ALT1: ["me to pay for the repair", "내가 수리비를 내는 건"],
+          ALT2: ["me to buy you a new one", "내가 새 걸로 사 주는 건"],
+        },
+      },
+    },
+    {
+      id: "I",
+      name: "I 업체에 전화",
+      desc: "교환 → 환불 → 대안",
+      grp: "롤플레이 12 · 문제 해결",
+      tag: "RP12",
+      kn: {
+        movie: "영화표 교환·환불",
+        concert: "콘서트 표 변경",
+        hotel: "호텔 예약 변경",
+        shop: "잘못 온 물건 반품",
+      },
+      qs: {
+        movie: [
+          "You bought movie tickets, but the clerk gave you the wrong ones. Call the theater, explain the problem, and suggest two or three solutions.",
+          "영화표를 샀는데 직원이 잘못된 표를 줬습니다. 영화관에 전화해 문제를 설명하고 해결책 두세 가지를 제안하세요.",
+        ],
+        concert: [
+          "You bought a concert ticket, but you cannot go on that day. Call the ticket office, explain the situation, and suggest two or three solutions.",
+          "콘서트 표를 샀는데 그날 갈 수 없게 됐습니다. 예매처에 전화해 상황을 설명하고 해결책 두세 가지를 제안하세요.",
+        ],
+        hotel: [
+          "You booked a hotel room, but you have to cancel your trip. Call the hotel, explain the problem, and suggest two or three solutions.",
+          "호텔 방을 예약했는데 여행을 취소해야 합니다. 호텔에 전화해 문제를 설명하고 해결책 두세 가지를 제안하세요.",
+        ],
+        shop: [
+          "You bought an item online, but you received the wrong one. Call the store, explain the problem, and suggest two or three solutions.",
+          "온라인으로 물건을 샀는데 잘못된 물건이 왔습니다. 가게에 전화해 문제를 설명하고 해결책 두세 가지를 제안하세요.",
+        ],
+      },
+      parts: [
+        [
+          "Hello, I'm calling to let you know I have a problem.",
+          "안녕하세요, 문제가 있어서 전화드렸어요.",
+          "인사",
+        ],
+        ["<SITUATION>.", "<SITUATION>.", "상황"],
+        [
+          "I'm not sure what to do. Can you tell me what to do?",
+          "어떻게 해야 할지 모르겠어요. 알려 주실 수 있나요?",
+          "당황",
+        ],
+        [
+          "I was wondering if it's possible to <REQ1>.",
+          "<REQ1> 수 있는지 궁금해서요.",
+          "요청 1: 교환·변경",
+        ],
+        ["If not, could I <REQ2>?", "안 된다면 <REQ2> 수 있을까요?", "요청 2: 환불·취소"],
+        [
+          "Do you have any other solutions? Please let me know.",
+          "다른 해결책이 있을까요? 알려 주세요.",
+          "만능",
+        ],
+        [
+          "Thank you for your understanding. Have a nice day.",
+          "이해해 주셔서 감사합니다. 좋은 하루 보내세요.",
+          "마무리",
+        ],
+      ],
+      slots: {
+        movie: {
+          SITUATION: [
+            "I bought two tickets for a movie yesterday, but they were for the wrong movie",
+            "어제 영화표를 두 장 샀는데 다른 영화 표였어요",
+          ],
+          REQ1: ["exchange these tickets for a different movie", "이 표를 다른 영화로 교환할"],
+          REQ2: ["get a refund", "환불받을"],
+        },
+        concert: {
+          SITUATION: [
+            "I bought a ticket for Saturday's concert, but I can't make it that day",
+            "토요일 콘서트 표를 샀는데 그날 갈 수가 없어요",
+          ],
+          REQ1: ["change my ticket to another day", "표를 다른 날로 바꿀"],
+          REQ2: ["get a refund", "환불받을"],
+        },
+        hotel: {
+          SITUATION: [
+            "I booked a hotel room for this weekend, but I have to cancel my trip",
+            "이번 주말 호텔 방을 예약했는데 여행을 취소해야 해요",
+          ],
+          REQ1: ["change my reservation to next weekend", "예약을 다음 주말로 변경할"],
+          REQ2: ["cancel it without a fee", "수수료 없이 취소할"],
+        },
+        shop: {
+          SITUATION: [
+            "I bought a jacket online, but I received the wrong size",
+            "온라인으로 재킷을 샀는데 사이즈가 잘못 왔어요",
+          ],
+          REQ1: ["exchange it for a bigger size", "더 큰 사이즈로 교환할"],
+          REQ2: ["return it and get a refund", "반품하고 환불받을"],
+        },
+      },
+    },
+    {
+      id: "J",
+      name: "J 비슷한 경험",
+      desc: "문제 → 전화 → 해결",
+      grp: "롤플레이 13 · 비슷한 경험",
+      tag: "RP13",
+      kn: {
+        promise: "약속 취소 (아파서)",
+        exchange: "잘못 산 물건 교환",
+        lost: "분실 (지하철 지갑)",
+        trip: "여행 중 예약 문제",
+        lostphone: "분실 (식당 휴대폰)",
+      },
+      qs: {
+        promise: [
+          "Have you ever had to cancel or break a plan because you were sick or had an urgent problem? When did it happen, and how did you solve it?",
+          "아프거나 급한 일 때문에 약속을 취소한 적이 있나요? 언제였고 어떻게 해결했나요?",
+        ],
+        exchange: [
+          "Have you ever bought something wrong and had to exchange or return it? What happened and how did you handle it?",
+          "잘못 산 물건을 교환하거나 반품한 적이 있나요? 무슨 일이 있었고 어떻게 처리했나요?",
+        ],
+        lost: [
+          "Have you ever lost something? What did you lose, and how did you handle it?",
+          "무언가를 잃어버린 적이 있나요? 무엇을 잃어버렸고 어떻게 처리했나요?",
+        ],
+        trip: [
+          "Have you ever had a problem with a reservation or a trip? What happened and how did you handle it?",
+          "예약이나 여행에서 문제가 생긴 적이 있나요? 무슨 일이 있었고 어떻게 처리했나요?",
+        ],
+        lostphone: [
+          "Have you ever lost something at a restaurant or a hotel? What did you lose, and how did you handle it?",
+          "식당이나 호텔에서 물건을 잃어버린 적이 있나요? 무엇을 잃어버렸고 어떻게 처리했나요?",
+        ],
+      },
+      parts: [
+        [
+          "I have experienced a situation like this before.",
+          "이런 상황을 겪은 적이 있어요.",
+          "도입",
+        ],
+        ["I found out that <SIT>.", "<SIT> 알게 됐어요.", "상황"],
+        [
+          "I immediately called <WHO> to let them know what happened.",
+          "바로 <WHO> 전화해서 상황을 알렸어요.",
+          "전화",
+        ],
+        [
+          "I explained that <EXPL> and asked for <ASK>.",
+          "<EXPL> 설명하고 <ASK> 요청했어요.",
+          "설명 · 요청",
+        ],
+        [
+          "<WHO2> was very understanding, and we managed to <HOW>.",
+          "<WHO2> 이해해 줘서 <HOW>.",
+          "해결",
+        ],
+        ["In the end, everything worked out fine.", "결국 모든 게 잘 풀렸어요.", "결론"],
+        ["I realized how lucky I was to <LESSON>.", "<LESSON> 운이 좋았다고 느꼈어요.", "느낀 점"],
+      ],
+      slots: {
+        promise: {
+          SIT: [
+            "I couldn't go to a concert with my friend because I was sick",
+            "몸이 아파서 친구와 콘서트에 갈 수 없다는 걸",
+          ],
+          WHO: ["my friend", "친구에게"],
+          EXPL: ["I wasn't feeling well", "몸이 안 좋다고"],
+          ASK: ["another day", "다른 날로 미루는 걸"],
+          WHO2: ["My friend", "친구가"],
+          HOW: ["go the following week", "다음 주에 갈 수 있었어요"],
+          LESSON: ["have a friend like him", "그런 친구가 있어서"],
+        },
+        exchange: {
+          SIT: ["I had bought the wrong tickets", "표를 잘못 샀다는 걸"],
+          WHO: ["the theater", "영화관에"],
+          EXPL: ["I didn't do anything wrong", "제가 잘못한 게 없다고"],
+          ASK: ["an exchange", "교환을"],
+          WHO2: ["The staff", "직원이"],
+          HOW: ["handle it", "잘 해결했어요"],
+          LESSON: ["get an exchange", "교환받을 수 있어서"],
+        },
+        lost: {
+          SIT: ["I lost my wallet on the subway", "지하철에서 지갑을 잃어버렸다는 걸"],
+          WHO: ["the lost and found", "분실물 센터에"],
+          EXPL: ["I left it on the seat by accident", "실수로 좌석에 두고 내렸다고"],
+          ASK: ["help finding it", "찾는 데 도움을"],
+          WHO2: ["The staff", "직원이"],
+          HOW: ["handle it on the following day", "다음 날 해결했어요"],
+          LESSON: ["get it back", "되찾아서"],
+        },
+        trip: {
+          SIT: [
+            "I had booked the wrong dates for my hotel in Japan",
+            "일본 호텔 날짜를 잘못 예약했다는 걸",
+          ],
+          WHO: ["the hotel", "호텔에"],
+          EXPL: ["I made a mistake with the dates", "제가 날짜를 착각했다고"],
+          ASK: ["a change", "변경을"],
+          WHO2: ["The staff", "직원이"],
+          HOW: ["fix it", "바로잡았어요"],
+          LESSON: ["have such kind staff", "친절한 직원분들을 만나서"],
+        },
+        lostphone: {
+          SIT: ["I left my phone at a restaurant", "식당에 휴대폰을 두고 왔다는 걸"],
+          WHO: ["the restaurant", "식당에"],
+          EXPL: ["I left it on the table by accident", "실수로 테이블에 두고 나왔다고"],
+          ASK: ["help finding it", "찾는 데 도움을"],
+          WHO2: ["The manager", "매니저님이"],
+          HOW: ["find it that night", "그날 밤에 찾을 수 있었어요"],
+          LESSON: ["get it back", "되찾아서"],
+        },
+      },
+    },
+  ],
+);
+
+SKELS.push(
+  ...[
+    {
+      id: "N",
+      name: "N 시설 7단계",
+      desc: "어렵다 → 한국 → 나의 경험 → 묘사 → 외국인 반응 → 자부심",
+      grp: "돌발 · 시설 7단계",
+      tag: "SP",
+      kn: {
+        bank: "은행",
+        pharmacy: "약국",
+        salon: "미용실",
+        hotel: "호텔",
+        restaurant: "식당",
+        library: "도서관",
+        hospital: "병원",
+        dental: "치과",
+      },
+      qs: {
+        bank: [
+          "Please tell me about the banks in your country. What do they look like, and what do people do there?",
+          "당신 나라의 은행에 대해 말해 주세요. 어떤 모습이고 사람들은 그곳에서 무엇을 하나요?",
+        ],
+        pharmacy: [
+          "Please tell me about the pharmacies in your country. What do they look like, and what do people do there?",
+          "당신 나라의 약국에 대해 말해 주세요. 어떤 모습이고 사람들은 그곳에서 무엇을 하나요?",
+        ],
+        salon: [
+          "Please tell me about the hair salons in your country. What do they look like, and what do people do there?",
+          "당신 나라의 미용실에 대해 말해 주세요. 어떤 모습이고 사람들은 그곳에서 무엇을 하나요?",
+        ],
+        hotel: [
+          "Please tell me about the hotels in your country. What do they look like, and what do people do there?",
+          "당신 나라의 호텔에 대해 말해 주세요. 어떤 모습이고 사람들은 그곳에서 무엇을 하나요?",
+        ],
+        restaurant: [
+          "Please tell me about the restaurants in your country. What do they look like, and what do people do there?",
+          "당신 나라의 식당에 대해 말해 주세요. 어떤 모습이고 사람들은 그곳에서 무엇을 하나요?",
+        ],
+        library: [
+          "Please tell me about the libraries in your country. What do they look like, and what do people do there?",
+          "당신 나라의 도서관에 대해 말해 주세요. 어떤 모습이고 사람들은 그곳에서 무엇을 하나요?",
+        ],
+        hospital: [
+          "Please tell me about the hospitals in your country. What do they look like, and what do people do there?",
+          "당신 나라의 병원에 대해 말해 주세요. 어떤 모습이고 사람들은 그곳에서 무엇을 하나요?",
+        ],
+        dental: [
+          "Please tell me about the dental clinics in your country. What do they look like, and what do people do there?",
+          "당신 나라의 치과에 대해 말해 주세요. 어떤 모습이고 사람들은 그곳에서 무엇을 하나요?",
+        ],
+      },
+      parts: [
+        [
+          "When I first get a question about <FAC>, I feel it's a bit difficult because <HARD>.",
+          "처음 <FAC> 받으면, <HARD> 조금 어렵게 느껴져요.",
+          "① 도입 · 어렵다",
+        ],
+        [
+          "But Korea has <GOOD>, and <MINE>.",
+          "하지만 한국에는 <GOOD> <MINE>.",
+          "② 한국 상황 · 나의 경험",
+        ],
+        ["The place is <PLACE>, and <INT>.", "그곳은 <PLACE> <INT>.", "③ 장소 묘사"],
+        ["The staff are <STAFF>.", "직원들은 <STAFF>.", "③ 직원"],
+        ["The service is <SERV>, so <RES>.", "서비스가 <SERV> <RES>.", "④ 서비스"],
+        ["I especially like <LIKE>.", "특히 <LIKE> 좋아요.", "④+ 구체적 디테일"],
+        [
+          "Foreign visitors are often impressed by <IMP>.",
+          "외국인 방문객들은 종종 <IMP> 깊은 인상을 받아요.",
+          "⑤ 외국인 반응",
+        ],
+        [
+          "I feel proud of <PROUD>, and I really hope this positive trend continues in the future.",
+          "저는 <PROUD> 자랑스럽고, 앞으로도 이런 긍정적인 흐름이 계속되기를 바라요.",
+          "⑥⑦ 자부심 · 마무리",
+        ],
+      ],
+      slots: {
+        bank: {
+          FAC: ["a bank", "은행에 대한 질문을"],
+          HARD: ["I'm not sure what to say", "무슨 말을 해야 할지 몰라서"],
+          GOOD: ["many well-organized banks", "잘 정비된 은행이 많고"],
+          MINE: ["the one I usually go to is near my home", "제가 주로 가는 곳은 집 근처에 있어요"],
+          PLACE: ["clean and well-maintained", "깨끗하고 관리가 잘 되어 있고"],
+          INT: ["the interior design is modern and stylish", "인테리어가 현대적이고 세련됐어요"],
+          STAFF: ["kind and polite, and very professional", "친절하고 공손하며 매우 전문적이에요"],
+          SERV: ["well-organized and efficient", "체계적이고 효율적이어서"],
+          RES: [
+            "everything is systematic and easy to follow",
+            "모든 절차가 조직적이고 따르기 쉬워요",
+          ],
+          LIKE: [
+            "the mobile banking app and the number ticket system",
+            "모바일 뱅킹 앱과 번호표 시스템이",
+          ],
+          IMP: [
+            "the system, and they are surprised by how efficient it is",
+            "그 시스템에, 그리고 효율성에 놀라곤 해요",
+          ],
+          PROUD: ["these facilities in Korea", "한국의 이런 시설들이"],
+        },
+        pharmacy: {
+          FAC: ["a pharmacy", "약국에 대한 이야기가"],
+          HARD: ["I don't know what details to focus on", "어디에 초점을 맞춰야 할지 몰라서"],
+          GOOD: ["many modern pharmacies", "현대적인 약국이 많고"],
+          MINE: ["there's one I visit regularly near my place", "집 근처에 자주 가는 곳이 있어요"],
+          PLACE: ["neat, modern, and comfortable", "깔끔하고 현대적이며 편안하고"],
+          INT: [
+            "everyone there is knowledgeable and experienced",
+            "모두 지식이 풍부하고 경험이 많아요",
+          ],
+          STAFF: ["friendly and helpful", "친절하고 도움이 돼요"],
+          SERV: ["smooth and reliable", "매끄럽고 믿을 수 있어서"],
+          RES: ["things are very convenient", "매우 편리해요"],
+          LIKE: ["the pharmacist consultation and the quick dispensing", "약사 상담과 빠른 조제가"],
+          IMP: [
+            "how organized and efficient Korean pharmacies are",
+            "한국 약국이 얼마나 체계적이고 효율적인지에",
+          ],
+          PROUD: ["this kind of environment", "이런 환경이"],
+        },
+        salon: {
+          FAC: ["a hair salon", "미용실에 대한 질문을"],
+          HARD: ["I'm not sure how to start", "어떻게 시작해야 할지 몰라서"],
+          GOOD: ["many stylish hair salons", "세련된 미용실이 정말 많고"],
+          MINE: [
+            "the one I usually go to is close to my home",
+            "제가 주로 가는 곳은 집 근처에 있어요",
+          ],
+          PLACE: ["sleek and minimalistic", "세련되고 미니멀하고"],
+          INT: ["the atmosphere is calm", "분위기가 차분해요"],
+          STAFF: [
+            "welcoming and highly skilled at what they do",
+            "환대해 주고 일에 매우 숙련돼 있어요",
+          ],
+          SERV: ["smooth and reliable", "원활하고 믿을 수 있어서"],
+          RES: ["I always feel comfortable during my visit", "방문하는 동안 항상 편안해요"],
+          LIKE: [
+            "the hair consultation and the attention to detail",
+            "스타일 상담과 세심한 마무리가",
+          ],
+          IMP: ["the quality of service here", "이곳의 서비스 품질에"],
+          PROUD: ["this high standard", "이런 높은 수준이"],
+        },
+        hotel: {
+          FAC: ["a hotel", "호텔에 대해 말하는 게"],
+          HARD: ["there are so many things to talk about", "말할 거리가 너무 많아서"],
+          GOOD: ["many well-managed hotels", "관리가 잘 된 호텔이 많고"],
+          MINE: ["there's one I've stayed at several times", "제가 몇 번 머문 곳이 있어요"],
+          PLACE: ["modern and stylish", "현대적이고 세련되고"],
+          INT: ["the place feels spacious", "공간이 넓게 느껴져요"],
+          STAFF: ["kind, polite, and professional", "친절하고 공손하며 전문적이에요"],
+          SERV: ["well-organized and efficient", "체계적이고 효율적이어서"],
+          RES: ["the stay is stress-free", "스트레스 없이 머물 수 있어요"],
+          LIKE: [
+            "the smooth check-in and the concierge service",
+            "매끄러운 체크인과 컨시어지 서비스가",
+          ],
+          IMP: ["the system and the overall atmosphere", "그 시스템과 전반적인 분위기에"],
+          PROUD: ["Korean hotels", "한국의 호텔들이"],
+        },
+        restaurant: {
+          FAC: ["a restaurant", "식당에 대해 말하는 게"],
+          HARD: ["it's hard to explain clearly", "명확하게 설명하기 어려워서"],
+          GOOD: ["a lot of well-run restaurants", "운영이 잘 되는 식당이 정말 많고"],
+          MINE: ["there's one I enjoy visiting regularly", "제가 즐겨 찾는 단골 식당이 있어요"],
+          PLACE: ["clean and well-maintained", "깨끗하고 관리가 잘 되어 있고"],
+          INT: ["the atmosphere is welcoming", "분위기가 따뜻해요"],
+          STAFF: ["friendly and helpful", "친절하고 도움이 돼서 경험이 훨씬 좋아져요"],
+          SERV: ["systematic and easy to follow", "체계적이고 따르기 쉬워서"],
+          RES: ["it works well even during busy hours", "바쁜 시간대에도 잘 돌아가요"],
+          LIKE: [
+            "the kiosk ordering and the free refills of side dishes",
+            "키오스크 주문과 반찬 리필이",
+          ],
+          IMP: [
+            "how efficient and organized Korean restaurants are",
+            "한국 식당이 얼마나 효율적이고 조직적인지에",
+          ],
+          PROUD: ["this dining culture", "이런 식문화가"],
+        },
+        library: {
+          FAC: ["a library", "도서관을 설명하는 게"],
+          HARD: ["it sounds so simple", "단순해 보여서"],
+          GOOD: ["many modern libraries", "현대적인 도서관이 많고"],
+          MINE: ["the one I go to is near my home", "제가 가는 곳은 집 근처에 있어요"],
+          PLACE: ["neat and modern", "정돈되어 있고 현대적이고"],
+          INT: ["the overall mood is calm", "전반적인 분위기가 차분해요"],
+          STAFF: ["kind and knowledgeable", "친절하고 지식이 풍부해요"],
+          SERV: ["comfortable, with a good reading area", "열람 공간이 편안해서"],
+          RES: ["people can stay for a long time", "사람들이 오래 머물 수 있어요"],
+          LIKE: [
+            "the quiet reading area and the self-check machines",
+            "조용한 열람 공간과 무인 대출기가",
+          ],
+          IMP: ["how clean and organized it is", "그곳이 얼마나 깨끗하고 질서정연한지에"],
+          PROUD: ["these public facilities", "이런 공공시설이"],
+        },
+        hospital: {
+          FAC: ["a hospital", "병원 관련 질문에"],
+          HARD: ["it's not easy to answer", "답변하기 쉽지 않아서"],
+          GOOD: ["many advanced hospitals", "수준 높은 병원이 많고"],
+          MINE: ["the one I usually visit is nearby", "제가 주로 가는 곳은 근처에 있어요"],
+          PLACE: ["clean and spacious", "깨끗하고 넓고"],
+          INT: ["the atmosphere is calm and professional", "분위기가 차분하고 전문적이에요"],
+          STAFF: ["well-trained and highly skilled", "잘 훈련되어 있고 기술이 뛰어나요"],
+          SERV: ["well-organized", "체계적이어서"],
+          RES: ["the whole process feels smooth and reliable", "전체 과정이 매끄럽고 믿음이 가요"],
+          LIKE: [
+            "the easy appointment scheduling and the short waiting time",
+            "쉬운 진료 예약과 짧은 대기 시간이",
+          ],
+          IMP: [
+            "how efficient the medical system is in Korea",
+            "한국 의료 시스템이 얼마나 효율적인지에",
+          ],
+          PROUD: ["this system", "이 시스템이"],
+        },
+        dental: {
+          FAC: ["a dental clinic", "치과에 대해 말하는 게"],
+          HARD: ["it can be uncomfortable", "불편한 주제일 수 있어서"],
+          GOOD: ["many modern dental clinics", "현대적인 치과가 많고"],
+          MINE: ["I go to one near my home", "저는 집 근처에 있는 곳을 다녀요"],
+          PLACE: ["modern and well-maintained", "현대적이고 관리가 잘 되어 있고"],
+          INT: ["it feels less stressful", "덜 긴장돼요"],
+          STAFF: ["friendly and approachable", "친절하고 다가가기 쉬워요"],
+          SERV: ["systematic and easy to follow", "체계적이고 따르기 쉬워서"],
+          RES: ["I feel at ease", "마음이 놓여요"],
+          LIKE: [
+            "the clear pricing and the hygienic tools",
+            "명확한 비용 안내와 위생적인 도구 관리가",
+          ],
+          IMP: ["how clean and efficient it is", "그곳이 얼마나 깨끗하고 효율적인지에"],
+          PROUD: ["this positive environment", "이런 긍정적인 환경이"],
+        },
+      },
+    },
+    {
+      id: "O",
+      name: "O 돌발 기본형",
+      desc: "어렵다 → 많다·중요 → 필수답변 3개 → 자긍심 → 결론",
+      grp: "돌발 · 기본형 (22~25강)",
+      tag: "SP",
+      kn: {
+        industry: "한국의 산업",
+        transport: "교통수단",
+        recycling: "재활용",
+        geography: "지형",
+        warming: "지구온난화",
+        weather: "날씨",
+        holiday: "휴일",
+        freetime: "자유시간",
+        smartphone: "스마트폰",
+      },
+      qs: {
+        industry: [
+          "Please tell me about one of the major industries or companies in your country. What is this industry or the company like? Tell me everything in detail.",
+          "당신 나라의 주요 산업이나 기업에 대해 말해 주세요. 어떤 곳인지 자세히 말해 주세요.",
+        ],
+        transport: [
+          "Please tell me about the transportation in your country. How do people usually get around?",
+          "당신 나라의 교통수단에 대해 말해 주세요. 사람들은 보통 어떻게 이동하나요?",
+        ],
+        recycling: [
+          "I would like to know about how recycling is practiced in your country. What do people usually do? Tell me how things are recycled.",
+          "당신 나라에서 재활용이 어떻게 이루어지는지 알고 싶습니다. 사람들은 보통 무엇을 하나요?",
+        ],
+        geography: [
+          "Please tell me about the geography of your country. What is it like?",
+          "당신 나라의 지형에 대해 말해 주세요. 어떤가요?",
+        ],
+        warming: [
+          "Please tell me about global warming. What do you know about it, and what is happening?",
+          "지구온난화에 대해 말해 주세요. 무엇을 알고 있고 어떤 일이 일어나고 있나요?",
+        ],
+        weather: [
+          "Please tell me about the weather and seasons in your country. What are they like?",
+          "당신 나라의 날씨와 계절에 대해 말해 주세요. 어떤가요?",
+        ],
+        holiday: [
+          "What kinds of holidays do you have in your country? What do people usually do and what kinds of food do they eat for each holiday?",
+          "당신 나라에는 어떤 휴일이 있나요? 휴일마다 사람들은 보통 무엇을 하고 어떤 음식을 먹나요?",
+        ],
+        freetime: [
+          "What do people in your country usually do in their free time? Tell me about it in detail.",
+          "당신 나라 사람들은 자유 시간에 보통 무엇을 하나요? 자세히 말해 주세요.",
+        ],
+        smartphone: [
+          "Tell me about how people use smartphones in your country. How do you use yours?",
+          "당신 나라 사람들이 스마트폰을 어떻게 쓰는지 말해 주세요. 당신은 어떻게 쓰나요?",
+        ],
+      },
+      parts: [
+        [
+          "It's a tough question, and I don't know what to say. But I will do my best.",
+          "무슨 말을 해야 할지 모르겠어요. 그래도 최선을 다하겠어요.",
+          "① 어렵다",
+        ],
+        ["<LEAD>.", "<LEAD>.", "② 많다 · 중요하다"],
+        [
+          "Speaking of <TOPIC>, <FACT1>.",
+          "<TOPIC> 이야기를 하자면, <FACT1>.",
+          "③ 주제별 필수답변 1",
+        ],
+        ["Also, <FACT2>.", "또한 <FACT2>.", "③ 주제별 필수답변 2"],
+        ["Plus, <FACT3>.", "게다가 <FACT3>.", "③ 주제별 필수답변 3"],
+        ["<WRAP>.", "<WRAP>.", "④ 자긍심 · 가족과의 시간"],
+        ["<CONCL>.", "<CONCL>.", "⑤ 결론 · 바람"],
+      ],
+      slots: {
+        industry: {
+          LEAD: [
+            "There are so many kinds of industries here in Korea, such as the IT, food, battery, automobile, and pharmaceutical industries",
+            "한국에는 IT, 식품, 배터리, 자동차, 제약처럼 정말 다양한 산업이 있어요",
+          ],
+          TOPIC: ["industry", "산업"],
+          FACT1: [
+            "if I had to choose one, it would be the smartphone industry, mainly led by Samsung Electronics",
+            "하나를 고르라면 삼성전자가 이끄는 스마트폰 산업이에요",
+          ],
+          FACT2: [
+            "its global market share is more than thirty percent, which is amazing",
+            "세계 시장점유율이 30%가 넘는데 정말 대단해요",
+          ],
+          FACT3: [
+            "Korean products are known for their high quality and great features",
+            "한국 제품은 높은 품질과 좋은 기능으로 알려져 있어요",
+          ],
+          WRAP: [
+            "A lot of foreign people come to Korea, and they're amazed by the high quality and the best features. I'm so proud of being Korean",
+            "많은 외국인이 한국에 와서 높은 품질과 최고의 기능에 감탄해요. 한국인으로서 정말 자랑스러워요",
+          ],
+          CONCL: [
+            "In conclusion, I think we're doing great, and I hope we continue to improve in the future",
+            "결론적으로 우리는 잘하고 있고, 앞으로도 계속 발전하기를 바라요",
+          ],
+        },
+        transport: {
+          LEAD: [
+            "There are numerous transportation options in Korea; wherever you go, you can easily find buses, subways, or taxis",
+            "한국에는 교통수단이 정말 많아서 어디를 가든 버스, 지하철, 택시를 쉽게 찾을 수 있어요",
+          ],
+          TOPIC: ["transportation", "교통"],
+          FACT1: [
+            "people use it for various purposes, such as commuting to work, traveling, or moving around the city",
+            "사람들은 출퇴근, 여행, 도시 이동 등 다양한 목적으로 이용해요",
+          ],
+          FACT2: [
+            "people can move from one place to another efficiently",
+            "사람들은 한 곳에서 다른 곳으로 효율적으로 이동할 수 있어요",
+          ],
+          FACT3: [
+            "these days, many people use apps for online reservations or navigation without any hassle",
+            "요즘은 많은 사람이 앱으로 예약과 길 찾기를 번거로움 없이 해요",
+          ],
+          WRAP: [
+            "Foreigners are often amazed by the convenience and punctuality of our public transportation system. I'm proud of that as a Korean",
+            "외국인들은 대중교통의 편리함과 정시성에 자주 놀라요. 한국인으로서 자랑스러워요",
+          ],
+          CONCL: [
+            "In conclusion, I think we're doing great, and I hope we continue to improve it in the future",
+            "결론적으로 우리는 잘하고 있고, 앞으로도 계속 개선되기를 바라요",
+          ],
+        },
+        recycling: {
+          LEAD: [
+            "These days environmental issues are emerging, and one of them is recycling. We take it very seriously",
+            "요즘 환경 문제가 대두되는데 그중 하나가 재활용이고, 우리는 매우 진지하게 받아들여요",
+          ],
+          TOPIC: ["recycling", "재활용"],
+          FACT1: [
+            "we recycle regularly, and it's a big topic for us",
+            "우리는 정기적으로 재활용을 하고 큰 관심사예요",
+          ],
+          FACT2: [
+            "we have a good system for materials like plastic, cans, and glass",
+            "플라스틱, 캔, 유리 같은 재료를 위한 좋은 시스템이 있어요",
+          ],
+          FACT3: [
+            "the government has strict rules, so if you don't recycle, you can get fined",
+            "정부의 규정이 엄격해서 재활용하지 않으면 벌금을 물 수 있어요",
+          ],
+          WRAP: [
+            "A lot of foreign people come to Korea, and they're amazed by our well-practiced recycling. I'm so proud of being Korean",
+            "많은 외국인이 한국에 와서 잘 정착된 재활용에 감탄해요. 한국인으로서 정말 자랑스러워요",
+          ],
+          CONCL: [
+            "In conclusion, I think we're doing great, and I hope this trend continues just like this forever",
+            "결론적으로 우리는 잘하고 있고, 이런 추세가 계속되기를 바라요",
+          ],
+        },
+        geography: {
+          LEAD: [
+            "There is so much to say about the geography here in Korea",
+            "한국의 지형에 대해서는 할 말이 정말 많아요",
+          ],
+          TOPIC: ["geography", "지형"],
+          FACT1: ["we have numerous mountains, rivers, and lakes", "수많은 산, 강, 호수가 있어요"],
+          FACT2: [
+            "Korea is on a peninsula surrounded by the sea on three sides, and we have thousands of islands along the coast",
+            "한국은 삼면이 바다로 둘러싸인 반도에 있고 해안을 따라 수천 개의 섬이 있어요",
+          ],
+          FACT3: [
+            "about seventy percent of our land is mountainous, and the tallest mountain is Baekdu Mountain",
+            "국토의 약 70%가 산지이고 가장 높은 산은 백두산이에요",
+          ],
+          WRAP: [
+            "Thanks to this, we are blessed with abundant seafood and marine resources, and I'm proud of that",
+            "덕분에 풍부한 해산물과 수산자원을 누리고 있어서 자랑스러워요",
+          ],
+          CONCL: [
+            "In conclusion, I think Korea has a beautiful and diverse landscape, and I hope we take good care of it",
+            "결론적으로 한국은 아름답고 다양한 지형을 가졌고, 잘 가꾸어 가기를 바라요",
+          ],
+        },
+        warming: {
+          LEAD: [
+            "Global warming is a serious issue these days, and it's important to understand it",
+            "지구온난화는 요즘 심각한 문제이고 이해하는 게 중요해요",
+          ],
+          TOPIC: ["global warming", "지구온난화"],
+          FACT1: [
+            "the Earth is gradually warming year by year",
+            "지구가 해마다 점차 따뜻해지고 있어요",
+          ],
+          FACT2: [
+            "global temperatures keep rising, leading to the melting of icebergs and glaciers at the North and South Poles",
+            "기온이 꾸준히 올라 남북극의 빙산과 빙하가 녹고 있어요",
+          ],
+          FACT3: [
+            "as a result, sea levels are rising, causing changes in coastal areas",
+            "그 결과 해수면이 상승해 해안 지역에 변화가 생겨요",
+          ],
+          WRAP: [
+            "This phenomenon is known as global warming, and everyone needs to take it seriously",
+            "이 현상을 지구온난화라고 하고, 모두가 심각하게 받아들여야 해요",
+          ],
+          CONCL: [
+            "In conclusion, I hope we all do our part to slow it down in the future",
+            "결론적으로 모두가 속도를 늦추기 위해 각자 역할을 하길 바라요",
+          ],
+        },
+        weather: {
+          LEAD: [
+            "There is a lot to say about the weather and seasons in Korea",
+            "한국의 날씨와 계절에 대해서는 할 말이 많아요",
+          ],
+          TOPIC: ["the weather", "날씨"],
+          FACT1: [
+            "we experience four distinct seasons: spring, summer, fall, and winter",
+            "봄, 여름, 가을, 겨울의 뚜렷한 사계절이 있어요",
+          ],
+          FACT2: [
+            "spring is nice and mild, and summer is hot and humid",
+            "봄은 좋고 온화하며 여름은 덥고 습해요",
+          ],
+          FACT3: [
+            "fall is considered the nicest time of the year, while winter is freezing cold and dry",
+            "가을은 일 년 중 가장 좋은 때로 여겨지고 겨울은 매우 춥고 건조해요",
+          ],
+          WRAP: [
+            "I think having four distinct seasons is a blessing, and I enjoy each of them",
+            "사계절이 뚜렷한 건 축복이라고 생각하고 계절마다 즐겨요",
+          ],
+          CONCL: [
+            "In conclusion, each season has its own charm, and I hope it stays that way",
+            "결론적으로 계절마다 매력이 있고, 앞으로도 그렇기를 바라요",
+          ],
+        },
+        holiday: {
+          LEAD: [
+            "There are so many kinds of holidays here in Korea, such as New Year's Day and Chuseok, which is like Thanksgiving",
+            "한국에는 설날과 추석(한국판 추수감사절)처럼 정말 다양한 명절이 있어요",
+          ],
+          TOPIC: ["holidays", "휴일"],
+          FACT1: [
+            "one of the major holidays is Chuseok, when families come together to spend time with each other",
+            "대표 명절 중 하나는 추석으로, 가족이 모여 시간을 보내요",
+          ],
+          FACT2: [
+            "families set up special feasts and often wear traditional Hanbok, and there is an ancestral ritual to honor ancestors",
+            "가족들은 특별한 상을 차리고 한복을 입으며 조상께 제사를 지내요",
+          ],
+          FACT3: [
+            "people also make and share a special rice cake called songpyeon",
+            "송편이라는 특별한 떡을 만들어 나눠 먹어요",
+          ],
+          WRAP: [
+            "Chuseok is considered a valuable time for family harmony and gratitude",
+            "추석은 가족 화합과 감사를 나누는 소중한 시간으로 여겨져요",
+          ],
+          CONCL: [
+            "I've been very busy these days, so I hope I can spend more precious time with my family",
+            "요즘 많이 바빠서 가족과 더 소중한 시간을 보낼 수 있으면 좋겠어요",
+          ],
+        },
+        freetime: {
+          LEAD: [
+            "It's a tough topic to talk about because I've been incredibly busy these days",
+            "요즘 엄청 바빠서 이야기하기 쉽지 않은 주제예요",
+          ],
+          TOPIC: ["free time", "자유시간"],
+          FACT1: [
+            "especially on weekdays, I have limited free time",
+            "특히 평일에는 자유 시간이 제한돼 있어요",
+          ],
+          FACT2: [
+            "however, I have a lot of free time on the weekend or holidays",
+            "하지만 주말이나 명절에는 시간이 많이 남아요",
+          ],
+          FACT3: [
+            "in my free time, I usually relax at home and enjoy my hobbies",
+            "자유 시간에는 보통 집에서 쉬며 취미를 즐겨요",
+          ],
+          WRAP: [
+            "Spending that time well is important to me",
+            "그 시간을 잘 보내는 게 저에겐 중요해요",
+          ],
+          CONCL: [
+            "In conclusion, I'd like to spend more quality time with my family",
+            "결론적으로 가족과 더 질 좋은 시간을 보내고 싶어요",
+          ],
+        },
+        smartphone: {
+          LEAD: [
+            "Most of the time, I use my smartphone for entertainment",
+            "저는 대부분 스마트폰을 오락용으로 써요",
+          ],
+          TOPIC: ["my smartphone", "스마트폰"],
+          FACT1: [
+            "it's a great source for videos that I'm interested in, and the best part is that it's absolutely free",
+            "관심 있는 영상을 보기 좋은 곳이고, 가장 좋은 점은 완전히 무료라는 거예요",
+          ],
+          FACT2: [
+            "I can dive deep into my favorite subjects and have unlimited access to my interests",
+            "좋아하는 주제를 깊이 파고들 수 있고 관심사를 무제한으로 접할 수 있어요",
+          ],
+          FACT3: [
+            "the bad thing is that I've become somewhat addicted to it",
+            "나쁜 점은 어느 정도 중독됐다는 거예요",
+          ],
+          WRAP: [
+            "When I don't watch YouTube or don't have my smartphone with me, I get a strange feeling like something is missing in my life",
+            "유튜브를 안 보거나 스마트폰이 없으면 삶에 뭔가 빠진 듯한 이상한 기분이 들어요",
+          ],
+          CONCL: [
+            "I realize I need to cut back on this addiction soon, and I'd like to spend more quality time with my family",
+            "곧 이 중독을 줄여야 한다는 걸 깨닫고, 가족과 더 좋은 시간을 보내고 싶어요",
+          ],
+        },
+      },
+    },
+  ],
 );
