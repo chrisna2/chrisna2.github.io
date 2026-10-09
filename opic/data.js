@@ -2249,3 +2249,115 @@ SKELS.push(
     },
   },
 );
+
+/* ===== K. 만능 묘사 — 교재 4강 "첫문제 258 만능답변" (장소·가족·친구·좋아하는 것) 4블록 =====
+ 어떤 묘사 문제가 나와도 이 4블록을 같은 순서로 말한다. 표현은 교재의 만능 문구를 바탕으로 한다. */
+Object.assign(SK_LABEL, {
+  DIST: "거리",
+  GO: "가는 방법",
+  FEAT: "장소 특징",
+  FAMDO: "가족과 하는 일",
+  NAME: "친구 이름",
+  YEARS: "친구 햇수",
+  ING: "푹 빠진 활동",
+  GOOD: "찾아 다니는 것",
+});
+SKELS.push({
+  id: "K",
+  name: "K 만능 묘사 4블록",
+  desc: "장소 → 가족 → 친구 → 좋아하는 것. 교재의 258번 만능답변",
+  grp: "묘사 · 2·5·8",
+  tag: "2·5·8",
+  qs: SKELS.find((s) => s.id === "D").qs,
+  parts: [
+    [
+      "I usually go to <PLACE>. It's <DIST>, so I <GO>.",
+      "저는 보통 <PLACE> 가요. <DIST>라서 <GO> 가요.",
+      "① 장소 · 거리",
+    ],
+    ["It's <FEAT>.", "그곳은 <FEAT>.", "① 장소 · 특징"],
+    [
+      "I usually go with my family. I'm too busy during the week, so I go on the weekends.",
+      "보통 가족과 함께 가요. 주중에는 바빠서 주말에 가요.",
+      "② 가족 · 주말",
+    ],
+    [
+      "We enjoy <FAMDO> together, and my family is precious to me.",
+      "우리는 같이 <FAMDO> 즐기고, 가족은 저에게 소중한 존재예요.",
+      "② 가족 · 소중한 존재",
+    ],
+    [
+      "Sometimes I go with my friend <NAME>. We get along well, and we have been friends for <YEARS> years.",
+      "가끔은 친구 <NAME>와 같이 가요. 우리는 죽이 잘 맞고 <YEARS>년지기 친구예요.",
+      "③ 친구 · 오래된 사이",
+    ],
+    [
+      "I'm addicted to <ING>, so I go wherever there is <GOOD>. It really gives me energy.",
+      "저는 <ING> 푹 빠져 있어서 <GOOD> 있으면 어디든 가요. 정말 에너지를 줘요.",
+      "④ 좋아하는 것 · 에너지",
+    ],
+  ],
+  slots: {
+    jog: {
+      PLACE: ["Boramae Park", "보라매공원에"],
+      DIST: ["a 10-minute bike ride from my house", "집에서 자전거로 10분 거리"],
+      GO: ["ride my bike there", "자전거를 타고"],
+      FEAT: ["well-maintained, comfortable, and quiet", "관리가 잘 되어 있고 편안하고 조용해요"],
+      FAMDO: ["taking a walk", "산책하는 걸"],
+      ING: ["jogging", "조깅에"],
+      GOOD: ["a nice park", "좋은 공원이"],
+      NAME: ["Minsu", "민수"],
+      YEARS: ["10", "10"],
+    },
+    cafe: {
+      PLACE: ["the Starbucks near my house", "집 근처 스타벅스에"],
+      DIST: ["a 5-minute walk from my house", "집에서 걸어서 5분 거리"],
+      GO: ["walk there", "걸어서"],
+      FEAT: ["well-maintained, comfortable, and quiet", "깔끔하고 편안하고 조용해요"],
+      FAMDO: ["drinking coffee", "커피 마시는 걸"],
+      ING: ["coffee", "커피에"],
+      GOOD: ["delicious coffee", "맛있는 커피가"],
+      NAME: ["Minsu", "민수"],
+      YEARS: ["10", "10"],
+    },
+    concert: {
+      PLACE: ["a concert hall in Seoul", "서울의 공연장에"],
+      DIST: ["a 40-minute subway ride from my house", "집에서 지하철로 40분 거리"],
+      GO: ["take the subway", "지하철을 타고"],
+      FEAT: [
+        "well-maintained, comfortable, and the sound is great",
+        "관리가 잘 되어 있고 편안하고 음향이 훌륭해요",
+      ],
+      FAMDO: ["listening to music", "음악 듣는 걸"],
+      ING: ["going to concerts", "콘서트 가는 데"],
+      GOOD: ["a great live show", "멋진 라이브 공연이"],
+      NAME: ["Minsu", "민수"],
+      YEARS: ["10", "10"],
+    },
+    movie: {
+      PLACE: ["the movie theater near my house", "집 근처 영화관에"],
+      DIST: ["a 10-minute bike ride from my house", "집에서 자전거로 10분 거리"],
+      GO: ["ride my bike there", "자전거를 타고"],
+      FEAT: ["well-maintained, comfortable, and quiet", "관리가 잘 되어 있고 편안하고 조용해요"],
+      FAMDO: ["watching movies", "영화 보는 걸"],
+      ING: ["watching movies", "영화 보는 데"],
+      GOOD: ["a great movie", "좋은 영화가"],
+      NAME: ["Minsu", "민수"],
+      YEARS: ["10", "10"],
+    },
+    trip: {
+      PLACE: ["Jeju Island", "제주도에"],
+      DIST: ["an hour away from my house by plane", "집에서 비행기로 1시간 거리"],
+      GO: ["take a plane", "비행기를 타고"],
+      FEAT: [
+        "comfortable, quiet, and full of beautiful nature",
+        "편안하고 조용하고 아름다운 자연이 가득해요",
+      ],
+      FAMDO: ["traveling", "여행하는 걸"],
+      ING: ["traveling", "여행에"],
+      GOOD: ["a beautiful place", "멋진 곳이"],
+      NAME: ["Minsu", "민수"],
+      YEARS: ["10", "10"],
+    },
+  },
+});
