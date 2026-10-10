@@ -86,6 +86,7 @@ const cfg = Object.assign(
     topicOf: {},
     skHint: false,
     skHideEn: false,
+    skRead: false,
     mode: "shadow",
     rate: 0.9,
     reps: 2,
@@ -965,6 +966,11 @@ function kwGo(n) {
 
 /* ===== 응용: 뼈대 바꿔끼우기 =====
  같은 뼈대(고정 문장)에 주제별 빈칸 값만 바꿔 끼워 어떤 주제 문제에도 답하는 연습 */
+// 정답을 펼칠 때 자동으로 읽어 줄지 정하는 체크박스 HTML (기본값: 읽지 않음)
+const skReadOpt = () =>
+  '<div class="row2"><label class="lbl"><input type="checkbox" id="skRead"' +
+  (cfg.skRead ? " checked" : "") +
+  "> 정답 펼칠 때 자동으로 읽어 주기</label></div>";
 // 응용 탭 상태: playing 전체 재생 중, shown 정답 표시 여부
 const sk = { playing: false, shown: false, drill: null };
 // 롤플레이 11번 질문 연습: 뼈대에서 가운데 문장 3~4개를 무작위로 뽑는다 (첫 인사·마무리는 항상 포함).
@@ -1079,8 +1085,11 @@ function renderSkel() {
         .join("") +
       "</div>" +
       '<div class="row2"><button class="big pri" data-skdrillshow="1">' +
-      (dr.shown ? "정답 가리기" : "모범 질문 보기 · 읽어 주기") +
-      "</button></div>";
+      (dr.shown ? "정답 가리기" : "모범 질문 보기") +
+      "</button>" +
+      '<button class="big" data-skread="1">읽어 주기</button>' +
+      "</div>" +
+      skReadOpt();
     h += '<div class="note" id="skStatus"></div>';
   } else {
     h += qCard(sec, 0, "Q · 뼈대 " + S.name + " × " + kn(S, cfg.skKey));
@@ -1108,7 +1117,9 @@ function renderSkel() {
                 tplHtml(p[0], sk.shown) +
                 "</div>" +
                 (sk.shown
-                  ? '<div class="k">' + esc(p[1]) + "</div>"
+                  ? cfg.skHint
+                    ? '<div class="k">' + esc(p[1]) + "</div>"
+                    : ""
                   : cfg.skHint && p[3]
                     ? '<div class="k">힌트: ' + esc(p[3]) + "</div>"
                     : "")) +
@@ -1118,14 +1129,16 @@ function renderSkel() {
       "</div>";
     h +=
       '<div class="row2"><button class="big pri" data-skshow="1">' +
-      (sk.shown ? "정답 가리기" : "정답 보기 · 읽어 주기") +
+      (sk.shown ? "정답 가리기" : "정답 보기") +
       "</button>" +
+      '<button class="big" data-skread="1">읽어 주기</button>' +
       '<button class="big" data-sknext="1">다음 조합 (랜덤)</button>' +
       '<button class="big' +
       (sk.playing ? " live" : "") +
       '" data-skall="1">' +
       (sk.playing ? "정지" : "이 뼈대로 모든 주제 이어 듣기") +
       "</button></div>";
+    h += skReadOpt();
     h += '<div class="note" id="skStatus"></div>';
   }
   const cols = Object.keys(S.slots[keys[0]]);
@@ -1864,7 +1877,7 @@ $("#v-skel").addEventListener("click", (e) => {
     stopAll();
     sk.drill.shown = !sk.drill.shown;
     renderSkel();
-    if (sk.drill.shown) {
+    if (sk.drill.shown && cfg.skRead) {
       const ds = genSec(S.id, sk.drill.key),
         my = ++token;
       sayAll(
@@ -1878,13 +1891,30 @@ $("#v-skel").addEventListener("click", (e) => {
     stopAll();
     sk.shown = !sk.shown;
     renderSkel();
-    if (sk.shown) {
+    if (sk.shown && cfg.skRead) {
       const my = ++token;
       sayAll(
         sec.s.map((p) => plain(p[0])),
         my,
       );
     }
+    return;
+  }
+  // 정답을 펼친 상태에서 '읽어 주기' 버튼: 자동 읽기가 꺼져 있어도 원할 때만 읽는다
+  if (e.target.closest("[data-skread]")) {
+    stopAll();
+    const my = ++token;
+    if (sk.drill && sk.drill.id === S.id) {
+      const ds = genSec(S.id, sk.drill.key);
+      sayAll(
+        sk.drill.idx.map((i) => plain(ds.s[i][0])),
+        my,
+      );
+    } else
+      sayAll(
+        sec.s.map((p) => plain(p[0])),
+        my,
+      );
     return;
   }
   if (e.target.closest("[data-sknext]")) {
@@ -1915,7 +1945,7 @@ $("#v-skel").addEventListener("click", (e) => {
 });
 // 응용 탭: 힌트 체크박스
 $("#v-skel").addEventListener("change", (e) => {
-  if (e.target.id === "skHint" || e.target.id === "skHideEn") {
+  if (["skHint", "skHideEn", "skRead"].includes(e.target.id)) {
     cfg[e.target.id] = e.target.checked;
     save();
     renderSkel();
