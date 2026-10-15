@@ -210,14 +210,14 @@ function pickVoice() {
 }
 // 한 문장을 읽고 끝나면 resolve되는 Promise.
 // 일부 브라우저는 onend가 안 오기도 해서 단어 수 기반 타임아웃으로 안전장치를 둔다.
-function speak(text, voice) {
+function speak(text, voice, lang) {
   return new Promise((res) => {
     if (!SYNTH) {
       res();
       return;
     }
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = "en-US";
+    u.lang = lang || "en-US";
     if (voice) {
       u.voice = voice;
       u.lang = voice.lang;
@@ -1336,14 +1336,79 @@ function buildMock() {
 }
 /* ===== 필수 표현 =====
  문장을 시작하는 틀 25개: 뜻과 예문을 보고, 영어를 가려 뜻만 보고 말해 본 뒤 눌러서 확인 */
-const phr = { hide: false, open: new Set() };
+const phr = { hide: false, open: new Set(), mode: "en", grp: "all", tok: -1 };
+const phrRunning = () => phr.tok === token;
+// 표현 묶음을 쭉 들려준다. mode "en": 표현 → 예문 / mode "ko": 한글 예문 → (내가 영어로 말함) → 정답 영어
+function phrBtn() {
+  const b = $("#phPlay");
+  if (b) b.textContent = phrRunning() ? "■ 정지" : "▶ 시작";
+}
+async function phrRun() {
+  stopAll();
+  const my = ++token;
+  phr.tok = my;
+  phrBtn();
+  const list = [];
+  PHRASES.forEach((g, gi) => {
+    if (phr.grp === "all" || phr.grp === String(gi))
+      g.items.forEach((it, ii) => list.push([gi + "." + ii, it]));
+  });
+  for (const [id, it] of list) {
+    if (my !== token) return;
+    document.querySelectorAll("#v-phr .bcard.now").forEach((x) => x.classList.remove("now"));
+    const el = document.querySelector('#v-phr [data-ph="' + id + '"]');
+    if (el) {
+      el.classList.add("now");
+      el.scrollIntoView({ block: "center", behavior: "smooth" });
+    }
+    if (phr.mode === "ko") {
+      await speak(it.ex[1], null, "ko-KR");
+      if (my !== token) return;
+      await sleep(gapMs(it.ex[0]) * 1.3);
+      if (my !== token) return;
+      await say(it.en + ". " + it.ex[0]);
+      if (my !== token) return;
+      await sleep(700);
+    } else {
+      await say(it.en);
+      if (my !== token) return;
+      await sleep(500);
+      if (my !== token) return;
+      await say(it.ex[0]);
+      if (my !== token) return;
+      await sleep(900);
+    }
+  }
+  if (my === token) {
+    phr.tok = -1;
+    phrBtn();
+  }
+}
 // 필수 표현 화면: 묶음별 카드(표현·뜻·예문), 영어 가리기, 읽어 주기
 function renderPhr() {
   let h =
     '<p class="note">문장을 여는 틀입니다. 뜻을 보고 표현과 예문을 말해 본 뒤 확인하세요. 시험에서는 이 틀로 문장을 시작하면 끊기지 않고 이어집니다.</p>' +
     '<div class="row2"><label class="lbl"><input type="checkbox" id="phHide"' +
     (phr.hide ? " checked" : "") +
-    "> 영어 가리기 (뜻만 보고 말하기, 누르면 확인)</label></div>";
+    "> 영어 가리기 (뜻만 보고 말하기, 누르면 확인)</label></div>" +
+    '<div class="phbar"><select id="phMode"><option value="en"' +
+    (phr.mode === "en" ? " selected" : "") +
+    '>쭉 듣기 (표현 → 예문)</option><option value="ko"' +
+    (phr.mode === "ko" ? " selected" : "") +
+    '>한글 → 내가 영어로 말하기</option></select><select id="phGrp"><option value="all">전체</option>' +
+    PHRASES.map(
+      (g, gi) =>
+        '<option value="' +
+        gi +
+        '"' +
+        (phr.grp === String(gi) ? " selected" : "") +
+        ">" +
+        esc(g.grp) +
+        "</option>",
+    ).join("") +
+    '</select><button class="mini pri" id="phPlay">' +
+    (phrRunning() ? "■ 정지" : "▶ 시작") +
+    "</button></div>";
   PHRASES.forEach((g, gi) => {
     h += '<div class="lbl" style="margin:12px 0 6px">' + esc(g.grp) + '</div><div class="list">';
     g.items.forEach((it, ii) => {
@@ -1376,6 +1441,8 @@ function renderPhr() {
 }
 // 필수 표현 화면 이벤트: 가리기 체크, 카드 눌러 확인, 읽어 주기
 $("#v-phr").addEventListener("change", (e) => {
+  if (e.target.id === "phMode") phr.mode = e.target.value;
+  if (e.target.id === "phGrp") phr.grp = e.target.value;
   if (e.target.id === "phHide") {
     phr.hide = e.target.checked;
     phr.open.clear();
@@ -1383,6 +1450,14 @@ $("#v-phr").addEventListener("change", (e) => {
   }
 });
 $("#v-phr").addEventListener("click", (e) => {
+  if (e.target.closest("#phPlay")) {
+    if (phrRunning()) {
+      stopAll();
+      phr.tok = -1;
+      phrBtn();
+    } else phrRun();
+    return;
+  }
   const sy = e.target.closest("[data-phsay]");
   if (sy) {
     const [g, i] = sy.dataset.phsay.split(".");

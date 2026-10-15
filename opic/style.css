@@ -802,3 +802,17 @@ mark {
     padding-block: 7px;
   }
 }
+
+.phbar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 6px 0 4px;
+}
+.phbar select {
+  flex: 1 1 140px;
+  min-width: 0;
+}
+.bcard.now {
+  outline: 2px solid var(--live);
+}
