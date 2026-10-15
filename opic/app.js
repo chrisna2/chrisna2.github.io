@@ -1337,7 +1337,130 @@ function buildMock() {
 /* ===== 필수 표현 =====
  문장을 시작하는 틀 25개: 뜻과 예문을 보고, 영어를 가려 뜻만 보고 말해 본 뒤 눌러서 확인 */
 const phr = { hide: false, open: new Set(), mode: "en", grp: "all", tok: -1, loop: false };
-const phrRunning = () => phr.tok === token;
+const phrRunning = () => phr.tok === token && phr.kind !== "script";
+const phrScriptRunning = () => phr.tok === token && phr.kind === "script";
+// 내가 고른 첫어구를 이어 붙여 하나의 스크립트(문단) 만들기: 어구만 읽어 주고 나머지는 내가 채워 말한다
+phr.secs = 20;
+phr.sets = [{ name: "세트 1", sel: [] }];
+phr.act = 0;
+Object.defineProperty(phr, "sel", {
+  get: () => phr.sets[phr.act].sel,
+  set: (v) => {
+    phr.sets[phr.act].sel = v;
+  },
+});
+const phrOk = (id) => {
+  const [g, i] = String(id).split(".");
+  return !!(PHRASES[g] && PHRASES[g].items[i]);
+};
+try {
+  const sv = JSON.parse(localStorage.getItem("opic_phr_sets") || "null");
+  if (sv && Array.isArray(sv.sets) && sv.sets.length) {
+    phr.sets = sv.sets.map((x, n) => ({
+      name: String(x.name || "세트 " + (n + 1)),
+      sel: (x.sel || []).filter(phrOk),
+    }));
+    phr.act = Math.min(Math.max(+sv.act || 0, 0), phr.sets.length - 1);
+  } else {
+    phr.sets[0].sel = JSON.parse(localStorage.getItem("opic_phr_sel") || "[]").filter(phrOk);
+  }
+} catch (e) {}
+const phrClean = (t) => t.replace(/\.{3}/g, ", ");
+const phrItem = (id) => {
+  const [g, i] = id.split(".");
+  return PHRASES[g].items[i];
+};
+function phrSave() {
+  try {
+    localStorage.setItem("opic_phr_sets", JSON.stringify({ act: phr.act, sets: phr.sets }));
+  } catch (e) {}
+}
+// 선택 트레이(담은 어구 목록) 다시 그리기
+function phrTray() {
+  const el = $("#phTray");
+  if (!el) return;
+  const ss = $("#phSet");
+  if (ss)
+    ss.innerHTML = phr.sets
+      .map(
+        (x, n) =>
+          '<option value="' +
+          n +
+          '"' +
+          (n === phr.act ? " selected" : "") +
+          ">" +
+          esc(x.name) +
+          " (" +
+          x.sel.length +
+          ")</option>",
+      )
+      .join("");
+  el.innerHTML = phr.sel.length
+    ? '<ol class="trl">' +
+      phr.sel
+        .map(
+          (id, n) =>
+            '<li><span class="trt">' +
+            esc(phrItem(id).en) +
+            '</span><button class="mini" data-phmv="' +
+            n +
+            ',-1" aria-label="위로">↑</button><button class="mini" data-phmv="' +
+            n +
+            ',1" aria-label="아래로">↓</button><button class="mini" data-phrm="' +
+            n +
+            '" aria-label="빼기">✕</button></li>',
+        )
+        .join("") +
+      "</ol>"
+    : '<p class="note">아래 카드의 "＋ 담기"를 눌러 첫어구를 순서대로 고르세요.</p>';
+  document.querySelectorAll("#v-phr [data-phadd]").forEach((b) => {
+    const on = phr.sel.includes(b.dataset.phadd);
+    b.textContent = on ? "✓ 담김" : "＋ 담기";
+    b.classList.toggle("pri", on);
+  });
+  const go = $("#phSGo");
+  if (go) go.textContent = phrScriptRunning() ? "■ 정지" : "▶ 이어 말하기 연습";
+}
+async function phrScriptRun() {
+  stopAll();
+  const my = ++token;
+  phr.tok = my;
+  phr.kind = "script";
+  phrTray();
+  const st = $("#phStage");
+  const items = phr.sel.map(phrItem);
+  for (let n = 0; n < items.length; n++) {
+    if (my !== token) return;
+    const en = items[n].en;
+    const draw = (left) => {
+      st.innerHTML =
+        '<div class="cnt">' +
+        (n + 1) +
+        " / " +
+        items.length +
+        '</div><div class="stbig">' +
+        esc(en) +
+        '</div><div class="note">이어서 마저 말해 보세요 · ' +
+        (left > 0 ? left + "초" : "다음") +
+        "</div>";
+    };
+    draw(phr.secs);
+    await say(phrClean(en));
+    for (let t = phr.secs; t > 0; t--) {
+      if (my !== token) return;
+      draw(t);
+      await sleep(1000);
+    }
+  }
+  if (my !== token) return;
+  st.innerHTML =
+    '<div class="note">끝! 오늘 만든 문단의 뼈대: <b>' +
+    esc(items.map((x) => x.en).join(" / ")) +
+    "</b></div>";
+  phr.tok = -1;
+  phr.kind = "";
+  phrTray();
+}
 // 표현 묶음을 쭉 들려준다. mode "en": 표현 → 예문 / mode "ko": 한글 예문 → (내가 영어로 말함) → 정답 영어
 function phrBtn() {
   const b = $("#phPlay");
@@ -1347,6 +1470,7 @@ async function phrRun() {
   stopAll();
   const my = ++token;
   phr.tok = my;
+  phr.kind = "list";
   phrBtn();
   const list = [];
   PHRASES.forEach((g, gi) => {
@@ -1367,7 +1491,7 @@ async function phrRun() {
         const steps = [
           () => speak(it.ko, null, "ko-KR"),
           () => sleep(gapMs(it.en) * 1.3),
-          () => say(it.en),
+          () => say(phrClean(it.en)),
           () => sleep(gapMs(it.en)),
           () => speak(it.ex[1], null, "ko-KR"),
           () => sleep(gapMs(it.ex[0]) * 1.3),
@@ -1383,11 +1507,11 @@ async function phrRun() {
         if (my !== token) return;
         await sleep(gapMs(it.ex[0]) * 1.3);
         if (my !== token) return;
-        await say(it.en + ". " + it.ex[0]);
+        await say(phrClean(it.en) + ". " + it.ex[0]);
         if (my !== token) return;
         await sleep(700);
       } else {
-        await say(it.en);
+        await say(phrClean(it.en));
         if (my !== token) return;
         await sleep(500);
         if (my !== token) return;
@@ -1410,6 +1534,17 @@ function renderPhr() {
     '<div class="row2"><label class="lbl"><input type="checkbox" id="phHide"' +
     (phr.hide ? " checked" : "") +
     "> 영어 가리기 (뜻만 보고 말하기, 누르면 확인)</label></div>" +
+    '<div class="trbox"><div class="lbl">내 스크립트 (첫어구 이어 붙이기)</div><div class="phbar"><select id="phSet"></select><button class="mini" id="phSNew">＋ 새 세트</button><button class="mini" id="phSRen">이름</button><button class="mini" id="phSDel">삭제</button></div><div id="phTray"></div>' +
+    '<div class="phbar"><select id="phSecs"><option value="10"' +
+    (phr.secs === 10 ? " selected" : "") +
+    '>어구마다 10초</option><option value="20"' +
+    (phr.secs === 20 ? " selected" : "") +
+    '>20초</option><option value="30"' +
+    (phr.secs === 30 ? " selected" : "") +
+    '>30초</option><option value="45"' +
+    (phr.secs === 45 ? " selected" : "") +
+    '>45초</option></select><button class="mini pri" id="phSGo">▶ 이어 말하기 연습</button><button class="mini" id="phSClr">비우기</button></div>' +
+    '<div id="phStage" class="stage2"></div></div>' +
     '<div class="phbar"><select id="phMode"><option value="en"' +
     (phr.mode === "en" ? " selected" : "") +
     '>쭉 듣기 (표현 → 예문)</option><option value="ko"' +
@@ -1444,7 +1579,9 @@ function renderPhr() {
         id +
         '" style="display:block;cursor:pointer"><div class="ko" style="margin:0;font-weight:600">' +
         esc(it.ko) +
-        "</div>" +
+        '</div><div class="row2" style="margin:4px 0 0"><button class="mini" data-phadd="' +
+        id +
+        '">＋ 담기</button></div>' +
         (show
           ? '<div class="en" style="margin-top:4px"><mark>' +
             esc(it.en) +
@@ -1461,12 +1598,24 @@ function renderPhr() {
     h += "</div>";
   });
   $("#v-phr").innerHTML = h;
+  phrTray();
 }
 // 필수 표현 화면 이벤트: 가리기 체크, 카드 눌러 확인, 읽어 주기
 $("#v-phr").addEventListener("change", (e) => {
   if (e.target.id === "phMode") phr.mode = e.target.value;
   if (e.target.id === "phGrp") phr.grp = e.target.value;
   if (e.target.id === "phLoop") phr.loop = e.target.checked;
+  if (e.target.id === "phSecs") phr.secs = +e.target.value;
+  if (e.target.id === "phSet") {
+    stopAll();
+    phr.tok = -1;
+    phr.kind = "";
+    phr.act = +e.target.value;
+    phrSave();
+    phrTray();
+    const sg = $("#phStage");
+    if (sg) sg.innerHTML = "";
+  }
   if (e.target.id === "phHide") {
     phr.hide = e.target.checked;
     phr.open.clear();
@@ -1474,6 +1623,76 @@ $("#v-phr").addEventListener("change", (e) => {
   }
 });
 $("#v-phr").addEventListener("click", (e) => {
+  const ad = e.target.closest("[data-phadd]");
+  if (ad) {
+    const id = ad.dataset.phadd,
+      k = phr.sel.indexOf(id);
+    if (k >= 0) phr.sel.splice(k, 1);
+    else phr.sel.push(id);
+    phrSave();
+    phrTray();
+    return;
+  }
+  const mv = e.target.closest("[data-phmv]");
+  if (mv) {
+    const [n, d] = mv.dataset.phmv.split(",").map(Number);
+    if (phr.sel[n + d] !== undefined) {
+      [phr.sel[n], phr.sel[n + d]] = [phr.sel[n + d], phr.sel[n]];
+      phrSave();
+      phrTray();
+    }
+    return;
+  }
+  const rm = e.target.closest("[data-phrm]");
+  if (rm) {
+    phr.sel.splice(+rm.dataset.phrm, 1);
+    phrSave();
+    phrTray();
+    return;
+  }
+  if (e.target.closest("#phSNew")) {
+    const nm = prompt("새 세트 이름", "세트 " + (phr.sets.length + 1));
+    if (nm && nm.trim()) {
+      phr.sets.push({ name: nm.trim().slice(0, 30), sel: [] });
+      phr.act = phr.sets.length - 1;
+      phrSave();
+      phrTray();
+    }
+    return;
+  }
+  if (e.target.closest("#phSRen")) {
+    const nm = prompt("세트 이름 바꾸기", phr.sets[phr.act].name);
+    if (nm && nm.trim()) {
+      phr.sets[phr.act].name = nm.trim().slice(0, 30);
+      phrSave();
+      phrTray();
+    }
+    return;
+  }
+  if (e.target.closest("#phSDel")) {
+    if (phr.sets.length > 1 && confirm('"' + phr.sets[phr.act].name + '" 세트를 삭제할까요?')) {
+      phr.sets.splice(phr.act, 1);
+      phr.act = Math.max(0, phr.act - 1);
+      phrSave();
+      phrTray();
+    }
+    return;
+  }
+  if (e.target.closest("#phSClr")) {
+    phr.sel = [];
+    phrSave();
+    phrTray();
+    return;
+  }
+  if (e.target.closest("#phSGo")) {
+    if (phrScriptRunning()) {
+      stopAll();
+      phr.tok = -1;
+      phr.kind = "";
+      phrTray();
+    } else if (phr.sel.length) phrScriptRun();
+    return;
+  }
   if (e.target.closest("#phPlay")) {
     if (phrRunning()) {
       stopAll();
@@ -1488,7 +1707,7 @@ $("#v-phr").addEventListener("click", (e) => {
     const it = PHRASES[g].items[i];
     stopAll();
     ++token;
-    say(it.en + ". " + it.ex[0]);
+    say(phrClean(it.en) + ". " + it.ex[0]);
     return;
   }
   const c = e.target.closest("[data-ph]");
