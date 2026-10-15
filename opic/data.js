@@ -4813,4 +4813,224 @@ const PHRASES = [
       },
     ],
   },
+  {
+    grp: "시작어 · I …",
+    items: [
+      {
+        en: "I found",
+        ko: "~을 발견했어요, ~을 알게 됐어요",
+        ex: ["I found a nice cafe near my office.", "회사 근처에서 좋은 카페를 발견했어요."],
+      },
+      {
+        en: "I realized",
+        ko: "~을 깨달았어요",
+        ex: ["I realized I left my wallet at home.", "지갑을 집에 두고 온 걸 깨달았어요."],
+      },
+      {
+        en: "I called",
+        ko: "~에게 전화했어요",
+        ex: ["I called the hotel right away.", "바로 호텔에 전화했어요."],
+      },
+      {
+        en: "I asked",
+        ko: "~에게 물어봤어요, 요청했어요",
+        ex: ["I asked for a new room.", "새 방을 요청했어요."],
+      },
+      {
+        en: "I felt",
+        ko: "~하게 느꼈어요",
+        ex: ["I felt really nervous.", "정말 긴장됐어요."],
+      },
+      {
+        en: "I think",
+        ko: "~라고 생각해요",
+        ex: ["I think it was a good choice.", "좋은 선택이었다고 생각해요."],
+      },
+      {
+        en: "I love",
+        ko: "~을 아주 좋아해요",
+        ex: ["I love walking in the park.", "공원 걷는 걸 아주 좋아해요."],
+      },
+      {
+        en: "I started",
+        ko: "~을 시작했어요",
+        ex: ["I started exercising last month.", "지난달부터 운동을 시작했어요."],
+      },
+      {
+        en: "I decided",
+        ko: "~하기로 했어요",
+        ex: ["I decided to take a day off.", "하루 쉬기로 했어요."],
+      },
+      {
+        en: "I remember",
+        ko: "~이 기억나요",
+        ex: ["I remember a bar near my house.", "집 근처 바가 기억나요."],
+      },
+      {
+        en: "I used to",
+        ko: "예전에는 ~하곤 했어요",
+        ex: ["I used to play outside every day.", "예전에는 매일 밖에서 놀곤 했어요."],
+      },
+      {
+        en: "I live",
+        ko: "~에 살아요",
+        ex: ["I live alone in an apartment.", "아파트에서 혼자 살아요."],
+      },
+      {
+        en: "I work",
+        ko: "~에서 일해요",
+        ex: ["I work in Yeouido.", "여의도에서 일해요."],
+      },
+      {
+        en: "I met",
+        ko: "~를 만났어요",
+        ex: ["I met my friends at the station.", "역에서 친구들을 만났어요."],
+      },
+      {
+        en: "I bought",
+        ko: "~을 샀어요",
+        ex: ["I bought a gift for my friend.", "친구에게 줄 선물을 샀어요."],
+      },
+    ],
+  },
+  {
+    grp: "시작어 · There / It / We / My",
+    items: [
+      {
+        en: "There was",
+        ko: "~가 있었어요",
+        ex: ["There was a small park near my old house.", "옛집 근처에 작은 공원이 있었어요."],
+      },
+      {
+        en: "There are",
+        ko: "~가 있어요 (여러 개)",
+        ex: ["There are many cafes around here.", "이 근처에는 카페가 많아요."],
+      },
+      {
+        en: "It looked",
+        ko: "~해 보였어요",
+        ex: ["It looked fancy.", "고급스러워 보였어요."],
+      },
+      {
+        en: "It's about",
+        ko: "~쯤이에요 (거리·시간)",
+        ex: ["It's about ten minutes away.", "10분쯤 거리예요."],
+      },
+      {
+        en: "It made me",
+        ko: "~하게 만들었어요",
+        ex: ["It made me really happy.", "정말 행복하게 해 줬어요."],
+      },
+      {
+        en: "It happened",
+        ko: "~한 일이 있었어요",
+        ex: ["It happened two years ago.", "2년 전에 있었던 일이에요."],
+      },
+      {
+        en: "We usually",
+        ko: "우리는 보통 ~해요",
+        ex: ["We usually meet once a month.", "우리는 보통 한 달에 한 번 만나요."],
+      },
+      {
+        en: "My favorite",
+        ko: "제가 가장 좋아하는 ~는",
+        ex: ["My favorite room is the living room.", "제일 좋아하는 방은 거실이에요."],
+      },
+      {
+        en: "My friend",
+        ko: "제 친구가 ~",
+        ex: ["My friend invited me to a party.", "친구가 파티에 초대했어요."],
+      },
+      {
+        en: "Now I",
+        ko: "지금은 ~해요",
+        ex: ["Now I usually stay at home.", "지금은 보통 집에 있어요."],
+      },
+    ],
+  },
+  {
+    grp: "시작어 · 이야기 이어가기",
+    items: [
+      {
+        en: "Recently,",
+        ko: "최근에",
+        ex: ["Recently, I went to a concert.", "최근에 콘서트에 갔어요."],
+      },
+      {
+        en: "One day,",
+        ko: "어느 날",
+        ex: ["One day, it suddenly started raining.", "어느 날 갑자기 비가 오기 시작했어요."],
+      },
+      {
+        en: "Last year,",
+        ko: "작년에",
+        ex: ["Last year, I traveled to Jeju Island.", "작년에 제주도로 여행을 갔어요."],
+      },
+      {
+        en: "When I was young,",
+        ko: "어릴 때",
+        ex: ["When I was young, I loved sweets.", "어릴 때 단 걸 좋아했어요."],
+      },
+      {
+        en: "In the end,",
+        ko: "결국",
+        ex: ["In the end, everything turned out fine.", "결국 모든 게 잘 해결됐어요."],
+      },
+      {
+        en: "Also,",
+        ko: "또한",
+        ex: ["Also, it was very cheap.", "또한 아주 쌌어요."],
+      },
+      {
+        en: "Because of that,",
+        ko: "그 때문에",
+        ex: ["Because of that, I was late.", "그 때문에 늦었어요."],
+      },
+      {
+        en: "For example,",
+        ko: "예를 들면",
+        ex: ["For example, I go hiking on weekends.", "예를 들면 주말에 등산을 가요."],
+      },
+      {
+        en: "Actually,",
+        ko: "사실은",
+        ex: ["Actually, I don't go there often.", "사실 그곳에 자주 가진 않아요."],
+      },
+      {
+        en: "Overall,",
+        ko: "전체적으로",
+        ex: ["Overall, it was a great experience.", "전체적으로 좋은 경험이었어요."],
+      },
+    ],
+  },
+  {
+    grp: "시작어 · 롤플레이·질문",
+    items: [
+      {
+        en: "Can I",
+        ko: "~해도 될까요?",
+        ex: ["Can I change my reservation?", "예약을 변경해도 될까요?"],
+      },
+      {
+        en: "Do you have",
+        ko: "~있나요?",
+        ex: ["Do you have any rooms left?", "남은 방이 있나요?"],
+      },
+      {
+        en: "Would you",
+        ko: "~해 주시겠어요? ~할래?",
+        ex: ["Would you like to meet earlier?", "더 일찍 만날래?"],
+      },
+      {
+        en: "Excuse me,",
+        ko: "실례합니다",
+        ex: ["Excuse me, I have a problem.", "실례합니다, 문제가 있어요."],
+      },
+      {
+        en: "I was wondering",
+        ko: "~인지 궁금해서요",
+        ex: ["I was wondering if I can cancel.", "취소할 수 있는지 궁금해서요."],
+      },
+    ],
+  },
 ];
