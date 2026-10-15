@@ -3779,3 +3779,1038 @@ SKELS.push(
     },
   ],
 );
+
+// 2026-10-15 실전 모의시험 복기: 그때 나온 15문제와 내 이야기 기반 모범답안
+const REPLAY = {
+  name: "10/15 모의시험 복기",
+  qs: [
+    {
+      kind: "자기소개",
+      t: "1 자기소개",
+      tag: "복기",
+      q: [
+        "Let's start the interview. Tell me a little about yourself.",
+        "인터뷰를 시작하겠습니다. 자기소개를 해 주세요.",
+      ],
+      s: [
+        [
+          "Hello, my name is {Hyun-gi}. It's nice to meet you.",
+          "안녕하세요, 제 이름은 현기예요. 만나서 반갑습니다.",
+          "인사",
+        ],
+        [
+          "I'm a software developer, and I've been working in {the IT field for about eight years}.",
+          "저는 소프트웨어 개발자이고 IT 분야에서 약 8년째 일하고 있어요.",
+          "직업",
+        ],
+        [
+          "I work in {Yeouido}, and I mostly {develop and maintain systems for clients}.",
+          "여의도에서 일하고, 주로 고객사의 시스템을 개발하고 유지보수해요.",
+          "하는 일",
+        ],
+        [
+          "In my free time, I enjoy {playing online games} at home and {meeting my friends}.",
+          "여가 시간에는 집에서 온라인 게임을 하고 친구들을 만나는 걸 즐겨요.",
+          "취미",
+        ],
+        [
+          "I live alone in {an apartment in Seoul}.",
+          "저는 서울의 아파트에서 혼자 살아요.",
+          "사는 곳",
+        ],
+        [
+          "I'm taking this test because {my company wants me to reach a certain grade}, so I'll do my best.",
+          "회사가 요구하는 등급이 있어서 이 시험을 보게 됐고, 최선을 다할게요.",
+          "시험 이유",
+        ],
+      ],
+    },
+    {
+      kind: "약속 · 습관",
+      t: "2 약속 습관",
+      tag: "복기",
+      q: [
+        "What kind of appointments do you usually make? Who do you make appointments with and how do you make them?",
+        "주로 어떤 약속을 잡나요? 누구와, 어떻게 약속을 잡나요?",
+      ],
+      s: [
+        [
+          "I usually make appointments with {my close friends}, and we meet {about once a month}.",
+          "저는 주로 친한 친구들과 약속을 잡고, 한 달에 한 번쯤 만나요.",
+          "누구와",
+        ],
+        [
+          "We make plans through {a group chat on our phones}, and we decide the date and place together.",
+          "휴대폰 단체 채팅방으로 약속을 잡고, 날짜와 장소를 함께 정해요.",
+          "방법",
+        ],
+        [
+          "We often go to {a restaurant} and {have some soju and food}.",
+          "우리는 자주 식당에 가서 소주와 음식을 먹어요.",
+          "활동",
+        ],
+        [
+          "While we eat, we talk about {our jobs, our future, and our favorite food}.",
+          "먹으면서 일, 미래, 좋아하는 음식에 대해 이야기해요.",
+          "대화",
+        ],
+        [
+          "Sometimes it's hard to find a time because {everyone is busy}, but I always try to make it.",
+          "다들 바빠서 시간을 맞추기 어려울 때도 있지만, 저는 항상 가려고 노력해요.",
+          "어려움",
+        ],
+        [
+          "I enjoy these appointments because {they help me relax after work}.",
+          "이런 약속은 일하고 나서 쉬게 해 줘서 좋아요.",
+          "마무리",
+        ],
+      ],
+    },
+    {
+      kind: "약속 · 어린 시절",
+      t: "3 어릴 적 병원",
+      tag: "복기",
+      q: [
+        "Tell me about an appointment you had when you were a child. What was the appointment for? Was it with a doctor or a dentist? How did it go?",
+        "어린 시절 있었던 약속(예약)에 대해 말해 주세요. 무엇 때문이었나요? 의사나 치과였나요? 어떻게 진행됐나요?",
+      ],
+      s: [
+        [
+          "When I was young, I had an appointment at {the dental clinic} because {I had a toothache}.",
+          "어릴 때 치통 때문에 치과 예약이 있었어요.",
+          "배경",
+        ],
+        [
+          "I loved sweets, so {I ate a lot of candy and cake}, and that made my teeth bad.",
+          "단 걸 좋아해서 사탕과 케이크를 많이 먹었고, 그래서 이가 나빠졌어요.",
+          "원인",
+        ],
+        [
+          "My mother took me there, and I was {very scared}.",
+          "어머니가 데려가 주셨고, 저는 많이 무서웠어요.",
+          "감정",
+        ],
+        [
+          "The dentist {checked my teeth and treated a cavity}, and it was {a little painful}.",
+          "치과 의사 선생님이 이를 살펴보고 충치를 치료했는데 조금 아팠어요.",
+          "진행",
+        ],
+        [
+          "After that, the dentist told me to {brush my teeth carefully and eat fewer sweets}.",
+          "그 후 선생님은 이를 꼼꼼히 닦고 단 걸 줄이라고 했어요.",
+          "결과",
+        ],
+        [
+          "Since then, I've been careful about my teeth, and I go to the dentist regularly.",
+          "그 뒤로 이를 조심하고 정기적으로 치과에 가요.",
+          "마무리",
+        ],
+      ],
+    },
+    {
+      kind: "약속 · 기억에 남는 경험",
+      t: "4 기억에 남는 약속",
+      tag: "복기",
+      q: [
+        "Tell me about a memorable experience you had during an appointment. Was it unexpected? What happened and how did you deal with the situation?",
+        "약속 중에 있었던 기억에 남는 경험을 말해 주세요. 예상 밖의 일이었나요? 무슨 일이 있었고 어떻게 대처했나요?",
+      ],
+      s: [
+        [
+          "One of my most memorable experiences during an appointment happened {two years ago}.",
+          "약속 중 가장 기억에 남는 경험은 2년 전에 있었어요.",
+          "도입",
+        ],
+        [
+          "I had dinner with {my friends} at {a restaurant}, and after that I went home.",
+          "친구들과 식당에서 저녁을 먹고 집에 갔어요.",
+          "상황",
+        ],
+        [
+          "When I got home, I realized that {I had left my wallet at the restaurant}.",
+          "집에 도착해서 식당에 지갑을 두고 온 걸 알았어요.",
+          "문제",
+        ],
+        [
+          "I was very embarrassed and stressed because {my cards and ID were in it}.",
+          "카드와 신분증이 들어 있어서 매우 당황하고 스트레스를 받았어요.",
+          "감정",
+        ],
+        [
+          "So I immediately {went back to the restaurant}, and luckily {the staff had kept my wallet}.",
+          "그래서 바로 식당으로 돌아갔고, 다행히 직원이 지갑을 보관하고 있었어요.",
+          "해결",
+        ],
+        [
+          "I was so relieved, and I learned to {always check my belongings before leaving}.",
+          "정말 안도했고, 나갈 때 소지품을 꼭 확인하는 법을 배웠어요.",
+          "교훈",
+        ],
+      ],
+    },
+    {
+      kind: "집 · 방 묘사",
+      t: "5 집 · 방",
+      tag: "복기",
+      q: [
+        "I'd like to know about where you live. Tell me about the different rooms in your home. What's your favorite room? Describe it in detail.",
+        "사는 곳에 대해 알고 싶어요. 집의 여러 방에 대해 말해 주세요. 가장 좋아하는 방은 어디인가요? 자세히 묘사해 주세요.",
+      ],
+      s: [
+        [
+          "I live alone in {an apartment on the fifth floor}.",
+          "저는 5층 아파트에서 혼자 살아요.",
+          "집",
+        ],
+        [
+          "My home has {a living room, a bedroom, a kitchen, and a small balcony}.",
+          "집에는 거실, 침실, 주방, 작은 발코니가 있어요.",
+          "방 구성",
+        ],
+        [
+          "My favorite room is {the living room}, because I spend most of my time there.",
+          "가장 좋아하는 방은 거실인데, 대부분의 시간을 거기서 보내기 때문이에요.",
+          "좋아하는 방",
+        ],
+        [
+          "There's {a big TV and my computer}, and I enjoy {playing online games} there.",
+          "큰 TV와 컴퓨터가 있고, 거기서 온라인 게임을 즐겨요.",
+          "물건 · 활동",
+        ],
+        [
+          "It's {clean, cozy, and comfortable}, so I can relax after work.",
+          "깨끗하고 아늑하고 편안해서 퇴근 후에 쉴 수 있어요.",
+          "분위기",
+        ],
+        [
+          "That's why the living room is my favorite place in my home.",
+          "그래서 거실이 우리 집에서 제일 좋아하는 곳이에요.",
+          "마무리",
+        ],
+      ],
+    },
+    {
+      kind: "집 · 어린 시절",
+      t: "6 자란 집",
+      tag: "복기",
+      q: [
+        "Tell me about the house or apartment where you grew up. What did your home and the surrounding area look like when you were young, and how has it changed?",
+        "자란 집이나 아파트에 대해 말해 주세요. 어렸을 때 집과 주변은 어땠고 어떻게 변했나요?",
+      ],
+      s: [
+        [
+          "I grew up in {an apartment}, and it was {bigger than my current home}.",
+          "저는 아파트에서 자랐고, 지금 집보다 더 컸어요.",
+          "집",
+        ],
+        [
+          "There was {a small park} near my old house, and I often {walked around it}.",
+          "옛집 근처에 작은 공원이 있었고, 자주 그 주변을 걸었어요.",
+          "주변",
+        ],
+        [
+          "I used to meet my friends there and {play after school}.",
+          "거기서 친구들을 만나 방과 후에 놀곤 했어요.",
+          "추억",
+        ],
+        ["The neighborhood was {quiet and friendly}.", "동네는 조용하고 정겨웠어요.", "분위기"],
+        [
+          "Now it has changed a lot, and there are {more buildings and shops}.",
+          "지금은 많이 변해서 건물과 가게가 더 많아졌어요.",
+          "변화",
+        ],
+        [
+          "I don't remember everything, but I still miss that place.",
+          "전부 기억나진 않지만 그곳이 여전히 그리워요.",
+          "마무리",
+        ],
+      ],
+    },
+    {
+      kind: "집 · 가족 추억",
+      t: "7 가족 추억",
+      tag: "복기",
+      q: [
+        "Tell me about a special family memory that occurred at home. It could be something funny, surprising, or important. Describe a particular day or moment that stands out in your memory.",
+        "집에서 있었던 특별한 가족 추억을 말해 주세요. 재미있거나 놀랍거나 중요한 일일 수 있어요. 기억에 남는 특정한 날이나 순간을 묘사해 주세요.",
+      ],
+      s: [
+        [
+          "My special family memory is {cooking together with my family}.",
+          "제 특별한 가족 추억은 가족과 함께 요리한 거예요.",
+          "도입",
+        ],
+        [
+          "My family loves cooking, so we often made {kimchi stew, bulgogi, and spaghetti} together.",
+          "가족이 요리를 좋아해서 김치찌개, 불고기, 스파게티를 자주 같이 만들었어요.",
+          "메뉴",
+        ],
+        [
+          "I remember one day when {we all made dinner in the kitchen}, and {we laughed a lot}.",
+          "온 가족이 주방에서 저녁을 만들며 많이 웃었던 어느 날이 기억나요.",
+          "특정한 날",
+        ],
+        [
+          "My mother has {great recipes}, and she always cooked delicious food for me.",
+          "어머니는 훌륭한 레시피가 있고 항상 맛있는 음식을 해 주셨어요.",
+          "어머니",
+        ],
+        [
+          "Now I live alone, so I often miss {my mother's cooking}.",
+          "지금은 혼자 살아서 어머니 음식이 자주 그리워요.",
+          "현재",
+        ],
+        [
+          "That's why I visit my old house and {eat her food} whenever I can.",
+          "그래서 시간이 될 때마다 본가에 가서 어머니 음식을 먹어요.",
+          "마무리",
+        ],
+      ],
+    },
+    {
+      kind: "술집 · 묘사",
+      t: "8 바 · 음료 만드는 곳",
+      tag: "복기",
+      q: [
+        "Most bars and pubs have a special area to make drinks. Tell me what this area looks like in your favorite bar or pub.",
+        "대부분의 바와 펍에는 음료를 만드는 특별한 공간이 있어요. 가장 좋아하는 바나 펍에서 그 공간이 어떻게 생겼는지 말해 주세요.",
+      ],
+      s: [
+        [
+          "I don't go to bars very often, but I'll describe the one I know best.",
+          "바에 자주 가진 않지만, 가장 잘 아는 곳을 설명해 볼게요.",
+          "도입",
+        ],
+        [
+          "The drink area is {a long counter} where the bartender makes drinks.",
+          "음료 공간은 바텐더가 음료를 만드는 긴 카운터예요.",
+          "공간",
+        ],
+        [
+          "Behind the counter, there are {shelves full of bottles} under {warm lights}.",
+          "카운터 뒤에는 따뜻한 조명 아래 병이 가득한 선반이 있어요.",
+          "뒤쪽",
+        ],
+        [
+          "The bartender {shakes cocktails}, and the tools like {shakers and glasses} are neatly arranged.",
+          "바텐더가 칵테일을 흔들어 만들고, 셰이커와 잔 같은 도구가 깔끔하게 놓여 있어요.",
+          "도구",
+        ],
+        [
+          "In front of the counter, there are {high stools}, so you can watch the bartender.",
+          "카운터 앞에는 높은 의자가 있어서 바텐더를 구경할 수 있어요.",
+          "좌석",
+        ],
+        [
+          "It has {a cozy and relaxed atmosphere}, so I like sitting there.",
+          "아늑하고 편안한 분위기라서 거기 앉는 걸 좋아해요.",
+          "마무리",
+        ],
+      ],
+    },
+    {
+      kind: "술집 · 기억",
+      t: "9 기억나는 바",
+      tag: "복기",
+      q: [
+        "Tell me about one bar you remember going to. What did it look like? Give me as many details as you can.",
+        "가 본 바 하나에 대해 말해 주세요. 어떻게 생겼나요? 최대한 자세히 말해 주세요.",
+      ],
+      s: [
+        [
+          "I remember {a bar near my house} that I visited {a few years ago}.",
+          "몇 년 전에 갔던 집 근처 바가 기억나요.",
+          "도입",
+        ],
+        [
+          "It looked {fancy}, with {dark wood furniture and soft lighting}.",
+          "어두운 원목 가구와 은은한 조명이 있어 고급스러워 보였어요.",
+          "외관",
+        ],
+        [
+          "The menu had {many expensive drinks}, but I usually only drink soju.",
+          "메뉴에는 비싼 술이 많았지만 저는 보통 소주만 마셔요.",
+          "메뉴",
+        ],
+        [
+          "So I told the bartender, and he made me {a cocktail with soju}.",
+          "그래서 바텐더에게 말했더니 소주로 칵테일을 만들어 줬어요.",
+          "사건",
+        ],
+        [
+          "It was my first cocktail, and it was {surprisingly delicious}.",
+          "처음 마신 칵테일이었는데 놀랄 만큼 맛있었어요.",
+          "느낌",
+        ],
+        [
+          "That was a good memory, and now I enjoy trying new drinks.",
+          "좋은 기억이었고, 지금은 새로운 술을 마셔 보는 걸 즐겨요.",
+          "마무리",
+        ],
+      ],
+    },
+    {
+      kind: "술집 · 특별한 방문",
+      t: "10 특별한 바 방문",
+      tag: "복기",
+      q: [
+        "Tell me about a special visit to a bar or pub. Maybe you celebrated your birthday there or a friend's birthday. Tell me what you did before and after your bar visit and how you spent your time at the bar. Tell me the whole story.",
+        "바나 펍에 특별히 방문한 경험을 말해 주세요. 생일 파티일 수도 있어요. 방문 전후에 무엇을 했고 바에서 어떻게 시간을 보냈는지 전체 이야기를 해 주세요.",
+      ],
+      s: [
+        [
+          "A special visit I remember was {a friend's birthday party} at {a pub}.",
+          "기억나는 특별한 방문은 친구 생일 파티로 간 펍이에요.",
+          "도입",
+        ],
+        [
+          "Before the party, I {bought a gift and met other friends at the station}.",
+          "파티 전에 선물을 사고 역에서 다른 친구들을 만났어요.",
+          "방문 전",
+        ],
+        [
+          "At the pub, we {ordered food and drinks and sang happy birthday}.",
+          "펍에서 음식과 술을 시키고 생일 축하 노래를 불렀어요.",
+          "바에서",
+        ],
+        [
+          "We talked about {our jobs and old memories} for hours.",
+          "일과 옛 추억에 대해 몇 시간 동안 이야기했어요.",
+          "대화",
+        ],
+        [
+          "After that, we {took a group photo and went home by taxi}.",
+          "그 후 단체 사진을 찍고 택시로 집에 갔어요.",
+          "방문 후",
+        ],
+        [
+          "It was a fun night, and my friend was really happy.",
+          "즐거운 밤이었고 친구도 정말 기뻐했어요.",
+          "마무리",
+        ],
+      ],
+    },
+    {
+      kind: "롤플레이 11",
+      t: "11 영화관에 질문",
+      tag: "복기",
+      q: [
+        "I would like to give you a situation and ask you to act it out. You want to watch a movie with your friends. Call a theater and ask three or four questions about the movie tickets.",
+        "상황을 연기해 주세요. 친구들과 영화를 보려고 합니다. 영화관에 전화해서 영화표에 대해 세네 가지 질문을 하세요.",
+      ],
+      s: [
+        [
+          "Hello, I'm calling to ask about {buying movie tickets}.",
+          "안녕하세요, 영화표 구매에 대해 문의하려고 전화했어요.",
+          "도입",
+        ],
+        [
+          "What movies are showing {this weekend}, and what time do they start?",
+          "이번 주말에 어떤 영화를 상영하고, 몇 시에 시작하나요?",
+          "상영 정보",
+        ],
+        [
+          "How much are the tickets? Is there {a discount for members}?",
+          "표는 얼마인가요? 회원 할인이 있나요?",
+          "가격 · 할인",
+        ],
+        [
+          "Are there seats available for {Saturday evening}? I'd like {two seats together}.",
+          "토요일 저녁에 자리가 있나요? 두 자리가 붙어 있으면 좋겠어요.",
+          "좌석",
+        ],
+        [
+          "Can I reserve them by phone or online?",
+          "전화나 온라인으로 예매할 수 있나요?",
+          "예매 방법",
+        ],
+        [
+          "Thank you for your help. Have a nice day!",
+          "도와주셔서 감사합니다. 좋은 하루 보내세요!",
+          "마무리",
+        ],
+      ],
+    },
+    {
+      kind: "롤플레이 12",
+      t: "12 잘못된 표",
+      tag: "복기",
+      q: [
+        "I'm sorry, but there is a problem I want you to resolve. You just found out you've been sold the wrong tickets. Ask someone at the movie theater for a solution, giving him or her two or three alternatives.",
+        "문제가 생겼습니다. 잘못된 표를 팔았다는 걸 방금 알았습니다. 영화관 직원에게 해결책을 요청하며 대안 두세 가지를 제시하세요.",
+      ],
+      s: [
+        [
+          "Excuse me, I have a problem. I bought {these tickets} {two hours ago}, but they're for the wrong movie.",
+          "실례합니다, 문제가 있어요. 두 시간 전에 이 표를 샀는데 다른 영화 표예요.",
+          "문제 설명",
+        ],
+        [
+          "I wanted to see {the sci-fi movie}, but these are for {a different one}.",
+          "저는 SF 영화를 보고 싶었는데 이건 다른 영화예요.",
+          "상세",
+        ],
+        [
+          "I have a few suggestions. First, could you exchange them for the right movie?",
+          "제안이 몇 가지 있어요. 첫째, 맞는 영화로 교환해 주시겠어요?",
+          "대안 1",
+        ],
+        [
+          "Second, if that's not possible, could I change to a different showtime?",
+          "둘째, 그게 안 되면 다른 시간대로 바꿀 수 있을까요?",
+          "대안 2",
+        ],
+        [
+          "Third, if neither works, could I get a refund and buy new tickets?",
+          "셋째, 둘 다 안 되면 환불받고 새 표를 살 수 있을까요?",
+          "대안 3",
+        ],
+        [
+          "I'd really appreciate your help. Thank you so much.",
+          "도와주시면 정말 감사하겠습니다. 고맙습니다.",
+          "마무리",
+        ],
+      ],
+    },
+    {
+      kind: "롤플레이 13",
+      t: "13 비슷한 경험 (예약 문제)",
+      tag: "복기",
+      q: [
+        "Have you ever been in a situation where you had a problem with buying tickets or making reservations? What was the situation and how did you solve the problem?",
+        "표를 사거나 예약할 때 문제가 생긴 적이 있나요? 어떤 상황이었고 어떻게 해결했나요?",
+      ],
+      s: [
+        [
+          "Two years ago, I had a problem when I booked a hotel in {Seogwipo, Jeju Island}.",
+          "2년 전 제주도 서귀포의 호텔을 예약할 때 문제가 있었어요.",
+          "도입",
+        ],
+        [
+          "I reserved the room for {the wrong date}, and I only noticed after I booked it.",
+          "날짜를 잘못 예약했고, 예약하고 나서야 알았어요.",
+          "문제",
+        ],
+        [
+          "I was worried, so I called the hotel and {asked to change my reservation}.",
+          "걱정돼서 호텔에 전화해 예약 변경을 요청했어요.",
+          "행동",
+        ],
+        [
+          "Luckily, they had {one room left} for the right day, so I booked it again.",
+          "다행히 맞는 날짜에 방이 하나 남아 있어서 다시 예약했어요.",
+          "해결",
+        ],
+        [
+          "It was a big relief, and the trip went well.",
+          "정말 안도했고 여행도 잘 다녀왔어요.",
+          "결과",
+        ],
+        [
+          "Since then, I always {double-check the date before I confirm a reservation}.",
+          "그 뒤로는 예약을 확정하기 전에 항상 날짜를 다시 확인해요.",
+          "교훈",
+        ],
+      ],
+    },
+    {
+      kind: "이슈 · 인접 국가의 변화",
+      t: "14 이웃 나라의 변화",
+      tag: "복기",
+      q: [
+        "Think about a country that is geographically close to your home country. In what ways has this country changed over the years? Has there been changes in its economy, politics, etc.? Describe this country and its changes in detail.",
+        "한국과 지리적으로 가까운 나라를 떠올려 보세요. 이 나라는 수년간 어떻게 변했나요? 경제, 정치 등에 변화가 있었나요? 그 나라와 변화를 자세히 말해 주세요.",
+      ],
+      s: [
+        ["A country close to Korea is {Japan}.", "한국과 가까운 나라는 일본이에요.", "도입"],
+        [
+          "When I was young, I felt that {Japan had a strong economy}, and it seemed {clean and polite}.",
+          "어렸을 때 일본은 경제가 강하고 깨끗하고 예의 바른 나라로 보였어요.",
+          "예전",
+        ],
+        [
+          "In recent years, I've heard that {its economy has slowed down and the yen has been weak}.",
+          "최근에는 경제가 둔화하고 엔화가 약세라고 들었어요.",
+          "경제 변화",
+        ],
+        [
+          "At the same time, {many Koreans travel to Japan}, because {it has become cheaper to visit}.",
+          "동시에 방문하기 저렴해져서 많은 한국인이 일본을 여행해요.",
+          "영향",
+        ],
+        [
+          "I also see {more cultural exchange}, such as {music, food, and games}.",
+          "음악, 음식, 게임 같은 문화 교류도 더 늘었어요.",
+          "문화",
+        ],
+        [
+          "Overall, both countries have changed, and I hope we keep a good relationship.",
+          "전반적으로 두 나라 모두 변했고, 좋은 관계가 이어지길 바라요.",
+          "마무리",
+        ],
+      ],
+    },
+    {
+      kind: "이슈 · 뉴스",
+      t: "15 인접 국가 뉴스",
+      tag: "복기",
+      q: [
+        "Tell me in detail about a news item you read or heard recently about a country near your country. What was the news story about? Tell me as much as you can about this report. Explain why the story is important.",
+        "최근 읽거나 들은 이웃 나라 뉴스를 자세히 말해 주세요. 어떤 내용이었나요? 보도 내용을 최대한 말하고, 왜 중요한지 설명해 주세요.",
+      ],
+      s: [
+        [
+          "Recently, I read a news story about {the exchange rate between Korea and Japan}.",
+          "최근 한국과 일본의 환율에 대한 뉴스를 읽었어요.",
+          "도입",
+        ],
+        [
+          "The report said that {the Japanese yen is weak compared to the Korean won}.",
+          "보도는 엔화가 원화에 비해 약하다고 했어요.",
+          "내용",
+        ],
+        [
+          "Because of that, {more Korean tourists visit Japan}, and {prices feel cheaper to them}.",
+          "그 때문에 일본을 찾는 한국인 관광객이 늘고 물가가 싸게 느껴진다고 해요.",
+          "영향",
+        ],
+        [
+          "It's important because {it affects the economy, travel, and shopping of both countries}.",
+          "두 나라의 경제, 여행, 쇼핑에 영향을 주기 때문에 중요해요.",
+          "중요한 이유",
+        ],
+        [
+          "It also shows that {a country's economy changes over time}.",
+          "또한 한 나라의 경제가 시간이 지나며 바뀐다는 걸 보여 줘요.",
+          "의미",
+        ],
+        [
+          "I think it's good to keep up with this kind of news, so I plan to follow it.",
+          "이런 뉴스를 계속 챙겨 보는 게 좋다고 생각해서 앞으로도 따라가 볼 생각이에요.",
+          "마무리",
+        ],
+      ],
+    },
+  ],
+};
+// 복기 문제의 분류: 1 자기소개(서베이 묶음), 2~4 약속(돌발), 5~10 집·바(서베이), 11~13 롤플레이, 14~15 이슈(돌발)
+REPLAY.qs.forEach((q, i) => {
+  q.cat = i < 1 ? "survey" : i < 4 ? "surprise" : i < 10 ? "survey" : i < 13 ? "rp" : "surprise";
+});
+/* 저장된 모의시험 세트 목록. 새 시험을 복기할 때마다 아래 배열에 세트를 추가하면
+   모의고사 화면에 버튼이 자동으로 생긴다.
+   세트 형식: {name, note?, qs:[{kind 문제 종류, t 제목, tag, q:[영어, 한글], s:[[영어({}=내 이야기), 한글, 키워드]], cat:'survey'|'surprise'|'rp'}]} */
+const MOCK_SETS = [REPLAY];
+
+/* 발화 노트(날짜별 복기 기록). 시험 후 평가를 여기에 추가하면 모의고사 화면의 발화 노트에 나타난다.
+   형식: {date, title, set(MOCK_SETS 인덱스), grade 예상 등급, summary, good:[], problems:[{q 문제, cat, issue 문제점, fix 고칠 점}], actions:[우선순위 할 일]} */
+const MOCK_REVIEWS = [
+  {
+    date: "2026-10-15",
+    title: "첫 모의시험 (15문제)",
+    set: 0,
+    grade: "IL 후반 ~ IM1 (목표 IM2에는 아직)",
+    summary:
+      "내용은 있는데 전달 방식에서 점수가 깎임. 과제 미수행, 짧고 끊기는 문장, 시제 혼용, 약한 연결과 구성이 핵심. 녹취록 기준 평가라 발음·억양·침묵은 반영되지 않음.",
+    good: [
+      "경험 이야기가 있음: 지갑 분실(Q4), 제주 호텔 예약 실수(Q13), 어머니 음식(Q7)은 상황→문제→해결이 이어짐",
+      "어려운 질문에도 끝까지 이어 가려 함. 12번에서 교환·환불·시간 변경 같은 대안을 냄",
+      "집 묘사(Q5)는 방 구조와 좋아하는 이유까지 나옴",
+    ],
+    problems: [
+      {
+        q: "Q11 롤플레이",
+        cat: "롤플레이",
+        issue:
+          "영화관에 전화해 질문하는 역할인데 친구에게 영화를 보자고 초대함. 표에 대한 질문이 0개",
+        fix: "Hello, I'm calling to ask about... 로 시작해 상영 시간·가격·좌석·예매 방법을 묻기 (롤플레이 > 업체에 질문 M, 질문 3~4개 뽑기)",
+      },
+      {
+        q: "Q12 롤플레이",
+        cat: "롤플레이",
+        issue: "문제 설명 후 대안이 First/Second/Third로 구분되지 않고 같은 말을 반복",
+        fix: "문제 한 줄 → 대안 1·2·3을 번호 붙여 말하기 (롤플레이 > 업체에 전화 I)",
+      },
+      {
+        q: "Q13 롤플레이",
+        cat: "롤플레이",
+        issue: "시제가 흔들리고 상황 설명이 불분명함 (예약 날짜를 잘못 잡았다는 핵심이 늦게 나옴)",
+        fix: "경험 순서 표지(Two years ago → Then → Luckily → Since then)로 고정 (롤플레이 > 비슷한 경험 J)",
+      },
+      {
+        q: "Q8·Q9·Q10 바",
+        cat: "서베이",
+        issue: "I don't like bars / I didn't go 로 시작해 질문에 답하지 못함, 내용이 얕음",
+        fix: "I don't go often, but I remember one place. 후 만능 묘사(장소·사람·분위기)로 5~6문장 채우기 (서베이 K 만능 묘사)",
+      },
+      {
+        q: "Q14·Q15 일본",
+        cat: "돌발",
+        issue: "I don't know about this topic 으로 시작, 같은 내용 반복, 중요한 이유 없음",
+        fix: "돌발 기본형: 어렵다 → 많다·중요 → 필수 답변 3개 → 결론 틀로 답하기 (돌발 > 돌발 기본 O)",
+      },
+      {
+        q: "Q2 약속 습관",
+        cat: "돌발",
+        issue: "한 문장 수준(I always accept their appointment)으로 끝남. 길이 부족",
+        fix: "누구와 → 어떻게 → 뭘 하나 → 대화 주제 → 힘든 점 → 마무리 6문장 (복기 세트 Q2 모범답안)",
+      },
+      {
+        q: "Q3 어린 시절 치과",
+        cat: "돌발",
+        issue: "I usually have 에서 멈춤. 과거 이야기에 always·현재형을 섞음",
+        fix: "When I was young, I had... 로 과거 고정, 원인→감정→진행→결과",
+      },
+      {
+        q: "Q4 기억에 남는 약속",
+        cat: "돌발",
+        issue: "forgot / forgotten 반복, 중간 침묵, 교훈과 마무리가 약함",
+        fix: "순서 표지 + 마지막에 I learned to ... 한 문장",
+      },
+      {
+        q: "Q5·Q6·Q7 집",
+        cat: "서베이",
+        issue: "live in alone 문법 오류, Q6은 흐름을 잃고 결론 없음, Q7은 always 반복",
+        fix: "live alone. 묘사 뼈대(방 구성 → 좋아하는 방 → 이유)와 가족 추억 뼈대 사용",
+      },
+    ],
+    actions: [
+      "롤플레이 11번 역할 고정: 질문 3~4개만 던지는 연습을 하루 10분 (영화관·렌터카·호텔 번갈아)",
+      "싫다·모른다로 시작하지 않기: I don't ... often, but ... 후 묘사 뼈대(K, 시설 7단계)로 5~6문장",
+      "always 금지, 과거 이야기는 순서 표지(Last year → Then → After that → In the end)로 고정",
+      "복기 세트를 영어 가리기 상태로 2~3회 반복, 막히면 결과 화면의 모범답안과 비교",
+    ],
+  },
+];
+
+/* 필수 표현 (기본 25개 + 감정·의견·시간·이유·평가 20개): 문장을 시작하는 틀. 예시 문장은 내 상황에 맞춘 연습용 예문
+   형식: {grp 묶음, items:[{en 표현, ko 쓰는 때, ex:[예문 영어, 예문 한글]}]} */
+const PHRASES = [
+  {
+    grp: "일상 행동 · 선호도",
+    items: [
+      {
+        en: "I usually go to",
+        ko: "보통 어디에 가는지 말할 때",
+        ex: [
+          "I usually go to a cafe near my office after lunch.",
+          "점심 후에 보통 회사 근처 카페에 가요.",
+        ],
+      },
+      {
+        en: "I'm really into",
+        ko: "무엇에 빠져 있는지(취미 등) 말할 때",
+        ex: [
+          "I'm really into playing online games these days.",
+          "요즘 온라인 게임에 푹 빠져 있어요.",
+        ],
+      },
+      {
+        en: "There is a",
+        ko: "주변에 무엇이 있는지 설명할 때",
+        ex: ["There is a small park near my house.", "우리 집 근처에는 작은 공원이 있어요."],
+      },
+      {
+        en: "I wanna",
+        ko: "무엇을 하고 싶은지 말할 때 (구어체, I want to와 같음)",
+        ex: ["I wanna travel to Jeju Island again.", "제주도에 다시 여행 가고 싶어요."],
+      },
+      {
+        en: "I have a",
+        ko: "가지고 있는 것을 설명할 때",
+        ex: [
+          "I have a big TV and a computer in my living room.",
+          "거실에 큰 TV와 컴퓨터가 있어요.",
+        ],
+      },
+    ],
+  },
+  {
+    grp: "경험 · 상태",
+    items: [
+      {
+        en: "I went to",
+        ko: "과거에 다녀온 곳을 말할 때",
+        ex: ["I went to Jeju Island two years ago.", "2년 전에 제주도에 갔어요."],
+      },
+      {
+        en: "It was",
+        ko: "당시의 기분이나 상태를 설명할 때",
+        ex: ["It was a really relaxing trip.", "정말 편안한 여행이었어요."],
+      },
+      {
+        en: "I had to",
+        ko: "무엇을 해야만 했는지 설명할 때",
+        ex: [
+          "I had to go back to the restaurant to get my wallet.",
+          "지갑을 찾으러 식당에 돌아가야 했어요.",
+        ],
+      },
+      {
+        en: "I stayed at",
+        ko: "머물렀던 장소를 말할 때",
+        ex: ["I stayed at a hotel in Seogwipo.", "서귀포의 한 호텔에 머물렀어요."],
+      },
+      {
+        en: "I'm planning to",
+        ko: "계획 중인 일을 말할 때",
+        ex: [
+          "I'm planning to visit my parents this weekend.",
+          "이번 주말에 부모님을 찾아뵐 계획이에요.",
+        ],
+      },
+    ],
+  },
+  {
+    grp: "습관 · 빈도",
+    items: [
+      {
+        en: "I need to",
+        ko: "해야 할 일을 말할 때",
+        ex: ["I need to finish my work before the weekend.", "주말 전에 일을 끝내야 해요."],
+      },
+      {
+        en: "I often",
+        ko: "자주 하는 행동을 말할 때",
+        ex: ["I often meet my friends for dinner.", "저는 친구들과 자주 저녁을 먹어요."],
+      },
+      {
+        en: "I sometimes",
+        ko: "가끔 하는 행동을 말할 때",
+        ex: ["I sometimes cook with my mother.", "가끔 어머니와 같이 요리해요."],
+      },
+      {
+        en: "It takes",
+        ko: "시간이 얼마나 걸리는지 말할 때",
+        ex: ["It takes about thirty minutes by subway.", "지하철로 30분쯤 걸려요."],
+      },
+      {
+        en: "I was",
+        ko: "과거의 감정 상태를 말할 때",
+        ex: [
+          "I was so embarrassed when I lost my wallet.",
+          "지갑을 잃어버렸을 때 정말 당황했어요.",
+        ],
+      },
+    ],
+  },
+  {
+    grp: "기타 필수 표현",
+    items: [
+      {
+        en: "I didn't",
+        ko: "하지 않았던 일을 말할 때",
+        ex: ["I didn't know that I had left my wallet.", "지갑을 두고 온 줄 몰랐어요."],
+      },
+      {
+        en: "I always",
+        ko: "항상 하는 행동을 말할 때 (남발하지 말기)",
+        ex: ["I always check my reservation twice.", "저는 예약을 항상 두 번 확인해요."],
+      },
+      {
+        en: "I get",
+        ko: "상태가 어떻게 변하는지 말할 때",
+        ex: ["I get tired after a long day of work.", "하루 종일 일하면 피곤해져요."],
+      },
+      {
+        en: "I prefer",
+        ko: "더 선호하는 것을 말할 때",
+        ex: ["I prefer staying home to going out.", "외출보다 집에 있는 걸 더 좋아해요."],
+      },
+      {
+        en: "I enjoyed",
+        ko: "즐겼던 경험을 말할 때",
+        ex: ["I enjoyed the cocktail a lot.", "그 칵테일이 정말 좋았어요."],
+      },
+      {
+        en: "I take",
+        ko: "교통수단을 이용할 때",
+        ex: ["I take the subway to work every day.", "저는 매일 지하철로 출근해요."],
+      },
+      {
+        en: "I visit",
+        ko: "방문하는 곳을 말할 때",
+        ex: ["I visit my parents' house once a month.", "한 달에 한 번 부모님 댁에 가요."],
+      },
+      {
+        en: "It is",
+        ko: "날씨나 상태를 설명할 때",
+        ex: ["It is sunny and warm today.", "오늘은 맑고 따뜻해요."],
+      },
+      {
+        en: "I'd like to",
+        ko: "~하고 싶다고 정중하게 말할 때",
+        ex: ["I'd like to buy two tickets, please.", "표 두 장을 사고 싶어요."],
+      },
+      {
+        en: "And then I",
+        ko: "순서를 이어갈 때",
+        ex: ["And then I went back to the restaurant.", "그러고 나서 식당으로 돌아갔어요."],
+      },
+    ],
+  },
+  {
+    grp: "감정 · 태도",
+    items: [
+      {
+        en: "I get ... when...",
+        ko: "~할 때 ~한 기분이 들어요",
+        ex: [
+          "I get nervous when I speak English in front of people.",
+          "사람들 앞에서 영어로 말하면 긴장돼요.",
+        ],
+      },
+      {
+        en: "I can't stand",
+        ko: "~하는 게 너무 싫어요",
+        ex: ["I can't stand waiting in long lines.", "긴 줄에서 기다리는 게 너무 싫어요."],
+      },
+      {
+        en: "I don't mind",
+        ko: "~하는 거 괜찮아요 / 신경 안 써요",
+        ex: ["I don't mind working late sometimes.", "가끔 늦게까지 일하는 건 괜찮아요."],
+      },
+      {
+        en: "I'm used to",
+        ko: "~에 익숙해요",
+        ex: ["I'm used to waking up early for work.", "일 때문에 일찍 일어나는 데 익숙해요."],
+      },
+    ],
+  },
+  {
+    grp: "솔직한 의견 · 습관",
+    items: [
+      {
+        en: "To be honest,",
+        ko: "솔직히 말하면",
+        ex: [
+          "To be honest, I'm not a big fan of crowded places.",
+          "솔직히 말하면 사람 많은 곳은 별로 안 좋아해요.",
+        ],
+      },
+      {
+        en: "I try to",
+        ko: "~하려고 노력해요",
+        ex: [
+          "I try to exercise at least twice a week.",
+          "일주일에 적어도 두 번은 운동하려고 노력해요.",
+        ],
+      },
+      {
+        en: "It depends on",
+        ko: "~에 따라 달라요",
+        ex: ["It depends on my schedule.", "제 일정에 따라 달라요."],
+      },
+      {
+        en: "Most of the time, I",
+        ko: "대부분 저는 ~해요",
+        ex: ["Most of the time, I eat dinner at home.", "대부분 저는 집에서 저녁을 먹어요."],
+      },
+    ],
+  },
+  {
+    grp: "상황 · 시간",
+    items: [
+      {
+        en: "Out of nowhere,",
+        ko: "갑자기 / 뜬금없이",
+        ex: [
+          "Out of nowhere, it started to rain heavily.",
+          "갑자기 비가 세차게 내리기 시작했어요.",
+        ],
+      },
+      {
+        en: "Make time for",
+        ko: "~할 시간을 만들다",
+        ex: [
+          "I try to make time for my friends even when I'm busy.",
+          "바빠도 친구들을 위한 시간을 만들려고 해요.",
+        ],
+      },
+      {
+        en: "After that,",
+        ko: "그다음에",
+        ex: ["After that, we went to a restaurant nearby.", "그다음에 우리는 근처 식당에 갔어요."],
+      },
+      {
+        en: "As soon as I",
+        ko: "~하자마자",
+        ex: [
+          "As soon as I got home, I realized I had lost my wallet.",
+          "집에 오자마자 지갑을 잃어버린 걸 알았어요.",
+        ],
+      },
+    ],
+  },
+  {
+    grp: "이유 · 인과관계",
+    items: [
+      {
+        en: "Whenever I ..., I ...",
+        ko: "~할 때마다 ~해요",
+        ex: [
+          "Whenever I feel stressed, I play online games.",
+          "스트레스를 받을 때마다 온라인 게임을 해요.",
+        ],
+      },
+      {
+        en: "That's why",
+        ko: "그래서 ~한 거예요",
+        ex: [
+          "That's why I always double-check my reservations.",
+          "그래서 저는 예약을 항상 다시 확인해요.",
+        ],
+      },
+      {
+        en: "It helps me",
+        ko: "~하는 걸 도와줘요",
+        ex: ["Music helps me relax after work.", "음악은 퇴근 후에 쉬는 데 도움이 돼요."],
+      },
+      {
+        en: "Since I",
+        ko: "~하기 때문에",
+        ex: [
+          "Since I live alone, I cook simple meals.",
+          "혼자 살기 때문에 간단한 음식을 해 먹어요.",
+        ],
+      },
+    ],
+  },
+  {
+    grp: "선호 · 평가",
+    items: [
+      {
+        en: "One of my favorite ... is ...",
+        ko: "제가 가장 좋아하는 ~ 중 하나는 ~예요",
+        ex: [
+          "One of my favorite places is a small cafe near my house.",
+          "제가 가장 좋아하는 곳 중 하나는 집 근처 작은 카페예요.",
+        ],
+      },
+      {
+        en: "The biggest reason is that",
+        ko: "가장 큰 이유는 ~기 때문이에요",
+        ex: [
+          "The biggest reason is that it's quiet and comfortable.",
+          "가장 큰 이유는 조용하고 편안하기 때문이에요.",
+        ],
+      },
+      {
+        en: "It seemed",
+        ko: "~인 것 같았어요",
+        ex: [
+          "It seemed very expensive, so I just looked around.",
+          "아주 비싸 보여서 그냥 구경만 했어요.",
+        ],
+      },
+      {
+        en: "It's one of the most ...",
+        ko: "가장 ~한 ~ 중 하나예요",
+        ex: [
+          "It's one of the most beautiful places I've ever visited.",
+          "제가 가 본 가장 아름다운 곳 중 하나예요.",
+        ],
+      },
+    ],
+  },
+];

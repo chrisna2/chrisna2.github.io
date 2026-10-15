@@ -104,6 +104,7 @@ const cfg = Object.assign(
     kwShuffle: false,
     kwHint: "kw",
     mockMode: "full",
+    mockCat: "all",
     mockSecs: 60,
     mockCaption: false,
     mockAuto: true,
@@ -341,7 +342,6 @@ const TABS = [
   ["blank", "1단계", "빈칸 채우기"],
   ["kw", "2단계", "키워드 말하기"],
   ["skel", "응용", "뼈대 바꿔끼우기"],
-  ["mock", "3단계", "모의고사"],
 ];
 // 상단 탭 버튼 그리기 (현재 뷰는 aria-pressed=true)
 function renderTabs() {
@@ -359,6 +359,8 @@ function renderTabs() {
   ).join("");
 }
 // 탭 전환: 재생을 멈추고, 해당 뷰만 보이게 하고, 뷰별 초기 렌더링을 수행
+// 분류와 별개로 단독 화면을 쓰는 뷰: 필수 표현, 모의고사
+const STANDALONE = ["phr", "mock"];
 function setView(v) {
   stopAll();
   cfg.view = v;
@@ -369,8 +371,9 @@ function setView(v) {
   $("#v-kw").hidden = v !== "kw";
   $("#v-skel").hidden = v !== "skel";
   $("#v-mock").hidden = v !== "mock";
-  $("#chips").hidden = v === "mock" || v === "skel";
-  $("#cats").hidden = $("#catnote").hidden = v === "mock";
+  $("#v-phr").hidden = v !== "phr";
+  $("#chips").hidden = STANDALONE.includes(v) || v === "skel";
+  $("#tabs").hidden = $("#catnote").hidden = STANDALONE.includes(v);
   renderCats();
   renderChips();
   $("#dock").hidden = v !== "listen";
@@ -389,38 +392,51 @@ function setView(v) {
     renderSkel();
   }
   if (v === "mock") renderMock();
+  if (v === "phr") renderPhr();
   window.scrollTo({ top: 0 });
 }
 // 대분류 선택(서베이 / 롤플레이 / 돌발)과 안내 문구 그리기
 function renderCats() {
-  $("#cats").innerHTML = CATS.map(
-    (c) =>
-      '<button data-cat="' +
-      c[0] +
-      '" aria-pressed="' +
-      (cfg.cat === c[0]) +
-      '">' +
-      c[1] +
-      "<small>" +
-      c[2] +
-      "</small></button>",
-  ).join("");
+  $("#cats").innerHTML =
+    CATS.map(
+      (c) =>
+        '<button data-cat="' +
+        c[0] +
+        '" aria-pressed="' +
+        (!STANDALONE.includes(cfg.view) && cfg.cat === c[0]) +
+        '">' +
+        c[1] +
+        "<small>" +
+        c[2] +
+        "</small></button>",
+    ).join("") +
+    '<button data-cat="phr" aria-pressed="' +
+    (cfg.view === "phr") +
+    '">표현<small>시작 문구</small></button>' +
+    // 모의고사는 분류와 별개의 최종 단계: 서베이·돌발·롤플레이를 묶어서 푼다
+    '<button data-cat="mock" aria-pressed="' +
+    (cfg.view === "mock") +
+    '">모의고사<small>최종 점검</small></button>';
   $("#catnote").textContent = CAT_NOTE[cfg.cat];
 }
 // 대분류 전환: 분류별로 마지막에 보던 주제를 기억했다가 복원하고 현재 탭을 다시 그린다
 function setCat(c) {
-  if (c === cfg.cat) return;
+  // 모의고사 화면에서 분류를 누르면 그 분류의 듣기 탭으로 돌아간다
+  const fromMock = STANDALONE.includes(cfg.view);
+  if (c === cfg.cat && !fromMock) return;
   stopAll();
-  cfg.topicOf[cfg.cat] = cfg.topic;
-  cfg.cat = c;
-  const saved = cfg.topicOf[c];
-  cfg.topic =
-    saved != null && saved < TOPICS.length && catOf(saved) === c ? saved : catTopics(c)[0];
-  cfg.sec = 0;
-  cfg.bsec = 0;
-  brev.clear();
+  if (c !== cfg.cat) {
+    cfg.topicOf[cfg.cat] = cfg.topic;
+    cfg.cat = c;
+    const saved = cfg.topicOf[c];
+    cfg.topic =
+      saved != null && saved < TOPICS.length && catOf(saved) === c ? saved : catTopics(c)[0];
+    cfg.sec = 0;
+    cfg.bsec = 0;
+    brev.clear();
+  }
   save();
-  setView(cfg.view);
+  setView(fromMock ? "listen" : cfg.view);
 }
 // 주제 칩(기억에 남는 경험, 집, 영화 …) 그리기
 function renderChips() {
@@ -1233,47 +1249,57 @@ function buildMock() {
     }),
   );
   const n = cfg.mockMode === "short" ? 1 : 3;
+  // 출제 범위: 전체 / 서베이만 / 돌발만 / 롤플레이만
+  const want = cfg.mockCat,
+    doSurvey = want === "all" || want === "survey",
+    doSp = want === "all" || want === "surprise",
+    doRp = want === "all" || want === "rp";
   const add = (c, kind) => {
     const a = c.filter((x) => !used.has(x.ti + "." + x.si));
     const x = pick(a.length ? a : c);
     used.add(x.ti + "." + x.si);
     qs.push({ ti: x.ti, si: x.si, kind });
   };
-  shuffle(pool.slice())
-    .slice(0, n)
-    .forEach((ti) => {
-      const secs = qSecs(ti).map((x) => ({ ti, si: x.i, tag: x.s.tag }));
-      const d = secs.filter((x) => x.tag === "2·5·8"),
-        h = secs.filter((x) => x.tag === "3" || x.tag === "6·9"),
-        m = secs.filter((x) => x.tag === "4·7·10");
-      const key = SKEY[TOPICS[ti].name];
-      const genQ = (tags, kind) => {
-        const o = SKELS.filter((s) => tags.includes(s.tag) && s.slots[key]);
-        if (!key || !o.length) return false;
-        qs.push({
-          ti,
-          si: -1,
-          kind: kind + " (뼈대 응용)",
-          gen: true,
-          sec: genSec(pick(o).id, key),
-        });
-        return true;
-      };
-      if (!(Math.random() < 0.5 && genQ(["2·5·8"], "묘사"))) add(d.length ? d : secs, "묘사");
-      if (!(Math.random() < 0.5 && genQ(["3", "6·9"], "습관·비교·최근")))
-        add(h.length ? h : secs, "습관·비교·최근");
-      if (!((!m.length || Math.random() < 0.5) && genQ(["4·7·10"], "기억에 남는 경험")))
-        add(m.length ? m : mem, "기억에 남는 경험");
-    });
+  if (doSurvey)
+    shuffle(pool.slice())
+      .slice(0, n)
+      .forEach((ti) => {
+        const secs = qSecs(ti).map((x) => ({ ti, si: x.i, tag: x.s.tag }));
+        const d = secs.filter((x) => x.tag === "2·5·8"),
+          h = secs.filter((x) => x.tag === "3" || x.tag === "6·9"),
+          m = secs.filter((x) => x.tag === "4·7·10");
+        const key = SKEY[TOPICS[ti].name];
+        const genQ = (tags, kind) => {
+          const o = SKELS.filter((s) => tags.includes(s.tag) && s.slots[key]);
+          if (!key || !o.length) return false;
+          qs.push({
+            ti,
+            si: -1,
+            kind: kind + " (뼈대 응용)",
+            gen: true,
+            sec: genSec(pick(o).id, key),
+          });
+          return true;
+        };
+        if (!(Math.random() < 0.5 && genQ(["2·5·8"], "묘사"))) add(d.length ? d : secs, "묘사");
+        if (!(Math.random() < 0.5 && genQ(["3", "6·9"], "습관·비교·최근")))
+          add(h.length ? h : secs, "습관·비교·최근");
+        if (!((!m.length || Math.random() < 0.5) && genQ(["4·7·10"], "기억에 남는 경험")))
+          add(m.length ? m : mem, "기억에 남는 경험");
+      });
   // 돌발 주제: 시설 7단계 / 돌발 기본형 / 신경향 중에서 서로 다른 주제로 뽑는다
-  shuffle(catTopics("surprise"))
-    .slice(0, cfg.mockMode === "short" ? 1 : 2)
-    .forEach((ti) =>
-      add(
-        qSecs(ti).map((x) => ({ ti, si: x.i })),
-        "돌발 주제",
-      ),
-    );
+  if (doSp)
+    shuffle(catTopics("surprise"))
+      .slice(
+        0,
+        want === "all" ? (cfg.mockMode === "short" ? 1 : 2) : cfg.mockMode === "short" ? 2 : 3,
+      )
+      .forEach((ti) =>
+        add(
+          qSecs(ti).map((x) => ({ ti, si: x.i })),
+          "돌발 주제",
+        ),
+      );
   const rpTis = catTopics("rp");
   const rp = rpTis.flatMap((ti) => qSecs(ti).map((x) => ({ ti, si: x.i, tag: x.s.tag })));
   const genRP = (tag, kind) => {
@@ -1286,21 +1312,161 @@ function buildMock() {
       sec: genSec(sk0.id, pick(Object.keys(sk0.slots))),
     });
   };
-  // 11번은 질문하기 뼈대(친구편 L / 업체편 M)로 매번 새로 만든다
-  genRP("RP11", "롤플레이 11");
-  if (Math.random() < 0.5) genRP("RP12", "롤플레이 12");
-  else
-    add(
-      rp.filter((x) => x.tag === "RP12"),
-      "롤플레이 12",
-    );
-  if (Math.random() < 0.5) genRP("RP13", "롤플레이 13");
-  else
-    add(
-      rp.filter((x) => x.tag === "RP13"),
-      "롤플레이 13",
-    );
+  if (doRp) {
+    // 11번은 질문하기 뼈대(친구편 L / 업체편 M)로 매번 새로 만든다
+    genRP("RP11", "롤플레이 11");
+    if (Math.random() < 0.5) genRP("RP12", "롤플레이 12");
+    else
+      add(
+        rp.filter((x) => x.tag === "RP12"),
+        "롤플레이 12",
+      );
+    if (Math.random() < 0.5) genRP("RP13", "롤플레이 13");
+    else
+      add(
+        rp.filter((x) => x.tag === "RP13"),
+        "롤플레이 13",
+      );
+  }
+  // 각 문제에 분류(서베이/돌발/롤플레이)를 붙인다
+  qs.forEach((q) => {
+    q.cat = q.kind === "돌발 주제" ? "surprise" : q.kind.startsWith("롤플레이") ? "rp" : "survey";
+  });
   return qs;
+}
+/* ===== 필수 표현 =====
+ 문장을 시작하는 틀 25개: 뜻과 예문을 보고, 영어를 가려 뜻만 보고 말해 본 뒤 눌러서 확인 */
+const phr = { hide: false, open: new Set() };
+// 필수 표현 화면: 묶음별 카드(표현·뜻·예문), 영어 가리기, 읽어 주기
+function renderPhr() {
+  let h =
+    '<p class="note">문장을 여는 틀입니다. 뜻을 보고 표현과 예문을 말해 본 뒤 확인하세요. 시험에서는 이 틀로 문장을 시작하면 끊기지 않고 이어집니다.</p>' +
+    '<div class="row2"><label class="lbl"><input type="checkbox" id="phHide"' +
+    (phr.hide ? " checked" : "") +
+    "> 영어 가리기 (뜻만 보고 말하기, 누르면 확인)</label></div>";
+  PHRASES.forEach((g, gi) => {
+    h += '<div class="lbl" style="margin:12px 0 6px">' + esc(g.grp) + '</div><div class="list">';
+    g.items.forEach((it, ii) => {
+      const id = gi + "." + ii,
+        show = !phr.hide || phr.open.has(id);
+      h +=
+        '<div class="bcard' +
+        (show && phr.hide ? " shown" : "") +
+        '" data-ph="' +
+        id +
+        '" style="display:block;cursor:pointer"><div class="ko" style="margin:0;font-weight:600">' +
+        esc(it.ko) +
+        "</div>" +
+        (show
+          ? '<div class="en" style="margin-top:4px"><mark>' +
+            esc(it.en) +
+            '</mark></div><div class="en" style="font-weight:400;font-size:15px">' +
+            esc(it.ex[0]) +
+            '</div><div class="ko">' +
+            esc(it.ex[1]) +
+            '</div><div class="row2" style="margin:6px 0 0"><button class="mini" data-phsay="' +
+            id +
+            '">읽어 주기</button></div>'
+          : "") +
+        "</div>";
+    });
+    h += "</div>";
+  });
+  $("#v-phr").innerHTML = h;
+}
+// 필수 표현 화면 이벤트: 가리기 체크, 카드 눌러 확인, 읽어 주기
+$("#v-phr").addEventListener("change", (e) => {
+  if (e.target.id === "phHide") {
+    phr.hide = e.target.checked;
+    phr.open.clear();
+    renderPhr();
+  }
+});
+$("#v-phr").addEventListener("click", (e) => {
+  const sy = e.target.closest("[data-phsay]");
+  if (sy) {
+    const [g, i] = sy.dataset.phsay.split(".");
+    const it = PHRASES[g].items[i];
+    stopAll();
+    ++token;
+    say(it.en + ". " + it.ex[0]);
+    return;
+  }
+  const c = e.target.closest("[data-ph]");
+  if (c && phr.hide) {
+    const id = c.dataset.ph;
+    if (phr.open.has(id)) phr.open.delete(id);
+    else phr.open.add(id);
+    renderPhr();
+  }
+});
+// 모의고사 출제·표시 순서 (서베이 → 돌발 → 롤플레이)
+const MOCK_ORDER = ["survey", "surprise", "rp"];
+// 저장된 모의시험 세트(MOCK_SETS[idx])를 분류(서베이 → 돌발 → 롤플레이)별로 묶어 출제한다. 문제 번호는 제목에 남기고 모범답안은 결과 화면에서 확인
+function buildReplay(idx) {
+  const set = MOCK_SETS[idx];
+  return set.qs
+    .filter((r) => cfg.mockCat === "all" || r.cat === cfg.mockCat)
+    .map((r, i) => [r, i])
+    .sort((a, b) => MOCK_ORDER.indexOf(a[0].cat) - MOCK_ORDER.indexOf(b[0].cat) || a[1] - b[1])
+    .map(([r]) => r)
+    .map((r) => ({
+      cat: r.cat,
+      ti: 0,
+      si: -1,
+      kind: r.kind,
+      tp: set.tp || set.name,
+      gen: true,
+      sec: { t: r.t, tag: r.tag, gen: true, q: r.q, s: r.s },
+    }));
+}
+// 날짜별 복기 기록(MOCK_REVIEWS)을 최신순 접이식 목록으로 만든다: 종합 → 잘한 점 → 문제별 문제점·고칠 점 → 우선순위
+function mockReviewHtml() {
+  if (!MOCK_REVIEWS.length) return "";
+  const li = (a) => a.map((x) => "<li>" + esc(x) + "</li>").join("");
+  return (
+    '<div class="lbl" style="margin:18px 0 6px">발화 노트 · 날짜별 평가와 복기</div>' +
+    MOCK_REVIEWS.slice()
+      .sort((a, b) => (a.date < b.date ? 1 : -1))
+      .map(
+        (r) =>
+          '<details class="res"><summary><span class="n">' +
+          esc(r.date.slice(5).replace("-", "/")) +
+          '</span><span class="tt">' +
+          esc(r.title) +
+          "</span></summary>" +
+          '<div class="qen" style="font-size:15px">예상 등급: ' +
+          esc(r.grade) +
+          '</div><div class="qko">' +
+          esc(r.summary) +
+          "</div>" +
+          '<div class="lbl" style="margin:10px 0 4px">잘한 점</div><ul class="rv">' +
+          li(r.good) +
+          '</ul><div class="lbl" style="margin:10px 0 4px">문제점과 고칠 점</div>' +
+          r.problems
+            .map(
+              (p) =>
+                '<div class="rvp"><b>' +
+                esc(p.q) +
+                '</b> <span class="tag">' +
+                esc(p.cat) +
+                "</span><div>" +
+                esc(p.issue) +
+                '</div><div class="k">→ ' +
+                esc(p.fix) +
+                "</div></div>",
+            )
+            .join("") +
+          '<div class="lbl" style="margin:10px 0 4px">시험 전 우선순위</div><ol class="rv">' +
+          li(r.actions) +
+          '</ol><div class="row2">' +
+          (MOCK_SETS[r.set]
+            ? '<button class="big pri" data-mset="' + r.set + '">이 시험 문제 다시 풀기</button>'
+            : "") +
+          "</div></details>",
+      )
+      .join("")
+  );
 }
 // 모의고사 화면 그리기: 설정 / 출제 중 / 답변 타이머 / 결과 (phase에 따라 다름)
 function renderMock() {
@@ -1311,8 +1477,8 @@ function renderMock() {
       '<p class="note">문제만 음성으로 읽어 줍니다. 아무것도 보지 않고 답하세요. 마이크 녹음은 이 페이지에서 쓸 수 없어서, 말한 시간만 기록합니다.</p>' +
       '<div class="row2"><span class="lbl">구성</span><div class="seg">' +
       [
-        ["full", "전체 14문제"],
-        ["short", "짧게 7문제"],
+        ["full", "전체"],
+        ["short", "짧게"],
       ]
         .map(
           (o) =>
@@ -1326,6 +1492,24 @@ function renderMock() {
         )
         .join("") +
       "</div></div>" +
+      '<div class="row2"><span class="lbl">범위</span><div class="seg">' +
+      [["all", "전체"], ...CATS.map((c) => [c[0], c[1]])]
+        .map(
+          (o) =>
+            '<button data-mc="' +
+            o[0] +
+            '" aria-pressed="' +
+            (cfg.mockCat === o[0]) +
+            '">' +
+            o[1] +
+            "</button>",
+        )
+        .join("") +
+      '</div></div><div class="note">이번 구성: ' +
+      buildMock().length +
+      "문제" +
+      (cfg.mockCat === "all" ? "" : " · " + CATS.find((c) => c[0] === cfg.mockCat)[1] + "만") +
+      "</div>" +
       '<div class="row2"><span class="lbl">문제당 답변 시간</span><div class="seg">' +
       secs
         .map(
@@ -1347,7 +1531,23 @@ function renderMock() {
       (cfg.mockAuto ? " checked" : "") +
       "> 시간이 끝나면 자동으로 다음 문제</label></div>" +
       '<p class="note">전체: 서베이 주제 3개 × 3문제(묘사, 습관·비교·최근, 기억에 남는 경험) + 돌발 주제 2문제 + 롤플레이 11·12·13번. 각 문제는 절반쯤의 확률로, 응용 탭의 뼈대를 다른 주제에 바꿔 끼워 답해야 하는 문제로 나옵니다. 문제마다 한 번 다시 들을 수 있습니다.</p>' +
-      '<button class="big live" data-mstart="1" style="width:100%">시작</button>';
+      '<button class="big live" data-mstart="1" style="width:100%">시작</button>' +
+      '<div class="lbl" style="margin:16px 0 6px">저장된 모의시험 · 분류별로 묶어서 풉니다 (위 범위 적용)</div>' +
+      MOCK_SETS.map(
+        (m, i) =>
+          '<button class="big" data-mset="' +
+          i +
+          '" style="width:100%;margin-bottom:8px;text-align:left">' +
+          esc(m.name) +
+          " · " +
+          buildReplay(i).length +
+          "문제" +
+          (m.note
+            ? '<small style="display:block;font-weight:400;opacity:.75">' + esc(m.note) + "</small>"
+            : "") +
+          "</button>",
+      ).join("") +
+      mockReviewHtml();
     return;
   }
   if (mock.phase === "result") {
@@ -1362,8 +1562,16 @@ function renderMock() {
       mock.total +
       "초</div>" +
       '<div class="qko">IM2는 문제당 30초 이상 막힘없이 이어 가는 것이 목표입니다. 너무 짧았던 문제는 빨간색으로 표시됩니다.</div></div>';
+    let lastCat = "";
     mock.qs.forEach((q, i) => {
-      const tpn = q.gen ? "응용" : TOPICS[q.ti].name,
+      if (q.cat && q.cat !== lastCat) {
+        lastCat = q.cat;
+        h +=
+          '<div class="lbl" style="margin:12px 0 4px">' +
+          CATS.find((c) => c[0] === q.cat)[1] +
+          "</div>";
+      }
+      const tpn = q.tp || (q.gen ? "응용" : TOPICS[q.ti].name),
         sc = secOf(q),
         sec = mock.res[i] || 0,
         wk = !q.gen && weakSec.has(q.ti + "." + q.si);
@@ -1539,9 +1747,10 @@ function mockNext() {
   mockAsk();
 }
 // 모의고사 시작: 문제 생성, 상태 초기화, 첫 문제 출제
-function mockStart() {
+function mockStart(setIdx) {
   stopAll();
-  mock.qs = buildMock();
+  mock.set = setIdx == null ? null : setIdx;
+  mock.qs = mock.set == null ? buildMock() : buildReplay(mock.set);
   mock.i = 0;
   mock.res = [];
   mock.total = cfg.mockSecs;
@@ -1561,7 +1770,9 @@ $("#tabs").addEventListener("click", (e) => {
 // 대분류 선택
 $("#cats").addEventListener("click", (e) => {
   const b = e.target.closest("[data-cat]");
-  if (b) setCat(b.dataset.cat);
+  if (!b) return;
+  if (b.dataset.cat === "mock" || b.dataset.cat === "phr") setView(b.dataset.cat);
+  else setCat(b.dataset.cat);
 });
 // 주제 칩 선택
 $("#chips").addEventListener("click", (e) => {
@@ -1954,6 +2165,13 @@ $("#v-skel").addEventListener("change", (e) => {
 
 // 모의고사: 모드·시간 선택, 시작, 다시 듣기, 다음 문제, 결과 화면 버튼
 $("#v-mock").addEventListener("click", (e) => {
+  const mc = e.target.closest("[data-mc]");
+  if (mc) {
+    cfg.mockCat = mc.dataset.mc;
+    save();
+    renderMock();
+    return;
+  }
   const mm = e.target.closest("[data-mm]");
   if (mm) {
     cfg.mockMode = mm.dataset.mm;
@@ -1968,8 +2186,13 @@ $("#v-mock").addEventListener("click", (e) => {
     renderMock();
     return;
   }
+  const mset = e.target.closest("[data-mset]");
+  if (mset) {
+    mockStart(+mset.dataset.mset);
+    return;
+  }
   if (e.target.closest("[data-mstart]")) {
-    mockStart();
+    mockStart(mock.phase === "result" ? mock.set : null);
     return;
   }
   if (e.target.closest("[data-mreset]")) {
@@ -2138,4 +2361,4 @@ if (SYNTH) {
 }
 if (cfg.view === "mock" && mock.phase === "setup") {
 }
-setView(["listen", "blank", "kw", "skel", "mock"].includes(cfg.view) ? cfg.view : "listen");
+setView(["listen", "blank", "kw", "skel", "phr", "mock"].includes(cfg.view) ? cfg.view : "listen");
