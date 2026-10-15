@@ -1336,7 +1336,7 @@ function buildMock() {
 }
 /* ===== 필수 표현 =====
  문장을 시작하는 틀 25개: 뜻과 예문을 보고, 영어를 가려 뜻만 보고 말해 본 뒤 눌러서 확인 */
-const phr = { hide: false, open: new Set(), mode: "en", grp: "all", tok: -1 };
+const phr = { hide: false, open: new Set(), mode: "en", grp: "all", tok: -1, loop: false };
 const phrRunning = () => phr.tok === token;
 // 표현 묶음을 쭉 들려준다. mode "en": 표현 → 예문 / mode "ko": 한글 예문 → (내가 영어로 말함) → 정답 영어
 function phrBtn() {
@@ -1353,32 +1353,51 @@ async function phrRun() {
     if (phr.grp === "all" || phr.grp === String(gi))
       g.items.forEach((it, ii) => list.push([gi + "." + ii, it]));
   });
-  for (const [id, it] of list) {
-    if (my !== token) return;
-    document.querySelectorAll("#v-phr .bcard.now").forEach((x) => x.classList.remove("now"));
-    const el = document.querySelector('#v-phr [data-ph="' + id + '"]');
-    if (el) {
-      el.classList.add("now");
-      el.scrollIntoView({ block: "center", behavior: "smooth" });
+  do {
+    for (const [id, it] of list) {
+      if (my !== token) return;
+      document.querySelectorAll("#v-phr .bcard.now").forEach((x) => x.classList.remove("now"));
+      const el = document.querySelector('#v-phr [data-ph="' + id + '"]');
+      if (el) {
+        el.classList.add("now");
+        el.scrollIntoView({ block: "center", behavior: "smooth" });
+      }
+      if (phr.mode === "full") {
+        // 한글 뜻 → 표현 말하기 → 표현 확인 → 한글 예문 → 문장 말하기 → 예문 확인
+        const steps = [
+          () => speak(it.ko, null, "ko-KR"),
+          () => sleep(gapMs(it.en) * 1.3),
+          () => say(it.en),
+          () => sleep(gapMs(it.en)),
+          () => speak(it.ex[1], null, "ko-KR"),
+          () => sleep(gapMs(it.ex[0]) * 1.3),
+          () => say(it.ex[0]),
+          () => sleep(gapMs(it.ex[0])),
+        ];
+        for (const f of steps) {
+          await f();
+          if (my !== token) return;
+        }
+      } else if (phr.mode === "ko") {
+        await speak(it.ex[1], null, "ko-KR");
+        if (my !== token) return;
+        await sleep(gapMs(it.ex[0]) * 1.3);
+        if (my !== token) return;
+        await say(it.en + ". " + it.ex[0]);
+        if (my !== token) return;
+        await sleep(700);
+      } else {
+        await say(it.en);
+        if (my !== token) return;
+        await sleep(500);
+        if (my !== token) return;
+        await say(it.ex[0]);
+        if (my !== token) return;
+        await sleep(900);
+      }
     }
-    if (phr.mode === "ko") {
-      await speak(it.ex[1], null, "ko-KR");
-      if (my !== token) return;
-      await sleep(gapMs(it.ex[0]) * 1.3);
-      if (my !== token) return;
-      await say(it.en + ". " + it.ex[0]);
-      if (my !== token) return;
-      await sleep(700);
-    } else {
-      await say(it.en);
-      if (my !== token) return;
-      await sleep(500);
-      if (my !== token) return;
-      await say(it.ex[0]);
-      if (my !== token) return;
-      await sleep(900);
-    }
-  }
+    if (my === token && phr.loop) await sleep(1200);
+  } while (my === token && phr.loop);
   if (my === token) {
     phr.tok = -1;
     phrBtn();
@@ -1395,7 +1414,9 @@ function renderPhr() {
     (phr.mode === "en" ? " selected" : "") +
     '>쭉 듣기 (표현 → 예문)</option><option value="ko"' +
     (phr.mode === "ko" ? " selected" : "") +
-    '>한글 → 내가 영어로 말하기</option></select><select id="phGrp"><option value="all">전체</option>' +
+    '>한글 → 내가 영어로 말하기</option><option value="full"' +
+    (phr.mode === "full" ? " selected" : "") +
+    '>풀코스 (뜻 → 표현 → 예문)</option></select><select id="phGrp"><option value="all">전체</option>' +
     PHRASES.map(
       (g, gi) =>
         '<option value="' +
@@ -1406,7 +1427,9 @@ function renderPhr() {
         esc(g.grp) +
         "</option>",
     ).join("") +
-    '</select><button class="mini pri" id="phPlay">' +
+    '</select><label class="ck"><input type="checkbox" id="phLoop"' +
+    (phr.loop ? " checked" : "") +
+    '> 끝나면 처음부터 반복</label><button class="mini pri" id="phPlay">' +
     (phrRunning() ? "■ 정지" : "▶ 시작") +
     "</button></div>";
   PHRASES.forEach((g, gi) => {
@@ -1443,6 +1466,7 @@ function renderPhr() {
 $("#v-phr").addEventListener("change", (e) => {
   if (e.target.id === "phMode") phr.mode = e.target.value;
   if (e.target.id === "phGrp") phr.grp = e.target.value;
+  if (e.target.id === "phLoop") phr.loop = e.target.checked;
   if (e.target.id === "phHide") {
     phr.hide = e.target.checked;
     phr.open.clear();

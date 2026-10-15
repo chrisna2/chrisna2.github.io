@@ -816,3 +816,10 @@ mark {
 .bcard.now {
   outline: 2px solid var(--live);
 }
+.phbar .ck {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  flex: 1 1 100%;
+}
