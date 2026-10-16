@@ -5033,4 +5033,259 @@ const PHRASES = [
       },
     ],
   },
+  {
+    grp: "새 표현 · 질문·요청",
+    items: [
+      {
+        en: "Where is",
+        ko: "~은 어디인가요?",
+        ex: ["Where is the nearest station?", "가장 가까운 역이 어디인가요?"],
+      },
+      {
+        en: "Do you know where",
+        ko: "~이 어디인지 아시나요?",
+        ex: ["Do you know where the restroom is?", "화장실이 어디인지 아시나요?"],
+      },
+      {
+        en: "Could I get",
+        ko: "~를 받을 수 있을까요?",
+        ex: ["Could I get a receipt?", "영수증 주시겠어요?"],
+      },
+      {
+        en: "Could you",
+        ko: "~해주실 수 있나요?",
+        ex: ["Could you open the window?", "창문 좀 열어주실 수 있나요?"],
+      },
+      {
+        en: "I'm trying to find",
+        ko: "~를 찾으려고 노력 중이다",
+        ex: ["I'm trying to find the parking lot.", "주차장을 찾고 있어요."],
+      },
+      {
+        en: "How do I",
+        ko: "어떻게 ~하나요?",
+        ex: ["How do I use this?", "이거 어떻게 사용하나요?"],
+      },
+      {
+        en: "Why not try",
+        ko: "~해보는 건 어때?",
+        ex: ["Why not just ask directly?", "그냥 직접 물어보는 건 어때?"],
+      },
+      {
+        en: "How come",
+        ko: "왜? 어째서?",
+        ex: ["How come you're not eating?", "왜 안 먹어?"],
+      },
+      {
+        en: "What do you think about",
+        ko: "~에 대해 어떻게 생각해?",
+        ex: ["What do you think about my idea?", "내 생각에 대해 어떻게 생각해?"],
+      },
+      {
+        en: "Then what about",
+        ko: "그럼 ~는 어때?",
+        ex: ["Then what about next week?", "그럼 다음 주는 어때?"],
+      },
+      {
+        en: "Have you tried",
+        ko: "~해봤니?",
+        ex: ["Have you tried turning it off and on?", "껐다 켜봤니?"],
+      },
+      {
+        en: "Have you been to",
+        ko: "~에 가본 적 있니?",
+        ex: ["Have you been to that cafe?", "그 카페에 가본 적 있니?"],
+      },
+      {
+        en: "Where can I",
+        ko: "어디서 ~ 할 수 있나요?",
+        ex: ["Where can I exchange money here?", "여기서 어디서 환전할 수 있나요?"],
+      },
+      {
+        en: "How long does it take",
+        ko: "~가 얼마나 걸리나요?",
+        ex: ["How long does it take to get downtown?", "시내까지 얼마나 걸리나요?"],
+      },
+      {
+        en: "What if",
+        ko: "만약 ~라면 어쩌지?",
+        ex: ["What if I'm late?", "만약 내가 늦으면 어쩌지?"],
+      },
+      {
+        en: "How long did it take",
+        ko: "~가 얼마나 걸렸니?",
+        ex: ["How long did it take to learn that?", "그거 배우는 데 얼마나 걸렸니?"],
+      },
+    ],
+  },
+  {
+    grp: "새 표현 · 계획·상태·감정",
+    items: [
+      {
+        en: "It's been",
+        ko: "~한 지 ~가 되었다",
+        ex: ["It's been 6 months since I moved here.", "여기 이사 온 지 6개월이 됐어."],
+      },
+      {
+        en: "I feel like",
+        ko: "~하고 싶다/기분이다",
+        ex: ["I feel like going for a walk.", "산책하러 가고 싶어."],
+      },
+      {
+        en: "I'll stick with",
+        ko: "~로 할게/고수할게",
+        ex: ["I'll stick with the original.", "원래 걸로 할게."],
+      },
+      {
+        en: "I'm about to",
+        ko: "막 ~하려던 참이다",
+        ex: ["I'm about to head out.", "막 나가려던 참이야."],
+      },
+      {
+        en: "I've got to",
+        ko: "~해야만 한다",
+        ex: ["I've got to go right now.", "지금 당장 가야 해."],
+      },
+      {
+        en: "I'm supposed to",
+        ko: "~하기로 되어 있다",
+        ex: ["I'm supposed to be on a diet.", "나 다이어트 하기로 되어 있어."],
+      },
+      {
+        en: "I was just about to",
+        ko: "막 ~하려던 참이었다",
+        ex: ["I was just about to order.", "막 주문하려던 참이었어."],
+      },
+      {
+        en: "I'm all set to",
+        ko: "~할 준비가 다 되었다",
+        ex: ["I'm all set to leave.", "떠날 준비 다 됐어."],
+      },
+      {
+        en: "I'm thinking about",
+        ko: "~에 대해 생각 중이다",
+        ex: ["I'm thinking about changing jobs.", "이직할까 생각 중이야."],
+      },
+      {
+        en: "I'm able to",
+        ko: "~할 수 있다",
+        ex: ["I'm able to help tomorrow.", "내일 도울 수 있어."],
+      },
+      {
+        en: "I don't think I can",
+        ko: "~할 수 있을지 모르겠다",
+        ex: ["I don't think I can make it today.", "오늘 못 갈 것 같아."],
+      },
+      {
+        en: "Don't forget to",
+        ko: "~하는 것을 잊지 마",
+        ex: ["Don't forget to lock the door.", "문 잠그는 거 잊지 마."],
+      },
+      {
+        en: "I'm working on",
+        ko: "~을 작업/노력 중이다",
+        ex: ["I'm working on improving my pronunciation.", "발음 고치려고 노력 중이야."],
+      },
+      {
+        en: "I'm trying to avoid",
+        ko: "~를 피하려고 노력 중이다",
+        ex: ["I'm trying to avoid caffeine.", "카페인을 피하려고 노력 중이야."],
+      },
+      {
+        en: "I'm getting",
+        ko: "~해지고 있다",
+        ex: ["I'm getting tired.", "피곤해지고 있어."],
+      },
+      {
+        en: "I'm getting used to",
+        ko: "~에 익숙해지고 있다",
+        ex: ["I'm getting used to the new keyboard.", "새 키보드에 익숙해지고 있어."],
+      },
+      {
+        en: "I've got",
+        ko: "~가 있다",
+        ex: ["I've got plans tonight.", "오늘 밤에 계획이 있어."],
+      },
+      {
+        en: "I got to",
+        ko: "~해야만 했다",
+        ex: ["I got to hang up now.", "이제 끊어야 해."],
+      },
+      {
+        en: "I'm okay",
+        ko: "난 괜찮아",
+        ex: ["I'm okay, thanks.", "난 괜찮아, 고마워."],
+      },
+      {
+        en: "I've been",
+        ko: "계속 ~해왔다",
+        ex: ["I've been looking for this.", "계속 이걸 찾고 있었어."],
+      },
+      {
+        en: "I'm considering",
+        ko: "~를 고려 중이다",
+        ex: ["I'm considering starting a YouTube channel.", "유튜브 채널 시작을 고려 중이야."],
+      },
+      {
+        en: "I would",
+        ko: "~할 것 같아/할게",
+        ex: ["I would just wait.", "난 그냥 기다릴 것 같아."],
+      },
+      {
+        en: "I'm obsessed with",
+        ko: "~에 사로잡혀 있다/광적으로 좋아한다",
+        ex: ["I'm obsessed with this song.", "이 노래에 완전히 꽂혔어."],
+      },
+      {
+        en: "I've been busy",
+        ko: "~하느라 바빴어",
+        ex: ["I've been busy preparing for my move.", "이사 준비하느라 바빴어."],
+      },
+      {
+        en: "I'm not sure if I should",
+        ko: "~해도 될지 모르겠어",
+        ex: ["I'm not sure if I should bring it up.", "그 이야기를 꺼내야 할지 모르겠어."],
+      },
+      {
+        en: "I feel like I",
+        ko: "내가 ~한 것 같은 기분이다",
+        ex: ["I feel like I missed something.", "뭔가 놓친 것 같은 기분이야."],
+      },
+    ],
+  },
+  {
+    grp: "새 표현 · 경험·의견·결과",
+    items: [
+      {
+        en: "It's not about",
+        ko: "~가 문제가 아니다",
+        ex: ["It's not about the money.", "돈 문제가 아니야."],
+      },
+      {
+        en: "It turns out",
+        ko: "알고 보니 ~더라",
+        ex: ["It turns out we went to the same school.", "알고 보니 우리 같은 학교 다녔더라."],
+      },
+      {
+        en: "I didn't mean to",
+        ko: "일부러 ~하려던 건 아니었다",
+        ex: ["I didn't mean to offend you.", "기분 상하게 하려던 건 아니었어."],
+      },
+      {
+        en: "I ended up",
+        ko: "결국 ~하게 되었다",
+        ex: ["I ended up walking there.", "결국 거기까지 걸어갔어."],
+      },
+      {
+        en: "You should have",
+        ko: "~했어야지",
+        ex: ["You should have booked in advance.", "미리 예약했어야지."],
+      },
+      {
+        en: "That's what happens when",
+        ko: "~하면 이런 결과가 나와/그게 ~의 결과야",
+        ex: ["That's what happens when you rush.", "서두르면 그런 결과가 나오는 거야."],
+      },
+    ],
+  },
 ];
