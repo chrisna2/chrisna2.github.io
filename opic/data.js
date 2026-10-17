@@ -4400,7 +4400,546 @@ REPLAY.qs.forEach((q, i) => {
 /* 저장된 모의시험 세트 목록. 새 시험을 복기할 때마다 아래 배열에 세트를 추가하면
    모의고사 화면에 버튼이 자동으로 생긴다.
    세트 형식: {name, note?, qs:[{kind 문제 종류, t 제목, tag, q:[영어, 한글], s:[[영어({}=내 이야기), 한글, 키워드]], cat:'survey'|'surprise'|'rp'}]} */
-const MOCK_SETS = [REPLAY];
+const REPLAY2 = {
+  name: "10/17 모의시험 2회차 복기",
+  qs: [
+    {
+      kind: "자기소개",
+      t: "1 자기소개",
+      tag: "복기",
+      q: [
+        "Let's start the interview. Now tell me about yourself.",
+        "인터뷰를 시작하겠습니다. 자기소개를 해 주세요.",
+      ],
+      s: [
+        [
+          "Hello, my name is {Hyun-gi}. It's nice to meet you.",
+          "안녕하세요, 제 이름은 현기예요. 만나서 반갑습니다.",
+          "인사",
+        ],
+        [
+          "I'm a software developer, and I've been working in {the IT field for about eight years}.",
+          "저는 소프트웨어 개발자이고 IT 분야에서 약 8년째 일하고 있어요.",
+          "직업",
+        ],
+        [
+          "I live alone in {an apartment in Seoul}, and in my free time I enjoy {playing online games and listening to music}.",
+          "저는 서울의 아파트에서 혼자 살고, 여가 시간에는 온라인 게임과 음악 듣기를 즐겨요.",
+          "집 · 취미",
+        ],
+        [
+          "I'm taking this test because {my company requires a certain grade}.",
+          "회사에서 요구하는 등급이 있어서 이 시험을 보게 됐어요.",
+          "시험 이유",
+        ],
+        [
+          "I'm a little nervous, but I studied a lot, so I'll do my best.",
+          "조금 긴장되지만 많이 공부했으니 최선을 다할게요.",
+          "각오 (등급 부탁은 금지)",
+        ],
+      ],
+      cat: "survey",
+    },
+    {
+      kind: "미용실 · 위치와 모습",
+      t: "2 미용실 위치·모습",
+      tag: "복기",
+      q: [
+        "Tell me about the hair salon you usually go to. Where is it located and what is it like?",
+        "자주 가는 미용실에 대해 말해 주세요. 어디에 있고 어떤 곳인가요?",
+      ],
+      s: [
+        [
+          "I usually go to {a hair salon near my house}, and it takes about {five minutes} on foot.",
+          "저는 보통 집 근처 미용실에 가고, 걸어서 5분쯤 걸려요.",
+          "위치",
+        ],
+        [
+          "It's {a small and clean salon}, and there are {a big mirror, a few chairs, and a waiting sofa}.",
+          "작고 깔끔한 곳이고, 큰 거울과 의자 몇 개, 대기용 소파가 있어요.",
+          "모습",
+        ],
+        [
+          "I go there because it's close, and I get my hair cut {quite often}.",
+          "가까워서 가고, 머리를 꽤 자주 잘라요.",
+          "가는 이유",
+        ],
+        [
+          "The hair stylist is very skilled, so I trust her.",
+          "미용사가 실력이 좋아서 믿고 맡겨요.",
+          "미용사",
+        ],
+        ["That's why I like going there.", "그래서 그곳에 가는 게 좋아요.", "마무리"],
+      ],
+      cat: "survey",
+    },
+    {
+      kind: "미용실 · 하는 일",
+      t: "3 미용실에서 하는 일",
+      tag: "복기",
+      q: [
+        "What do you usually do when you go to the hair salon? Do you get a haircut, dye your hair, or get other treatments?",
+        "미용실에 가면 보통 무엇을 하나요? 커트, 염색, 다른 시술 중에서 자세히 말해 주세요.",
+      ],
+      s: [
+        [
+          "I usually get a haircut, and I ask for {a two-block cut}.",
+          "저는 보통 커트를 하고, 투블럭으로 해 달라고 해요.",
+          "하는 일",
+        ],
+        [
+          "I don't dye my hair because {my hair is weak}, and strong chemicals can damage it.",
+          "머리카락이 약해서 염색은 안 해요. 강한 약품이 머리를 상하게 할 수 있거든요.",
+          "염색 안 하는 이유",
+        ],
+        [
+          "First, I sit on the sofa and wait for my turn. Then the stylist washes and cuts my hair.",
+          "먼저 소파에 앉아 차례를 기다리고, 그다음 미용사가 머리를 감기고 잘라요.",
+          "순서",
+        ],
+        [
+          "She is good at styling, so I'm usually satisfied with the result.",
+          "스타일링을 잘해서 보통 결과에 만족해요.",
+          "만족",
+        ],
+        [
+          "After that, I check the style in the mirror and pay.",
+          "그 뒤에 거울로 스타일을 확인하고 계산해요.",
+          "마무리",
+        ],
+      ],
+      cat: "survey",
+    },
+    {
+      kind: "미용실 · 기억에 남는 경험",
+      t: "4 미용실 기억에 남는 경험",
+      tag: "복기",
+      q: [
+        "Tell me about a memorable experience you had at a hair salon. What happened and why was it unforgettable?",
+        "미용실에서 기억에 남는 경험을 말해 주세요. 무슨 일이 있었고 왜 잊을 수 없나요?",
+      ],
+      s: [
+        [
+          "One of my most memorable experiences at a hair salon happened {when I was young}.",
+          "미용실에서 가장 기억에 남는 경험은 어릴 때 있었어요.",
+          "도입",
+        ],
+        [
+          "My regular salon near my old house was closed, so I went to another one.",
+          "옛집 근처 단골 미용실이 문을 닫아서 다른 곳에 갔어요.",
+          "상황",
+        ],
+        [
+          "I asked for {a two-block cut}, but the stylist wasn't good at it, and my hair looked terrible.",
+          "투블럭으로 해 달라고 했는데 미용사가 서툴러서 머리가 엉망이 됐어요.",
+          "문제",
+        ],
+        [
+          "I didn't want to pay, but it was my choice to go there, so I paid.",
+          "돈을 내기 싫었지만 제가 선택한 거라 계산했어요.",
+          "결과",
+        ],
+        [
+          "It was unforgettable because it was my worst haircut ever. Since then, I check reviews before I go to a new salon.",
+          "최악의 머리였어서 잊을 수 없어요. 그 뒤로는 새 미용실에 가기 전에 후기를 확인해요.",
+          "마무리",
+        ],
+      ],
+      cat: "survey",
+    },
+    {
+      kind: "집 · 위치와 방 묘사",
+      t: "5 집 · 방",
+      tag: "복기",
+      q: [
+        "Please tell me about your house. Where is it located and what does it look like? Which one is your favorite room?",
+        "집에 대해 말해 주세요. 어디에 있고 어떻게 생겼나요? 가장 좋아하는 방은 어디인가요?",
+      ],
+      s: [
+        [
+          "I live alone in {an apartment on the fifth floor}.",
+          "저는 5층 아파트에서 혼자 살아요.",
+          "집",
+        ],
+        [
+          "My home isn't big or small, and it's very cozy and comfortable.",
+          "집은 크지도 작지도 않고, 아주 아늑하고 편해요.",
+          "느낌",
+        ],
+        [
+          "It has {one bedroom, a living room, a kitchen, and a bathroom}.",
+          "침실 하나, 거실, 주방, 욕실이 있어요.",
+          "방 구성",
+        ],
+        [
+          "My favorite room is the living room, because it has {a big TV and my computer}.",
+          "제일 좋아하는 방은 거실이에요. 큰 TV와 컴퓨터가 있거든요.",
+          "좋아하는 방",
+        ],
+        [
+          "I play online games there, and since I live alone, I really enjoy my freedom.",
+          "거기서 온라인 게임을 하고, 혼자 살아서 자유를 정말 즐겨요.",
+          "이유",
+        ],
+      ],
+      cat: "survey",
+    },
+    {
+      kind: "집 · 최근 바꾼 점",
+      t: "6 집 · 최근 변화",
+      tag: "복기",
+      q: [
+        "Please tell me about the changes you have made to your house recently. Why did you make the changes? Are you satisfied with them?",
+        "최근 집에 바꾼 점을 말해 주세요. 왜 바꿨고 만족하나요?",
+      ],
+      s: [
+        [
+          "Recently, I bought {a new audio system} because I love listening to music.",
+          "최근에 음악 듣는 걸 좋아해서 새 오디오 시스템을 샀어요.",
+          "바꾼 것 · 이유",
+        ],
+        [
+          "It was big, so I changed {the layout of my living room}.",
+          "크기가 커서 거실 배치를 바꿨어요.",
+          "변화",
+        ],
+        [
+          "The sound is great, and it makes me really happy and excited.",
+          "소리가 훌륭하고 저를 정말 행복하고 신나게 해 줘요.",
+          "좋은 점",
+        ],
+        ["I'm very satisfied with it.", "아주 만족해요.", "만족"],
+        [
+          "I think it was one of the best things I've ever bought.",
+          "제가 산 것 중 가장 잘한 것 중 하나라고 생각해요.",
+          "마무리",
+        ],
+      ],
+      cat: "survey",
+    },
+    {
+      kind: "집 · 문제와 해결",
+      t: "7 집 · 문제 해결",
+      tag: "복기",
+      q: [
+        "Have you had any problems at home? For instance, a piece of furniture or a home appliance could be broken or damaged. How did you handle the situation?",
+        "집에서 문제가 있었나요? 가구나 가전이 고장 나거나 망가졌을 수 있어요. 어떻게 해결했나요?",
+      ],
+      s: [
+        [
+          "I haven't had many big problems at home, but once {my TV stopped working}.",
+          "집에서 큰 문제는 많지 않았지만, 한 번은 TV가 멈춘 적이 있어요.",
+          "도입",
+        ],
+        [
+          "I checked {the power and the cable}, but it still didn't work.",
+          "전원과 케이블을 확인했지만 그래도 안 됐어요.",
+          "시도",
+        ],
+        [
+          "So I contacted the manufacturer's service center, and they fixed it.",
+          "그래서 제조사 서비스 센터에 연락했고 고쳐 줬어요.",
+          "해결",
+        ],
+        ["Now it works well.", "지금은 잘 작동해요.", "결과"],
+        [
+          "The only other problem is that my home feels a little empty, because I live alone.",
+          "그 밖의 문제라면 혼자 살아서 집이 조금 허전하다는 거예요.",
+          "마무리",
+        ],
+      ],
+      cat: "survey",
+    },
+    {
+      kind: "카페 · 우리 동네 모습",
+      t: "8 카페 묘사",
+      tag: "복기",
+      q: [
+        "Tell me what cafes and coffee shops typically look like in your community.",
+        "우리 동네의 카페와 커피숍은 보통 어떤 모습인지 말해 주세요.",
+      ],
+      s: [
+        [
+          "In my town, most cafes are {clean and modern}, with {comfortable seats and soft lighting}.",
+          "우리 동네 카페는 대부분 깔끔하고 현대적이고, 편한 좌석과 은은한 조명이 있어요.",
+          "전체 모습",
+        ],
+        [
+          "There's a Starbucks near my house, and its interior is well maintained.",
+          "집 근처에 스타벅스가 있는데 인테리어가 잘 관리돼 있어요.",
+          "예시",
+        ],
+        [
+          "Many people go there to {study, work, or chat with friends}.",
+          "많은 사람들이 공부하거나 일하거나 친구와 수다를 떨러 가요.",
+          "사람들",
+        ],
+        [
+          "Some cafes also hold community events like {meetings or small celebrations}.",
+          "어떤 카페는 모임이나 작은 축하 행사 같은 지역 행사도 열어요.",
+          "행사",
+        ],
+        [
+          "I'm not a big cafe person, but I like a quiet cafe where I can focus.",
+          "카페를 아주 좋아하진 않지만 집중할 수 있는 조용한 카페는 좋아해요.",
+          "마무리",
+        ],
+      ],
+      cat: "survey",
+    },
+    {
+      kind: "카페 · 처음 간 기억",
+      t: "9 처음 간 카페",
+      tag: "복기",
+      q: [
+        "Tell me about the one time you remember going to a cafe or coffee shop. Were you a child or were you older? What happened when you were there?",
+        "카페에 갔던 기억을 하나 말해 주세요. 어릴 때였나요, 더 컸나요? 거기서 무슨 일이 있었나요?",
+      ],
+      s: [
+        [
+          "The first time I remember going to a cafe was when {I was a high school student}.",
+          "제가 기억하는 첫 카페는 고등학생 때예요.",
+          "도입",
+        ],
+        [
+          "I couldn't focus on studying in my room at my old house.",
+          "옛집 제 방에서는 공부에 집중이 안 됐어요.",
+          "이유",
+        ],
+        ["So I went to a small cafe near my house.", "그래서 집 근처 작은 카페에 갔어요.", "행동"],
+        [
+          "It was quiet, and I could really focus on my studies.",
+          "조용해서 공부에 정말 집중할 수 있었어요.",
+          "분위기",
+        ],
+        [
+          "I studied very well that day, so it was a good experience.",
+          "그날 공부가 아주 잘 돼서 좋은 경험이었어요.",
+          "마무리",
+        ],
+      ],
+      cat: "survey",
+    },
+    {
+      kind: "카페 · 특별한 경험",
+      t: "10 카페 특별한 경험",
+      tag: "복기",
+      q: [
+        "Tell me about a time you went to a cafe or coffee shop that was very memorable. Did something unusual or strange happen?",
+        "아주 기억에 남는 카페 방문을 말해 주세요. 특이하거나 이상한 일이 있었나요?",
+      ],
+      s: [
+        [
+          "About {two years ago}, I lost my wallet at a cafe near {my college}.",
+          "2년쯤 전에 대학 근처 카페에서 지갑을 잃어버렸어요.",
+          "도입",
+        ],
+        [
+          "I had been {studying there with a friend}, and I left it on the table.",
+          "거기서 친구와 공부하다가 테이블에 두고 왔어요.",
+          "상황",
+        ],
+        [
+          "I didn't notice until I got home, and I felt very worried.",
+          "집에 와서야 알았고 아주 걱정됐어요.",
+          "깨달음",
+        ],
+        [
+          "I went back to the cafe right away, but the wallet couldn't be found.",
+          "바로 카페에 돌아갔지만 지갑은 찾을 수 없었어요.",
+          "결과",
+        ],
+        [
+          "It was so embarrassing, and since then I check my bag before I leave a cafe.",
+          "너무 당황스러웠고, 그 뒤로는 카페를 나서기 전에 가방을 확인해요.",
+          "교훈",
+        ],
+      ],
+      cat: "survey",
+    },
+    {
+      kind: "롤플레이 11",
+      t: "11 친구에게 MP3 질문",
+      tag: "복기",
+      q: [
+        "You want to buy an MP3 player. Call a friend who knows a lot about it and ask 3 or 4 questions to get information about buying an MP3 player.",
+        "MP3 플레이어를 사려고 합니다. 잘 아는 친구에게 전화해서 3~4가지 질문을 하세요.",
+      ],
+      s: [
+        [
+          "Hi, it's {Hyun-gi}. I'm thinking about buying an MP3 player, and I need your help.",
+          "안녕, 나 현기야. MP3 플레이어를 사려는데 네 도움이 필요해.",
+          "도입",
+        ],
+        [
+          "What kind of MP3 player would you recommend?",
+          "어떤 종류의 MP3 플레이어를 추천해?",
+          "질문 1",
+        ],
+        [
+          "How much memory do I need? And does it need Bluetooth?",
+          "메모리는 얼마나 필요해? 블루투스도 있어야 할까?",
+          "질문 2",
+        ],
+        [
+          "Which brand has the best sound quality for around {$200}?",
+          "200달러쯤이면 어느 브랜드가 음질이 제일 좋아?",
+          "질문 3",
+        ],
+        [
+          "Where can I buy it? Thank you so much!",
+          "어디서 살 수 있어? 정말 고마워!",
+          "질문 4 · 마무리",
+        ],
+      ],
+      cat: "rp",
+    },
+    {
+      kind: "롤플레이 12",
+      t: "12 친구 MP3 고장",
+      tag: "복기",
+      q: [
+        "You borrowed an MP3 player from a friend and broke it. Call your friend, explain what happened and the current condition, then suggest 2 or 3 solutions.",
+        "친구에게 빌린 MP3 플레이어를 망가뜨렸습니다. 전화해서 상황과 현재 상태를 설명하고 해결책 2~3가지를 제안하세요.",
+      ],
+      s: [
+        [
+          "Hi, it's {Hyun-gi}. I have some bad news. I'm so sorry, but I broke your MP3 player.",
+          "안녕, 나 현기야. 안 좋은 소식이 있어. 정말 미안한데 네 MP3 플레이어를 망가뜨렸어.",
+          "도입 · 사과",
+        ],
+        [
+          "I dropped it when {I had a small car accident}, and now it won't turn on.",
+          "작은 교통사고가 났을 때 떨어뜨렸고, 지금은 켜지지 않아.",
+          "상황 · 상태",
+        ],
+        [
+          "I have three ideas. First, I can take it to a repair shop and pay for it.",
+          "해결책이 세 가지 있어. 첫째, 수리점에 가져가서 내가 비용을 낼게.",
+          "해결책 1",
+        ],
+        [
+          "Second, if it can't be fixed, I'll buy you the same model.",
+          "둘째, 고칠 수 없으면 같은 모델을 사 줄게.",
+          "해결책 2",
+        ],
+        [
+          "Third, I could buy you a newer one. Which one do you prefer?",
+          "셋째, 더 새 제품을 사 줄 수도 있어. 어느 쪽이 좋아?",
+          "해결책 3 · 질문",
+        ],
+      ],
+      cat: "rp",
+    },
+    {
+      kind: "롤플레이 13",
+      t: "13 비슷한 경험 (기기 고장)",
+      tag: "복기",
+      q: [
+        "Tell me about a time when some equipment or device broke down or didn't work properly. What was the situation, what happened, and how did you solve the problem?",
+        "장비나 기기가 고장 났거나 제대로 작동하지 않았던 경험을 말해 주세요. 어떤 상황이었고 어떻게 해결했나요?",
+      ],
+      s: [
+        [
+          "Recently, my TV stopped working, and I didn't know why.",
+          "최근에 TV가 멈췄는데 이유를 몰랐어요.",
+          "도입",
+        ],
+        [
+          "I had bought it {one year ago}, so it was still under warranty.",
+          "1년 전에 산 거라 아직 보증 기간이었어요.",
+          "배경",
+        ],
+        [
+          "I contacted the manufacturer's service center, and they sent a technician.",
+          "제조사 서비스 센터에 연락했고 기사님이 왔어요.",
+          "해결 요청",
+        ],
+        ["He repaired it, and now it works well.", "수리해 줬고 지금은 잘 작동해요.", "결과"],
+        [
+          "I learned that I should keep my receipt and check the warranty.",
+          "영수증을 보관하고 보증을 확인해야 한다는 걸 배웠어요.",
+          "교훈",
+        ],
+      ],
+      cat: "rp",
+    },
+    {
+      kind: "이슈 · 인터넷 사용",
+      t: "14 연령별 인터넷 사용",
+      tag: "복기",
+      q: [
+        "How is the use of the Internet different among different age groups? What do younger people typically do on the Internet and how do older people use it?",
+        "연령대별로 인터넷 사용은 어떻게 다른가요? 젊은 사람과 나이 든 사람은 각각 무엇을 하나요?",
+      ],
+      s: [
+        [
+          "There are two big differences in how younger and older people use the Internet.",
+          "젊은 사람과 나이 든 사람의 인터넷 사용에는 큰 차이가 두 가지 있어요.",
+          "도입",
+        ],
+        [
+          "First, younger people mostly use it to connect with others, like {Instagram and KakaoTalk}.",
+          "첫째, 젊은 사람들은 주로 인스타그램, 카카오톡처럼 사람들과 연결되는 데 써요.",
+          "차이 1",
+        ],
+        [
+          "Second, older people use it to get information, like {YouTube, Naver, and Wikipedia}.",
+          "둘째, 나이 든 사람들은 유튜브, 네이버, 위키백과처럼 정보를 얻는 데 써요.",
+          "차이 2",
+        ],
+        [
+          "So young people use it for social networking, while older people use it for information.",
+          "그래서 젊은 사람은 소셜 활동에, 나이 든 사람은 정보에 써요.",
+          "정리",
+        ],
+        ["I think that's the main difference.", "그게 가장 큰 차이라고 생각해요.", "마무리"],
+      ],
+      cat: "surprise",
+    },
+    {
+      kind: "이슈 · 인터넷 문제",
+      t: "15 인터넷 이슈",
+      tag: "복기",
+      q: [
+        "Tell me about some issues regarding the Internet these days, for example, security problems or personal information. How have these concerns changed over the years and how do they affect people in your country?",
+        "요즘 인터넷의 문제(보안, 개인정보 등)를 말해 주세요. 해마다 우려가 어떻게 바뀌었고 우리나라 사람들에게 어떤 영향이 있나요?",
+      ],
+      s: [
+        [
+          "These days, one big issue is {hacking with AI and personal information leaks}.",
+          "요즘 큰 문제 중 하나는 AI를 이용한 해킹과 개인정보 유출이에요.",
+          "도입",
+        ],
+        [
+          "I read a news story that {hackers used AI to attack a banking system}, and a lot of personal information was leaked.",
+          "해커가 AI로 은행 시스템을 공격해 많은 개인정보가 유출됐다는 뉴스를 읽었어요.",
+          "뉴스",
+        ],
+        [
+          "Years ago, people mainly worried about {viruses and spam}, but now the problems are more serious.",
+          "몇 년 전에는 주로 바이러스와 스팸을 걱정했지만, 지금은 문제가 더 심각해요.",
+          "과거 vs 지금",
+        ],
+        [
+          "In Korea, many people use online banking, so it affects almost everyone.",
+          "한국에서는 많은 사람이 온라인 뱅킹을 써서 거의 모두에게 영향이 있어요.",
+          "우리나라 영향",
+        ],
+        [
+          "It's a hard problem, but I think it must be solved.",
+          "어려운 문제지만 반드시 해결해야 한다고 생각해요.",
+          "마무리",
+        ],
+      ],
+      cat: "surprise",
+    },
+  ],
+};
+REPLAY2.qs.forEach((q, i) => {
+  q.cat = i < 10 ? "survey" : i < 13 ? "rp" : "surprise";
+});
+const MOCK_SETS = [REPLAY, REPLAY2];
 
 /* 발화 노트(날짜별 복기 기록). 시험 후 평가를 여기에 추가하면 모의고사 화면의 발화 노트에 나타난다.
    형식: {date, title, set(MOCK_SETS 인덱스), grade 예상 등급, summary, good:[], problems:[{q 문제, cat, issue 문제점, fix 고칠 점}], actions:[우선순위 할 일]} */
@@ -4479,6 +5018,93 @@ const MOCK_REVIEWS = [
       "싫다·모른다로 시작하지 않기: I don't ... often, but ... 후 묘사 뼈대(K, 시설 7단계)로 5~6문장",
       "always 금지, 과거 이야기는 순서 표지(Last year → Then → After that → In the end)로 고정",
       "복기 세트를 영어 가리기 상태로 2~3회 반복, 막히면 결과 화면의 모범답안과 비교",
+    ],
+  },
+  {
+    date: "2026-10-17",
+    title: "2회차 모의시험 (15문제)",
+    set: 1,
+    grade: "IM1 중후반 (목표 IM2까지 한 걸음, 1회차 IL 후반~IM1에서 상승)",
+    summary:
+      "1회차보다 길고 구조가 생겼음. 지갑 분실·TV 고장 경험이 이야기로 이어지고 14번은 '차이 두 가지' 틀이 잡힘. 점수를 깎는 것은 롤플레이 과제 수행(질문 개수, 해결책 개수), 질문을 피하거나 포기하는 답(Q7·Q8), 반복 문법 오류와 끝맺음. 녹취록 기준 평가라 발음·억양·침묵은 반영되지 않음. 'hair salon→healthur', 'wallet→warlead' 같은 STT 오인식은 감점하지 않음.",
+    good: [
+      "경험 이야기에 흐름이 있음: 미용실 최악의 머리(Q4), 고등학교 때 카페 공부(Q9), 지갑 분실(Q10), TV 고장→서비스 센터→교훈(Q13)",
+      "자기 교정: 'I always go to No, I usually go there'처럼 always를 스스로 고침 (1회차 대비 개선)",
+      "Q14는 'there are two differences'로 구조를 먼저 말하고 SNS 대 정보 검색으로 대비를 만듦",
+      "Q15는 최근 뉴스(AI 해킹, 은행 개인정보)를 예로 들어 내용이 있음",
+      "Q3에서 '머리카락이 약해서 염색 안 함'처럼 이유를 말함",
+    ],
+    problems: [
+      {
+        q: "Q1 자기소개",
+        cat: "서베이",
+        issue:
+          "'Please give me a good grade'와 '시험이 처음이라 긴장된다'만 말함. 직업·집·취미 소개가 없음",
+        fix: "직업 → 사는 곳 → 취미 → 각오 5문장 고정. 등급 부탁은 하지 않기 (복기 세트 Q1 모범답안)",
+      },
+      {
+        q: "Q11 롤플레이",
+        cat: "롤플레이",
+        issue:
+          "'Hi, nice to meet you'로 친구에게 인사하고, 질문 대신 'I want ~'로 원하는 것을 나열. 실제 질문은 'can you recommend' 두 번뿐",
+        fix: "Hi, it's ... → What kind / How much / Which brand / Where can I 4개 질문 틀 (롤플레이 > 친구에게 질문 L, 표현 'Can I', 'Do you have')",
+      },
+      {
+        q: "Q12 롤플레이",
+        cat: "롤플레이",
+        issue:
+          "해결책이 '같은 걸 새로 사 주겠다' 하나뿐이고 사과가 반복됨. 'Can you call me?'로 역할이 뒤집힘",
+        fix: "First / Second / Third로 수리·같은 모델·새 제품 3가지 번호 붙여 말하기 (롤플레이 > 문제 해결 H, I)",
+      },
+      {
+        q: "Q7 집 문제",
+        cat: "서베이",
+        issue:
+          "'문제가 없었다'로 시작해 과제(고장 경험과 해결)를 피함. 마지막에 '새 파트너가 필요하다'로 빠짐",
+        fix: "없으면 Q13 소재(TV 고장)를 가져와 상황→시도→해결 3문장 (복기 세트 Q7)",
+      },
+      {
+        q: "Q8 카페 묘사",
+        cat: "서베이",
+        issue:
+          "'I don't have an interest of the cafe so I can't tell anymore'로 스스로 중단. 길이 부족",
+        fix: "모르면 포기하지 말고 만능 묘사(인테리어·좌석·손님·분위기)로 5문장 (서베이 K 만능 묘사)",
+      },
+      {
+        q: "Q10 카페 특별한 경험",
+        cat: "서베이",
+        issue:
+          "지갑 분실 이야기가 'could be founded', 'my old house' 등 문법과 연결이 흔들리고 결말이 갑자기 끝남",
+        fix: "순서 표지 About two years ago → Then → I realized → I went back → Since then 으로 고정 (서베이 C 지갑 분실)",
+      },
+      {
+        q: "Q5·Q6 집",
+        cat: "서베이",
+        issue:
+          "'live in alone', 'in apartment in 50 floor', 'very where buying statue' 등 어색한 표현. Q6은 끝에서 흐름이 무너짐",
+        fix: "live alone. on the fifth floor. 마지막 문장을 'I think it was one of the best things I've ever bought'로 고정",
+      },
+      {
+        q: "Q15 인터넷 이슈",
+        cat: "돌발",
+        issue:
+          "질문의 '해마다 어떻게 변했나'와 '우리나라 영향'을 빠뜨리고 반복('it must be solved')으로 끝남",
+        fix: "지금 문제 → 뉴스 예 → 과거에는 → 한국 영향 → 결론 5문장 (돌발 O 돌발 기본형)",
+      },
+      {
+        q: "전체 문법·마무리",
+        cat: "공통",
+        issue:
+          "'My home don't have', 'young people using'(be 동사 없음), 'a very big side of room', 'So yeah that's all' 반복, Frankly 남발",
+        fix: "문법 3개만 고정(live alone, 3인칭 단수, -ing 앞 be). 마무리는 'That's why...' 또는 'In conclusion'으로",
+      },
+    ],
+    actions: [
+      "롤플레이 11·12: 11번은 질문 4개(What kind / How much / Which brand / Where can I), 12번은 해결책 3개(First/Second/Third)를 하루 10분씩. 인사는 'Hi, it's ...'",
+      "포기·회피 금지: 'I don't care/can't tell' 대신 만능 묘사 5문장 (카페·집 문제는 TV 고장 소재 재사용)",
+      "문법 3개 고정: live alone, My home doesn't have, Young people are using. 말하기 전에 속으로 한 번 체크",
+      "자기소개 5문장(직업→집→취미→시험 이유→각오) 외우기. 등급 부탁은 하지 않기",
+      "복기 세트를 영어 가리기로 2회 반복하고, 막히는 문장은 표현 화면의 'I realized', 'Can I', 'Because of that,'로 첫마디 연습",
     ],
   },
 ];
