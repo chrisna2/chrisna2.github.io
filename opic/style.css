@@ -884,3 +884,7 @@ mark {
 #cardsOv .cdMark{display:flex;gap:8px}
 #cardsOv .cdMark .mini{flex:1;padding:12px 8px;font-size:15px}
 #cardsOv .cdStat{text-align:center;font-size:13px;opacity:.7}
+
+.setchips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.setchips .chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 12px;font-size:14px;font-family:inherit;cursor:pointer}
+.setchips .chip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}

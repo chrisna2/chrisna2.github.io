@@ -8978,4 +8978,429 @@ const PHRASES = [
       },
     ],
   },
+  {
+    grp: "롤플레이 · 질문하기 틀",
+    items: [
+      {
+        en: "Hi, it's … I'm calling about",
+        ko: "첫마디: 인사 + 용건",
+        ex: [
+          "Hi, it's Hyun-gi. I'm calling about the trip.",
+          "안녕, 현기야. 여행 때문에 전화했어.",
+        ],
+      },
+      {
+        en: "Which day is good for you?",
+        ko: "날짜를 물을 때",
+        ex: ["Which day is good for you, Saturday or Sunday?", "토요일과 일요일 중 언제가 좋아?"],
+      },
+      {
+        en: "What time is good for you?",
+        ko: "시간을 물을 때",
+        ex: ["What time is good for you? How about noon?", "몇 시가 좋아? 12시는 어때?"],
+      },
+      {
+        en: "Where should we meet?",
+        ko: "장소를 물을 때",
+        ex: ["Where should we meet before the trip?", "여행 전에 어디서 만날까?"],
+      },
+      {
+        en: "What should I bring?",
+        ko: "준비물을 물을 때",
+        ex: ["What should I bring for the party?", "파티에 뭘 가져가야 해?"],
+      },
+      {
+        en: "How many people are coming?",
+        ko: "인원을 물을 때",
+        ex: ["How many people are coming to lunch?", "점심에 몇 명이 와?"],
+      },
+      {
+        en: "Is there anything I can't eat there?",
+        ko: "음식·주의사항을 물을 때",
+        ex: ["Is there any food you can't eat?", "못 먹는 음식 있어?"],
+      },
+      {
+        en: "Do I need to book in advance?",
+        ko: "예약·준비 여부를 물을 때",
+        ex: ["Do I need to book a table in advance?", "미리 자리를 예약해야 해?"],
+      },
+      {
+        en: "Thank you, I got it",
+        ko: "질문을 마치고 닫을 때",
+        ex: ["Thank you, I got it. See you then.", "고마워, 알겠어. 그때 보자."],
+      },
+    ],
+  },
+  {
+    grp: "롤플레이 · 문제+대안 틀",
+    items: [
+      {
+        en: "I'm sorry, but I have a problem",
+        ko: "첫마디: 사과 + 문제 알리기",
+        ex: [
+          "Hi, it's Hyun-gi. I'm sorry, but I have a problem.",
+          "안녕, 현기야. 미안한데 문제가 생겼어.",
+        ],
+      },
+      {
+        en: "My car broke down",
+        ko: "이유 1: 차 고장",
+        ex: ["My car broke down on the way.", "오는 길에 차가 고장 났어."],
+      },
+      {
+        en: "My brother is sick",
+        ko: "이유 2: 가족이 아플 때",
+        ex: ["My brother is sick, so I can't come.", "동생이 아파서 못 가."],
+      },
+      {
+        en: "I'll be late",
+        ko: "이유 3: 늦을 때",
+        ex: ["I'll be late for about an hour.", "한 시간쯤 늦을 것 같아."],
+      },
+      {
+        en: "I have two ideas",
+        ko: "대안을 시작할 때",
+        ex: ["I have two ideas for you.", "두 가지 제안이 있어."],
+      },
+      {
+        en: "First, we can",
+        ko: "대안 1",
+        ex: ["First, we can meet next Saturday.", "첫째, 다음 주 토요일에 만날 수 있어."],
+      },
+      {
+        en: "Second, we can",
+        ko: "대안 2",
+        ex: ["Second, we can have dinner this weekend.", "둘째, 이번 주말에 저녁을 먹을 수 있어."],
+      },
+      {
+        en: "Third, I can",
+        ko: "대안 3 (선택)",
+        ex: ["Third, I can come tomorrow with a gift.", "셋째, 내일 선물을 들고 갈 수 있어."],
+      },
+      {
+        en: "Which one is better for you?",
+        ko: "대안 후 의견을 물을 때",
+        ex: ["Which one is better for you?", "어느 쪽이 더 좋아?"],
+      },
+    ],
+  },
+  {
+    grp: "롤플레이 대안 · 시간 바꾸기",
+    items: [
+      {
+        en: "Let's meet next Saturday",
+        ko: "날짜를 미루는 대안",
+        ex: ["First, let's meet next Saturday for lunch.", "첫째, 다음 주 토요일에 점심 먹자."],
+      },
+      {
+        en: "Let's do it this weekend instead",
+        ko: "이번 주말로 바꾸는 대안",
+        ex: ["Second, let's do it this weekend instead.", "둘째, 이번 주말에 대신 하자."],
+      },
+      {
+        en: "I can come tomorrow",
+        ko: "내일로 미루는 대안",
+        ex: ["If you're free, I can come tomorrow.", "시간 되면 내일 갈 수 있어."],
+      },
+      {
+        en: "I'll come later, around three",
+        ko: "늦게 합류하는 대안",
+        ex: ["I'll come later, around three.", "3시쯤 늦게 갈게."],
+      },
+      {
+        en: "I can join you after dinner",
+        ko: "저녁 후 합류하는 대안",
+        ex: ["I can join you after dinner for dessert.", "저녁 후 디저트 때 합류할 수 있어."],
+      },
+      {
+        en: "Let's meet again next week",
+        ko: "다음 주로 미루는 대안",
+        ex: ["I'm sorry. Let's meet again next week.", "미안해. 다음 주에 다시 만나자."],
+      },
+    ],
+  },
+  {
+    grp: "롤플레이 대안 · 장소 바꾸기",
+    items: [
+      {
+        en: "Let's meet at a cafe near your house",
+        ko: "상대 집 근처로 옮기는 대안",
+        ex: ["Let's meet at a cafe near your house.", "너희 집 근처 카페에서 만나자."],
+      },
+      {
+        en: "Let's eat at my place",
+        ko: "우리 집으로 옮기는 대안",
+        ex: ["Let's eat at my place instead.", "대신 우리 집에서 먹자."],
+      },
+      {
+        en: "Let's go to another restaurant",
+        ko: "다른 식당으로 바꾸는 대안",
+        ex: [
+          "The restaurant is full. Let's go to another restaurant.",
+          "식당이 꽉 찼어. 다른 식당에 가자.",
+        ],
+      },
+      {
+        en: "Let's meet halfway",
+        ko: "중간에서 만나는 대안",
+        ex: ["Let's meet halfway to save time.", "시간 아끼게 중간에서 만나자."],
+      },
+      {
+        en: "We can stay at home and watch a movie",
+        ko: "실내·집에서 하는 대안",
+        ex: [
+          "It's raining, so we can stay at home and watch a movie.",
+          "비가 오니까 집에서 영화 보자.",
+        ],
+      },
+    ],
+  },
+  {
+    grp: "롤플레이 대안 · 방법 바꾸기",
+    items: [
+      {
+        en: "I'll take a taxi",
+        ko: "택시로 가는 대안",
+        ex: ["I'll take a taxi and arrive in an hour.", "택시 타고 한 시간 뒤에 도착할게."],
+      },
+      {
+        en: "Let's have a video call",
+        ko: "영상통화로 대신하는 대안",
+        ex: ["Let's have a video call tonight.", "오늘 밤 영상통화 하자."],
+      },
+      {
+        en: "I'll send you a gift",
+        ko: "선물로 대신하는 대안",
+        ex: ["I'll send you a gift to say sorry.", "사과의 뜻으로 선물을 보낼게."],
+      },
+      {
+        en: "I'll bring some food to your house",
+        ko: "음식을 가져가는 대안",
+        ex: ["I'll bring some food to your house tomorrow.", "내일 음식을 가져갈게."],
+      },
+      {
+        en: "I'll order delivery for us",
+        ko: "배달로 해결하는 대안",
+        ex: ["I'll order delivery for us at your place.", "너희 집으로 배달 시켜 줄게."],
+      },
+      {
+        en: "I can pay for dinner next time",
+        ko: "다음에 대접하는 대안",
+        ex: ["I can pay for dinner next time.", "다음엔 내가 저녁 살게."],
+      },
+    ],
+  },
+  {
+    grp: "롤플레이 대안 · 사람·내용 바꾸기",
+    items: [
+      {
+        en: "My friend can go instead of me",
+        ko: "다른 사람이 대신 가는 대안",
+        ex: ["My friend can go instead of me.", "내 친구가 대신 갈 수 있어."],
+      },
+      {
+        en: "Let's have dinner instead of lunch",
+        ko: "점심 대신 저녁으로 바꾸는 대안",
+        ex: ["Let's have dinner instead of lunch.", "점심 대신 저녁을 먹자."],
+      },
+      {
+        en: "Let's have coffee instead of a full meal",
+        ko: "식사 대신 커피로 줄이는 대안",
+        ex: ["Let's have coffee instead of a full meal.", "식사 대신 커피 한잔 하자."],
+      },
+      {
+        en: "Let's go to the movies instead",
+        ko: "다른 활동으로 바꾸는 대안",
+        ex: ["Let's go to the movies instead.", "대신 영화 보러 가자."],
+      },
+      {
+        en: "We can watch the concert online",
+        ko: "온라인으로 대신하는 대안",
+        ex: ["We can watch the concert online together.", "콘서트를 온라인으로 같이 볼 수 있어."],
+      },
+    ],
+  },
+  {
+    grp: "틀 · 묘사 (장소·물건·사람)",
+    items: [
+      {
+        en: "Let me tell you about",
+        ko: "묘사 시작: 주제 소개",
+        ex: ["Let me tell you about my phone.", "제 휴대폰에 대해 말할게요."],
+      },
+      {
+        en: "It looks",
+        ko: "외관을 말할 때",
+        ex: ["It looks modern and simple.", "현대적이고 단순해 보여요."],
+      },
+      {
+        en: "It has",
+        ko: "구성·특징을 말할 때",
+        ex: ["It has a big screen and a good camera.", "큰 화면과 좋은 카메라가 있어요."],
+      },
+      {
+        en: "It's located in",
+        ko: "위치를 말할 때",
+        ex: ["It's located in the south of Korea.", "한국 남쪽에 있어요."],
+      },
+      {
+        en: "What I like most is",
+        ko: "가장 좋은 점을 말할 때",
+        ex: ["What I like most is the camera.", "제일 좋은 건 카메라예요."],
+      },
+      {
+        en: "I use it for",
+        ko: "용도를 말할 때",
+        ex: ["I use it for studying and taking photos.", "공부와 사진 찍는 데 써요."],
+      },
+    ],
+  },
+  {
+    grp: "틀 · 경험 이야기 (과거)",
+    items: [
+      {
+        en: "It happened about … ago",
+        ko: "경험 시작: 언제",
+        ex: ["It happened about two years ago.", "약 2년 전에 있었던 일이에요."],
+      },
+      {
+        en: "I was with",
+        ko: "누구와 있었는지",
+        ex: ["I was with my family.", "가족과 함께였어요."],
+      },
+      {
+        en: "At first,",
+        ko: "이야기 시작 순서",
+        ex: ["At first, we went to the hotel.", "처음엔 호텔에 갔어요."],
+      },
+      {
+        en: "Then,",
+        ko: "이야기 이어가기",
+        ex: ["Then, we looked for a restaurant.", "그다음엔 식당을 찾았어요."],
+      },
+    ],
+  },
+  {
+    grp: "틀 · 비교·선택",
+    items: [
+      {
+        en: "Both are similar because",
+        ko: "공통점을 말할 때",
+        ex: [
+          "Both are similar because they are good for relaxing.",
+          "둘 다 쉬기 좋다는 점이 비슷해요.",
+        ],
+      },
+      {
+        en: "The first one is",
+        ko: "첫 번째 대상의 특징",
+        ex: ["The first one is big and has beautiful scenery.", "첫 번째는 크고 경치가 좋아요."],
+      },
+      {
+        en: "The second one is",
+        ko: "두 번째 대상의 특징",
+        ex: ["The second one is small and quiet.", "두 번째는 작고 조용해요."],
+      },
+      {
+        en: "However,",
+        ko: "차이점으로 넘어갈 때",
+        ex: ["However, the big one is far from my house.", "하지만 큰 곳은 집에서 멀어요."],
+      },
+      {
+        en: "I prefer … because",
+        ko: "선택과 이유",
+        ex: ["I prefer the small park because it's close.", "가까워서 작은 공원이 더 좋아요."],
+      },
+    ],
+  },
+  {
+    grp: "틀 · 문제와 해결",
+    items: [
+      {
+        en: "I think there are some problems",
+        ko: "문제 답의 도입",
+        ex: ["I think there are some problems today.", "요즘 몇 가지 문제가 있다고 생각해요."],
+      },
+      {
+        en: "The biggest problem is",
+        ko: "가장 큰 문제",
+        ex: ["The biggest problem is parking.", "가장 큰 문제는 주차예요."],
+      },
+      {
+        en: "Another problem is",
+        ko: "다른 문제",
+        ex: ["Another problem is the noise.", "또 다른 문제는 소음이에요."],
+      },
+      {
+        en: "One solution is",
+        ko: "해결책 1",
+        ex: [
+          "One solution is to build a parking building.",
+          "한 가지 해결책은 주차 건물을 짓는 거예요.",
+        ],
+      },
+      {
+        en: "Another solution is",
+        ko: "해결책 2",
+        ex: [
+          "Another solution is to use public transportation.",
+          "또 다른 해결책은 대중교통을 쓰는 거예요.",
+        ],
+      },
+    ],
+  },
+  {
+    grp: "틀 · 자기소개",
+    items: [
+      {
+        en: "Hi, my name is",
+        ko: "인사 + 이름",
+        ex: ["Hi, my name is Hyun-gi.", "안녕하세요, 제 이름은 현기예요."],
+      },
+      {
+        en: "Nice to meet you",
+        ko: "인사 마무리",
+        ex: ["Nice to meet you.", "만나서 반갑습니다."],
+      },
+      {
+        en: "I'm a software developer at",
+        ko: "직업·회사",
+        ex: [
+          "I'm a software developer at Hanna System.",
+          "저는 한나시스템의 소프트웨어 개발자예요.",
+        ],
+      },
+      {
+        en: "I've worked in the IT field for about",
+        ko: "경력",
+        ex: ["I've worked in the IT field for about eight years.", "IT 분야에서 약 8년 일했어요."],
+      },
+      {
+        en: "I live alone in",
+        ko: "사는 곳",
+        ex: ["I live alone in an apartment.", "아파트에 혼자 살아요."],
+      },
+      {
+        en: "In my free time, I like",
+        ko: "취미",
+        ex: [
+          "In my free time, I like playing games and taking photos.",
+          "여가에는 게임과 사진 찍기를 좋아해요.",
+        ],
+      },
+      {
+        en: "I'm taking this test because",
+        ko: "시험 이유",
+        ex: [
+          "I'm taking this test because my company needs a grade.",
+          "회사에서 등급이 필요해서 시험을 봐요.",
+        ],
+      },
+      {
+        en: "I'll do my best",
+        ko: "각오로 닫기",
+        ex: ["I studied hard, so I'll do my best.", "열심히 공부했으니 최선을 다할게요."],
+      },
+    ],
+  },
 ];

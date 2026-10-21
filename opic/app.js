@@ -1365,6 +1365,131 @@ try {
     phr.sets[0].sel = JSON.parse(localStorage.getItem("opic_phr_sel") || "[]").filter(phrOk);
   }
 } catch (e) {}
+// 롤플레이 틀 기본 세트: 앱을 처음 열 때 한 번만 추가한다 (지워도 다시 생기지 않음)
+const RP_PRESETS = [
+  [
+    "RP 질문 틀",
+    [
+      "Hi, it's … I'm calling about",
+      "Which day is good for you?",
+      "What time is good for you?",
+      "Where should we meet?",
+      "What should I bring?",
+      "How many people are coming?",
+      "Thank you, I got it",
+    ],
+  ],
+  [
+    "RP 대안 틀 (늦음·고장)",
+    [
+      "I'm sorry, but I have a problem",
+      "My car broke down",
+      "I'll be late",
+      "I have two ideas",
+      "First, we can",
+      "Second, we can",
+      "Which one is better for you?",
+      "Please call me back",
+    ],
+  ],
+  [
+    "RP 대안 틀 (가족 아픔)",
+    [
+      "I'm sorry, but I have a problem",
+      "My brother is sick",
+      "I have two ideas",
+      "First, we can",
+      "Second, we can",
+      "Which one is better for you?",
+      "I'm really sorry about this",
+    ],
+  ],
+];
+const RP_PRESETS2 = [
+  [
+    "묘사 틀 (장소·물건)",
+    [
+      "Let me tell you about",
+      "It looks",
+      "It has",
+      "What I like most is",
+      "I use it for",
+      "That's why I like it",
+    ],
+  ],
+  [
+    "경험 이야기 틀 (과거)",
+    [
+      "It happened about … ago",
+      "I was with",
+      "At first,",
+      "Then,",
+      "After that,",
+      "In the end,",
+      "I felt",
+      "It was a great memory",
+    ],
+  ],
+  [
+    "비교·선택 틀",
+    [
+      "Both are similar because",
+      "The first one is",
+      "The second one is",
+      "However,",
+      "I prefer … because",
+      "That's why I like it",
+    ],
+  ],
+  [
+    "문제·해결 틀",
+    [
+      "I think there are some problems",
+      "The biggest problem is",
+      "Another problem is",
+      "One solution is",
+      "Another solution is",
+      "In short",
+    ],
+  ],
+];
+const RP_PRESETS3 = [
+  [
+    "자기소개 틀",
+    [
+      "Hi, my name is",
+      "Nice to meet you",
+      "I'm a software developer at",
+      "I've worked in the IT field for about",
+      "I live alone in",
+      "In my free time, I like",
+      "I'm taking this test because",
+      "I'll do my best",
+    ],
+  ],
+];
+// 기본 세트를 한 번만 추가한다 (flag로 구분, 지워도 다시 생기지 않음)
+function seedSets(flag, presets) {
+  try {
+    if (localStorage.getItem(flag)) return;
+    const idOf = (en) => {
+      for (let g = 0; g < PHRASES.length; g++) {
+        const i = PHRASES[g].items.findIndex((x) => x.en === en);
+        if (i >= 0) return g + "." + i;
+      }
+      return null;
+    };
+    const only = phr.sets.length === 1 && !phr.sets[0].sel.length;
+    const add = presets.map(([name, ens]) => ({ name, sel: ens.map(idOf).filter(Boolean) }));
+    phr.sets = only ? add : phr.sets.concat(add);
+    phr.act = Math.min(phr.act, phr.sets.length - 1);
+    localStorage.setItem(flag, "1");
+    localStorage.setItem("opic_phr_sets", JSON.stringify({ act: phr.act, sets: phr.sets }));
+  } catch (e) {}
+}
+seedSets("opic_phr_seed1", RP_PRESETS);
+seedSets("opic_phr_seed2", RP_PRESETS2);
+seedSets("opic_phr_seed3", RP_PRESETS3);
 const phrClean = (t) => t.replace(/\.{3}/g, ", ");
 const phrItem = (id) => {
   const [g, i] = id.split(".");
@@ -1379,20 +1504,20 @@ function phrSave() {
 function phrTray() {
   const el = $("#phTray");
   if (!el) return;
-  const ss = $("#phSet");
+  const ss = $("#phSetList");
   if (ss)
     ss.innerHTML = phr.sets
       .map(
         (x, n) =>
-          '<option value="' +
+          '<button class="chip' +
+          (n === phr.act ? " on" : "") +
+          '" data-phset="' +
           n +
-          '"' +
-          (n === phr.act ? " selected" : "") +
-          ">" +
+          '">' +
           esc(x.name) +
           " (" +
           x.sel.length +
-          ")</option>",
+          ")</button>",
       )
       .join("");
   el.innerHTML = phr.sel.length
@@ -1535,7 +1660,7 @@ function renderPhr() {
     '<div class="row2"><label class="lbl"><input type="checkbox" id="phHide"' +
     (phr.hide ? " checked" : "") +
     "> 영어 가리기 (뜻만 보고 말하기, 누르면 확인)</label></div>" +
-    '<div class="trbox"><div class="lbl">내 스크립트 (첫어구 이어 붙이기)</div><div class="phbar"><select id="phSet"></select><button class="mini" id="phSNew">＋ 새 세트</button><button class="mini" id="phSRen">이름</button><button class="mini" id="phSDel">삭제</button></div><div id="phTray"></div>' +
+    '<div class="trbox"><div class="lbl">내 스크립트 (첫어구 이어 붙이기)</div><div id="phSetList" class="setchips"></div><div class="phbar"><button class="mini" id="phSNew">＋ 새 세트</button><button class="mini" id="phSRen">이름</button><button class="mini" id="phSDel">삭제</button></div><div id="phTray"></div>' +
     '<div class="phbar"><select id="phSecs"><option value="10"' +
     (phr.secs === 10 ? " selected" : "") +
     '>어구마다 10초</option><option value="20"' +
@@ -1608,16 +1733,6 @@ $("#v-phr").addEventListener("change", (e) => {
   if (e.target.id === "phGrp") phr.grp = e.target.value;
   if (e.target.id === "phLoop") phr.loop = e.target.checked;
   if (e.target.id === "phSecs") phr.secs = +e.target.value;
-  if (e.target.id === "phSet") {
-    stopAll();
-    phr.tok = -1;
-    phr.kind = "";
-    phr.act = +e.target.value;
-    phrSave();
-    phrTray();
-    const sg = $("#phStage");
-    if (sg) sg.innerHTML = "";
-  }
   if (e.target.id === "phHide") {
     phr.hide = e.target.checked;
     phr.open.clear();
@@ -1625,6 +1740,18 @@ $("#v-phr").addEventListener("change", (e) => {
   }
 });
 $("#v-phr").addEventListener("click", (e) => {
+  const st = e.target.closest("[data-phset]");
+  if (st) {
+    stopAll();
+    phr.tok = -1;
+    phr.kind = "";
+    phr.act = +st.dataset.phset;
+    phrSave();
+    phrTray();
+    const sg = $("#phStage");
+    if (sg) sg.innerHTML = "";
+    return;
+  }
   const ad = e.target.closest("[data-phadd]");
   if (ad) {
     const id = ad.dataset.phadd,
