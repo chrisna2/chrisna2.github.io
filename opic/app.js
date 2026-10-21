@@ -1531,6 +1531,7 @@ async function phrRun() {
 function renderPhr() {
   let h =
     '<p class="note">문장을 여는 틀입니다. 뜻을 보고 표현과 예문을 말해 본 뒤 확인하세요. 시험에서는 이 틀로 문장을 시작하면 끊기지 않고 이어집니다.</p>' +
+    '<div class="phbar"><button class="mini pri" id="phCards">🃏 카드 넘기며 외우기 (선택한 묶음)</button></div>' +
     '<div class="row2"><label class="lbl"><input type="checkbox" id="phHide"' +
     (phr.hide ? " checked" : "") +
     "> 영어 가리기 (뜻만 보고 말하기, 누르면 확인)</label></div>" +
@@ -1578,6 +1579,7 @@ function renderPhr() {
         '" data-ph="' +
         id +
         '" style="display:block;cursor:pointer"><div class="ko" style="margin:0;font-weight:600">' +
+        (known.has(it.en) ? "✓ " : "") +
         esc(it.ko) +
         '</div><div class="row2" style="margin:4px 0 0"><button class="mini" data-phadd="' +
         id +
@@ -1693,6 +1695,10 @@ $("#v-phr").addEventListener("click", (e) => {
     } else if (phr.sel.length) phrScriptRun();
     return;
   }
+  if (e.target.closest("#phCards")) {
+    cardsOpen();
+    return;
+  }
   if (e.target.closest("#phPlay")) {
     if (phrRunning()) {
       stopAll();
@@ -1718,6 +1724,163 @@ $("#v-phr").addEventListener("click", (e) => {
     renderPhr();
   }
 });
+// 표현 카드 슬라이드: 한 장씩 넘기며 외우기 (앞면 뜻 → 뒷면 표현·예문). 좌우 스와이프, 버튼, 방향키 지원
+const cards = { list: [], i: 0, flip: false, auto: false, shuffle: false, only: false };
+// 외운 표현 표시: 영어 표현 문자열을 기준으로 localStorage(opic_phr_known)에 저장
+const known = new Set();
+try {
+  JSON.parse(localStorage.getItem("opic_phr_known") || "[]").forEach((x) => known.add(x));
+} catch (e) {}
+function knownSave() {
+  try {
+    localStorage.setItem("opic_phr_known", JSON.stringify([...known]));
+  } catch (e) {}
+}
+function cardsBuild() {
+  const out = [];
+  PHRASES.forEach((g, gi) => {
+    if (phr.grp === "all" || phr.grp === String(gi))
+      g.items.forEach((it, ii) => out.push({ it, id: gi + "." + ii, grp: g.grp }));
+  });
+  cards.all = out.length;
+  const left = cards.only ? out.filter((c) => !known.has(c.it.en)) : out.slice();
+  out.length = 0;
+  out.push(...left);
+  if (cards.shuffle) out.sort(() => Math.random() - 0.5);
+  cards.list = out;
+  cards.i = Math.min(cards.i, Math.max(out.length - 1, 0));
+}
+function cardsDraw() {
+  const ov = document.getElementById("cardsOv");
+  if (!ov) return;
+  const c = cards.list[cards.i];
+  if (!c) {
+    ov.querySelector(".cdPos").textContent = "0 / 0";
+    ov.querySelector(".cdBody").innerHTML =
+      "<p>" + (cards.only ? "모두 외웠어요! 🎉" : "카드가 없습니다") + "</p>";
+    return;
+  }
+  const kn = known.has(c.it.en);
+  ov.querySelector(".cdPos").textContent =
+    cards.i + 1 + " / " + cards.list.length + (kn ? "  ✓ 외움" : "");
+  ov.querySelector("#cdYes").classList.toggle("pri", !kn);
+  ov.querySelector("#cdNo").classList.toggle("pri", kn);
+  ov.querySelector(".cdStat").textContent = "외운 표현 " + known.size + "개";
+  ov.querySelector(".cdGrp").textContent = c.grp;
+  ov.querySelector(".cdBody").innerHTML = cards.flip
+    ? '<div class="cdEn">' +
+      esc(c.it.en) +
+      '</div><div class="cdEx">' +
+      esc(c.it.ex[0]) +
+      '</div><div class="cdKo">' +
+      esc(c.it.ex[1]) +
+      '</div><div class="cdHint">뜻: ' +
+      esc(c.it.ko) +
+      "</div>"
+    : '<div class="cdFront">' + esc(c.it.ko) + '</div><div class="cdHint">눌러서 영어 확인</div>';
+  if (cards.flip && cards.auto) cardsSay();
+}
+function cardsSay() {
+  const c = cards.list[cards.i];
+  if (!c) return;
+  stopAll();
+  ++token;
+  say(phrClean(c.it.en) + ". " + c.it.ex[0]);
+}
+function cardsGo(d) {
+  const n = cards.i + d;
+  if (n < 0 || n >= cards.list.length) return;
+  stopAll();
+  cards.i = n;
+  cards.flip = false;
+  cardsDraw();
+}
+function cardsClose() {
+  stopAll();
+  const ov = document.getElementById("cardsOv");
+  if (ov) ov.remove();
+  document.removeEventListener("keydown", cardsKey);
+}
+function cardsKey(e) {
+  if (e.key === "ArrowRight") cardsGo(1);
+  else if (e.key === "ArrowLeft") cardsGo(-1);
+  else if (e.key === " " || e.key === "Enter") {
+    e.preventDefault();
+    cards.flip = !cards.flip;
+    cardsDraw();
+  } else if (e.key === "Escape") cardsClose();
+}
+function cardsOpen() {
+  cardsClose();
+  cards.i = 0;
+  cards.flip = false;
+  cardsBuild();
+  const ov = document.createElement("div");
+  ov.id = "cardsOv";
+  ov.innerHTML =
+    '<div class="cdTop"><span class="cdPos"></span><span class="cdGrp"></span><button class="mini" id="cdX">닫기</button></div>' +
+    '<div class="cdBody" id="cdBody"></div>' +
+    '<div class="cdMark"><button class="mini" id="cdNo">✗ 아직 못 외움</button><button class="mini" id="cdYes">✓ 외웠어요</button></div>' +
+    '<div class="cdBar"><button class="mini" id="cdPrev">◀ 이전</button><button class="mini" id="cdSay">🔊 읽어 주기</button><button class="mini pri" id="cdNext">다음 ▶</button></div>' +
+    '<div class="cdOpt"><label class="ck"><input type="checkbox" id="cdAuto"> 뒤집으면 자동 읽기</label><label class="ck"><input type="checkbox" id="cdShuf"> 섞기</label><label class="ck"><input type="checkbox" id="cdOnly"> 못 외운 것만</label></div><div class="cdStat"></div>';
+  document.body.appendChild(ov);
+  ov.addEventListener("click", (e) => {
+    const t = e.target;
+    if (t.id === "cdX") cardsClose();
+    else if (t.id === "cdYes" || t.id === "cdNo") {
+      const c = cards.list[cards.i];
+      if (!c) return;
+      if (t.id === "cdYes") known.add(c.it.en);
+      else known.delete(c.it.en);
+      knownSave();
+      if (cards.i < cards.list.length - 1) cardsGo(1);
+      else cardsDraw();
+    } else if (t.id === "cdPrev") cardsGo(-1);
+    else if (t.id === "cdNext") cardsGo(1);
+    else if (t.id === "cdSay") {
+      if (!cards.flip) {
+        cards.flip = true;
+        cardsDraw();
+      }
+      cardsSay();
+    } else if (t.closest("#cdBody")) {
+      cards.flip = !cards.flip;
+      cardsDraw();
+    }
+  });
+  ov.addEventListener("change", (e) => {
+    if (e.target.id === "cdAuto") cards.auto = e.target.checked;
+    if (e.target.id === "cdOnly") {
+      cards.only = e.target.checked;
+      cards.i = 0;
+      cards.flip = false;
+      cardsBuild();
+      cardsDraw();
+    }
+    if (e.target.id === "cdShuf") {
+      cards.shuffle = e.target.checked;
+      cards.i = 0;
+      cards.flip = false;
+      cardsBuild();
+      cardsDraw();
+    }
+  });
+  let x0 = null;
+  ov.addEventListener("touchstart", (e) => {
+    x0 = e.touches[0].clientX;
+  });
+  ov.addEventListener("touchend", (e) => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    x0 = null;
+    if (Math.abs(dx) > 50) cardsGo(dx < 0 ? 1 : -1);
+  });
+  document.addEventListener("keydown", cardsKey);
+  ov.querySelector("#cdAuto").checked = cards.auto;
+  ov.querySelector("#cdShuf").checked = cards.shuffle;
+  ov.querySelector("#cdOnly").checked = cards.only;
+  cardsDraw();
+}
 // 모의고사 출제·표시 순서 (서베이 → 돌발 → 롤플레이)
 const MOCK_ORDER = ["survey", "surprise", "rp"];
 // 저장된 모의시험 세트(MOCK_SETS[idx])를 분류(서베이 → 돌발 → 롤플레이)별로 묶어 출제한다. 문제 번호는 제목에 남기고 모범답안은 결과 화면에서 확인

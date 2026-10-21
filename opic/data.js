@@ -8638,4 +8638,344 @@ const PHRASES = [
       },
     ],
   },
+  {
+    grp: "막힐 때 · 감정·태도",
+    items: [
+      {
+        en: "I wanted them to win",
+        ko: "'응원하다(cheer)'가 안 나올 때",
+        ex: ["I wanted the Korean team to win.", "한국 팀이 이기길 응원했어요."],
+      },
+      {
+        en: "I was very happy",
+        ko: "'신나다·흥분되다'가 안 나올 때",
+        ex: ["I was very happy at the concert.", "콘서트에서 정말 신났어요."],
+      },
+      {
+        en: "I was afraid",
+        ko: "'긴장되다'가 안 나올 때",
+        ex: ["I was afraid before the test.", "시험 전에 긴장됐어요."],
+      },
+      {
+        en: "I had nothing to do",
+        ko: "'지루하다'가 안 나올 때",
+        ex: ["I had nothing to do in my room.", "방에서 할 일이 없어서 지루했어요."],
+      },
+      {
+        en: "I was alone",
+        ko: "'외롭다'가 안 나올 때",
+        ex: ["I was alone for a week.", "일주일 동안 외로웠어요."],
+      },
+      {
+        en: "I like it a lot",
+        ko: "'만족하다'가 안 나올 때",
+        ex: ["I like my phone a lot.", "제 휴대폰에 아주 만족해요."],
+      },
+    ],
+  },
+  {
+    grp: "막힐 때 · 음악·여행",
+    items: [
+      {
+        en: "The sound was great",
+        ko: "'음향이 좋다'가 안 나올 때",
+        ex: ["The sound was great in the hall.", "공연장 음향이 아주 좋았어요."],
+      },
+      {
+        en: "I sang with people",
+        ko: "'떼창하다'가 안 나올 때",
+        ex: ["I sang with people at the show.", "공연에서 사람들과 함께 노래했어요."],
+      },
+      {
+        en: "It felt great",
+        ko: "'분위기'가 안 나올 때",
+        ex: ["It felt great in the hall.", "공연장 분위기가 좋았어요."],
+      },
+      {
+        en: "People from other places",
+        ko: "'관광객'이 안 나올 때",
+        ex: ["There were many people from other places.", "관광객이 많았어요."],
+      },
+      {
+        en: "It looks beautiful",
+        ko: "'경치'가 안 나올 때",
+        ex: ["The sea looks beautiful there.", "거기 바다 경치가 아름다워요."],
+      },
+      {
+        en: "old buildings",
+        ko: "'건축물·문화유산'이 안 나올 때",
+        ex: ["I saw many old buildings in Italy.", "이탈리아에서 오래된 건물을 많이 봤어요."],
+      },
+      {
+        en: "Teams came to play",
+        ko: "'대회에 참가하다'가 안 나올 때",
+        ex: ["Teams came to play from many countries.", "여러 나라에서 팀들이 대회에 참가했어요."],
+      },
+    ],
+  },
+  {
+    grp: "막힐 때 · 건강·몸",
+    items: [
+      {
+        en: "I had to stay alone",
+        ko: "'전염되다·격리하다'가 안 나올 때",
+        ex: ["I had to stay alone in my room.", "방에서 혼자 격리돼 있어야 했어요."],
+      },
+      {
+        en: "healthy food",
+        ko: "'영양가 있는 음식'이 안 나올 때",
+        ex: ["I try to eat healthy food.", "건강한 음식을 먹으려고 해요."],
+      },
+      {
+        en: "I eat many kinds of food",
+        ko: "'균형 잡힌 식단'이 안 나올 때",
+        ex: ["I eat many kinds of food every day.", "매일 여러 종류의 음식을 먹어요."],
+      },
+      {
+        en: "I got lighter",
+        ko: "'체중을 줄이다'가 안 나올 때",
+        ex: ["I got lighter after I stopped sweets.", "단 걸 끊고 살이 빠졌어요."],
+      },
+      {
+        en: "My stomach hurt",
+        ko: "'배탈 나다'가 안 나올 때",
+        ex: ["My brother's stomach hurt in Jeju.", "제주에서 동생이 배가 아팠어요."],
+      },
+      {
+        en: "I got better",
+        ko: "'회복하다'가 안 나올 때",
+        ex: ["After a week, I got better.", "일주일 뒤에 나았어요."],
+      },
+      {
+        en: "I stay healthy",
+        ko: "'건강을 유지하다'가 안 나올 때",
+        ex: ["I exercise to stay healthy.", "건강을 유지하려고 운동해요."],
+      },
+    ],
+  },
+  {
+    grp: "막힐 때 · 모임·약속",
+    items: [
+      {
+        en: "I booked a table",
+        ko: "'예약하다'가 안 나올 때",
+        ex: ["I booked a table for dinner.", "저녁 식사 자리를 예약했어요."],
+      },
+      {
+        en: "We couldn't go",
+        ko: "'취소하다'가 안 나올 때",
+        ex: ["We couldn't go to the restaurant.", "식당에 못 가서 취소했어요."],
+      },
+      {
+        en: "Let's meet on Saturday",
+        ko: "'일정을 잡다'가 안 나올 때",
+        ex: ["Let's meet next Saturday for lunch.", "다음 주 토요일에 점심 먹자."],
+      },
+      {
+        en: "Please come to my house",
+        ko: "'초대하다'가 안 나올 때",
+        ex: ["Please come to my house for lunch.", "점심에 우리 집에 오세요."],
+      },
+      {
+        en: "We pay together",
+        ko: "'비용을 나누다'가 안 나올 때",
+        ex: ["We pay together for the party.", "파티 비용은 같이 내요."],
+      },
+      {
+        en: "There are many people",
+        ko: "'혼잡하다'가 안 나올 때",
+        ex: ["There are many people in the city.", "도시는 사람이 많아요."],
+      },
+    ],
+  },
+  {
+    grp: "막힐 때 · 만능 동사",
+    items: [
+      {
+        en: "I wanted to",
+        ko: "want로 돌려 말할 때",
+        ex: ["I wanted to see the show.", "그 공연이 보고 싶었어요."],
+      },
+      {
+        en: "I liked it a lot",
+        ko: "like로 돌려 말할 때",
+        ex: ["I liked the trip a lot.", "그 여행이 아주 좋았어요."],
+      },
+      {
+        en: "I went there",
+        ko: "go로 돌려 말할 때",
+        ex: ["I went to the concert alone.", "콘서트에 혼자 갔어요."],
+      },
+      {
+        en: "I had a",
+        ko: "have로 돌려 말할 때",
+        ex: ["I had a stomachache.", "배가 아팠어요."],
+      },
+      {
+        en: "I got",
+        ko: "get으로 돌려 말할 때 (되다·변하다)",
+        ex: ["I got sick in the morning.", "아침에 아팠어요."],
+      },
+      {
+        en: "It makes me",
+        ko: "make로 돌려 말할 때",
+        ex: ["It makes me happy.", "기분이 좋아져요."],
+      },
+    ],
+  },
+  {
+    grp: "급하게 마칠 때 · 경험·묘사 답변",
+    items: [
+      {
+        en: "That's why I like it",
+        ko: "이유를 말하고 닫을 때",
+        ex: ["I enjoy the music, so that's why I like it.", "음악이 즐거워서 그래서 좋아해요."],
+      },
+      {
+        en: "That's my story",
+        ko: "이야기를 하고 끝낼 때",
+        ex: [
+          "I went to Jeju with my family. That's my story.",
+          "가족과 제주도에 갔어요. 제 이야기예요.",
+        ],
+      },
+      {
+        en: "It was a great memory",
+        ko: "과거 경험을 닫을 때",
+        ex: [
+          "We ate cutlets at the hotel. It was a great memory.",
+          "호텔에서 돈가스를 먹었어요. 좋은 추억이었어요.",
+        ],
+      },
+      {
+        en: "It was a good experience",
+        ko: "경험을 평가하며 닫을 때",
+        ex: [
+          "I saw the concert alone. It was a good experience.",
+          "콘서트를 혼자 봤어요. 좋은 경험이었어요.",
+        ],
+      },
+      {
+        en: "I want to do it again",
+        ko: "또 하고 싶다며 닫을 때",
+        ex: ["The concert was great. I want to do it again.", "콘서트가 좋았어요. 또 가고 싶어요."],
+      },
+      {
+        en: "I want to go there again",
+        ko: "여행·장소 답을 닫을 때",
+        ex: [
+          "Jeju was beautiful. I want to go there again.",
+          "제주가 아름다웠어요. 또 가고 싶어요.",
+        ],
+      },
+      {
+        en: "Since then, I've been more careful",
+        ko: "문제 경험 후 교훈으로 닫을 때",
+        ex: [
+          "I broke my phone. Since then, I've been more careful.",
+          "폰을 깨뜨렸어요. 그 뒤로 더 조심해요.",
+        ],
+      },
+      {
+        en: "I learned a lot from it",
+        ko: "경험에서 배운 점으로 닫을 때",
+        ex: ["I got sick once. I learned a lot from it.", "한 번 아팠어요. 거기서 많이 배웠어요."],
+      },
+      {
+        en: "That's how I solved it",
+        ko: "해결한 이야기를 닫을 때",
+        ex: [
+          "I called the service center. That's how I solved it.",
+          "서비스센터에 전화했어요. 그렇게 해결했어요.",
+        ],
+      },
+    ],
+  },
+  {
+    grp: "급하게 마칠 때 · 비교·의견·문제 답변",
+    items: [
+      {
+        en: "In short",
+        ko: "시간이 없어 요약하며 닫을 때",
+        ex: ["In short, both parks are good.", "요약하면 두 공원 다 좋아요."],
+      },
+      {
+        en: "So I prefer",
+        ko: "비교를 마무리할 때",
+        ex: ["So I prefer the small park.", "그래서 저는 작은 공원이 더 좋아요."],
+      },
+      {
+        en: "That's how I feel",
+        ko: "내 생각을 닫을 때",
+        ex: [
+          "I like small towns. That's how I feel.",
+          "저는 작은 마을이 좋아요. 그게 제 생각이에요.",
+        ],
+      },
+      {
+        en: "I think it's a good idea",
+        ko: "해결책을 제안하고 닫을 때",
+        ex: [
+          "We need a parking lot. I think it's a good idea.",
+          "주차장이 필요해요. 좋은 생각이라고 봐요.",
+        ],
+      },
+      {
+        en: "That's why it's important",
+        ko: "중요성을 말하며 닫을 때",
+        ex: ["Health is key. That's why it's important.", "건강이 핵심이에요. 그래서 중요해요."],
+      },
+      {
+        en: "That's my answer",
+        ko: "질문에 직접 답하고 닫을 때",
+        ex: ["I prefer rock. That's my answer.", "저는 록이 좋아요. 이게 제 대답이에요."],
+      },
+      {
+        en: "I'm very satisfied",
+        ko: "만족을 말하며 닫을 때",
+        ex: ["I like my phone. I'm very satisfied.", "폰이 좋아요. 아주 만족해요."],
+      },
+    ],
+  },
+  {
+    grp: "급하게 마칠 때 · 롤플레이",
+    items: [
+      {
+        en: "Please call me back",
+        ko: "전화 답을 요청하며 닫을 때",
+        ex: ["I can't come today. Please call me back.", "오늘 못 가. 전화 줘."],
+      },
+      {
+        en: "Let me know what you think",
+        ko: "상대 의견을 묻고 닫을 때",
+        ex: [
+          "I have two ideas. Let me know what you think.",
+          "두 가지 제안이야. 어떻게 생각하는지 알려 줘.",
+        ],
+      },
+      {
+        en: "I hope that works for you",
+        ko: "대안을 제안하고 닫을 때",
+        ex: [
+          "Let's meet on Saturday. I hope that works for you.",
+          "토요일에 보자. 괜찮았으면 좋겠어.",
+        ],
+      },
+      {
+        en: "I'm really sorry about this",
+        ko: "사과하며 닫을 때",
+        ex: ["I can't come. I'm really sorry about this.", "못 가. 정말 미안해."],
+      },
+      {
+        en: "Thank you for your help",
+        ko: "도움에 감사하며 닫을 때",
+        ex: ["Thank you for your help. See you soon.", "도와줘서 고마워. 곧 봐."],
+      },
+      {
+        en: "See you soon",
+        ko: "만남을 기약하며 닫을 때",
+        ex: ["Okay, see you soon. Bye.", "그래, 곧 보자. 안녕."],
+      },
+    ],
+  },
 ];
