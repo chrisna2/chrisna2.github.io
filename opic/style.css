@@ -888,3 +888,7 @@ mark {
 .setchips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
 .setchips .chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 12px;font-size:14px;font-family:inherit;cursor:pointer}
 .setchips .chip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+
+#v-phr .trt[data-phgo]{cursor:pointer;text-decoration:underline;text-decoration-style:dotted}
+#v-phr .flash{animation:phflash 1.6s ease}
+@keyframes phflash{0%,60%{background:var(--accent);color:var(--accent-ink)}100%{background:transparent}}

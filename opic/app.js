@@ -1523,6 +1523,14 @@ const phrItem = (id) => {
   const [g, i] = id.split(".");
   return PHRASES[g].items[i];
 };
+// 틀(트레이)의 문장 ↔ 아래 카드를 오가며 이동: 도착한 요소를 잠깐 강조한다
+function phrJump(sel, fallback) {
+  const el = document.querySelector(sel) || (fallback && document.querySelector(fallback));
+  if (!el) return;
+  el.scrollIntoView({ behavior: "smooth", block: "center" });
+  el.classList.add("flash");
+  setTimeout(() => el.classList.remove("flash"), 1600);
+}
 function phrSave() {
   try {
     localStorage.setItem("opic_phr_sets", JSON.stringify({ act: phr.act, sets: phr.sets }));
@@ -1553,7 +1561,11 @@ function phrTray() {
       phr.sel
         .map(
           (id, n) =>
-            '<li><span class="trt">' +
+            '<li data-trid="' +
+            id +
+            '"><span class="trt" data-phgo="' +
+            id +
+            '" title="누르면 아래 카드로 이동">' +
             esc(phrItem(id).en) +
             '</span><button class="mini" data-phmv="' +
             n +
@@ -1736,7 +1748,9 @@ function renderPhr() {
         esc(it.ko) +
         '</div><div class="row2" style="margin:4px 0 0"><button class="mini" data-phadd="' +
         id +
-        '">＋ 담기</button></div>' +
+        '">＋ 담기</button><button class="mini" data-phup="' +
+        id +
+        '">▲ 틀로</button></div>' +
         (show
           ? '<div class="en" style="margin-top:4px"><mark>' +
             esc(it.en) +
@@ -1768,6 +1782,16 @@ $("#v-phr").addEventListener("change", (e) => {
   }
 });
 $("#v-phr").addEventListener("click", (e) => {
+  const go = e.target.closest("[data-phgo]");
+  if (go) {
+    phrJump('#v-phr [data-ph="' + go.dataset.phgo + '"]');
+    return;
+  }
+  const up = e.target.closest("[data-phup]");
+  if (up) {
+    phrJump('#phTray [data-trid="' + up.dataset.phup + '"]', "#phTray");
+    return;
+  }
   const st = e.target.closest("[data-phset]");
   if (st) {
     stopAll();
