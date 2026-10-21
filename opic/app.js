@@ -1468,6 +1468,33 @@ const RP_PRESETS3 = [
     ],
   ],
 ];
+const RP_PRESETS4 = [
+  [
+    "RP 대안 틀 (예약 취소)",
+    [
+      "I'm sorry, but I have a problem",
+      "We have to cancel our reservation",
+      "I'll call the restaurant",
+      "I have two ideas",
+      "First, we can",
+      "Second, we can",
+      "Which one is better for you?",
+      "I'm really sorry about this",
+    ],
+  ],
+  [
+    "RP 식당 전화 (예약 취소·변경)",
+    [
+      "I made a reservation for",
+      "I need to cancel my reservation",
+      "Can I change it to",
+      "Is there an open table on",
+      "Is there any cancellation fee?",
+      "Could you send me a confirmation?",
+      "I'm sorry for the trouble",
+    ],
+  ],
+];
 // 기본 세트를 한 번만 추가한다 (flag로 구분, 지워도 다시 생기지 않음)
 function seedSets(flag, presets) {
   try {
@@ -1490,6 +1517,7 @@ function seedSets(flag, presets) {
 seedSets("opic_phr_seed1", RP_PRESETS);
 seedSets("opic_phr_seed2", RP_PRESETS2);
 seedSets("opic_phr_seed3", RP_PRESETS3);
+seedSets("opic_phr_seed4", RP_PRESETS4);
 const phrClean = (t) => t.replace(/\.{3}/g, ", ");
 const phrItem = (id) => {
   const [g, i] = id.split(".");

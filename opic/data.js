@@ -9403,4 +9403,59 @@ const PHRASES = [
       },
     ],
   },
+  {
+    grp: "롤플레이 · 예약 취소·변경",
+    items: [
+      {
+        en: "We have to cancel our reservation",
+        ko: "친구에게 예약 취소를 알릴 때",
+        ex: ["I'm sorry, but we have to cancel our reservation.", "미안한데 예약을 취소해야 해."],
+      },
+      {
+        en: "I'll call the restaurant",
+        ko: "내가 식당에 연락하겠다고 할 때",
+        ex: ["Don't worry. I'll call the restaurant.", "걱정 마. 내가 식당에 전화할게."],
+      },
+      {
+        en: "I made a reservation for",
+        ko: "식당에 전화: 예약 확인",
+        ex: ["Hello, I made a reservation for six o'clock.", "안녕하세요, 6시에 예약했어요."],
+      },
+      {
+        en: "I need to cancel my reservation",
+        ko: "식당에 전화: 취소 요청",
+        ex: ["I'm sorry, I need to cancel my reservation.", "죄송하지만 예약을 취소해야 해요."],
+      },
+      {
+        en: "Can I change it to",
+        ko: "식당에 전화: 시간·날짜 변경",
+        ex: ["Can I change it to next Saturday at noon?", "다음 주 토요일 정오로 바꿀 수 있나요?"],
+      },
+      {
+        en: "Is there an open table on",
+        ko: "식당에 전화: 빈자리 문의",
+        ex: ["Is there an open table on Sunday evening?", "일요일 저녁에 빈 테이블 있나요?"],
+      },
+      {
+        en: "Is there any cancellation fee?",
+        ko: "취소 수수료를 물을 때",
+        ex: ["Is there any cancellation fee?", "취소 수수료가 있나요?"],
+      },
+      {
+        en: "I'm sorry for the trouble",
+        ko: "불편을 끼쳐 사과할 때",
+        ex: ["I'm sorry for the trouble.", "불편 드려 죄송합니다."],
+      },
+      {
+        en: "Could you send me a confirmation?",
+        ko: "확인 문자·메일을 요청할 때",
+        ex: ["Could you send me a confirmation by text?", "문자로 확인을 보내 주시겠어요?"],
+      },
+      {
+        en: "We can book another place",
+        ko: "다른 곳을 예약하는 대안",
+        ex: ["If it's full, we can book another place.", "꽉 찼으면 다른 곳을 예약하면 돼."],
+      },
+    ],
+  },
 ];
