@@ -8270,6 +8270,8 @@ const PHRASES = [
       },
       {
         en: "It was",
+        fill: true,
+        ft: "느낌",
         ko: "당시의 기분이나 상태를 설명할 때",
         ex: ["It was a really relaxing trip.", "정말 편안한 여행이었어요."],
       },
@@ -8306,11 +8308,15 @@ const PHRASES = [
       },
       {
         en: "I often",
+        fill: true,
+        ft: "빈도",
         ko: "자주 하는 행동을 말할 때",
         ex: ["I often meet my friends for dinner.", "저는 친구들과 자주 저녁을 먹어요."],
       },
       {
         en: "I sometimes",
+        fill: true,
+        ft: "빈도",
         ko: "가끔 하는 행동을 말할 때",
         ex: ["I sometimes cook with my mother.", "가끔 어머니와 같이 요리해요."],
       },
@@ -8339,6 +8345,8 @@ const PHRASES = [
       },
       {
         en: "I always",
+        fill: true,
+        ft: "빈도",
         ko: "항상 하는 행동을 말할 때 (남발하지 말기)",
         ex: ["I always check my reservation twice.", "저는 예약을 항상 두 번 확인해요."],
       },
@@ -8379,6 +8387,8 @@ const PHRASES = [
       },
       {
         en: "And then I",
+        fill: true,
+        ft: "덧붙이기",
         ko: "순서를 이어갈 때",
         ex: ["And then I went back to the restaurant.", "그러고 나서 식당으로 돌아갔어요."],
       },
@@ -8402,6 +8412,8 @@ const PHRASES = [
       },
       {
         en: "I don't mind",
+        fill: true,
+        ft: "의견",
         ko: "~하는 거 괜찮아요 / 신경 안 써요",
         ex: ["I don't mind working late sometimes.", "가끔 늦게까지 일하는 건 괜찮아요."],
       },
@@ -8417,6 +8429,8 @@ const PHRASES = [
     items: [
       {
         en: "To be honest,",
+        fill: true,
+        ft: "의견",
         ko: "솔직히 말하면",
         ex: [
           "To be honest, I'm not a big fan of crowded places.",
@@ -8433,11 +8447,15 @@ const PHRASES = [
       },
       {
         en: "It depends on",
+        fill: true,
+        ft: "이유·결과",
         ko: "~에 따라 달라요",
         ex: ["It depends on my schedule.", "제 일정에 따라 달라요."],
       },
       {
         en: "Most of the time, I",
+        fill: true,
+        ft: "빈도",
         ko: "대부분 저는 ~해요",
         ex: ["Most of the time, I eat dinner at home.", "대부분 저는 집에서 저녁을 먹어요."],
       },
@@ -8464,11 +8482,15 @@ const PHRASES = [
       },
       {
         en: "After that,",
+        fill: true,
+        ft: "순서",
         ko: "그다음에",
         ex: ["After that, we went to a restaurant nearby.", "그다음에 우리는 근처 식당에 갔어요."],
       },
       {
         en: "As soon as I",
+        fill: true,
+        ft: "순서",
         ko: "~하자마자",
         ex: [
           "As soon as I got home, I realized I had lost my wallet.",
@@ -8482,6 +8504,8 @@ const PHRASES = [
     items: [
       {
         en: "Whenever I ..., I ...",
+        fill: true,
+        ft: "이유·결과",
         ko: "~할 때마다 ~해요",
         ex: [
           "Whenever I feel stressed, I play online games.",
@@ -8490,6 +8514,8 @@ const PHRASES = [
       },
       {
         en: "That's why",
+        fill: true,
+        ft: "이유·결과",
         ko: "그래서 ~한 거예요",
         ex: [
           "That's why I always double-check my reservations.",
@@ -8498,11 +8524,15 @@ const PHRASES = [
       },
       {
         en: "It helps me",
+        fill: true,
+        ft: "느낌",
         ko: "~하는 걸 도와줘요",
         ex: ["Music helps me relax after work.", "음악은 퇴근 후에 쉬는 데 도움이 돼요."],
       },
       {
         en: "Since I",
+        fill: true,
+        ft: "이유·결과",
         ko: "~하기 때문에",
         ex: [
           "Since I live alone, I cook simple meals.",
@@ -8524,6 +8554,8 @@ const PHRASES = [
       },
       {
         en: "The biggest reason is that",
+        fill: true,
+        ft: "이유·결과",
         ko: "가장 큰 이유는 ~기 때문이에요",
         ex: [
           "The biggest reason is that it's quiet and comfortable.",
@@ -8532,6 +8564,8 @@ const PHRASES = [
       },
       {
         en: "It seemed",
+        fill: true,
+        ft: "의견",
         ko: "~인 것 같았어요",
         ex: [
           "It seemed very expensive, so I just looked around.",
@@ -8573,11 +8607,15 @@ const PHRASES = [
       },
       {
         en: "I felt",
+        fill: true,
+        ft: "느낌",
         ko: "~하게 느꼈어요",
         ex: ["I felt really nervous.", "정말 긴장됐어요."],
       },
       {
         en: "I think",
+        fill: true,
+        ft: "의견",
         ko: "~라고 생각해요",
         ex: ["I think it was a good choice.", "좋은 선택이었다고 생각해요."],
       },
@@ -8653,6 +8691,8 @@ const PHRASES = [
       },
       {
         en: "It made me",
+        fill: true,
+        ft: "느낌",
         ko: "~하게 만들었어요",
         ex: ["It made me really happy.", "정말 행복하게 해 줬어요."],
       },
@@ -8678,6 +8718,8 @@ const PHRASES = [
       },
       {
         en: "Now I",
+        fill: true,
+        ft: "덧붙이기",
         ko: "지금은 ~해요",
         ex: ["Now I usually stay at home.", "지금은 보통 집에 있어요."],
       },
@@ -8708,31 +8750,43 @@ const PHRASES = [
       },
       {
         en: "In the end,",
+        fill: true,
+        ft: "순서",
         ko: "결국",
         ex: ["In the end, everything turned out fine.", "결국 모든 게 잘 해결됐어요."],
       },
       {
         en: "Also,",
+        fill: true,
+        ft: "덧붙이기",
         ko: "또한",
         ex: ["Also, it was very cheap.", "또한 아주 쌌어요."],
       },
       {
         en: "Because of that,",
+        fill: true,
+        ft: "이유·결과",
         ko: "그 때문에",
         ex: ["Because of that, I was late.", "그 때문에 늦었어요."],
       },
       {
         en: "For example,",
+        fill: true,
+        ft: "예시·강조",
         ko: "예를 들면",
         ex: ["For example, I go hiking on weekends.", "예를 들면 주말에 등산을 가요."],
       },
       {
         en: "Actually,",
+        fill: true,
+        ft: "예시·강조",
         ko: "사실은",
         ex: ["Actually, I don't go there often.", "사실 그곳에 자주 가진 않아요."],
       },
       {
         en: "Overall,",
+        fill: true,
+        ft: "예시·강조",
         ko: "전체적으로",
         ex: ["Overall, it was a great experience.", "전체적으로 좋은 경험이었어요."],
       },
@@ -8863,6 +8917,8 @@ const PHRASES = [
       },
       {
         en: "I feel like",
+        fill: true,
+        ft: "의견",
         ko: "~하고 싶다/기분이다",
         ex: ["I feel like going for a walk.", "산책하러 가고 싶어."],
       },
@@ -8983,6 +9039,8 @@ const PHRASES = [
       },
       {
         en: "I feel like I",
+        hidden: true,
+        alias: "I feel like",
         ko: "내가 ~한 것 같은 기분이다",
         ex: ["I feel like I missed something.", "뭔가 놓친 것 같은 기분이야."],
       },
@@ -9053,6 +9111,8 @@ const PHRASES = [
       },
       {
         en: "I like it a lot",
+        fill: true,
+        ft: "느낌",
         ko: "'만족하다'가 안 나올 때",
         ex: ["I like my phone a lot.", "제 휴대폰에 아주 만족해요."],
       },
@@ -9073,6 +9133,8 @@ const PHRASES = [
       },
       {
         en: "It felt great",
+        fill: true,
+        ft: "느낌",
         ko: "'분위기'가 안 나올 때",
         ex: ["It felt great in the hall.", "공연장 분위기가 좋았어요."],
       },
@@ -9183,11 +9245,15 @@ const PHRASES = [
       },
       {
         en: "I liked it a lot",
+        hidden: true,
+        alias: "I like it a lot",
         ko: "like로 돌려 말할 때",
         ex: ["I liked the trip a lot.", "그 여행이 아주 좋았어요."],
       },
       {
         en: "I went there",
+        hidden: true,
+        alias: "I went to",
         ko: "go로 돌려 말할 때",
         ex: ["I went to the concert alone.", "콘서트에 혼자 갔어요."],
       },
@@ -9281,6 +9347,8 @@ const PHRASES = [
     items: [
       {
         en: "In short",
+        fill: true,
+        ft: "예시·강조",
         ko: "시간이 없어 요약하며 닫을 때",
         ex: ["In short, both parks are good.", "요약하면 두 공원 다 좋아요."],
       },
@@ -9655,11 +9723,15 @@ const PHRASES = [
       },
       {
         en: "At first,",
+        fill: true,
+        ft: "순서",
         ko: "이야기 시작 순서",
         ex: ["At first, we went to the hotel.", "처음엔 호텔에 갔어요."],
       },
       {
         en: "Then,",
+        fill: true,
+        ft: "순서",
         ko: "이야기 이어가기",
         ex: ["Then, we looked for a restaurant.", "그다음엔 식당을 찾았어요."],
       },
@@ -9923,66 +9995,85 @@ const PHRASES = [
     items: [
       {
         en: "Also, …",
+        hidden: true,
+        alias: "Also,",
         ko: "내용을 하나 더 붙일 때 (채우기)",
         ex: ["Also, I take many pictures there.", "또, 거기서 사진을 많이 찍어요."],
         fill: true,
       },
       {
         en: "For example, …",
+        hidden: true,
+        alias: "For example,",
         ko: "예를 들어 덧붙일 때 (채우기)",
         ex: ["For example, I run around the park.", "예를 들어 공원 둘레를 달려요."],
         fill: true,
       },
       {
         en: "Because",
+        ft: "이유·결과",
         ko: "이유를 덧붙일 때 (채우기)",
         ex: ["Because it's quiet and relaxing.", "조용하고 편안하기 때문이에요."],
         fill: true,
       },
       {
         en: "It was very",
+        hidden: true,
+        alias: "It was",
         ko: "느낌을 한 줄 덧붙일 때 (채우기)",
         ex: ["It was very exciting.", "정말 신났어요."],
         fill: true,
       },
       {
         en: "I think …",
+        hidden: true,
+        alias: "I think",
         ko: "내 생각을 덧붙일 때 (채우기)",
         ex: ["I think it's a good idea.", "좋은 생각 같아요."],
         fill: true,
       },
       {
         en: "Especially …",
+        ft: "예시·강조",
         ko: "특히 강조할 때 (채우기)",
         ex: ["Especially, I like the quiet places.", "특히 조용한 곳이 좋아요."],
         fill: true,
       },
       {
         en: "Sometimes, …",
+        hidden: true,
+        alias: "I sometimes",
         ko: "가끔 하는 일을 덧붙일 때 (채우기)",
         ex: ["Sometimes, I go there alone.", "가끔 거기 혼자 가요."],
         fill: true,
       },
       {
         en: "For me, …",
+        ft: "의견",
         ko: "내 입장을 말할 때 (채우기)",
         ex: ["For me, it's the best way to relax.", "저한테는 쉬는 가장 좋은 방법이에요."],
         fill: true,
       },
       {
         en: "In fact, …",
+        hidden: true,
+        alias: "Actually,",
         ko: "사실을 덧붙일 때 (채우기)",
         ex: ["In fact, I go there every week.", "사실 매주 거기에 가요."],
         fill: true,
       },
       {
         en: "That's because …",
+        hidden: true,
+        alias: "Because",
         ko: "이유를 이어 말할 때 (채우기)",
         ex: ["That's because it's close to my house.", "집에서 가깝기 때문이에요."],
         fill: true,
       },
       {
         en: "Usually, …",
+        hidden: true,
+        alias: "Most of the time, I",
         ko: "평소 습관을 덧붙일 때 (채우기)",
         ex: ["Usually, I go after work.", "보통 퇴근 후에 가요."],
         fill: true,

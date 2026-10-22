@@ -904,3 +904,8 @@ mark {
 #v-phr .setchips .chip.fillc{border-color:#d98a00;background:rgba(217,138,0,.14);color:#b36f00;font-weight:600}
 @media (prefers-color-scheme:dark){#v-phr .setchips .chip.fillc{color:#ffb84d}}
 :root[data-theme="dark"] #v-phr .setchips .chip.fillc{color:#ffb84d}
+
+#v-phr .fillrow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;width:100%}
+#v-phr .fillft{font-size:12px;font-weight:700;color:#b36f00;background:rgba(217,138,0,.16);border-radius:6px;padding:2px 7px}
+@media (prefers-color-scheme:dark){#v-phr .fillft{color:#ffb84d}}
+:root[data-theme="dark"] #v-phr .fillft{color:#ffb84d}

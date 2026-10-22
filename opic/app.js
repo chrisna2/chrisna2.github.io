@@ -1351,14 +1351,25 @@ Object.defineProperty(phr, "sel", {
 });
 const phrOk = (id) => {
   const [g, i] = String(id).split(".");
-  return !!(PHRASES[g] && PHRASES[g].items[i]);
+  return !!(PHRASES[g] && PHRASES[g].items[i] && !PHRASES[g].items[i].hidden);
+};
+// 중복이라 숨긴 카드(hidden)는 같은 뜻의 남은 카드(alias)로 바꿔 준다 (예전에 담아 둔 세트 호환)
+const phrRemap = (id) => {
+  const [g, i] = String(id).split(".");
+  const it = PHRASES[g] && PHRASES[g].items[i];
+  if (!it || !it.alias) return id;
+  for (let gg = 0; gg < PHRASES.length; gg++) {
+    const k = PHRASES[gg].items.findIndex((x) => x.en === it.alias && !x.hidden);
+    if (k >= 0) return gg + "." + k;
+  }
+  return id;
 };
 try {
   const sv = JSON.parse(localStorage.getItem("opic_phr_sets") || "null");
   if (sv && Array.isArray(sv.sets) && sv.sets.length) {
     phr.sets = sv.sets.map((x, n) => ({
       name: String(x.name || "세트 " + (n + 1)),
-      sel: (x.sel || []).filter(phrOk),
+      sel: (x.sel || []).map(phrRemap).filter(phrOk),
     }));
     phr.act = Math.min(Math.max(+sv.act || 0, 0), phr.sets.length - 1);
   } else {
@@ -1518,7 +1529,7 @@ function seedSets(flag, presets) {
     if (localStorage.getItem(flag)) return;
     const idOf = (en) => {
       for (let g = 0; g < PHRASES.length; g++) {
-        const i = PHRASES[g].items.findIndex((x) => x.en === en);
+        const i = PHRASES[g].items.findIndex((x) => x.en === en && !x.hidden);
         if (i >= 0) return g + "." + i;
       }
       return null;
@@ -1551,7 +1562,7 @@ try {
   if (!localStorage.getItem("opic_phr_seed6")) {
     const idOf2 = (en) => {
       for (let g = 0; g < PHRASES.length; g++) {
-        const i = PHRASES[g].items.findIndex((x) => x.en === en);
+        const i = PHRASES[g].items.findIndex((x) => x.en === en && !x.hidden);
         if (i >= 0) return g + "." + i;
       }
       return null;
@@ -1716,7 +1727,7 @@ try {
   if (!localStorage.getItem("opic_phr_seed7")) {
     const idOf3 = (en) => {
       for (let g = 0; g < PHRASES.length; g++) {
-        const i = PHRASES[g].items.findIndex((x) => x.en === en);
+        const i = PHRASES[g].items.findIndex((x) => x.en === en && !x.hidden);
         if (i >= 0) return g + "." + i;
       }
       return null;
@@ -1737,14 +1748,14 @@ try {
   if (!localStorage.getItem("opic_phr_seed8")) {
     const idOf4 = (en) => {
       for (let g = 0; g < PHRASES.length; g++) {
-        const i = PHRASES[g].items.findIndex((x) => x.en === en);
+        const i = PHRASES[g].items.findIndex((x) => x.en === en && !x.hidden);
         if (i >= 0) return g + "." + i;
       }
       return null;
     };
     const names = RP_PRESETS6.map((x) => x[0]);
-    const f1 = idOf4("Also, …");
-    const f2 = idOf4("For example, …");
+    const f1 = idOf4("Also,");
+    const f2 = idOf4("For example,");
     phr.sets.forEach((st) => {
       if (!names.includes(st.name) || st.sel.length < 5) return;
       if (st.sel.includes(f1) || st.sel.includes(f2)) return;
@@ -1824,21 +1835,28 @@ function phrTray() {
   });
   const fb = $("#phFillBar");
   if (fb) {
-    let hh = "";
+    const by = {};
     PHRASES.forEach((g, gi) =>
       g.items.forEach((it, ii) => {
-        if (it.fill)
-          hh +=
-            '<button class="chip fillc" data-phfill="' +
-            gi +
-            "." +
-            ii +
-            '">' +
-            esc(it.en) +
-            "</button>";
+        if (it.fill && !it.hidden)
+          (by[it.ft || "기타"] = by[it.ft || "기타"] || []).push([gi + "." + ii, it]);
       }),
     );
-    fb.innerHTML = hh;
+    fb.innerHTML = Object.keys(by)
+      .map(
+        (k) =>
+          '<div class="fillrow"><span class="fillft">' +
+          esc(k) +
+          "</span>" +
+          by[k]
+            .map(
+              ([id, it]) =>
+                '<button class="chip fillc" data-phfill="' + id + '">' + esc(it.en) + "</button>",
+            )
+            .join("") +
+          "</div>",
+      )
+      .join("");
   }
   const go = $("#phSGo");
   if (go) go.textContent = phrScriptRunning() ? "■ 정지" : "▶ 이어 말하기 연습";
@@ -1897,7 +1915,7 @@ async function phrRun() {
   const list = [];
   PHRASES.forEach((g, gi) => {
     if (phr.grp === "all" || phr.grp === String(gi))
-      g.items.forEach((it, ii) => list.push([gi + "." + ii, it]));
+      g.items.forEach((it, ii) => it.hidden || list.push([gi + "." + ii, it]));
   });
   do {
     for (const [id, it] of list) {
@@ -1993,6 +2011,7 @@ function renderPhr() {
   PHRASES.forEach((g, gi) => {
     h += '<div class="lbl" style="margin:12px 0 6px">' + esc(g.grp) + '</div><div class="list">';
     g.items.forEach((it, ii) => {
+      if (it.hidden) return;
       const id = gi + "." + ii,
         show = !phr.hide || phr.open.has(id);
       h +=
@@ -2003,6 +2022,7 @@ function renderPhr() {
         id +
         '" style="display:block;cursor:pointer"><div class="ko" style="margin:0;font-weight:600">' +
         (known.has(it.en) ? "✓ " : "") +
+        (it.fill ? '<span class="fillft">채우기 · ' + esc(it.ft || "") + "</span> " : "") +
         esc(it.ko) +
         '</div><div class="row2" style="margin:4px 0 0"><button class="mini" data-phadd="' +
         id +
@@ -2185,7 +2205,7 @@ function cardsBuild() {
   const out = [];
   PHRASES.forEach((g, gi) => {
     if (phr.grp === "all" || phr.grp === String(gi))
-      g.items.forEach((it, ii) => out.push({ it, id: gi + "." + ii, grp: g.grp }));
+      g.items.forEach((it, ii) => it.hidden || out.push({ it, id: gi + "." + ii, grp: g.grp }));
   });
   cards.all = out.length;
   const left = cards.only ? out.filter((c) => !known.has(c.it.en)) : out.slice();
