@@ -909,3 +909,5 @@ mark {
 #v-phr .fillft{font-size:12px;font-weight:700;color:#b36f00;background:rgba(217,138,0,.16);border-radius:6px;padding:2px 7px}
 @media (prefers-color-scheme:dark){#v-phr .fillft{color:#ffb84d}}
 :root[data-theme="dark"] #v-phr .fillft{color:#ffb84d}
+
+#phTray li.now{outline:2px solid var(--accent);border-radius:8px}

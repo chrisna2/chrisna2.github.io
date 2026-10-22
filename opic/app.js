@@ -1337,10 +1337,14 @@ function buildMock() {
 /* ===== 필수 표현 =====
  문장을 시작하는 틀 25개: 뜻과 예문을 보고, 영어를 가려 뜻만 보고 말해 본 뒤 눌러서 확인 */
 const phr = { hide: false, open: new Set(), mode: "en", grp: "all", tok: -1, loop: false };
-const phrRunning = () => phr.tok === token && phr.kind !== "script";
+const phrRunning = () => phr.tok === token && phr.kind === "list";
 const phrScriptRunning = () => phr.tok === token && phr.kind === "script";
 // 내가 고른 첫어구를 이어 붙여 하나의 스크립트(문단) 만들기: 어구만 읽어 주고 나머지는 내가 채워 말한다
 phr.secs = 20;
+phr.lmode = "en";
+phr.llaps = 3;
+phr.lnext = true;
+phr.lnext = true;
 phr.sets = [{ name: "세트 1", sel: [] }];
 phr.act = 0;
 Object.defineProperty(phr, "sel", {
@@ -1858,6 +1862,8 @@ function phrTray() {
       )
       .join("");
   }
+  const lb = $("#phSListen");
+  if (lb) lb.textContent = phr.tok === token && phr.kind === "slisten" ? "■ 정지" : "🔁 틀 듣기";
   const go = $("#phSGo");
   if (go) go.textContent = phrScriptRunning() ? "■ 정지" : "▶ 이어 말하기 연습";
 }
@@ -1897,6 +1903,76 @@ async function phrScriptRun() {
     '<div class="note">끝! 오늘 만든 문단의 뼈대: <b>' +
     esc(items.map((x) => x.en).join(" / ")) +
     "</b></div>";
+  phr.tok = -1;
+  phr.kind = "";
+  phrTray();
+}
+// 내가 만든 틀(세트)을 처음부터 끝까지 반복해서 들려준다: 틀 문장만 / 틀 문장 → 예문 / 한글 뜻 → 틀 문장
+async function phrSetListen() {
+  stopAll();
+  const my = ++token;
+  phr.tok = my;
+  phr.kind = "slisten";
+  phrTray();
+  const st = $("#phStage");
+  // 한 바퀴 = 지금 세트부터 (모든 틀 이어서가 켜져 있으면) 비어 있지 않은 모든 세트를 차례로 한 번씩
+  const first = phr.act;
+  const order = [];
+  for (let s = 0; s < phr.sets.length; s++) {
+    const c = (first + s) % phr.sets.length;
+    if (phr.sets[c].sel.length && (phr.lnext || s === 0)) order.push(c);
+  }
+  for (let lap = 1; !phr.llaps || lap <= phr.llaps; lap++) {
+    for (const c of order) {
+      if (my !== token) return;
+      if (phr.act !== c) {
+        phr.act = c;
+        phrSave();
+        phrTray();
+      }
+      const items = phr.sets[c].sel.map(phrItem);
+      for (let n = 0; n < items.length; n++) {
+        if (my !== token) return;
+        const it = items[n];
+        document.querySelectorAll("#phTray li.now").forEach((x) => x.classList.remove("now"));
+        const li = document.querySelectorAll("#phTray li")[n];
+        if (li) li.classList.add("now");
+        st.innerHTML =
+          '<div class="cnt">' +
+          lap +
+          "바퀴째 · " +
+          esc(phr.sets[c].name) +
+          " · " +
+          (n + 1) +
+          " / " +
+          items.length +
+          '</div><div class="stbig">' +
+          esc(it.en) +
+          "</div>" +
+          (phr.lmode === "ex" ? '<div class="note">' + esc(it.ex[0]) + "</div>" : "");
+        if (phr.lmode === "ko") {
+          await speak(it.ko.replace(/\s*\(채우기\)/, ""), null, "ko-KR");
+          if (my !== token) return;
+          await sleep(500);
+          if (my !== token) return;
+        }
+        await say(phrClean(it.en));
+        if (my !== token) return;
+        if (phr.lmode === "ex") {
+          await sleep(400);
+          if (my !== token) return;
+          await say(it.ex[0]);
+          if (my !== token) return;
+        }
+        await sleep(700);
+      }
+      if (my !== token) return;
+      await sleep(1200);
+    }
+  }
+  if (my !== token) return;
+  document.querySelectorAll("#phTray li.now").forEach((x) => x.classList.remove("now"));
+  st.innerHTML = '<div class="note">끝! ' + phr.llaps + "바퀴를 모두 들었어요.</div>";
   phr.tok = -1;
   phr.kind = "";
   phrTray();
@@ -1985,7 +2061,30 @@ function renderPhr() {
     '>30초</option><option value="45"' +
     (phr.secs === 45 ? " selected" : "") +
     '>45초</option></select><button class="mini pri" id="phSGo">▶ 이어 말하기 연습</button><button class="mini" id="phSClr">비우기</button></div>' +
-    '<div id="phStage" class="stage2"></div></div>' +
+    '<div class="phbar"><select id="phLMode"><option value="en"' +
+    (phr.lmode === "en" ? " selected" : "") +
+    '>틀 문장만 듣기</option><option value="ex"' +
+    (phr.lmode === "ex" ? " selected" : "") +
+    '>틀 문장 → 예문</option><option value="ko"' +
+    (phr.lmode === "ko" ? " selected" : "") +
+    '>한글 뜻 → 틀 문장</option></select><label class="ck"><input type="checkbox" id="phLNext"' +
+    (phr.lnext ? " checked" : "") +
+    '> 끝나면 다음 틀로</label><label class="ck"><input type="checkbox" id="phLNext"' +
+    (phr.lnext ? " checked" : "") +
+    '> 모든 틀 이어서</label><select id="phLLaps">' +
+    [1, 2, 3, 5, 10, 0]
+      .map(
+        (v) =>
+          '<option value="' +
+          v +
+          '"' +
+          (phr.llaps === v ? " selected" : "") +
+          ">" +
+          (v ? v + "바퀴" : "무한 반복") +
+          "</option>",
+      )
+      .join("") +
+    '</select><button class="mini pri" id="phSListen">🔁 틀 듣기</button></div><div id="phStage" class="stage2"></div></div>' +
     '<div class="phbar"><select id="phMode"><option value="en"' +
     (phr.mode === "en" ? " selected" : "") +
     '>쭉 듣기 (표현 → 예문)</option><option value="ko"' +
@@ -2053,6 +2152,10 @@ $("#v-phr").addEventListener("change", (e) => {
   if (e.target.id === "phGrp") phr.grp = e.target.value;
   if (e.target.id === "phLoop") phr.loop = e.target.checked;
   if (e.target.id === "phSecs") phr.secs = +e.target.value;
+  if (e.target.id === "phLMode") phr.lmode = e.target.value;
+  if (e.target.id === "phLLaps") phr.llaps = +e.target.value;
+  if (e.target.id === "phLNext") phr.lnext = e.target.checked;
+  if (e.target.id === "phLNext") phr.lnext = e.target.checked;
   if (e.target.id === "phHide") {
     phr.hide = e.target.checked;
     phr.open.clear();
@@ -2149,6 +2252,15 @@ $("#v-phr").addEventListener("click", (e) => {
     phr.sel = [];
     phrSave();
     phrTray();
+    return;
+  }
+  if (e.target.closest("#phSListen")) {
+    if (phr.tok === token && phr.kind === "slisten") {
+      stopAll();
+      phr.tok = -1;
+      phr.kind = "";
+      phrTray();
+    } else if (phr.sel.length) phrSetListen();
     return;
   }
   if (e.target.closest("#phSGo")) {
