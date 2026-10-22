@@ -9606,7 +9606,7 @@ const PHRASES = [
     ],
   },
   {
-    grp: "틀 · 묘사 (장소·물건·사람)",
+    grp: "틀 · 장소 묘사",
     items: [
       {
         en: "Let me tell you about",
@@ -9619,24 +9619,24 @@ const PHRASES = [
         ex: ["It looks modern and simple.", "현대적이고 단순해 보여요."],
       },
       {
-        en: "It has",
-        ko: "구성·특징을 말할 때",
-        ex: ["It has a big screen and a good camera.", "큰 화면과 좋은 카메라가 있어요."],
-      },
-      {
         en: "It's located in",
         ko: "위치를 말할 때",
         ex: ["It's located in the south of Korea.", "한국 남쪽에 있어요."],
       },
       {
-        en: "What I like most is",
-        ko: "가장 좋은 점을 말할 때",
-        ex: ["What I like most is the camera.", "제일 좋은 건 카메라예요."],
+        en: "You can see",
+        ko: "볼거리를 말할 때",
+        ex: ["You can see the sea from the hotel.", "호텔에서 바다가 보여요."],
       },
       {
-        en: "I use it for",
-        ko: "용도를 말할 때",
-        ex: ["I use it for studying and taking photos.", "공부와 사진 찍는 데 써요."],
+        en: "The atmosphere is",
+        ko: "분위기를 말할 때",
+        ex: ["The atmosphere is calm and friendly.", "분위기가 차분하고 친근해요."],
+      },
+      {
+        en: "It's famous for",
+        ko: "유명한 점을 말할 때",
+        ex: ["It's famous for its beautiful nature.", "아름다운 자연으로 유명해요."],
       },
     ],
   },
@@ -9696,6 +9696,11 @@ const PHRASES = [
         ko: "선택과 이유",
         ex: ["I prefer the small park because it's close.", "가까워서 작은 공원이 더 좋아요."],
       },
+      {
+        en: "I like the second one better",
+        ko: "비교를 마치며 선택을 닫을 때",
+        ex: ["I like the second one better.", "저는 두 번째가 더 좋아요."],
+      },
     ],
   },
   {
@@ -9731,6 +9736,11 @@ const PHRASES = [
           "Another solution is to use public transportation.",
           "또 다른 해결책은 대중교통을 쓰는 거예요.",
         ],
+      },
+      {
+        en: "That's how we can solve it",
+        ko: "해결책을 말하고 닫을 때",
+        ex: ["That's how we can solve it.", "그렇게 해결할 수 있어요."],
       },
     ],
   },
@@ -9840,6 +9850,142 @@ const PHRASES = [
         en: "We can book another place",
         ko: "다른 곳을 예약하는 대안",
         ex: ["If it's full, we can book another place.", "꽉 찼으면 다른 곳을 예약하면 돼."],
+      },
+    ],
+  },
+  {
+    grp: "틀 · 물건 묘사",
+    items: [
+      {
+        en: "It has",
+        ko: "구성·기능을 말할 때",
+        ex: ["It has a big screen and a good camera.", "큰 화면과 좋은 카메라가 있어요."],
+      },
+      {
+        en: "I bought it",
+        ko: "언제·어떻게 샀는지",
+        ex: ["I bought it a year ago.", "1년 전에 샀어요."],
+      },
+      {
+        en: "It comes in",
+        ko: "색·종류를 말할 때",
+        ex: ["It comes in black and white.", "검정과 흰색이 있어요."],
+      },
+      {
+        en: "It can",
+        ko: "할 수 있는 기능",
+        ex: ["It can fold and fit in my pocket.", "접혀서 주머니에 들어가요."],
+      },
+      {
+        en: "What I like most is",
+        ko: "가장 좋은 점",
+        ex: ["What I like most is the camera.", "제일 좋은 건 카메라예요."],
+      },
+      {
+        en: "I use it for",
+        ko: "용도",
+        ex: ["I use it for studying and taking photos.", "공부와 사진 찍는 데 써요."],
+      },
+    ],
+  },
+  {
+    grp: "틀 · 끝났다는 신호",
+    items: [
+      {
+        en: "That's all I wanted to ask",
+        ko: "질문을 끝냈다는 신호",
+        ex: ["That's all I wanted to ask.", "묻고 싶은 건 여기까지예요."],
+      },
+      {
+        en: "That's all I wanted to say",
+        ko: "말을 끝냈다는 신호 (롤플레이)",
+        ex: ["That's all I wanted to say.", "하고 싶은 말은 여기까지야."],
+      },
+      {
+        en: "That's all about me",
+        ko: "자기소개를 끝냈다는 신호",
+        ex: ["That's all about me.", "제 소개는 여기까지예요."],
+      },
+      {
+        en: "That's all about this place",
+        ko: "장소 묘사를 끝냈다는 신호",
+        ex: ["That's all about this place.", "이 장소에 대한 이야기는 여기까지예요."],
+      },
+      {
+        en: "That's all about it",
+        ko: "물건 묘사를 끝냈다는 신호",
+        ex: ["That's all about it.", "그것에 대한 이야기는 여기까지예요."],
+      },
+    ],
+  },
+  {
+    grp: "틀 · 채우기용 문장",
+    items: [
+      {
+        en: "Also, …",
+        ko: "내용을 하나 더 붙일 때 (채우기)",
+        ex: ["Also, I take many pictures there.", "또, 거기서 사진을 많이 찍어요."],
+        fill: true,
+      },
+      {
+        en: "For example, …",
+        ko: "예를 들어 덧붙일 때 (채우기)",
+        ex: ["For example, I run around the park.", "예를 들어 공원 둘레를 달려요."],
+        fill: true,
+      },
+      {
+        en: "Because",
+        ko: "이유를 덧붙일 때 (채우기)",
+        ex: ["Because it's quiet and relaxing.", "조용하고 편안하기 때문이에요."],
+        fill: true,
+      },
+      {
+        en: "It was very",
+        ko: "느낌을 한 줄 덧붙일 때 (채우기)",
+        ex: ["It was very exciting.", "정말 신났어요."],
+        fill: true,
+      },
+      {
+        en: "I think …",
+        ko: "내 생각을 덧붙일 때 (채우기)",
+        ex: ["I think it's a good idea.", "좋은 생각 같아요."],
+        fill: true,
+      },
+      {
+        en: "Especially …",
+        ko: "특히 강조할 때 (채우기)",
+        ex: ["Especially, I like the quiet places.", "특히 조용한 곳이 좋아요."],
+        fill: true,
+      },
+      {
+        en: "Sometimes, …",
+        ko: "가끔 하는 일을 덧붙일 때 (채우기)",
+        ex: ["Sometimes, I go there alone.", "가끔 거기 혼자 가요."],
+        fill: true,
+      },
+      {
+        en: "For me, …",
+        ko: "내 입장을 말할 때 (채우기)",
+        ex: ["For me, it's the best way to relax.", "저한테는 쉬는 가장 좋은 방법이에요."],
+        fill: true,
+      },
+      {
+        en: "In fact, …",
+        ko: "사실을 덧붙일 때 (채우기)",
+        ex: ["In fact, I go there every week.", "사실 매주 거기에 가요."],
+        fill: true,
+      },
+      {
+        en: "That's because …",
+        ko: "이유를 이어 말할 때 (채우기)",
+        ex: ["That's because it's close to my house.", "집에서 가깝기 때문이에요."],
+        fill: true,
+      },
+      {
+        en: "Usually, …",
+        ko: "평소 습관을 덧붙일 때 (채우기)",
+        ex: ["Usually, I go after work.", "보통 퇴근 후에 가요."],
+        fill: true,
       },
     ],
   },

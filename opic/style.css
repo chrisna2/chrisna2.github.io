@@ -892,3 +892,15 @@ mark {
 #v-phr .trt[data-phgo]{cursor:pointer;text-decoration:underline;text-decoration-style:dotted}
 #v-phr .flash{animation:phflash 1.6s ease}
 @keyframes phflash{0%,60%{background:var(--accent);color:var(--accent-ink)}100%{background:transparent}}
+
+/* 채우기용 문장: 다른 색으로 구분 */
+#v-phr .bcard.fillc{border-left:5px solid #d98a00;background:rgba(217,138,0,.10)}
+#v-phr .trl li.fillc{background:rgba(217,138,0,.16);border-radius:8px}
+#v-phr .trl li.fillc .trt{color:#b36f00;font-weight:600}
+#cardsOv .cdBody.fillc{border-left:6px solid #d98a00;background:rgba(217,138,0,.10)}
+@media (prefers-color-scheme:dark){#v-phr .trl li.fillc .trt{color:#ffb84d}}
+:root[data-theme="dark"] #v-phr .trl li.fillc .trt{color:#ffb84d}
+
+#v-phr .setchips .chip.fillc{border-color:#d98a00;background:rgba(217,138,0,.14);color:#b36f00;font-weight:600}
+@media (prefers-color-scheme:dark){#v-phr .setchips .chip.fillc{color:#ffb84d}}
+:root[data-theme="dark"] #v-phr .setchips .chip.fillc{color:#ffb84d}

@@ -1407,17 +1407,6 @@ const RP_PRESETS = [
 ];
 const RP_PRESETS2 = [
   [
-    "묘사 틀 (장소·물건)",
-    [
-      "Let me tell you about",
-      "It looks",
-      "It has",
-      "What I like most is",
-      "I use it for",
-      "That's why I like it",
-    ],
-  ],
-  [
     "경험 이야기 틀 (과거)",
     [
       "It happened about … ago",
@@ -1438,7 +1427,7 @@ const RP_PRESETS2 = [
       "The second one is",
       "However,",
       "I prefer … because",
-      "That's why I like it",
+      "I like the second one better",
     ],
   ],
   [
@@ -1449,7 +1438,7 @@ const RP_PRESETS2 = [
       "Another problem is",
       "One solution is",
       "Another solution is",
-      "In short",
+      "That's how we can solve it",
     ],
   ],
 ];
@@ -1495,6 +1484,34 @@ const RP_PRESETS4 = [
     ],
   ],
 ];
+const RP_PRESETS5 = [
+  [
+    "장소 묘사 틀",
+    [
+      "Let me tell you about",
+      "It's located in",
+      "It looks",
+      "You can see",
+      "The atmosphere is",
+      "It's famous for",
+      "That's why I like it",
+    ],
+  ],
+  [
+    "물건 묘사 틀",
+    [
+      "Let me tell you about",
+      "I bought it",
+      "It looks",
+      "It has",
+      "It comes in",
+      "It can",
+      "What I like most is",
+      "I use it for",
+      "That's why I like it",
+    ],
+  ],
+];
 // 기본 세트를 한 번만 추가한다 (flag로 구분, 지워도 다시 생기지 않음)
 function seedSets(flag, presets) {
   try {
@@ -1518,6 +1535,226 @@ seedSets("opic_phr_seed1", RP_PRESETS);
 seedSets("opic_phr_seed2", RP_PRESETS2);
 seedSets("opic_phr_seed3", RP_PRESETS3);
 seedSets("opic_phr_seed4", RP_PRESETS4);
+// 예전의 합쳐진 "묘사 틀 (장소·물건)" 세트는 장소/물건 두 세트로 대체한다
+try {
+  if (!localStorage.getItem("opic_phr_seed5")) {
+    const k = phr.sets.findIndex((x) => x.name === "묘사 틀 (장소·물건)");
+    if (k >= 0 && phr.sets.length > 1) {
+      phr.sets.splice(k, 1);
+      phr.act = Math.min(phr.act, phr.sets.length - 1);
+    }
+  }
+} catch (e) {}
+seedSets("opic_phr_seed5", RP_PRESETS5);
+// 모든 틀의 마지막 문장은 완성된 짧은 문장이 되도록, 예전에 만들어진 세트의 마지막 칸을 교체한다
+try {
+  if (!localStorage.getItem("opic_phr_seed6")) {
+    const idOf2 = (en) => {
+      for (let g = 0; g < PHRASES.length; g++) {
+        const i = PHRASES[g].items.findIndex((x) => x.en === en);
+        if (i >= 0) return g + "." + i;
+      }
+      return null;
+    };
+    const fix = {
+      "비교·선택 틀": ["That's why I like it", "I like the second one better"],
+      "문제·해결 틀": ["In short", "That's how we can solve it"],
+    };
+    phr.sets.forEach((st) => {
+      const f = fix[st.name];
+      if (!f || !st.sel.length) return;
+      if (st.sel[st.sel.length - 1] === idOf2(f[0])) st.sel[st.sel.length - 1] = idOf2(f[1]);
+    });
+    localStorage.setItem("opic_phr_seed6", "1");
+    localStorage.setItem("opic_phr_sets", JSON.stringify({ act: phr.act, sets: phr.sets }));
+  }
+} catch (e) {}
+// 틀 개편(카드 6~8개, 마지막은 "끝났다"는 신호 문장): 같은 이름의 기본 세트를 새 구성으로 교체한다
+const RP_PRESETS6 = [
+  [
+    "RP 질문 틀",
+    [
+      "Hi, it's … I'm calling about",
+      "Which day is good for you?",
+      "What time is good for you?",
+      "Where should we meet?",
+      "What should I bring?",
+      "How many people are coming?",
+      "Thank you, I got it",
+      "That's all I wanted to ask",
+    ],
+  ],
+  [
+    "RP 대안 틀 (늦음·고장)",
+    [
+      "I'm sorry, but I have a problem",
+      "My car broke down",
+      "I have two ideas",
+      "First, we can",
+      "Second, we can",
+      "Which one is better for you?",
+      "Please call me back",
+      "That's all I wanted to say",
+    ],
+  ],
+  [
+    "RP 대안 틀 (가족 아픔)",
+    [
+      "I'm sorry, but I have a problem",
+      "My brother is sick",
+      "I have two ideas",
+      "First, we can",
+      "Second, we can",
+      "Which one is better for you?",
+      "I'm really sorry about this",
+      "That's all I wanted to say",
+    ],
+  ],
+  [
+    "RP 대안 틀 (예약 취소)",
+    [
+      "I'm sorry, but I have a problem",
+      "We have to cancel our reservation",
+      "I have two ideas",
+      "First, we can",
+      "Second, we can",
+      "Which one is better for you?",
+      "I'm really sorry about this",
+      "That's all I wanted to say",
+    ],
+  ],
+  [
+    "RP 식당 전화 (예약 취소·변경)",
+    [
+      "I made a reservation for",
+      "I need to cancel my reservation",
+      "Can I change it to",
+      "Is there an open table on",
+      "Is there any cancellation fee?",
+      "Could you send me a confirmation?",
+      "I'm sorry for the trouble",
+      "That's all I wanted to say",
+    ],
+  ],
+  [
+    "경험 이야기 틀 (과거)",
+    [
+      "It happened about … ago",
+      "At first,",
+      "Then,",
+      "After that,",
+      "In the end,",
+      "I felt",
+      "It was a great memory",
+      "That's my story",
+    ],
+  ],
+  [
+    "비교·선택 틀",
+    [
+      "Both are similar because",
+      "The first one is",
+      "The second one is",
+      "However,",
+      "I prefer … because",
+      "I like the second one better",
+      "That's my answer",
+    ],
+  ],
+  [
+    "문제·해결 틀",
+    [
+      "I think there are some problems",
+      "The biggest problem is",
+      "Another problem is",
+      "One solution is",
+      "Another solution is",
+      "That's how we can solve it",
+      "That's my answer",
+    ],
+  ],
+  [
+    "자기소개 틀",
+    [
+      "Hi, my name is",
+      "I'm a software developer at",
+      "I've worked in the IT field for about",
+      "I live alone in",
+      "In my free time, I like",
+      "I'm taking this test because",
+      "I'll do my best",
+      "That's all about me",
+    ],
+  ],
+  [
+    "장소 묘사 틀",
+    [
+      "Let me tell you about",
+      "It's located in",
+      "It looks",
+      "You can see",
+      "The atmosphere is",
+      "That's why I like it",
+      "That's all about this place",
+    ],
+  ],
+  [
+    "물건 묘사 틀",
+    [
+      "Let me tell you about",
+      "It looks",
+      "It has",
+      "It can",
+      "What I like most is",
+      "I use it for",
+      "That's why I like it",
+      "That's all about it",
+    ],
+  ],
+];
+try {
+  if (!localStorage.getItem("opic_phr_seed7")) {
+    const idOf3 = (en) => {
+      for (let g = 0; g < PHRASES.length; g++) {
+        const i = PHRASES[g].items.findIndex((x) => x.en === en);
+        if (i >= 0) return g + "." + i;
+      }
+      return null;
+    };
+    RP_PRESETS6.forEach(([name, ens]) => {
+      const sel = ens.map(idOf3).filter(Boolean);
+      const k = phr.sets.findIndex((x) => x.name === name);
+      if (k >= 0) phr.sets[k].sel = sel;
+      else phr.sets.push({ name, sel });
+    });
+    phr.act = Math.min(phr.act, phr.sets.length - 1);
+    localStorage.setItem("opic_phr_seed7", "1");
+    localStorage.setItem("opic_phr_sets", JSON.stringify({ act: phr.act, sets: phr.sets }));
+  }
+} catch (e) {}
+// 채우기용 문장(Also, / For example, …)을 틀 중간과 끝 앞에 두 칸 끼워 넣는다 (이미 있으면 건너뜀)
+try {
+  if (!localStorage.getItem("opic_phr_seed8")) {
+    const idOf4 = (en) => {
+      for (let g = 0; g < PHRASES.length; g++) {
+        const i = PHRASES[g].items.findIndex((x) => x.en === en);
+        if (i >= 0) return g + "." + i;
+      }
+      return null;
+    };
+    const names = RP_PRESETS6.map((x) => x[0]);
+    const f1 = idOf4("Also, …");
+    const f2 = idOf4("For example, …");
+    phr.sets.forEach((st) => {
+      if (!names.includes(st.name) || st.sel.length < 5) return;
+      if (st.sel.includes(f1) || st.sel.includes(f2)) return;
+      st.sel.splice(st.sel.length - 2, 0, f2);
+      st.sel.splice(3, 0, f1);
+    });
+    localStorage.setItem("opic_phr_seed8", "1");
+    localStorage.setItem("opic_phr_sets", JSON.stringify({ act: phr.act, sets: phr.sets }));
+  }
+} catch (e) {}
 const phrClean = (t) => t.replace(/\.{3}/g, ", ");
 const phrItem = (id) => {
   const [g, i] = id.split(".");
@@ -1561,7 +1798,9 @@ function phrTray() {
       phr.sel
         .map(
           (id, n) =>
-            '<li data-trid="' +
+            '<li class="' +
+            (phrItem(id).fill ? "fillc" : "") +
+            '" data-trid="' +
             id +
             '"><span class="trt" data-phgo="' +
             id +
@@ -1583,6 +1822,24 @@ function phrTray() {
     b.textContent = on ? "✓ 담김" : "＋ 담기";
     b.classList.toggle("pri", on);
   });
+  const fb = $("#phFillBar");
+  if (fb) {
+    let hh = "";
+    PHRASES.forEach((g, gi) =>
+      g.items.forEach((it, ii) => {
+        if (it.fill)
+          hh +=
+            '<button class="chip fillc" data-phfill="' +
+            gi +
+            "." +
+            ii +
+            '">' +
+            esc(it.en) +
+            "</button>";
+      }),
+    );
+    fb.innerHTML = hh;
+  }
   const go = $("#phSGo");
   if (go) go.textContent = phrScriptRunning() ? "■ 정지" : "▶ 이어 말하기 연습";
 }
@@ -1700,7 +1957,7 @@ function renderPhr() {
     '<div class="row2"><label class="lbl"><input type="checkbox" id="phHide"' +
     (phr.hide ? " checked" : "") +
     "> 영어 가리기 (뜻만 보고 말하기, 누르면 확인)</label></div>" +
-    '<div class="trbox"><div class="lbl">내 스크립트 (첫어구 이어 붙이기)</div><div id="phSetList" class="setchips"></div><div class="phbar"><button class="mini" id="phSNew">＋ 새 세트</button><button class="mini" id="phSRen">이름</button><button class="mini" id="phSDel">삭제</button></div><div id="phTray"></div>' +
+    '<div class="trbox"><div class="lbl">내 스크립트 (첫어구 이어 붙이기)</div><div id="phSetList" class="setchips"></div><div class="phbar"><button class="mini" id="phSNew">＋ 새 세트</button><button class="mini" id="phSRen">이름</button><button class="mini" id="phSDel">삭제</button></div><div id="phTray"></div><div class="lbl" style="margin-top:6px">채우기 문장 끼우기 (눌러서 추가)</div><div id="phFillBar" class="setchips"></div>' +
     '<div class="phbar"><select id="phSecs"><option value="10"' +
     (phr.secs === 10 ? " selected" : "") +
     '>어구마다 10초</option><option value="20"' +
@@ -1740,6 +1997,7 @@ function renderPhr() {
         show = !phr.hide || phr.open.has(id);
       h +=
         '<div class="bcard' +
+        (it.fill ? " fillc" : "") +
         (show && phr.hide ? " shown" : "") +
         '" data-ph="' +
         id +
@@ -1782,6 +2040,14 @@ $("#v-phr").addEventListener("change", (e) => {
   }
 });
 $("#v-phr").addEventListener("click", (e) => {
+  const fl = e.target.closest("[data-phfill]");
+  if (fl) {
+    const at = Math.max(phr.sel.length - 1, 0);
+    phr.sel.splice(at, 0, fl.dataset.phfill);
+    phrSave();
+    phrTray();
+    return;
+  }
   const go = e.target.closest("[data-phgo]");
   if (go) {
     phrJump('#v-phr [data-ph="' + go.dataset.phgo + '"]');
@@ -1946,6 +2212,7 @@ function cardsDraw() {
   ov.querySelector("#cdNo").classList.toggle("pri", kn);
   ov.querySelector(".cdStat").textContent = "외운 표현 " + known.size + "개";
   ov.querySelector(".cdGrp").textContent = c.grp;
+  ov.querySelector(".cdBody").classList.toggle("fillc", !!c.it.fill);
   ov.querySelector(".cdBody").innerHTML = cards.flip
     ? '<div class="cdEn">' +
       esc(c.it.en) +
