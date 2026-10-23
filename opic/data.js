@@ -10985,4 +10985,49 @@ const PHRASES = [
       },
     ],
   },
+  {
+    grp: "새 표현 · 도움·변화 말하기",
+    items: [
+      {
+        en: "This helps me every day",
+        ko: "오늘 주제가 내게 도움이 된다고 열 때",
+        ex: ["This helps me every day.", "매일 저에게 도움이 돼요."],
+      },
+      {
+        en: "First, I use",
+        ko: "도움 첫 번째를 말할 때",
+        ex: ["First, I use my smartphone all day.", "먼저 스마트폰을 하루 종일 써요."],
+      },
+      {
+        en: "Second, I use",
+        ko: "도움 두 번째를 말할 때",
+        ex: ["Second, I use a laptop for my work.", "둘째, 일에 노트북을 써요."],
+      },
+      {
+        en: "Third, I use",
+        ko: "도움 세 번째를 말할 때",
+        ex: ["Third, I use an audio system at home.", "셋째, 집에서 오디오 시스템을 써요."],
+      },
+      {
+        en: "It makes my life easier",
+        ko: "도움의 효과를 말할 때",
+        ex: ["It makes my life easier.", "생활이 편해져요."],
+      },
+      {
+        en: "So it's very important to me",
+        ko: "중요성으로 닫을 때",
+        ex: ["So it's very important to me.", "그래서 저에게 아주 중요해요."],
+      },
+      {
+        en: "It's different because",
+        ko: "지금과 어떻게 다른지 이유를 말할 때",
+        ex: ["It's different because I go alone now.", "지금은 혼자 가서 달라요."],
+      },
+      {
+        en: "I miss those days",
+        ko: "그때가 그리운 마음을 말할 때",
+        ex: ["I miss those days.", "그때가 그리워요."],
+      },
+    ],
+  },
 ];

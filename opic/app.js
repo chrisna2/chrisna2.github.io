@@ -1755,6 +1755,33 @@ try {
     localStorage.setItem("opic_phr_sets", JSON.stringify({ act: phr.act, sets: phr.sets }));
   }
 } catch (e) {}
+// 8회차 모의시험 복기에서 추가한 틀: 도움·영향(Q3), 어릴 적 vs 지금(Q9)
+const RP_PRESETS7 = [
+  [
+    "도움·영향 틀",
+    [
+      "This helps me every day",
+      "First, I use",
+      "Second, I use",
+      "Third, I use",
+      "It makes my life easier",
+      "So it's very important to me",
+      "That's my answer",
+    ],
+  ],
+  [
+    "어릴 적 vs 지금 틀",
+    [
+      "When I was young,",
+      "I felt",
+      "Now I",
+      "It's different because",
+      "I miss those days",
+      "That's my story",
+    ],
+  ],
+];
+seedSets("opic_phr_seed10", RP_PRESETS7);
 const phrClean = (t) => t.replace(/\.{3}/g, ", ");
 const phrItem = (id) => {
   const [g, i] = id.split(".");
