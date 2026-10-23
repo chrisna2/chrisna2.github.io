@@ -108,6 +108,8 @@ const cfg = Object.assign(
     mockSecs: 60,
     mockCaption: false,
     mockAuto: true,
+    mockQV: "",
+    mockAV: "",
   },
   store.get("cfg", {}),
 );
@@ -210,7 +212,7 @@ function pickVoice() {
 }
 // 한 문장을 읽고 끝나면 resolve되는 Promise.
 // 일부 브라우저는 onend가 안 오기도 해서 단어 수 기반 타임아웃으로 안전장치를 둔다.
-function speak(text, voice, lang) {
+function speak(text, voice, lang, pitch) {
   return new Promise((res) => {
     if (!SYNTH) {
       res();
@@ -223,6 +225,7 @@ function speak(text, voice, lang) {
       u.lang = voice.lang;
     }
     u.rate = cfg.rate;
+    if (pitch) u.pitch = pitch;
     let done = false,
       tm = null;
     const fin = () => {
@@ -2497,12 +2500,16 @@ function cardsOpen() {
 // 모의고사 출제·표시 순서 (서베이 → 돌발 → 롤플레이)
 const MOCK_ORDER = ["survey", "surprise", "rp"];
 // 저장된 모의시험 세트(MOCK_SETS[idx])를 분류(서베이 → 돌발 → 롤플레이)별로 묶어 출제한다. 문제 번호는 제목에 남기고 모범답안은 결과 화면에서 확인
-function buildReplay(idx) {
+function buildReplay(idx, browse) {
   const set = MOCK_SETS[idx];
   return set.qs
-    .filter((r) => cfg.mockCat === "all" || r.cat === cfg.mockCat)
+    .filter((r) => browse || cfg.mockCat === "all" || r.cat === cfg.mockCat)
     .map((r, i) => [r, i])
-    .sort((a, b) => MOCK_ORDER.indexOf(a[0].cat) - MOCK_ORDER.indexOf(b[0].cat) || a[1] - b[1])
+    .sort((a, b) =>
+      browse
+        ? a[1] - b[1]
+        : MOCK_ORDER.indexOf(a[0].cat) - MOCK_ORDER.indexOf(b[0].cat) || a[1] - b[1],
+    )
     .map(([r]) => r)
     .map((r) => ({
       cat: r.cat,
@@ -2555,17 +2562,101 @@ function mockReviewHtml() {
           li(r.actions) +
           '</ol><div class="row2">' +
           (MOCK_SETS[r.set]
-            ? '<button class="big pri" data-mset="' + r.set + '">이 시험 문제 다시 풀기</button>'
+            ? '<button class="big pri" data-mset="' +
+              r.set +
+              '">이 시험 문제 다시 풀기</button><button class="big" data-mbrowse="' +
+              r.set +
+              '">정답 보기</button>'
             : "") +
           "</div></details>",
       )
       .join("")
   );
 }
+// 정답 보기 화면의 읽어 주기 컨트롤: 처음부터 끝까지, 정지, 문제 목소리와 정답 목소리 선택
+function mockVoiceHtml() {
+  const opt = (cur) =>
+    '<option value="">자동</option>' +
+    voices
+      .map(
+        (v) =>
+          '<option value="' +
+          esc(v.name) +
+          '"' +
+          (v.name === cur ? " selected" : "") +
+          ">" +
+          esc(v.name) +
+          " (" +
+          esc(v.lang) +
+          ")</option>",
+      )
+      .join("");
+  return (
+    '<div class="row2"><button class="big pri" data-rall="1">▶ 처음부터 끝까지 읽어 주기</button>' +
+    '<button class="big" data-rstop="1">■ 정지</button></div>' +
+    '<div class="row2"><label class="lbl">문제 목소리 <select id="bQV">' +
+    opt(cfg.mockQV) +
+    '</select></label><label class="lbl">정답 목소리 <select id="bAV">' +
+    opt(cfg.mockAV) +
+    "</select></label></div>" +
+    '<div class="note">문제는 문제 목소리로, 모범답안은 정답 목소리로 한 문장씩 읽습니다. 영어 음성이 하나뿐이면 높낮이를 달리해서 구분합니다. 속도는 설정의 재생 속도를 따릅니다.</div>'
+  );
+}
+// 문제용·정답용 음성 정하기: 선택이 없으면 서로 다른 음성을 자동으로 고르고, 같으면 높낮이를 달리한다
+function mockVoices() {
+  const byName = (n) => voices.find((v) => v.name === n);
+  const qv = byName(cfg.mockQV) || pickVoice();
+  let av = byName(cfg.mockAV);
+  if (!av && qv)
+    av =
+      voices.find((v) => v.name !== qv.name && v.lang !== qv.lang) ||
+      voices.find((v) => v.name !== qv.name) ||
+      qv;
+  const same = !qv || !av || qv.name === av.name;
+  return { qv, av: av || qv, qp: same ? 1.15 : 1, ap: same ? 0.8 : 1 };
+}
+// 지금 읽는 문제를 표시하고 화면 가운데로 가져온다 (-1이면 표시 해제)
+function mockMark(i) {
+  document.querySelectorAll("#v-mock details.res").forEach((d) => {
+    const on = +d.dataset.qi === i;
+    d.classList.toggle("reading", on);
+    if (on) {
+      d.open = true;
+      d.scrollIntoView({ block: "center", behavior: "smooth" });
+    }
+  });
+}
+// 정답 보기: start번 문제부터 끝까지 [문제 → 잠깐 쉬고 → 모범답안 문장들] 순서로 읽는다
+async function mockReadAll(start) {
+  stopAll();
+  const my = ++token;
+  keepAwake();
+  const V = mockVoices();
+  for (let i = start; i < mock.qs.length; i++) {
+    if (my !== token) return;
+    mockMark(i);
+    const sc = secOf(mock.qs[i]);
+    await speak(sc.q[0], V.qv, null, V.qp);
+    if (my !== token) return;
+    await sleep(900);
+    for (const p of sc.s) {
+      if (my !== token) return;
+      await speak(plain(p[0]), V.av, null, V.ap);
+      if (my !== token) return;
+      await sleep(350);
+    }
+    if (my !== token) return;
+    await sleep(1400);
+  }
+  if (my === token) {
+    mockMark(-1);
+    releaseAwake();
+  }
+}
 // 모의고사 화면 그리기: 설정 / 출제 중 / 답변 타이머 / 결과 (phase에 따라 다름)
 function renderMock() {
   const el = $("#v-mock");
-  if (mock.phase === "setup" || (!mock.on && mock.phase !== "result")) {
+  if (mock.phase === "setup" || (!mock.on && mock.phase !== "result" && mock.phase !== "browse")) {
     const secs = [30, 45, 60, 90];
     el.innerHTML =
       '<p class="note">문제만 음성으로 읽어 줍니다. 아무것도 보지 않고 답하세요. 마이크 녹음은 이 페이지에서 쓸 수 없어서, 말한 시간만 기록합니다.</p>' +
@@ -2629,9 +2720,9 @@ function renderMock() {
       '<div class="lbl" style="margin:16px 0 6px">저장된 모의시험 · 분류별로 묶어서 풉니다 (위 범위 적용)</div>' +
       MOCK_SETS.map(
         (m, i) =>
-          '<button class="big" data-mset="' +
+          '<div style="display:flex;gap:8px;margin-bottom:8px"><button class="big" data-mset="' +
           i +
-          '" style="width:100%;margin-bottom:8px;text-align:left">' +
+          '" style="flex:1;text-align:left">' +
           esc(m.name) +
           " · " +
           buildReplay(i).length +
@@ -2639,23 +2730,32 @@ function renderMock() {
           (m.note
             ? '<small style="display:block;font-weight:400;opacity:.75">' + esc(m.note) + "</small>"
             : "") +
-          "</button>",
+          '</button><button class="big" data-mbrowse="' +
+          i +
+          '" title="시험을 풀지 않고 바로 문제와 정답 보기">정답 보기</button></div>',
       ).join("") +
       mockReviewHtml();
     return;
   }
-  if (mock.phase === "result") {
+  if (mock.phase === "result" || mock.phase === "browse") {
+    const br = mock.phase === "browse";
     const tot = mock.res.reduce((a, b) => a + b, 0),
       avg = mock.res.length ? Math.round(tot / mock.res.length) : 0;
-    let h =
-      '<div class="qcard"><div class="qlab">결과</div><div class="qen">' +
-      mock.qs.length +
-      "문제 · 평균 " +
-      avg +
-      "초 / " +
-      mock.total +
-      "초</div>" +
-      '<div class="qko">IM2는 문제당 30초 이상 막힘없이 이어 가는 것이 목표입니다. 너무 짧았던 문제는 빨간색으로 표시됩니다.</div></div>';
+    let h = br
+      ? '<div class="qcard"><div class="qlab">정답 보기</div><div class="qen">' +
+        esc(MOCK_SETS[mock.set].name) +
+        '</div><div class="qko">' +
+        mock.qs.length +
+        "문제 · 시험을 풀지 않고 문제와 모범답안을 바로 봅니다.</div></div>" +
+        mockVoiceHtml()
+      : '<div class="qcard"><div class="qlab">결과</div><div class="qen">' +
+        mock.qs.length +
+        "문제 · 평균 " +
+        avg +
+        "초 / " +
+        mock.total +
+        "초</div>" +
+        '<div class="qko">IM2는 문제당 30초 이상 막힘없이 이어 가는 것이 목표입니다. 너무 짧았던 문제는 빨간색으로 표시됩니다.</div></div>';
     let lastCat = "";
     mock.qs.forEach((q, i) => {
       if (q.cat && q.cat !== lastCat) {
@@ -2670,17 +2770,19 @@ function renderMock() {
         sec = mock.res[i] || 0,
         wk = !q.gen && weakSec.has(q.ti + "." + q.si);
       h +=
-        '<details class="res"><summary><span class="n">Q' +
+        '<details class="res" data-qi="' +
+        i +
+        '"' +
+        (br ? " open" : "") +
+        '><summary><span class="n">Q' +
         (i + 1) +
         '</span><span class="tt">' +
         esc(tpn) +
         " · " +
         esc(sc.t) +
-        '</span><span class="sec2 ' +
-        (sec < 25 ? "low" : "") +
-        '">' +
-        sec +
-        "초</span></summary>" +
+        "</span>" +
+        (br ? "" : '<span class="sec2 ' + (sec < 25 ? "low" : "") + '">' + sec + "초</span>") +
+        "</summary>" +
         '<div class="qen" style="font-size:15px">' +
         esc(sc.q[0]) +
         '</div><div class="qko">' +
@@ -2698,7 +2800,9 @@ function renderMock() {
           )
           .join("") +
         "</div>" +
-        '<div class="row2"><button class="mini" data-rsay="' +
+        '<div class="row2">' +
+        (br ? '<button class="mini" data-rfrom="' + i + '">여기서부터 끝까지 읽기</button>' : "") +
+        '<button class="mini" data-rsay="' +
         i +
         '">정답 읽어 주기</button>' +
         (q.gen
@@ -2711,7 +2815,9 @@ function renderMock() {
         "</div></details>";
     });
     h +=
-      '<div class="nav2"><span></span><div class="g"><button class="big" data-mreset="1">설정으로</button><button class="big pri" data-mstart="1">다시 하기</button></div></div>';
+      '<div class="nav2"><span></span><div class="g"><button class="big" data-mreset="1">설정으로</button><button class="big pri" data-mstart="1">' +
+      (br ? "이 시험 풀기" : "다시 하기") +
+      "</button></div></div>";
     el.innerHTML = h;
     return;
   }
@@ -3285,8 +3391,34 @@ $("#v-mock").addEventListener("click", (e) => {
     mockStart(+mset.dataset.mset);
     return;
   }
+  const mbr = e.target.closest("[data-mbrowse]");
+  if (mbr) {
+    stopAll();
+    mock.set = +mbr.dataset.mbrowse;
+    mock.qs = buildReplay(mock.set, true);
+    mock.res = [];
+    mock.on = false;
+    mock.phase = "browse";
+    renderMock();
+    window.scrollTo({ top: 0 });
+    return;
+  }
+  if (e.target.closest("[data-rall]")) {
+    mockReadAll(0);
+    return;
+  }
+  const rf = e.target.closest("[data-rfrom]");
+  if (rf) {
+    mockReadAll(+rf.dataset.rfrom);
+    return;
+  }
+  if (e.target.closest("[data-rstop]")) {
+    stopAll();
+    mockMark(-1);
+    return;
+  }
   if (e.target.closest("[data-mstart]")) {
-    mockStart(mock.phase === "result" ? mock.set : null);
+    mockStart(mock.phase === "result" || mock.phase === "browse" ? mock.set : null);
     return;
   }
   if (e.target.closest("[data-mreset]")) {
@@ -3342,6 +3474,18 @@ $("#v-mock").addEventListener("click", (e) => {
     stopAll();
     const q = mock.qs[+rs.dataset.rsay];
     const my = ++token;
+    if (mock.phase === "browse") {
+      const V = mockVoices();
+      (async () => {
+        for (const p of secOf(q).s) {
+          if (my !== token) return;
+          await speak(plain(p[0]), V.av, null, V.ap);
+          if (my !== token) return;
+          await sleep(350);
+        }
+      })();
+      return;
+    }
     sayAll(
       secOf(q).s.map((p) => plain(p[0])),
       my,
@@ -3366,6 +3510,14 @@ $("#v-mock").addEventListener("change", (e) => {
   }
   if (e.target.id === "mAuto") {
     cfg.mockAuto = e.target.checked;
+    save();
+  }
+  if (e.target.id === "bQV") {
+    cfg.mockQV = e.target.value;
+    save();
+  }
+  if (e.target.id === "bAV") {
+    cfg.mockAV = e.target.value;
     save();
   }
 });
