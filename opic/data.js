@@ -7645,7 +7645,385 @@ const REPLAY8 = {
 REPLAY8.qs.forEach((q, i) => {
   q.cat = i < 10 ? "survey" : i < 13 ? "rp" : "surprise";
 });
-const MOCK_SETS = [REPLAY, REPLAY2, REPLAY3, REPLAY4, REPLAY5, REPLAY6, REPLAY7, REPLAY8];
+const REPLAY9 = {
+  name: "10/23 모의시험 7회차 복기 (난이도 4-4, 짧은 문장)",
+  qs: [
+    {
+      kind: "자기소개",
+      t: "1 자기소개",
+      tag: "복기",
+      q: ["Tell me something about yourself.", "자기소개를 해 주세요."],
+      s: [
+        ["Hi, my name is {Hyun-gi}.", "안녕하세요, 제 이름은 현기예요.", "인사"],
+        [
+          "I'm a software developer at {Hanwha System}.",
+          "한화시스템의 소프트웨어 개발자예요.",
+          "직업",
+        ],
+        [
+          "I've worked in the IT field for about {eight years}.",
+          "IT 분야에서 약 8년 일했어요.",
+          "경력",
+        ],
+        ["I live alone in an apartment.", "아파트에 혼자 살아요.", "집"],
+        [
+          "In my free time, I like {playing online games}.",
+          "여가에는 온라인 게임을 좋아해요.",
+          "취미",
+        ],
+        [
+          "I'm taking this test because my company needs a grade.",
+          "회사에서 등급이 필요해서 시험을 봐요.",
+          "시험 이유",
+        ],
+        ["I'll do my best.", "최선을 다할게요.", "각오"],
+        ["That's all about me.", "제 소개는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "공원 · 좋아하는 공원",
+      t: "2 좋아하는 공원",
+      tag: "복기",
+      q: [
+        "You indicated in the survey that you go to parks. Tell me about the kind of parks you like to visit. What do the parks look like?",
+        "설문에서 공원에 간다고 하셨어요. 좋아하는 공원은 어떤 곳이고 어떻게 생겼나요?",
+      ],
+      s: [
+        [
+          "Let me tell you about {the park near my house}.",
+          "집 근처 공원에 대해 말할게요.",
+          "도입",
+        ],
+        ["It's located in Seoul, close to my house.", "서울에 있고 집에서 가까워요.", "위치"],
+        ["It looks big and well kept.", "크고 잘 관리돼 보여요.", "외관"],
+        [
+          "You can see a running track and a big field.",
+          "러닝 트랙과 넓은 운동장이 보여요.",
+          "볼거리",
+        ],
+        ["Especially, I like the trees and flowers.", "특히 나무와 꽃이 좋아요.", "강조"],
+        ["The atmosphere is calm.", "분위기가 차분해요.", "분위기"],
+        ["That's why I like it.", "그래서 좋아해요.", "이유"],
+        ["That's all about this place.", "이 장소 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "공원 · 보통의 방문",
+      t: "3 공원 방문 일과",
+      tag: "복기",
+      q: [
+        "Describe what a typical visit to a park is like for you. How would you prepare, and what are the things you do and see at the park? Tell me all the details.",
+        "공원 방문이 보통 어떤지 설명해 주세요. 어떻게 준비하고 무엇을 하고 보나요? 자세히 말해 주세요.",
+      ],
+      s: [
+        ["I first went to a park in elementary school.", "초등학교 때 처음 공원에 갔어요.", "배경"],
+        ["There was a small park near my old house.", "옛집 근처에 작은 공원이 있었어요.", "장소"],
+        ["Now I usually go for exercise.", "지금은 보통 운동하러 가요.", "목적"],
+        ["At first, I put on my running shoes.", "먼저 러닝화를 신어요.", "준비"],
+        ["Then I walk and run on the track.", "그다음 트랙을 걷고 달려요.", "하는 일"],
+        ["After that, I rest and look at the trees.", "그 후 쉬면서 나무를 봐요.", "보는 것"],
+        ["It makes me feel better.", "기분이 좋아져요.", "느낌"],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "공원 · 마지막 방문",
+      t: "4 마지막으로 간 공원",
+      tag: "복기",
+      q: [
+        "Describe the last time you went to the park. What park was it? When did you go? Tell me everything you did and saw from the time you arrived to the time you left.",
+        "마지막으로 공원에 간 때를 설명해 주세요. 어느 공원이고 언제였나요? 도착해서 떠날 때까지 한 일과 본 것을 모두 말해 주세요.",
+      ],
+      s: [
+        ["Recently, I went to {the big park}.", "최근에 큰 공원에 갔어요.", "어디 · 언제"],
+        ["I went on {Saturday morning}.", "토요일 아침에 갔어요.", "언제"],
+        ["At first, I walked around the track.", "먼저 트랙을 걸었어요.", "도착 후"],
+        ["Then I ran for thirty minutes.", "그다음 30분을 달렸어요.", "한 일 1"],
+        ["After that, I took photos of the trees.", "그 후 나무 사진을 찍었어요.", "한 일 2"],
+        ["In the end, I went home.", "마지막에 집에 갔어요.", "떠남"],
+        ["I felt refreshed.", "상쾌했어요.", "느낌"],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "날씨 · 오늘 날씨",
+      t: "5 오늘 날씨",
+      tag: "복기",
+      q: [
+        "Tell me about the weather where you are. Is it typical for the season? Tell me all about it.",
+        "지금 있는 곳의 날씨를 말해 주세요. 계절에 맞는 날씨인가요? 자세히 말해 주세요.",
+      ],
+      s: [
+        [
+          "Today's weather is clear and a little chilly.",
+          "오늘은 맑고 조금 쌀쌀해요.",
+          "오늘 날씨",
+        ],
+        ["It's typical for fall in Korea.", "한국의 가을답게 평범한 날씨예요.", "계절에 맞는지"],
+        ["Korea has four seasons.", "한국에는 사계절이 있어요.", "특징"],
+        [
+          "Many people go outside on days like this.",
+          "이런 날엔 많은 사람이 밖에 나가요.",
+          "사람들",
+        ],
+        ["I love this season.", "저는 이 계절이 좋아요.", "나의 생각"],
+        ["It's good for walking.", "걷기에 좋아요.", "이유"],
+        ["That's why I go to the park.", "그래서 공원에 가요.", "마무리"],
+      ],
+    },
+    {
+      kind: "날씨 · 사계절",
+      t: "6 사계절 날씨",
+      tag: "복기",
+      q: [
+        "Tell me about the weather in your area during the year. What is it usually like in summer and in winter?",
+        "1년 동안 지역의 날씨를 말해 주세요. 여름과 겨울에는 보통 어떤가요?",
+      ],
+      s: [
+        ["Korea has four seasons.", "한국에는 사계절이 있어요.", "도입"],
+        ["In summer, it's hot and humid.", "여름은 덥고 습해요.", "여름"],
+        ["So I stay at home more.", "그래서 집에 더 있어요.", "여름 행동"],
+        ["In winter, it's cold and dry.", "겨울은 춥고 건조해요.", "겨울"],
+        ["But I don't mind the cold.", "하지만 추위는 괜찮아요.", "나의 생각"],
+        ["I still go out to the park.", "그래도 공원에 나가요.", "겨울 행동"],
+        ["Spring and fall are my favorites.", "봄과 가을이 제일 좋아요.", "선호"],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "날씨 · 날씨 변화",
+      t: "7 날씨의 변화",
+      tag: "복기",
+      q: [
+        "Is the weather in your area today different from the past? Describe the trends or changes that you have observed in the weather.",
+        "지금 날씨가 과거와 다른가요? 관찰한 날씨의 변화나 추세를 설명해 주세요.",
+      ],
+      s: [
+        ["Yes, the weather is different now.", "네, 지금은 날씨가 달라요.", "도입"],
+        [
+          "When I was young, we had four balanced seasons.",
+          "어릴 때는 사계절이 고르게 있었어요.",
+          "과거 1",
+        ],
+        ["Spring and fall were longer.", "봄과 가을이 더 길었어요.", "과거 2"],
+        ["Now spring and fall are shorter.", "지금은 봄과 가을이 더 짧아요.", "현재 1"],
+        ["Summer is hotter and longer.", "여름은 더 덥고 길어요.", "현재 2"],
+        ["I think it's because of climate change.", "기후 변화 때문이라고 생각해요.", "이유"],
+        ["That's how it changed.", "그렇게 변했어요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "집 · 좋아하는 방",
+      t: "8 좋아하는 방",
+      tag: "복기",
+      q: [
+        "I would like to talk about where you live. Tell me about your favorite room in your home. What does it look like?",
+        "사는 곳에 대해 이야기해 보죠. 집에서 가장 좋아하는 방을 말해 주세요. 어떻게 생겼나요?",
+      ],
+      s: [
+        ["Let me tell you about my home.", "제 집에 대해 말할게요.", "도입"],
+        ["It's located in Seoul.", "서울에 있어요.", "위치"],
+        [
+          "It's a tall apartment, and I live on the {fifteenth} floor.",
+          "높은 아파트이고 15층에 살아요.",
+          "집",
+        ],
+        [
+          "It has a living room, a bedroom, a bathroom, and a balcony.",
+          "거실, 침실, 욕실, 발코니가 있어요.",
+          "방 수",
+        ],
+        ["My favorite room is the living room.", "제일 좋아하는 방은 거실이에요.", "좋아하는 방"],
+        ["It has a big TV and a computer.", "큰 TV와 컴퓨터가 있어요.", "모습"],
+        ["I play games there, so that's why I like it.", "거기서 게임을 해서 좋아해요.", "이유"],
+        ["That's all about my home.", "제 집 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "집 · 어릴 적 집",
+      t: "9 어릴 적 집",
+      tag: "복기",
+      q: [
+        "Describe the home you lived in as a child. How is that home different from the home you live in now?",
+        "어릴 때 살던 집을 설명해 주세요. 지금 사는 집과 어떻게 다른가요?",
+      ],
+      s: [
+        ["My old house was an apartment.", "옛집은 아파트였어요.", "도입"],
+        ["It was bigger than my house now.", "지금 집보다 컸어요.", "차이 1"],
+        [
+          "It had a big living room and four small rooms.",
+          "큰 거실과 작은 방 네 개가 있었어요.",
+          "내부",
+        ],
+        ["It also had two bathrooms and a balcony.", "욕실 두 개와 발코니도 있었어요.", "내부 2"],
+        ["My favorite room was my room.", "제일 좋아한 방은 제 방이었어요.", "좋아한 방"],
+        ["It had many books and a computer.", "책이 많고 컴퓨터가 있었어요.", "모습"],
+        ["I miss my old house.", "옛집이 그리워요.", "느낌"],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "집 · 집의 변화",
+      t: "10 집을 바꾼 경험",
+      tag: "복기",
+      q: [
+        "Sometimes we want to change something in our home, like getting new furniture or decorating. Tell me about one change that you made. Why did you decide to make that change, and everything you had to do to make it happen?",
+        "집에서 무언가를 바꾸고 싶을 때가 있죠. 직접 바꾼 것 하나를 말해 주세요. 왜 바꿨고 어떤 과정이 필요했나요?",
+      ],
+      s: [
+        ["My home was simple and modern.", "제 집은 단순하고 현대적이었어요.", "배경"],
+        ["Sometimes I felt it was boring.", "가끔 지루하다고 느꼈어요.", "이유"],
+        ["So I decided to change something.", "그래서 바꾸기로 했어요.", "결정"],
+        [
+          "First, I searched for good speakers online.",
+          "먼저 온라인에서 좋은 스피커를 찾았어요.",
+          "과정 1",
+        ],
+        ["Then I ordered an audio system.", "그다음 오디오 시스템을 주문했어요.", "과정 2"],
+        ["After that, I set it up in my living room.", "그 후 거실에 설치했어요.", "과정 3"],
+        ["Now I listen to music every day.", "지금은 매일 음악을 들어요.", "결과"],
+        ["It was a good choice.", "좋은 선택이었어요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "롤플레이 · 질문하기 (새 웹사이트)",
+      t: "11 새 웹사이트 질문",
+      tag: "복기",
+      q: [
+        "Your friend knows about a terrific new website. Ask your friend 3 or 4 questions about the website.",
+        "친구가 멋진 새 웹사이트를 알고 있어요. 그 웹사이트에 대해 친구에게 3~4개 질문해 보세요.",
+      ],
+      s: [
+        [
+          "Hi, it's {Hyun-gi}. I heard about a new website.",
+          "안녕, 현기야. 새 웹사이트 얘기 들었어.",
+          "도입",
+        ],
+        ["What kind of website is it?", "어떤 종류의 사이트야?", "질문 1"],
+        ["What is the address?", "주소가 뭐야?", "질문 2"],
+        ["Can I join for free?", "무료로 가입할 수 있어?", "질문 3"],
+        ["How do you use it?", "어떻게 사용해?", "질문 4"],
+        ["Thank you, I got it.", "고마워, 알겠어.", "마무리"],
+        ["That's all I wanted to ask.", "묻고 싶은 건 여기까지야.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "롤플레이 · 문제 + 해결 (인터넷 고장)",
+      t: "12 인터넷 서비스 전화",
+      tag: "복기",
+      q: [
+        "There is a problem. When you try to go to the website, you realize your internet is not working. Call your internet service provider, explain the situation in detail and try to get your internet repaired as soon as possible.",
+        "웹사이트에 접속하려는데 인터넷이 안 돼요. 인터넷 업체에 전화해 상황을 자세히 설명하고 최대한 빨리 수리받도록 해 보세요.",
+      ],
+      s: [
+        [
+          "Hello, my name is {Hyun-gi}. I'm a customer of your service.",
+          "안녕하세요, 현기입니다. 고객이에요.",
+          "도입",
+        ],
+        ["I have a problem.", "문제가 생겼어요.", "문제"],
+        ["My internet isn't working.", "인터넷이 안 돼요.", "상황 1"],
+        ["It stopped this morning.", "오늘 아침부터 멈췄어요.", "상황 2"],
+        ["Can you send a technician today?", "오늘 기사님을 보내 주실 수 있나요?", "해결 1"],
+        ["If not, can you come tomorrow morning?", "안 되면 내일 아침은 가능한가요?", "해결 2"],
+        ["Please call me back. Thank you.", "전화 주세요. 감사합니다.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "돌발 · 인터넷을 활용한 프로젝트",
+      t: "13 인터넷 프로젝트",
+      tag: "복기",
+      q: [
+        "Tell me the story of one particular project you completed where the internet played a crucial role. Explain the details of the project and how you used the internet to finish it.",
+        "인터넷이 중요한 역할을 한 프로젝트 하나를 이야기해 주세요. 프로젝트 내용과 인터넷을 어떻게 활용해 마쳤는지 설명해 주세요.",
+      ],
+      s: [
+        [
+          "Last year, I finished a project at my company.",
+          "작년에 회사에서 프로젝트를 끝냈어요.",
+          "언제 · 무엇",
+        ],
+        ["I used the internet a lot.", "인터넷을 많이 썼어요.", "도입"],
+        [
+          "First, I searched for similar cases online.",
+          "먼저 비슷한 사례를 온라인에서 찾았어요.",
+          "활용 1",
+        ],
+        [
+          "Then I shared files with my team by email and Teams.",
+          "그다음 이메일과 팀즈로 팀과 파일을 공유했어요.",
+          "활용 2",
+        ],
+        ["We also had video meetings.", "화상 회의도 했어요.", "활용 3"],
+        ["The internet saved a lot of time.", "인터넷 덕에 시간을 많이 아꼈어요.", "효과"],
+        ["We finished on time.", "제때 끝냈어요.", "결과"],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "돌발 · 좋아하는 음악",
+      t: "14 좋아하는 음악",
+      tag: "복기",
+      q: [
+        "What kinds of music do you listen to? Who are some of your favorite musicians and composers?",
+        "어떤 음악을 듣나요? 가장 좋아하는 음악가는 누구인가요?",
+      ],
+      s: [
+        ["I like rock music.", "록 음악을 좋아해요.", "장르"],
+        ["I'm a big fan of {Silica Gel}.", "실리카겔의 열렬한 팬이에요.", "가수"],
+        ["I listen to their songs every day.", "매일 그들의 노래를 들어요.", "빈도"],
+        ["I also went to their concert.", "콘서트에도 갔어요.", "경험"],
+        ["It was energetic and powerful.", "에너지 넘치고 강렬했어요.", "느낌"],
+        ["I felt refreshed.", "상쾌했어요.", "효과"],
+        ["That's why I love them.", "그래서 좋아해요.", "이유"],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "롤플레이 · 질문하기 (바이올린)",
+      t: "15 바이올린 질문",
+      tag: "복기",
+      q: [
+        "I play the violin in an orchestra. Ask me 3 or 4 questions to find out more about my violin playing.",
+        "저는 오케스트라에서 바이올린을 연주해요. 바이올린 연주에 대해 3~4개 질문해 보세요.",
+      ],
+      s: [
+        [
+          "Wow, you play the violin in an orchestra.",
+          "와, 오케스트라에서 바이올린을 연주하시네요.",
+          "도입",
+        ],
+        ["How long have you played it?", "얼마나 오래 연주하셨어요?", "질문 1"],
+        ["How often do you practice?", "얼마나 자주 연습하세요?", "질문 2"],
+        ["Is the violin expensive?", "바이올린은 비싼가요?", "질문 3"],
+        ["Do you plan to play in a big concert?", "큰 연주회에서 연주할 계획이 있나요?", "질문 4"],
+        ["You're very talented.", "정말 재능이 있으세요.", "칭찬"],
+        ["That's all I wanted to ask.", "묻고 싶은 건 여기까지예요.", "끝맺음"],
+      ],
+    },
+  ],
+};
+const REPLAY9_CATS = [
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "rp",
+  "rp",
+  "surprise",
+  "surprise",
+  "rp",
+];
+REPLAY9.qs.forEach((q, i) => {
+  q.cat = REPLAY9_CATS[i];
+});
+const MOCK_SETS = [REPLAY, REPLAY2, REPLAY3, REPLAY4, REPLAY5, REPLAY6, REPLAY7, REPLAY8, REPLAY9];
 
 /* 발화 노트(날짜별 복기 기록). 시험 후 평가를 여기에 추가하면 모의고사 화면의 발화 노트에 나타난다.
    형식: {date, title, set(MOCK_SETS 인덱스), grade 예상 등급, summary, good:[], problems:[{q 문제, cat, issue 문제점, fix 고칠 점}], actions:[우선순위 할 일]} */
@@ -8214,6 +8592,87 @@ const MOCK_REVIEWS = [
       "뉴스·사건처럼 확신이 없는 큰 주제는 피하고 안전한 개인 경험으로 답하기",
       "롤플레이 12는 오늘처럼 '문제 → 설명 → 해결 2개 → 감사'를 유지하되 직원이나 친구 탓은 하지 않기",
       "층수는 'fifteenth'를 또렷하게(fifty와 구분), 콘서트는 실리카겔, 옛집에서 가족과 요리. 5회차 이후 틀 세트로 시험 전 날 한 번씩 돌리기",
+    ],
+  },
+  {
+    date: "2026-10-23",
+    title: "7회차 모의시험 (난이도 4-4, 문제당 1분 컷)",
+    set: 8,
+    grade: "IM1 후반 ~ IM2 경계 (틀을 써서 구조는 좋아졌고, 세부 서술이 아직 약함)",
+    summary:
+      "처음으로 만들어 둔 틀(자기소개·장소 묘사·끝맺음 문장)을 실제 답에 썼음. 'Let me tell you about … It's located in … It looks … You can see … Especially … The atmosphere is … That's why I like it. That's all about the place.'(Q2)처럼 한 문제가 완결된 흐름으로 끝났고, 자기소개(Q1)와 Q3의 'That's all about me / That's my story'로 끝났다는 신호도 분명했음. 롤플레이 11·15는 3~5개 질문을 실제로 했고 Q12는 상황 설명과 수리 요청이 있었음. 문제당 1분 컷이라 길이는 문제가 되지 않았음. 약점은 틀을 기계적으로 가져다 쓰는 것(Q6 '계절 날씨'에서 'Both are similar because', Q6·Q9에서 'Okay let's go'), '마지막으로 간 공원'(Q4)·'보통의 방문'(Q3)처럼 순서대로 한 일을 말해야 하는 질문에서 이유·배경만 말한 것, Q13에서 '인터넷이 고장 난 이야기'로 질문을 오해한 것임. 녹취록 기준 평가라 발음·억양·침묵은 반영되지 않았고 'ITP2', 'Graham Park', 'Silkger' 같은 STT 오인식은 감점하지 않음.",
+    good: [
+      "Q2 좋아하는 공원: 장소 묘사 틀을 그대로 사용해 위치 → 외관 → 볼거리 → 분위기 → 'That's why I like it. That's all about the place.'로 완결됨. 이번 시험에서 가장 좋은 답",
+      "Q1 자기소개: 인사 → 직업 → 경력 → 집·취미 → 시험 이유 → 각오 → 'That's all about me.'로 끝났다는 신호가 분명함. 등급 부탁도 없음",
+      "Q11·Q15 롤플레이 질문: 웹사이트 종류·주소·가입·사용법, 바이올린 연주 기간·가격·계획 등 실제 질문 3~5개. 5회차 0개에서 꾸준히 개선",
+      "Q12 롤플레이: 고객이라고 밝히고 인터넷이 안 된다는 문제를 설명한 뒤 수리 방문을 요청하고 'Thank you'로 닫음",
+      "Q9·Q10 집 이야기: 옛집 구성(큰 거실, 방 4개, 욕실 2개)과 오디오 시스템을 산 이유까지 내 이야기로 구체적임",
+      "Q5·Q6 날씨: 오늘 날씨, 사계절, 여름은 더워서 집에, 겨울은 추워도 공원에 간다는 개인적 내용이 들어감",
+    ],
+    problems: [
+      {
+        q: "Q3·Q4 공원 방문 (순서 서술)",
+        cat: "서베이",
+        issue:
+          "'보통의 방문'과 '마지막으로 간 공원'은 도착해서 떠날 때까지 한 일과 본 것을 순서대로 말해야 하는데, 어린 시절 배경과 '왜 가는지(운동, 기분 전환)'만 말하고 한 일의 순서가 없음. Q4는 'FC park. That's all reason.'로 끝남",
+        fix: "경험 이야기 틀(At first, → Then → After that → In the end)로 한 일 3개를 순서대로 말하기 (복기 세트 Q3·Q4)",
+      },
+      {
+        q: "Q6 사계절 날씨 · 틀 오용",
+        cat: "서베이",
+        issue:
+          "'Okay let's go. Both are similar because …'로 시작함. 비교 틀(Both are similar because)은 두 대상을 비교하는 질문에서만 쓰는 틀인데 계절 날씨 설명에 그대로 가져옴. 'Okay let's go'도 Q9에서 반복되는 군더더기",
+        fix: "계절 날씨는 '4계절 → 여름 → 겨울 → 내 행동'처럼 나열로 말하기. 'Okay let's go'는 버리고 바로 첫 문장 말하기",
+      },
+      {
+        q: "Q13 인터넷이 중요한 역할을 한 프로젝트",
+        cat: "돌발",
+        issue:
+          "질문은 '인터넷을 활용해 프로젝트를 마친 이야기'인데 '인터넷이 고장 나서 USB로 전달했다'는 반대 이야기를 함. 인터넷을 어떻게 활용했는지가 없음",
+        fix: "인터넷으로 자료를 찾고, 팀과 파일을 공유하고, 화상 회의를 한 프로젝트 하나로 답하기 (복기 세트 Q13). 질문의 핵심 단어(played a crucial role, how you used)를 먼저 확인",
+      },
+      {
+        q: "Q7 날씨의 변화",
+        cat: "서베이",
+        issue:
+          "'part of season has a similar length of day'가 무슨 뜻인지 불분명하고 두 문장에서 끊김. 변화(과거 vs 현재)를 대비하지 못함",
+        fix: "'When I was young… Now…'로 과거 둘, 현재 둘을 짝지어 말하고 이유(기후 변화) 한 줄 (복기 세트 Q7)",
+      },
+      {
+        q: "Q15·Q11 롤플레이 문장 형태",
+        cat: "롤플레이",
+        issue:
+          "질문은 했지만 'How long exercise you are performing the violin?', 'Could you plan to more exercising?'처럼 문장 형태가 어색하고, 'I am touched your performance' 같은 칭찬이 질문보다 더 많음",
+        fix: "How long have you played? / How often do you practice? / Is it expensive? 같은 고정 질문 4개를 외우고 칭찬은 한 문장만",
+      },
+      {
+        q: "Q10 집의 변화",
+        cat: "서베이",
+        issue:
+          "왜 바꿨는지는 말했지만 '무엇을 해야 했는지(과정)'가 없음. 'audio theorem'은 STT 오인식",
+        fix: "First(검색) → Then(주문) → After that(설치) 순서 3칸을 넣기 (복기 세트 Q10)",
+      },
+      {
+        q: "Q12 롤플레이 (인터넷 고장)",
+        cat: "롤플레이",
+        issue:
+          "'예약 때문에 웹사이트에 접속해야 한다'는 곁가지가 들어가고 'Please call me I appointment to meet you'로 방문 요청이 어색함. 대안 시간(오늘/내일) 제안이 없음",
+        fix: "'Can you send a technician today? If not, tomorrow morning?'처럼 시간 대안 둘 (복기 세트 Q12)",
+      },
+      {
+        q: "문법 · 공통",
+        cat: "공통",
+        issue:
+          "It's located in Seoul is nearby(두 동사), I live alone in apartments(복수), bigger sized, I really into(be 누락), ran music(rock), 'I think'으로 끊기는 마무리가 반복됨",
+        fix: "한 문장에 동사 하나. 고정 문장: I live alone in an apartment / I'm really into … / It's bigger than …",
+      },
+    ],
+    actions: [
+      "내일 시험 전: 틀 듣기(말할 시간 7초)로 자기소개 틀, 경험 이야기 틀, 질문 틀, 대안 틀을 한 번씩 돌리기",
+      "'마지막으로', '보통', '과정' 질문이 나오면 경험 이야기 틀의 At first → Then → After that → In the end를 그대로 쓰기",
+      "질문의 핵심 단어를 한 번 더 확인하고 반대로 답하지 않기 (Q13: 인터넷을 '활용'한 프로젝트)",
+      "비교 틀은 두 대상을 비교할 때만 쓰고, 'Okay let's go' 같은 시작 군더더기는 버리기",
+      "끝맺음 신호 문장(That's all about …, That's my story, That's my answer)은 오늘처럼 계속 사용하기",
     ],
   },
 ];
