@@ -8023,7 +8023,382 @@ const REPLAY9_CATS = [
 REPLAY9.qs.forEach((q, i) => {
   q.cat = REPLAY9_CATS[i];
 });
-const MOCK_SETS = [REPLAY, REPLAY2, REPLAY3, REPLAY4, REPLAY5, REPLAY6, REPLAY7, REPLAY8, REPLAY9];
+const REPLAY10 = {
+  name: "10/24 모의시험 8회차 복기 (짧은 문장)",
+  qs: [
+    {
+      kind: "자기소개",
+      t: "1 자기소개",
+      tag: "복기",
+      q: [
+        "Let's start the interview now. Tell me about yourself.",
+        "면접을 시작하죠. 자기소개를 해 주세요.",
+      ],
+      s: [
+        ["Hi, my name is {Hyun-gi}.", "안녕하세요, 제 이름은 현기예요.", "인사"],
+        [
+          "I'm a software developer at {Hanwha System}.",
+          "한화시스템의 소프트웨어 개발자예요.",
+          "직업",
+        ],
+        [
+          "I work on insurance systems in Yeouido.",
+          "여의도에서 보험 시스템 일을 해요.",
+          "일 · 장소",
+        ],
+        ["I've worked in IT for about {eight years}.", "IT에서 약 8년 일했어요.", "경력"],
+        ["I live alone in an apartment.", "아파트에 혼자 살아요.", "집"],
+        [
+          "I like playing online games and studying English.",
+          "온라인 게임과 영어 공부를 좋아해요.",
+          "취미",
+        ],
+        ["I'll do my best today.", "오늘 최선을 다할게요.", "각오"],
+        ["That's all about me.", "제 소개는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "돌발 · 유망 산업",
+      t: "2 유망한 산업",
+      tag: "복기",
+      q: [
+        "Talk about one of the most promising industries in your country. Why is that industry or company well known and what makes it special?",
+        "우리나라에서 가장 유망한 산업 하나를 말해 주세요. 그 산업이나 회사가 왜 유명하고 무엇이 특별한가요?",
+      ],
+      s: [
+        [
+          "One promising industry in Korea is electronics.",
+          "한국의 유망 산업 하나는 전자 산업이에요.",
+          "도입",
+        ],
+        [
+          "Samsung Electronics is a very famous company.",
+          "삼성전자는 아주 유명한 회사예요.",
+          "회사",
+        ],
+        [
+          "It makes smartphones, computers, and home appliances.",
+          "스마트폰, 컴퓨터, 가전을 만들어요.",
+          "제품",
+        ],
+        [
+          "It's special because it makes new products.",
+          "새 제품을 만들어서 특별해요.",
+          "특별한 점",
+        ],
+        ["Also, it sells them all over the world.", "또 전 세계에 팔아요.", "범위"],
+        ["Many Koreans are proud of it.", "많은 한국인이 자랑스러워해요.", "사람들"],
+        ["I'm proud of it, too.", "저도 자랑스러워요.", "나의 생각"],
+        ["That's all about this industry.", "이 산업 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "돌발 · 개인적 도움",
+      t: "3 산업이 준 도움",
+      tag: "복기",
+      q: [
+        "How did this industry help you personally? Was it for entertainment, technology, or something else? Please tell me about it in detail.",
+        "이 산업이 개인적으로 어떤 도움이 됐나요? 오락, 기술, 아니면 다른 것인가요? 자세히 말해 주세요.",
+      ],
+      s: [
+        ["This industry helps me every day.", "이 산업은 매일 저를 도와줘요.", "도입"],
+        ["First, I use my smartphone all day.", "먼저 스마트폰을 하루 종일 써요.", "도움 1"],
+        ["Second, I use a laptop for my work.", "둘째, 일에 노트북을 써요.", "도움 2"],
+        [
+          "Third, I enjoy music with my audio system.",
+          "셋째, 오디오 시스템으로 음악을 즐겨요.",
+          "도움 3",
+        ],
+        ["I also play online games on my computer.", "컴퓨터로 온라인 게임도 해요.", "오락"],
+        ["Technology makes my life easier.", "기술이 생활을 편하게 해요.", "효과"],
+        ["So it's very important to me.", "그래서 저에게 아주 중요해요.", "결론"],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "돌발 · 산업의 역사",
+      t: "4 산업의 시작과 성장",
+      tag: "복기",
+      q: [
+        "Can you explain how this industry started and how it became so popular? Please share what you know in detail.",
+        "이 산업이 어떻게 시작됐고 어떻게 인기를 얻었는지 설명해 주세요. 아는 것을 자세히 말해 주세요.",
+      ],
+      s: [
+        ["Samsung started as a small company.", "삼성은 작은 회사로 시작했어요.", "시작"],
+        ["At first, it sold food like noodles.", "처음에는 국수 같은 식품을 팔았어요.", "초기"],
+        ["Later, it changed to electronics.", "나중에 전자 산업으로 바꿨어요.", "전환"],
+        ["Then it made TVs and phones.", "그다음 TV와 휴대폰을 만들었어요.", "성장 1"],
+        ["It grew with new technology.", "새 기술로 성장했어요.", "성장 2"],
+        ["Now it's famous worldwide.", "지금은 전 세계에서 유명해요.", "현재"],
+        ["I love this growth story.", "이 성장 이야기가 좋아요.", "나의 생각"],
+        ["That's what I know.", "제가 아는 건 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "집 휴가 · 보통",
+      t: "5 집에서 보내는 휴가",
+      tag: "복기",
+      q: [
+        "You indicated in your survey that you preferred to stay at home during your vacations. Who do you usually spend your vacation with at home and what do you usually do during that time?",
+        "설문에서 휴가를 집에서 보내는 걸 선호한다고 하셨어요. 보통 집에서 누구와 휴가를 보내고 무엇을 하나요?",
+      ],
+      s: [
+        ["I usually spend my vacation at home.", "보통 휴가를 집에서 보내요.", "도입"],
+        ["I live alone, so I'm by myself.", "혼자 살아서 혼자 있어요.", "누구와"],
+        ["I play online games.", "온라인 게임을 해요.", "하는 일 1"],
+        ["I also watch videos.", "영상도 봐요.", "하는 일 2"],
+        ["Recently, I started studying English.", "최근에 영어 공부를 시작했어요.", "하는 일 3"],
+        ["It's a good way to spend time.", "시간을 보내기 좋은 방법이에요.", "생각"],
+        ["I can rest freely.", "자유롭게 쉴 수 있어요.", "이유"],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "집 휴가 · 최근",
+      t: "6 최근 집에서 보낸 휴가",
+      tag: "복기",
+      q: [
+        "Can you tell me about a recent vacation you spent at home? When was it? Who were you with and what did you do?",
+        "최근 집에서 보낸 휴가를 말해 주세요. 언제였고 누구와 있었고 무엇을 했나요?",
+      ],
+      s: [
+        ["My recent vacation at home was {last month}.", "최근 집 휴가는 지난달이었어요.", "언제"],
+        ["I was alone.", "혼자였어요.", "누구와"],
+        ["On the first day, I slept late and rested.", "첫날은 늦잠 자고 쉬었어요.", "한 일 1"],
+        ["Then I played online games.", "그다음 온라인 게임을 했어요.", "한 일 2"],
+        [
+          "After that, I studied English for an hour.",
+          "그 후 한 시간 영어 공부를 했어요.",
+          "한 일 3",
+        ],
+        ["In the evening, I listened to music.", "저녁에는 음악을 들었어요.", "한 일 4"],
+        ["It was relaxing.", "편안했어요.", "느낌"],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "집 휴가 · 기억에 남는 경험",
+      t: "7 기억에 남는 집 휴가",
+      tag: "복기",
+      q: [
+        "Describe one memorable experience you had during a vacation at home. What happened? Why was the vacation so unforgettable?",
+        "집에서 보낸 휴가 중 기억에 남는 경험 하나를 설명해 주세요. 무슨 일이 있었고 왜 잊을 수 없나요?",
+      ],
+      s: [
+        ["Two months ago, I decorated my house.", "두 달 전에 집을 꾸몄어요.", "언제 · 무엇"],
+        ["My living room was big and empty.", "거실이 크고 비어 있었어요.", "배경"],
+        ["So I wanted to change it.", "그래서 바꾸고 싶었어요.", "이유"],
+        [
+          "First, I searched for audio systems online.",
+          "먼저 오디오 시스템을 온라인에서 찾았어요.",
+          "한 일 1",
+        ],
+        ["Then I bought a good one.", "그다음 좋은 걸 샀어요.", "한 일 2"],
+        ["Now I listen to music every day.", "지금은 매일 음악을 들어요.", "결과"],
+        [
+          "It was unforgettable because my house felt new.",
+          "집이 새롭게 느껴져서 잊을 수 없어요.",
+          "이유",
+        ],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "대중교통 · 우리나라",
+      t: "8 대중교통 시스템",
+      tag: "복기",
+      q: [
+        "Can you tell me about the public transportation system in your country? What kinds of transportation do people usually take? Do they prefer to drive their own cars or do they rely on public transportation?",
+        "우리나라의 대중교통 시스템을 말해 주세요. 사람들은 보통 어떤 교통수단을 타나요? 자가용을 선호하나요, 대중교통에 의존하나요?",
+      ],
+      s: [
+        ["Korea has a great public transportation system.", "한국은 대중교통이 훌륭해요.", "도입"],
+        ["The subway is the most popular.", "지하철이 가장 인기 있어요.", "종류"],
+        ["I take it to work.", "저도 출근할 때 타요.", "나의 경우"],
+        ["Many people have cars.", "차가 있는 사람도 많아요.", "자가용"],
+        [
+          "But Seoul is crowded, and parking is hard.",
+          "하지만 서울은 붐비고 주차가 어려워요.",
+          "이유",
+        ],
+        ["So they use the subway or buses.", "그래서 지하철이나 버스를 타요.", "결론"],
+        ["It's cheap and convenient.", "저렴하고 편해요.", "장점"],
+        ["That's all about transportation.", "교통 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "대중교통 · 어린 시절",
+      t: "9 어릴 때 이동 수단",
+      tag: "복기",
+      q: [
+        "How did you travel when you were a child? Did you use public transportation, ride a bike, or rely on your parents to drive you? Please share how it was different from how you travel now.",
+        "어릴 때는 어떻게 이동했나요? 대중교통, 자전거, 아니면 부모님 차였나요? 지금과 어떻게 다른지도 말해 주세요.",
+      ],
+      s: [
+        ["When I was a child, I traveled with my family.", "어릴 때는 가족과 이동했어요.", "과거"],
+        ["We often went to Jeju Island.", "자주 제주도에 갔어요.", "어디"],
+        ["We took an airplane from Seoul.", "서울에서 비행기를 탔어요.", "수단"],
+        ["It was fast and convenient.", "빠르고 편했어요.", "장점"],
+        ["Now I take the subway to work.", "지금은 지하철로 출근해요.", "현재"],
+        ["It's different because I go alone.", "혼자 가서 달라요.", "차이"],
+        ["I miss those family trips.", "그 가족 여행이 그리워요.", "느낌"],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "대중교통 · 문제 경험",
+      t: "10 대중교통 문제",
+      tag: "복기",
+      q: [
+        "Have you ever experienced any problems with public transportation? For example, tell me about a time when there was a breakdown or a traffic jam. How did you handle the situation?",
+        "대중교통에서 문제를 겪은 적이 있나요? 고장이나 교통 체증이 있었던 때를 말해 주세요. 어떻게 대처했나요?",
+      ],
+      s: [
+        ["Yes, I had a problem with the subway.", "네, 지하철에서 문제가 있었어요.", "도입"],
+        ["Sometimes it's packed in the morning.", "가끔 아침에 꽉 차요.", "상황"],
+        ["Once, I couldn't breathe well.", "한번은 숨쉬기 힘들었어요.", "문제"],
+        ["I felt nervous.", "불안했어요.", "느낌"],
+        ["So I decided to leave earlier.", "그래서 더 일찍 나가기로 했어요.", "해결"],
+        ["Now I take an earlier train.", "지금은 더 이른 열차를 타요.", "결과"],
+        ["It's much more relaxed.", "훨씬 여유로워요.", "효과"],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "롤플레이 · 질문하기 (새 카페)",
+      t: "11 새 카페에 전화",
+      tag: "복기",
+      q: [
+        "You heard there's a new cafe in your neighborhood. Call the cafe and ask 3 or 4 questions about it.",
+        "동네에 새 카페가 생겼다고 들었어요. 카페에 전화해서 3~4개 질문해 보세요.",
+      ],
+      s: [
+        ["Hello, I heard about your new cafe.", "안녕하세요, 새 카페 소식을 들었어요.", "도입"],
+        ["What time do you open?", "몇 시에 여나요?", "질문 1"],
+        ["What kind of coffee do you sell?", "어떤 커피를 파나요?", "질문 2"],
+        ["Do you sell desserts or sandwiches?", "디저트나 샌드위치도 파나요?", "질문 3"],
+        ["How much is an Americano?", "아메리카노는 얼마예요?", "질문 4"],
+        ["Thank you for your help.", "도와주셔서 감사해요.", "감사"],
+        ["I'll visit soon. Goodbye.", "곧 방문할게요. 안녕히 계세요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "롤플레이 · 문제 + 해결 (잘못 나온 주문)",
+      t: "12 잘못 나온 주문",
+      tag: "복기",
+      q: [
+        "Imagine you are at a cafe and you realize that the drink or meal you received is not what you ordered. How would you communicate this error to the cafe staff? Please provide a detailed explanation of the mistake and propose a solution.",
+        "카페에서 받은 음료나 음식이 주문한 것이 아닌 걸 알았어요. 직원에게 어떻게 알릴까요? 실수를 자세히 설명하고 해결책을 제안해 보세요.",
+      ],
+      s: [
+        ["Excuse me, I have a problem.", "실례합니다, 문제가 있어요.", "도입"],
+        ["I ordered an Americano and a sandwich.", "아메리카노와 샌드위치를 주문했어요.", "주문"],
+        ["But I got a cafe latte.", "그런데 카페라테를 받았어요.", "실수"],
+        ["I think there was a mistake.", "실수가 있었던 것 같아요.", "요약"],
+        ["You can change it for an Americano.", "아메리카노로 바꿔 주실 수 있어요.", "해결 1"],
+        ["Or you can give me a discount.", "아니면 할인해 주셔도 돼요.", "해결 2"],
+        ["I prefer the first option. Thank you.", "첫 번째가 좋아요. 감사합니다.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "롤플레이 · 비슷한 경험",
+      t: "13 카페에서 겪은 문제",
+      tag: "복기",
+      q: [
+        "Have you ever experienced a problem at a cafe? For example, has your order ever been incorrect, or were you dissatisfied with the service or the food? Please tell me the details of what happened and how you handled it.",
+        "카페에서 문제를 겪은 적이 있나요? 주문이 틀렸거나 서비스나 음식이 불만족스러웠던 때를 구체적으로, 어떻게 대처했는지도 말해 주세요.",
+      ],
+      s: [
+        ["Yes, I had a problem at a cafe.", "네, 카페에서 문제가 있었어요.", "도입"],
+        ["It was near my old house.", "옛집 근처였어요.", "어디"],
+        ["I ordered an iced Americano.", "아이스 아메리카노를 주문했어요.", "주문"],
+        ["But the staff gave me a latte.", "그런데 라테를 받았어요.", "문제"],
+        ["I told them about the mistake.", "실수를 말했어요.", "대처"],
+        ["They apologized and made a new drink.", "사과하고 새로 만들어 줬어요.", "결과"],
+        ["I was satisfied.", "만족했어요.", "느낌"],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "음악 · 두 장르 비교",
+      t: "14 두 가지 음악 장르",
+      tag: "복기",
+      q: [
+        "Please tell me about two different music genres you like. Why do you like those music genres? What are some differences and similarities between them?",
+        "좋아하는 서로 다른 음악 장르 두 가지를 말해 주세요. 왜 좋아하나요? 차이점과 공통점은 무엇인가요?",
+      ],
+      s: [
+        ["I like rock and jazz.", "록과 재즈를 좋아해요.", "도입"],
+        ["Both help me feel better.", "둘 다 기분을 좋게 해요.", "공통점"],
+        ["Rock is exciting and loud.", "록은 신나고 시끄러워요.", "차이 1"],
+        ["It relieves my stress.", "스트레스를 풀어 줘요.", "록의 효과"],
+        ["Jazz is calm and smooth.", "재즈는 차분하고 부드러워요.", "차이 2"],
+        ["It helps me focus.", "집중하게 도와줘요.", "재즈의 효과"],
+        ["Rock is energetic, but jazz is relaxing.", "록은 활기차고 재즈는 편안해요.", "정리"],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "음악 · 기기",
+      t: "15 음악 기기",
+      tag: "복기",
+      q: [
+        "What kind of music gadgets or equipment do people like to use in your country? Can you tell me about the popular ones? Why do people like them? Please explain the devices in as much detail as possible.",
+        "우리나라 사람들은 어떤 음악 기기나 장비를 좋아하나요? 인기 있는 것을 말해 주세요. 왜 좋아하나요? 최대한 자세히 설명해 주세요.",
+      ],
+      s: [
+        [
+          "Many Koreans listen to music on smartphones.",
+          "많은 한국인이 스마트폰으로 음악을 들어요.",
+          "1순위",
+        ],
+        ["A phone is small and easy to use.", "폰은 작고 쓰기 쉬워요.", "이유"],
+        ["Also, people use wireless earphones.", "무선 이어폰도 많이 써요.", "2순위"],
+        [
+          "Some people buy speakers or audio systems.",
+          "스피커나 오디오 시스템을 사는 사람도 있어요.",
+          "3순위",
+        ],
+        ["I use {YouTube Music}.", "저는 유튜브 뮤직을 써요.", "나의 경우"],
+        ["I can listen to podcasts, too.", "팟캐스트도 들을 수 있어요.", "장점"],
+        ["It's simple and convenient.", "간단하고 편해요.", "정리"],
+        ["That's all about music gadgets.", "음악 기기 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+  ],
+};
+const REPLAY10_CATS = [
+  "survey",
+  "surprise",
+  "surprise",
+  "surprise",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "rp",
+  "rp",
+  "rp",
+  "survey",
+  "survey",
+];
+REPLAY10.qs.forEach((q, i) => {
+  q.cat = REPLAY10_CATS[i];
+});
+const MOCK_SETS = [
+  REPLAY,
+  REPLAY2,
+  REPLAY3,
+  REPLAY4,
+  REPLAY5,
+  REPLAY6,
+  REPLAY7,
+  REPLAY8,
+  REPLAY9,
+  REPLAY10,
+];
 
 /* 발화 노트(날짜별 복기 기록). 시험 후 평가를 여기에 추가하면 모의고사 화면의 발화 노트에 나타난다.
    형식: {date, title, set(MOCK_SETS 인덱스), grade 예상 등급, summary, good:[], problems:[{q 문제, cat, issue 문제점, fix 고칠 점}], actions:[우선순위 할 일]} */
@@ -8673,6 +9048,87 @@ const MOCK_REVIEWS = [
       "질문의 핵심 단어를 한 번 더 확인하고 반대로 답하지 않기 (Q13: 인터넷을 '활용'한 프로젝트)",
       "비교 틀은 두 대상을 비교할 때만 쓰고, 'Okay let's go' 같은 시작 군더더기는 버리기",
       "끝맺음 신호 문장(That's all about …, That's my story, That's my answer)은 오늘처럼 계속 사용하기",
+    ],
+  },
+  {
+    date: "2026-10-24",
+    title: "8회차 모의시험 (시험 당일 아침)",
+    set: 9,
+    grade: "IM1 후반 (IM2 경계 아래쪽) — 길이와 구조는 있는데, 질문 맞춤과 구체성이 흔들림",
+    summary:
+      "문제당 3~6문장으로 길이는 충분했고, 질문 틀은 일부에서 잘 작동함. Q12 잘못 나온 주문은 '문제 → 두 가지 해결안(바꿔 주기 / 할인)'으로 롤플레이 틀을 정확히 썼고, Q14 두 장르는 '공통점 → First / Second 차이' 틀로 완결됨. Q8 대중교통도 '지하철 → 자가용이 적은 이유(혼잡·주차) → 편리함'으로 이유까지 설명함. 약점은 세 가지: ① 질문이 묻는 것과 다른 것을 답함(Q3 '이 산업이 개인적으로 어떻게 도움이 됐나'에 '전자 산업이 좋다'는 취향만, Q6 '최근'인데 '2년 전', Q9 '지금과 어떻게 다른지'가 없음) ② 개인 경험이 흐릿함(Q13 카페 문제 '7년 전, 주문이 틀렸다'로 끝나 무슨 일이 있었고 어떻게 해결했는지 없음, Q2는 '삼성에 입사하고 싶었다'고 해서 한화시스템 개발자라는 본인 정보와 어긋남) ③ 마무리 신호가 흔들림('That is all about that, can I say', 'It is good', 'I think'). Q11은 전화인데 '맛이 좋다'며 매장 안에서 말하는 것처럼 진행함. 녹취록 기준 평가라 발음·억양·침묵은 반영되지 않았고 'Hanhwa', 'OPPIC', 'cairatete(cafe latte)', 'Jang(genre)' 같은 STT 오인식은 감점하지 않음.",
+    good: [
+      "Q12 잘못 나온 주문: 'Excuse me → I have a problem → 주문과 다른 메뉴 → 두 가지 해결안'이라는 롤플레이 해결 틀을 정확히 사용. 두 안 중 하나를 고르는 마무리도 좋음",
+      "Q14 두 장르: 'They are similar … there are two differences. First … Second …'로 공통점과 차이점을 모두 다룸. 록은 기분 전환·스트레스 해소, 재즈는 집중으로 이유가 분명함",
+      "Q4 산업의 시작: 삼성이 작은 식품 장사에서 전자로 바꿔 성장했다는 과거 흐름을 시간 순서로 설명하고 '이 이야기가 좋다'는 나의 생각으로 닫음. 내용 구성이 가장 좋은 돌발 답",
+      "Q8·Q10 대중교통: 출근에 지하철을 타는 개인 이야기, 서울이 붐비고 주차가 어려워 자가용보다 지하철을 쓴다는 이유, 혼잡할 때 일찍 나가 해결한다는 대처까지 모두 있음",
+      "Q7 기억에 남는 집 휴가: 거실을 꾸미려 오디오 시스템을 산 이유가 있고 '기분이 더 좋아졌다'는 결과로 이어짐",
+      "Q11 카페 전화 질문: 커피 종류, 가격, 디저트·샌드위치, 개업 시기 등 질문 4~5개를 실제로 함",
+    ],
+    problems: [
+      {
+        q: "Q3 이 산업이 개인적으로 준 도움",
+        cat: "돌발",
+        issue:
+          "질문은 '나에게 어떤 도움이 됐나(오락·기술 등), 자세히'인데 '전자 산업이 다른 산업보다 중요하다, 놀라게 해서 좋다'는 취향을 같은 말('surprised')로 반복함. 스마트폰·노트북 등 내가 쓰는 제품이라는 구체적 예가 없음",
+        fix: "'도움 3가지'를 First / Second / Third로 말하기: 스마트폰, 업무용 노트북, 오디오 시스템 (복기 세트 Q3). 'help me'가 들리면 내가 쓰는 물건 세 개를 말한다",
+      },
+      {
+        q: "Q2 유망 산업",
+        cat: "돌발",
+        issue:
+          "'삼성에 들어가고 싶었다'고 말해 현재 직장(한화시스템 개발자)과 어긋남. 끝은 'Duck, work with the company / That is all about that. I can say'로 흐려짐",
+        fix: "'I'm proud of it'처럼 현재 나의 생각으로 닫고 'That's all about this industry.'로 끝내기 (복기 세트 Q2)",
+      },
+      {
+        q: "Q6 최근 집에서 보낸 휴가",
+        cat: "서베이",
+        issue:
+          "질문은 '최근(recent)'인데 'Two years ago'로 시작하고 무엇을 했는지보다 '혼자 있고 싶은 이유'를 길게 말함. 한 일의 순서가 없음",
+        fix: "질문의 시간 단어(recent, last)를 먼저 확인하고 '언제 → 누구와 → At first / Then / After that' 순서로 말하기 (복기 세트 Q6)",
+      },
+      {
+        q: "Q13 카페에서 겪은 문제 (경험)",
+        cat: "롤플레이",
+        issue:
+          "'Seven years ago… 주문이 틀리기도 했다… 환불하거나 바꿨다'로 일반론에 머묾. 무슨 메뉴였고 무슨 일이 있었는지, 직원이 어떻게 했는지 한 장면이 없음. 문장도 'I didn't need to trouble anymore' 등 뜻이 흐림",
+        fix: "경험 이야기 틀(언제 · 어디 → 주문 → 문제 → 내가 한 말 → 결과 → 느낌)로 한 번의 사건만 말하기 (복기 세트 Q13)",
+      },
+      {
+        q: "Q9 어릴 때 이동 수단",
+        cat: "서베이",
+        issue:
+          "제주도에 비행기로 갔다는 과거는 있으나 질문의 마지막 요구인 '지금과 어떻게 다른가'가 없음. 'always'를 세 번 반복",
+        fix: "과거 두 문장 + 'Now I take the subway… It's different because …'로 현재 대비 두 문장 (복기 세트 Q9). always는 한 번만",
+      },
+      {
+        q: "Q11 새 카페 전화 (롤플레이)",
+        cat: "롤플레이",
+        issue:
+          "전화인데 'Oh nice to meet you / your coffee is very great / this taste is very good'처럼 매장 안에서 마시며 말하는 것처럼 진행함. 'Hello'와 개점 시간·위치 같은 기본 질문이 없고 'What kind of your coffee do you selling?'처럼 어색한 문장이 있음",
+        fix: "고정 질문 4개: What time do you open? / What kind of coffee do you sell? / Do you sell desserts? / How much is it? 상황(전화)에 맞게 Hello로 열고 Thank you로 닫기 (복기 세트 Q11)",
+      },
+      {
+        q: "Q5 · Q15 구체성과 범위",
+        cat: "서베이",
+        issue:
+          "Q5 'hobbies in hobbies in inside', 'I wanted to run the other hobbies'처럼 문장이 엉킴. Q15는 '기기나 장비'를 묻는데 스마트폰 하나만 말하고 이어폰·스피커 등 다른 기기와 직접 쓴 오디오 시스템(Q7)을 연결하지 못함",
+        fix: "Q5는 게임 / 영상 / 영어 공부 세 가지를 나열. Q15는 폰 → 이어폰 → 스피커·오디오 시스템 순으로 기기를 세 가지 말하기",
+      },
+      {
+        q: "문법 · 마무리 · 공통",
+        cat: "공통",
+        issue:
+          "'many industry', 'people's', 'to went', 'I live in this apartment in apartment', 'always' 반복이 이어짐. 끝맺음이 'That is all about that. Can I say / It is good / I think'로 흔들림",
+        fix: "복수형과 동사 하나 규칙. 끝맺음은 'That's my answer. / That's my story. / That's all about …' 세 개만 쓰고 'can I say'는 버리기",
+      },
+    ],
+    actions: [
+      "시험장에서 질문이 끝나면 한 번 더 확인: '시간(recent/last), 요구(how different, how helped), 장르(전화/매장)' 세 가지",
+      "돌발 'help me / 도움' 질문은 First / Second / Third로 내가 쓰는 물건 세 가지 말하기",
+      "경험 질문은 일반론 대신 한 번의 사건을 '언제 · 어디 → 한 일 순서 → 결과 → 느낌'으로 말하기",
+      "롤플레이 전화는 Hello로 열고 질문 4개를 고정 문장으로 말한 뒤 Thank you로 닫기",
+      "끝맺음은 'That's my answer / That's my story / That's all about …' 중 하나로 확실하게 끝내기",
     ],
   },
 ];
