@@ -1343,6 +1343,7 @@ const phrScriptRunning = () => phr.tok === token && phr.kind === "script";
 phr.secs = 20;
 phr.lmode = "en";
 phr.llaps = 3;
+phr.lgap = 7;
 phr.lnext = true;
 phr.lnext = true;
 phr.sets = [{ name: "세트 1", sel: [] }];
@@ -1604,6 +1605,7 @@ const RP_PRESETS6 = [
     [
       "I'm sorry, but I have a problem",
       "My car broke down",
+      "Because of that,",
       "I have two ideas",
       "First, we can",
       "Second, we can",
@@ -1617,6 +1619,7 @@ const RP_PRESETS6 = [
     [
       "I'm sorry, but I have a problem",
       "My brother is sick",
+      "Because of that,",
       "I have two ideas",
       "First, we can",
       "Second, we can",
@@ -1657,6 +1660,7 @@ const RP_PRESETS6 = [
       "It happened about … ago",
       "At first,",
       "Then,",
+      "Because of that,",
       "After that,",
       "In the end,",
       "I felt",
@@ -1671,6 +1675,7 @@ const RP_PRESETS6 = [
       "The first one is",
       "The second one is",
       "However,",
+      "For me, …",
       "I prefer … because",
       "I like the second one better",
       "That's my answer",
@@ -1681,6 +1686,7 @@ const RP_PRESETS6 = [
     [
       "I think there are some problems",
       "The biggest problem is",
+      "Because",
       "Another problem is",
       "One solution is",
       "Another solution is",
@@ -1708,6 +1714,7 @@ const RP_PRESETS6 = [
       "It's located in",
       "It looks",
       "You can see",
+      "Especially …",
       "The atmosphere is",
       "That's why I like it",
       "That's all about this place",
@@ -1722,13 +1729,14 @@ const RP_PRESETS6 = [
       "It can",
       "What I like most is",
       "I use it for",
+      "Most of the time, I",
       "That's why I like it",
       "That's all about it",
     ],
   ],
 ];
 try {
-  if (!localStorage.getItem("opic_phr_seed7")) {
+  if (!localStorage.getItem("opic_phr_seed9")) {
     const idOf3 = (en) => {
       for (let g = 0; g < PHRASES.length; g++) {
         const i = PHRASES[g].items.findIndex((x) => x.en === en && !x.hidden);
@@ -1743,30 +1751,7 @@ try {
       else phr.sets.push({ name, sel });
     });
     phr.act = Math.min(phr.act, phr.sets.length - 1);
-    localStorage.setItem("opic_phr_seed7", "1");
-    localStorage.setItem("opic_phr_sets", JSON.stringify({ act: phr.act, sets: phr.sets }));
-  }
-} catch (e) {}
-// 채우기용 문장(Also, / For example, …)을 틀 중간과 끝 앞에 두 칸 끼워 넣는다 (이미 있으면 건너뜀)
-try {
-  if (!localStorage.getItem("opic_phr_seed8")) {
-    const idOf4 = (en) => {
-      for (let g = 0; g < PHRASES.length; g++) {
-        const i = PHRASES[g].items.findIndex((x) => x.en === en && !x.hidden);
-        if (i >= 0) return g + "." + i;
-      }
-      return null;
-    };
-    const names = RP_PRESETS6.map((x) => x[0]);
-    const f1 = idOf4("Also,");
-    const f2 = idOf4("For example,");
-    phr.sets.forEach((st) => {
-      if (!names.includes(st.name) || st.sel.length < 5) return;
-      if (st.sel.includes(f1) || st.sel.includes(f2)) return;
-      st.sel.splice(st.sel.length - 2, 0, f2);
-      st.sel.splice(3, 0, f1);
-    });
-    localStorage.setItem("opic_phr_seed8", "1");
+    localStorage.setItem("opic_phr_seed9", "1");
     localStorage.setItem("opic_phr_sets", JSON.stringify({ act: phr.act, sets: phr.sets }));
   }
 } catch (e) {}
@@ -1948,8 +1933,7 @@ async function phrSetListen() {
           items.length +
           '</div><div class="stbig">' +
           esc(it.en) +
-          "</div>" +
-          (phr.lmode === "ex" ? '<div class="note">' + esc(it.ex[0]) + "</div>" : "");
+          "</div>";
         if (phr.lmode === "ko") {
           await speak(it.ko.replace(/\s*\(채우기\)/, ""), null, "ko-KR");
           if (my !== token) return;
@@ -1958,13 +1942,23 @@ async function phrSetListen() {
         }
         await say(phrClean(it.en));
         if (my !== token) return;
-        if (phr.lmode === "ex") {
-          await sleep(400);
+        // 내가 틀의 내용을 채워 말하는 시간 (카운트다운 표시)
+        for (let t = phr.lgap; t > 0; t--) {
+          const nt = st.querySelector(".lgapnote");
+          if (nt) nt.textContent = "내용을 채워 말해 보세요 · " + t + "초";
+          else
+            st.insertAdjacentHTML(
+              "beforeend",
+              '<div class="note lgapnote">내용을 채워 말해 보세요 · ' + t + "초</div>",
+            );
+          await sleep(1000);
           if (my !== token) return;
+        }
+        if (phr.lmode === "ex") {
           await say(it.ex[0]);
           if (my !== token) return;
         }
-        await sleep(700);
+        await sleep(500);
       }
       if (my !== token) return;
       await sleep(1200);
@@ -2071,7 +2065,20 @@ function renderPhr() {
     (phr.lnext ? " checked" : "") +
     '> 끝나면 다음 틀로</label><label class="ck"><input type="checkbox" id="phLNext"' +
     (phr.lnext ? " checked" : "") +
-    '> 모든 틀 이어서</label><select id="phLLaps">' +
+    '> 모든 틀 이어서</label><select id="phLGap">' +
+    [0, 3, 5, 7, 10]
+      .map(
+        (v) =>
+          '<option value="' +
+          v +
+          '"' +
+          (phr.lgap === v ? " selected" : "") +
+          ">" +
+          (v ? "말할 시간 " + v + "초" : "말할 시간 없음") +
+          "</option>",
+      )
+      .join("") +
+    '</select><select id="phLLaps">' +
     [1, 2, 3, 5, 10, 0]
       .map(
         (v) =>
@@ -2154,6 +2161,7 @@ $("#v-phr").addEventListener("change", (e) => {
   if (e.target.id === "phSecs") phr.secs = +e.target.value;
   if (e.target.id === "phLMode") phr.lmode = e.target.value;
   if (e.target.id === "phLLaps") phr.llaps = +e.target.value;
+  if (e.target.id === "phLGap") phr.lgap = +e.target.value;
   if (e.target.id === "phLNext") phr.lnext = e.target.checked;
   if (e.target.id === "phLNext") phr.lnext = e.target.checked;
   if (e.target.id === "phHide") {

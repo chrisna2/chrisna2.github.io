@@ -8482,8 +8482,6 @@ const PHRASES = [
       },
       {
         en: "After that,",
-        fill: true,
-        ft: "순서",
         ko: "그다음에",
         ex: ["After that, we went to a restaurant nearby.", "그다음에 우리는 근처 식당에 갔어요."],
       },
@@ -8607,8 +8605,6 @@ const PHRASES = [
       },
       {
         en: "I felt",
-        fill: true,
-        ft: "느낌",
         ko: "~하게 느꼈어요",
         ex: ["I felt really nervous.", "정말 긴장됐어요."],
       },
@@ -8750,8 +8746,6 @@ const PHRASES = [
       },
       {
         en: "In the end,",
-        fill: true,
-        ft: "순서",
         ko: "결국",
         ex: ["In the end, everything turned out fine.", "결국 모든 게 잘 해결됐어요."],
       },
@@ -9723,15 +9717,11 @@ const PHRASES = [
       },
       {
         en: "At first,",
-        fill: true,
-        ft: "순서",
         ko: "이야기 시작 순서",
         ex: ["At first, we went to the hotel.", "처음엔 호텔에 갔어요."],
       },
       {
         en: "Then,",
-        fill: true,
-        ft: "순서",
         ko: "이야기 이어가기",
         ex: ["Then, we looked for a restaurant.", "그다음엔 식당을 찾았어요."],
       },
