@@ -8388,8 +8388,8 @@ REPLAY10.qs.forEach((q, i) => {
   q.cat = REPLAY10_CATS[i];
 });
 const REPLAY11 = {
-  name: "10/24 실전 시험 복기 (난이도 5-5, 2~12번 풀이)",
-  note: "Q1·Q11~15는 문구를 추정해서 만들었어요 (답안 유무와 상관없이 틀 연습용)",
+  name: "10/24 공유받은 시험 복기 (난이도 5-5)",
+  note: "다른 응시자가 공유한 문제 요약으로 복원. Q1·Q11~15는 문구 추정",
   qs: [
     {
       kind: "자기소개",
@@ -8752,6 +8752,391 @@ const REPLAY11_CATS = [
 REPLAY11.qs.forEach((q, i) => {
   q.cat = REPLAY11_CATS[i];
 });
+const REPLAY12 = {
+  name: "10/24 내 실전 시험 복기 (난이도 5-6)",
+  note: "문제는 기억나는 요약으로 복원했어요. Q1·Q11~12·Q15는 문구 추정",
+  qs: [
+    {
+      kind: "자기소개",
+      t: "1 자기소개 (추정)",
+      tag: "복기",
+      q: [
+        "Let's start the interview. Tell me about yourself.",
+        "면접을 시작하죠. 자기소개를 해 주세요.",
+      ],
+      s: [
+        ["Hi, my name is {Hyun-gi}.", "안녕하세요, 제 이름은 현기예요.", "인사"],
+        [
+          "I'm a software developer at {Hanwha System}.",
+          "한화시스템의 소프트웨어 개발자예요.",
+          "직업",
+        ],
+        [
+          "I work on insurance systems in Yeouido.",
+          "여의도에서 보험 시스템 일을 해요.",
+          "일 · 장소",
+        ],
+        ["I've worked in IT for about {eight years}.", "IT에서 약 8년 일했어요.", "경력"],
+        ["I live alone in an apartment.", "아파트에 혼자 살아요.", "집"],
+        [
+          "I like playing online games and studying English.",
+          "온라인 게임과 영어 공부를 좋아해요.",
+          "취미",
+        ],
+        ["I need a good grade this month.", "이번 달에 좋은 등급이 필요해요.", "시험 이유"],
+        ["That's all about me.", "제 소개는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "자유 시간 · 하는 일",
+      t: "2 자유 시간에 하는 일",
+      tag: "복기",
+      q: [
+        "What do you do in your free time? Tell me about it in detail.",
+        "자유 시간에 무엇을 하나요? 자세히 말해 주세요.",
+      ],
+      s: [
+        [
+          "I have a few things I do in my free time.",
+          "자유 시간에 하는 일이 몇 가지 있어요.",
+          "도입",
+        ],
+        ["First, I play online games.", "먼저 온라인 게임을 해요.", "하는 일 1"],
+        ["Second, I listen to music.", "둘째, 음악을 들어요.", "하는 일 2"],
+        ["Third, I go for a run in the park.", "셋째, 공원에서 달려요.", "하는 일 3"],
+        ["Recently, I started studying English.", "최근에 영어 공부를 시작했어요.", "하는 일 4"],
+        ["These things help me relax.", "이런 것들이 쉬는 데 도움이 돼요.", "효과"],
+        ["I enjoy my free time a lot.", "자유 시간을 많이 즐겨요.", "나의 생각"],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "자유 시간 · 루틴",
+      t: "3 자유 시간 루틴",
+      tag: "복기",
+      q: [
+        "Tell me about your free time routine. What do you usually do from the beginning to the end?",
+        "자유 시간의 루틴을 말해 주세요. 보통 처음부터 끝까지 무엇을 하나요?",
+      ],
+      s: [
+        ["My free time usually starts after work.", "자유 시간은 보통 퇴근 후에 시작해요.", "시작"],
+        ["First, I go home and take a shower.", "먼저 집에 가서 샤워해요.", "순서 1"],
+        [
+          "Then I have dinner and turn on some music.",
+          "그다음 저녁을 먹고 음악을 틀어요.",
+          "순서 2",
+        ],
+        ["After that, I play online games for an hour.", "그 후 한 시간 게임을 해요.", "순서 3"],
+        ["Sometimes I study English before bed.", "가끔 자기 전에 영어를 공부해요.", "순서 4"],
+        ["On weekends, I run in the park.", "주말에는 공원에서 달려요.", "주말"],
+        ["It's a simple routine, but I like it.", "단순한 루틴이지만 좋아해요.", "생각"],
+        ["That's my routine.", "제 루틴은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "자유 시간 · 어릴 때와 지금",
+      t: "4 어릴 때 vs 지금 자유 시간",
+      tag: "복기",
+      q: [
+        "How is the way you spend your free time now different from when you were young?",
+        "지금 자유 시간을 보내는 방식은 어릴 때와 어떻게 다른가요?",
+      ],
+      s: [
+        [
+          "When I was young, I played outside with friends.",
+          "어릴 때는 친구들과 밖에서 놀았어요.",
+          "과거 1",
+        ],
+        ["I also played games at home.", "집에서 게임도 했어요.", "과거 2"],
+        ["I felt free and happy then.", "그때는 자유롭고 행복했어요.", "그때 느낌"],
+        ["Now I spend my free time alone.", "지금은 혼자 자유 시간을 보내요.", "현재 1"],
+        ["I listen to music and study English.", "음악을 듣고 영어를 공부해요.", "현재 2"],
+        ["It's different because I'm busy with work.", "일로 바빠서 달라요.", "차이"],
+        ["I miss those days.", "그때가 그리워요.", "느낌"],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "집 · 지금 집",
+      t: "5 지금 집과 좋아하는 방",
+      tag: "복기",
+      q: [
+        "Describe the home you live in now. What is your favorite room, and why?",
+        "지금 사는 집을 묘사해 주세요. 가장 좋아하는 방은 어디이고 왜 그런가요?",
+      ],
+      s: [
+        ["Let me tell you about {my apartment}.", "제 아파트에 대해 말할게요.", "도입"],
+        ["I live alone on the 15th floor.", "15층에 혼자 살아요.", "위치"],
+        ["The building has 25 floors.", "건물은 25층이에요.", "건물"],
+        ["My favorite room is the living room.", "가장 좋아하는 방은 거실이에요.", "좋아하는 방"],
+        ["It has a sofa and an audio system.", "소파와 오디오 시스템이 있어요.", "물건"],
+        ["I listen to music there every day.", "거기서 매일 음악을 들어요.", "이유"],
+        ["It's comfortable for me.", "저에게 편안해요.", "느낌"],
+        ["That's all about my home.", "제 집 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "집 · 예전 집과 비교",
+      t: "6 예전 집 vs 지금 집",
+      tag: "복기",
+      q: [
+        "Compare the home you lived in before with the home you live in now. How are they different?",
+        "예전에 살던 집과 지금 집을 비교해 주세요. 어떻게 다른가요?",
+      ],
+      s: [
+        ["My old home and my home now are different.", "예전 집과 지금 집은 달라요.", "도입"],
+        ["My old home was bigger.", "예전 집은 더 컸어요.", "예전"],
+        ["It had four rooms and two bathrooms.", "방이 네 개, 욕실이 두 개였어요.", "예전 구성"],
+        ["I lived there with my family.", "가족과 같이 살았어요.", "누구와"],
+        ["My home now is smaller.", "지금 집은 더 작아요.", "지금"],
+        [
+          "But I live alone, so it's quiet and free.",
+          "하지만 혼자라서 조용하고 자유로워요.",
+          "지금 장점",
+        ],
+        ["I prefer my home now.", "저는 지금 집이 더 좋아요.", "선호"],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "집 · 가족과의 기억",
+      t: "7 집에서 가족과 보낸 기억",
+      tag: "복기",
+      q: [
+        "Tell me about a memorable time you spent with your family at home. What happened and why do you remember it?",
+        "집에서 가족과 보낸 기억에 남는 때를 말해 주세요. 무슨 일이 있었고 왜 기억에 남나요?",
+      ],
+      s: [
+        ["I remember a family dinner at home.", "집에서 한 가족 저녁이 기억나요.", "도입"],
+        ["It was a holiday when I was young.", "어릴 때 명절이었어요.", "언제"],
+        ["My mother cooked a special meal.", "어머니가 특별한 음식을 만드셨어요.", "한 일 1"],
+        ["First, we ate together at the table.", "먼저 식탁에서 함께 먹었어요.", "한 일 2"],
+        [
+          "Then we talked and laughed for hours.",
+          "그다음 몇 시간 동안 이야기하고 웃었어요.",
+          "한 일 3",
+        ],
+        ["I felt warm and happy.", "따뜻하고 행복했어요.", "느낌"],
+        ["That's why I remember it.", "그래서 기억에 남아요.", "이유"],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "음악 · 듣는 음악",
+      t: "8 어떤 음악을 듣나",
+      tag: "복기",
+      q: [
+        "What kind of music do you listen to? Tell me about your favorite music.",
+        "어떤 음악을 듣나요? 좋아하는 음악에 대해 말해 주세요.",
+      ],
+      s: [
+        ["I listen to rock and jazz.", "록과 재즈를 들어요.", "장르"],
+        ["I'm a big fan of {Silica Gel}.", "실리카겔의 열렬한 팬이에요.", "가수"],
+        ["Rock is exciting and relieves my stress.", "록은 신나고 스트레스를 풀어 줘요.", "록"],
+        ["Jazz is calm and helps me focus.", "재즈는 차분하고 집중에 도움이 돼요.", "재즈"],
+        ["I use YouTube Music on my phone.", "폰으로 유튜브 뮤직을 써요.", "방법"],
+        [
+          "I also listen at home with my audio system.",
+          "집에서는 오디오 시스템으로도 들어요.",
+          "집에서",
+        ],
+        ["Music makes my day better.", "음악이 하루를 더 좋게 해 줘요.", "효과"],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "음악 · 관심과 변화",
+      t: "9 음악에 관심 갖게 된 때와 변화",
+      tag: "복기",
+      q: [
+        "When did you first become interested in music? How has the way you listen to music changed?",
+        "음악에 언제부터 관심을 가졌나요? 음악을 듣는 방식은 어떻게 변했나요?",
+      ],
+      s: [
+        [
+          "I became interested in music in middle school.",
+          "중학교 때 음악에 관심이 생겼어요.",
+          "시작",
+        ],
+        [
+          "At that time, I listened to Toy and Roller Coaster.",
+          "그때는 토이와 롤러코스터를 들었어요.",
+          "그때",
+        ],
+        ["I still like them now.", "지금도 좋아해요.", "지금도"],
+        [
+          "Now I also enjoy rock bands like Silica Gel.",
+          "지금은 실리카겔 같은 록 밴드도 즐겨요.",
+          "현재 취향",
+        ],
+        [
+          "In the past, I used CDs and an MP3 player.",
+          "예전에는 CD와 MP3 플레이어를 썼어요.",
+          "과거 방법",
+        ],
+        ["Now I stream music on my phone.", "지금은 폰으로 스트리밍해요.", "현재 방법"],
+        ["My taste has become wider.", "취향이 더 넓어졌어요.", "변화"],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "음악 · 라이브 콘서트",
+      t: "10 기억에 남는 라이브 콘서트",
+      tag: "복기",
+      q: [
+        "Tell me about a memorable live concert you went to. What was it like, and why do you remember it?",
+        "기억에 남는 라이브 콘서트를 말해 주세요. 어땠고 왜 기억에 남나요?",
+      ],
+      s: [
+        ["I went to a {Silica Gel} concert.", "실리카겔 콘서트에 갔어요.", "어떤 공연"],
+        ["It was about two years ago.", "약 2년 전이었어요.", "언제"],
+        ["I went with a friend.", "친구와 갔어요.", "누구와"],
+        ["The band played my favorite songs.", "밴드가 제가 좋아하는 곡을 연주했어요.", "내용 1"],
+        ["Everyone sang along together.", "모두 같이 따라 불렀어요.", "내용 2"],
+        ["The sound was powerful and exciting.", "소리가 강렬하고 신났어요.", "느낌"],
+        ["That's why I remember it.", "그래서 기억에 남아요.", "이유"],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "롤플레이 · 질문하기 (지역 축제)",
+      t: "11 지역 축제 봉사 질문 (추정)",
+      tag: "복기",
+      q: [
+        "You want to help at a local festival. Call the festival office and ask three or four questions about it.",
+        "지역 축제를 돕고 싶어요. 축제 사무실에 전화해서 3~4개 질문해 보세요.",
+      ],
+      s: [
+        [
+          "Hello, I'd like to help at the local festival.",
+          "안녕하세요, 지역 축제를 돕고 싶어요.",
+          "도입",
+        ],
+        ["When is the festival?", "축제는 언제예요?", "질문 1"],
+        ["What would I do as a volunteer?", "봉사자로서 무엇을 하나요?", "질문 2"],
+        ["How many volunteers do you need?", "봉사자가 몇 명 필요한가요?", "질문 3"],
+        ["Do I need to register in advance?", "미리 등록해야 하나요?", "질문 4"],
+        ["Thank you for your help.", "도와주셔서 감사합니다.", "감사"],
+        ["That's all I wanted to ask.", "묻고 싶은 건 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "롤플레이 · 문제 + 대안 (중요한 약속)",
+      t: "12 중요한 약속과 대안 (추정)",
+      tag: "복기",
+      q: [
+        "Something has come up. You have an important appointment on the day of the festival. Call the festival office, explain the situation, and offer two or three alternatives.",
+        "문제가 생겼어요. 축제 날 중요한 약속이 있어요. 축제 사무실에 전화해 상황을 설명하고 대안을 두세 가지 제시해 보세요.",
+      ],
+      s: [
+        [
+          "Hello, I'm sorry, but I have a problem.",
+          "안녕하세요, 죄송하지만 문제가 생겼어요.",
+          "도입",
+        ],
+        ["I have an important appointment on that day.", "그날 중요한 약속이 있어요.", "문제"],
+        [
+          "I still want to help, so I have two ideas.",
+          "그래도 돕고 싶어서 두 가지 생각이 있어요.",
+          "대안 소개",
+        ],
+        ["First, I can help in the morning only.", "첫째, 오전에만 도울 수 있어요.", "대안 1"],
+        ["Second, I can help on the day before.", "둘째, 전날에 도울 수 있어요.", "대안 2"],
+        ["Which one is better for you?", "어느 쪽이 좋으세요?", "선택 요청"],
+        ["I'm really sorry about this. Thank you.", "정말 죄송해요. 감사합니다.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "롤플레이 · 비슷한 경험 (지역 축제)",
+      t: "13 지역 축제 경험",
+      tag: "복기",
+      q: [
+        "Have you ever been to a local festival? Tell me what happened and what it was like.",
+        "지역 축제에 가 본 적이 있나요? 무슨 일이 있었고 어땠는지 말해 주세요.",
+      ],
+      s: [
+        [
+          "Yes, I went to {the Yeouido cherry blossom festival}.",
+          "네, 여의도 벚꽃 축제에 갔어요.",
+          "도입",
+        ],
+        ["It was about two years ago.", "약 2년 전이었어요.", "언제"],
+        ["I went with my coworkers after lunch.", "점심 후에 동료들과 갔어요.", "누구와"],
+        ["First, we walked under the cherry trees.", "먼저 벚나무 아래를 걸었어요.", "한 일 1"],
+        ["Then we took photos and ate snacks.", "그다음 사진을 찍고 간식을 먹었어요.", "한 일 2"],
+        ["It was crowded, but the view was beautiful.", "붐볐지만 경치가 아름다웠어요.", "느낌"],
+        ["I felt refreshed.", "상쾌했어요.", "결과"],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "영화 · 과거와 지금",
+      t: "14 영화, 과거 vs 지금",
+      tag: "복기",
+      q: [
+        "How are movies different now from the past? Tell me about the differences you have noticed.",
+        "영화는 과거와 지금 어떻게 다른가요? 알아챈 차이를 말해 주세요.",
+      ],
+      s: [
+        ["Movies are very different now.", "영화는 지금 많이 달라요.", "도입"],
+        ["In the past, people watched movies at the theater.", "과거에는 극장에서 봤어요.", "과거"],
+        ["I watched “Titanic” with my parents.", "부모님과 '타이타닉'을 봤어요.", "나의 과거"],
+        ["Now many people watch movies at home.", "지금은 많은 사람이 집에서 봐요.", "현재"],
+        [
+          "They use streaming services on phones and TVs.",
+          "폰과 TV로 스트리밍 서비스를 써요.",
+          "방법",
+        ],
+        ["Special effects are also much better.", "특수효과도 훨씬 좋아졌어요.", "변화"],
+        ["I like action movies now.", "저는 지금 액션 영화를 좋아해요.", "나의 현재"],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "영화 · 가족과 친구의 걱정 (추정)",
+      t: "15 영화에 대한 가족·친구의 걱정",
+      tag: "복기",
+      q: [
+        "What concerns do your friends or family members have about movies? Tell me about it in detail.",
+        "영화에 대해 친구나 가족은 어떤 걱정이나 의견을 가지고 있나요? 자세히 말해 주세요.",
+      ],
+      s: [
+        [
+          "My friends and family have a few concerns about movies.",
+          "친구와 가족은 영화에 대해 걱정이 조금 있어요.",
+          "도입",
+        ],
+        ["First, tickets are expensive.", "첫째, 영화표가 비싸요.", "걱정 1"],
+        ["Second, some movies are too violent.", "둘째, 어떤 영화는 너무 폭력적이에요.", "걱정 2"],
+        ["My mother worries about that most.", "어머니가 가장 걱정하세요.", "가족"],
+        ["My friends worry about spoilers online.", "친구들은 온라인 스포일러를 걱정해요.", "친구"],
+        ["So we often watch at home.", "그래서 우리는 집에서 자주 봐요.", "대처"],
+        ["I understand their concerns.", "저는 그 걱정을 이해해요.", "나의 생각"],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+  ],
+};
+const REPLAY12_CATS = [
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "rp",
+  "rp",
+  "rp",
+  "survey",
+  "survey",
+];
+REPLAY12.qs.forEach((q, i) => {
+  q.cat = REPLAY12_CATS[i];
+});
 const MOCK_SETS = [
   REPLAY,
   REPLAY2,
@@ -8764,6 +9149,7 @@ const MOCK_SETS = [
   REPLAY9,
   REPLAY10,
   REPLAY11,
+  REPLAY12,
 ];
 
 /* 발화 노트(날짜별 복기 기록). 시험 후 평가를 여기에 추가하면 모의고사 화면의 발화 노트에 나타난다.
