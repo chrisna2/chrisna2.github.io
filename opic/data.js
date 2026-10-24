@@ -8387,6 +8387,371 @@ const REPLAY10_CATS = [
 REPLAY10.qs.forEach((q, i) => {
   q.cat = REPLAY10_CATS[i];
 });
+const REPLAY11 = {
+  name: "10/24 실전 시험 복기 (난이도 5-5, 2~12번 풀이)",
+  note: "Q1·Q11~15는 문구를 추정해서 만들었어요 (답안 유무와 상관없이 틀 연습용)",
+  qs: [
+    {
+      kind: "자기소개",
+      t: "1 자기소개 (추정)",
+      tag: "복기",
+      q: [
+        "Let's start the interview. Tell me about yourself.",
+        "면접을 시작하죠. 자기소개를 해 주세요.",
+      ],
+      s: [
+        ["Hi, my name is {Hyun-gi}.", "안녕하세요, 제 이름은 현기예요.", "인사"],
+        [
+          "I'm a software developer at {Hanwha System}.",
+          "한화시스템의 소프트웨어 개발자예요.",
+          "직업",
+        ],
+        [
+          "I work on insurance systems in Yeouido.",
+          "여의도에서 보험 시스템 일을 해요.",
+          "일 · 장소",
+        ],
+        ["I've worked in IT for about {eight years}.", "IT에서 약 8년 일했어요.", "경력"],
+        ["I live alone in an apartment.", "아파트에 혼자 살아요.", "집"],
+        [
+          "I like playing online games and studying English.",
+          "온라인 게임과 영어 공부를 좋아해요.",
+          "취미",
+        ],
+        ["I need a good grade this month.", "이번 달에 좋은 등급이 필요해요.", "시험 이유"],
+        ["That's all about me.", "제 소개는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "돌발 · 친구와의 통화",
+      t: "2 친구와 통화로 하는 일",
+      tag: "복기",
+      q: [
+        "What do you usually do or talk about when you call your friends? Tell me about it in detail.",
+        "친구와 전화할 때 보통 무엇을 하고 무슨 이야기를 하나요? 자세히 말해 주세요.",
+      ],
+      s: [
+        ["I don't call my friends very often.", "친구들에게 자주 전화하지는 않아요.", "도입"],
+        ["But when I do, we talk for a while.", "하지만 전화하면 한참 이야기해요.", "빈도"],
+        ["First, we ask about each other's lives.", "먼저 서로의 근황을 물어요.", "내용 1"],
+        ["Then we talk about work and stress.", "그다음 일과 스트레스를 이야기해요.", "내용 2"],
+        ["Sometimes we plan to meet.", "가끔 만날 계획을 세워요.", "내용 3"],
+        ["It makes me feel better.", "기분이 좋아져요.", "효과"],
+        ["So I'm glad to have them.", "그래서 친구들이 있어서 좋아요.", "나의 생각"],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "돌발 · 전화기 구매",
+      t: "3 전화기를 산 과정",
+      tag: "복기",
+      q: [
+        "How did you buy your phone? Tell me about the process, from choosing it to paying for it.",
+        "전화기를 어떻게 샀나요? 고르는 것부터 결제까지 과정을 말해 주세요.",
+      ],
+      s: [
+        ["I bought my phone about {two years ago}.", "전화기는 약 2년 전에 샀어요.", "언제"],
+        ["First, I compared models online.", "먼저 온라인으로 모델을 비교했어요.", "과정 1"],
+        ["I read reviews and checked prices.", "후기를 읽고 가격을 확인했어요.", "과정 2"],
+        ["Then I went to a phone store.", "그다음 휴대폰 매장에 갔어요.", "과정 3"],
+        ["After that, I chose a plan and paid.", "그 후 요금제를 고르고 결제했어요.", "과정 4"],
+        ["I got a good discount.", "좋은 할인을 받았어요.", "결과"],
+        ["I'm satisfied with it.", "만족해요.", "느낌"],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "돌발 · 기억에 남는 전화",
+      t: "4 기억에 남는 통화",
+      tag: "복기",
+      q: [
+        "Tell me about a memorable phone call you have had. Who was it with, what was it about, and why do you remember it?",
+        "기억에 남는 통화를 말해 주세요. 누구와 무슨 내용이었고 왜 기억에 남나요?",
+      ],
+      s: [
+        [
+          "A friend called me about {a Silica Gel concert}.",
+          "친구가 실리카겔 콘서트 때문에 전화했어요.",
+          "누구 · 무엇",
+        ],
+        ["It was about two years ago.", "약 2년 전이었어요.", "언제"],
+        ["He said he got two tickets.", "표 두 장을 구했다고 했어요.", "내용 1"],
+        ["He asked me to go with him.", "같이 가자고 했어요.", "내용 2"],
+        ["I was so happy and excited.", "정말 기쁘고 설렜어요.", "느낌"],
+        ["We went together and enjoyed it.", "같이 가서 즐겼어요.", "결과"],
+        ["That's why I remember it.", "그래서 기억에 남아요.", "이유"],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "여행 · 기억에 남는 국내 여행지",
+      t: "5 기억에 남는 국내 여행지",
+      tag: "복기",
+      q: [
+        "Tell me about a memorable place you visited in Korea. Where was it, what did you do there, and why do you remember it?",
+        "국내에서 기억에 남는 여행지를 말해 주세요. 어디였고 무엇을 했으며 왜 기억에 남나요?",
+      ],
+      s: [
+        [
+          "My most memorable place in Korea is {Jeju Island}.",
+          "한국에서 가장 기억에 남는 곳은 제주도예요.",
+          "어디",
+        ],
+        ["I went there with my family.", "가족과 갔어요.", "누구와"],
+        ["We took an airplane from Seoul.", "서울에서 비행기를 탔어요.", "교통"],
+        ["First, we saw the beautiful sea.", "먼저 아름다운 바다를 봤어요.", "한 일 1"],
+        ["Then we ate fresh seafood.", "그다음 신선한 해산물을 먹었어요.", "한 일 2"],
+        ["The views were amazing.", "경치가 정말 멋졌어요.", "느낌"],
+        ["That's why I remember it.", "그래서 기억에 남아요.", "이유"],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "여행 · 첫 여행",
+      t: "6 첫 여행 경험",
+      tag: "복기",
+      q: [
+        "Tell me about your first trip. When was it, where did you go, and what happened?",
+        "처음 여행했던 때를 말해 주세요. 언제 어디를 갔고 무슨 일이 있었나요?",
+      ],
+      s: [
+        ["My first trip was to {Jeju Island}.", "첫 여행은 제주도였어요.", "어디"],
+        ["I was young then.", "그때 어렸어요.", "언제"],
+        ["I went with my family.", "가족과 갔어요.", "누구와"],
+        ["It was my first time on an airplane.", "비행기를 처음 탄 거였어요.", "특별한 점"],
+        ["I was excited and a little nervous.", "설렜고 조금 긴장됐어요.", "느낌"],
+        ["We walked on the beach together.", "같이 해변을 걸었어요.", "한 일"],
+        ["I still remember the sea.", "지금도 바다가 기억나요.", "지금"],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "여행 · 문제 해결 경험",
+      t: "7 여행 중 문제 해결",
+      tag: "복기",
+      q: [
+        "Tell me about a problem you had during a trip. What happened and how did you solve it?",
+        "여행 중에 겪은 문제를 말해 주세요. 무슨 일이 있었고 어떻게 해결했나요?",
+      ],
+      s: [
+        ["Once, I had a problem on a trip.", "한번은 여행 중에 문제가 있었어요.", "도입"],
+        ["My flight was delayed for two hours.", "비행기가 두 시간 지연됐어요.", "문제"],
+        ["I felt worried about my hotel.", "호텔이 걱정됐어요.", "느낌"],
+        ["First, I checked the airline app.", "먼저 항공사 앱을 확인했어요.", "해결 1"],
+        ["Then I called the hotel.", "그다음 호텔에 전화했어요.", "해결 2"],
+        ["They kept my room for me.", "방을 유지해 줬어요.", "결과"],
+        ["I learned to check early.", "일찍 확인해야 한다는 걸 배웠어요.", "교훈"],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "돌발 · 인터넷 서핑",
+      t: "8 인터넷 서핑으로 하는 일",
+      tag: "복기",
+      q: [
+        "What do you usually do when you surf the Internet? Tell me about it in detail.",
+        "인터넷 서핑을 할 때 보통 무엇을 하나요? 자세히 말해 주세요.",
+      ],
+      s: [
+        ["I surf the Internet almost every day.", "거의 매일 인터넷 서핑을 해요.", "도입"],
+        ["First, I read the news.", "먼저 뉴스를 읽어요.", "하는 일 1"],
+        ["Second, I watch videos on YouTube.", "둘째, 유튜브에서 영상을 봐요.", "하는 일 2"],
+        ["Third, I listen to music and podcasts.", "셋째, 음악과 팟캐스트를 들어요.", "하는 일 3"],
+        ["Sometimes I play online games.", "가끔 온라인 게임도 해요.", "하는 일 4"],
+        ["I also search for English study tips.", "영어 공부 팁도 검색해요.", "하는 일 5"],
+        ["It's useful and fun.", "유용하고 재미있어요.", "생각"],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "돌발 · 첫 인터넷 서핑",
+      t: "9 처음 인터넷 서핑한 경험",
+      tag: "복기",
+      q: [
+        "Tell me about the first time you surfed the Internet. When was it, where were you, and what did you do?",
+        "처음 인터넷 서핑을 했던 때를 말해 주세요. 언제 어디였고 무엇을 했나요?",
+      ],
+      s: [
+        [
+          "I first used the Internet in elementary school.",
+          "초등학교 때 처음 인터넷을 썼어요.",
+          "언제",
+        ],
+        ["I used the computer at home.", "집 컴퓨터로 했어요.", "어디"],
+        ["My father showed me how to use it.", "아버지가 사용법을 알려 주셨어요.", "누구와"],
+        ["First, I searched for games.", "먼저 게임을 검색했어요.", "한 일 1"],
+        ["Then I played a simple online game.", "그다음 간단한 온라인 게임을 했어요.", "한 일 2"],
+        ["It was slow, but it felt amazing.", "느렸지만 신기했어요.", "느낌"],
+        ["That's why I remember it.", "그래서 기억에 남아요.", "이유"],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "돌발 · 인터넷으로 프로젝트 해결",
+      t: "10 인터넷으로 프로젝트 해결",
+      tag: "복기",
+      q: [
+        "Tell me about a project you solved using the Internet. What was the project, and how did the Internet help you?",
+        "인터넷을 이용해 해결한 프로젝트를 말해 주세요. 어떤 프로젝트였고 인터넷이 어떻게 도움이 됐나요?",
+      ],
+      s: [
+        [
+          "Last year, I finished a project at my company.",
+          "작년에 회사에서 프로젝트를 끝냈어요.",
+          "언제 · 무엇",
+        ],
+        ["I used the Internet a lot.", "인터넷을 많이 썼어요.", "도입"],
+        [
+          "First, I searched for similar cases online.",
+          "먼저 비슷한 사례를 온라인에서 찾았어요.",
+          "활용 1",
+        ],
+        [
+          "Then I shared files with my team by email and Teams.",
+          "그다음 이메일과 팀즈로 파일을 공유했어요.",
+          "활용 2",
+        ],
+        ["We also had video meetings.", "화상 회의도 했어요.", "활용 3"],
+        ["The Internet saved a lot of time.", "인터넷 덕에 시간을 많이 아꼈어요.", "효과"],
+        ["We finished on time.", "제때 끝냈어요.", "결과"],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "롤플레이 · 질문하기 (MP3)",
+      t: "11 MP3 정보 묻기 (추정)",
+      tag: "복기",
+      q: [
+        "You want to buy an MP3 player. Call the store and ask 3 or 4 questions about it.",
+        "MP3 플레이어를 사고 싶어요. 매장에 전화해서 3~4개 질문해 보세요.",
+      ],
+      s: [
+        [
+          "Hello, I'm calling about an MP3 player.",
+          "안녕하세요, MP3 플레이어 때문에 전화했어요.",
+          "도입",
+        ],
+        ["How much is it?", "얼마예요?", "질문 1"],
+        ["How much storage does it have?", "저장 용량은 얼마나 되나요?", "질문 2"],
+        ["How long does the battery last?", "배터리는 얼마나 가나요?", "질문 3"],
+        ["Does it support Bluetooth?", "블루투스를 지원하나요?", "질문 4"],
+        ["Thank you for your help.", "도와주셔서 감사합니다.", "감사"],
+        ["That's all I wanted to ask.", "묻고 싶은 건 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "롤플레이 · 문제 + 대안 (MP3)",
+      t: "12 MP3 대안 제시 (추정)",
+      tag: "복기",
+      q: [
+        "There is a problem. The MP3 player you wanted is sold out. Call the store, explain the situation, and suggest two or three alternatives.",
+        "문제가 생겼어요. 원하던 MP3 플레이어가 품절이에요. 매장에 전화해 상황을 설명하고 대안을 두세 가지 제시해 보세요.",
+      ],
+      s: [
+        [
+          "Hello, I called about an MP3 player.",
+          "안녕하세요, MP3 플레이어 때문에 전화했어요.",
+          "도입",
+        ],
+        ["I heard it's sold out.", "품절이라고 들었어요.", "문제"],
+        ["I have two ideas.", "두 가지 생각이 있어요.", "대안 소개"],
+        [
+          "First, can you check another store?",
+          "첫째, 다른 매장을 확인해 주실 수 있나요?",
+          "대안 1",
+        ],
+        ["Second, can you order it for me?", "둘째, 주문해 주실 수 있나요?", "대안 2"],
+        ["If not, do you have a similar model?", "안 되면 비슷한 모델이 있나요?", "대안 3"],
+        ["Please call me back. Thank you.", "전화 주세요. 감사합니다.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "롤플레이 · 비슷한 경험 (기계 문제)",
+      t: "13 기계 문제 경험 (추정)",
+      tag: "복기",
+      q: [
+        "Have you ever had a problem with a machine or a device? What happened and how did you handle it?",
+        "기계나 기기에 문제가 생긴 적이 있나요? 무슨 일이 있었고 어떻게 처리했나요?",
+      ],
+      s: [
+        ["Yes, I had a problem with my computer.", "네, 컴퓨터에 문제가 있었어요.", "도입"],
+        ["It happened at work last year.", "작년에 회사에서 있었어요.", "언제 · 어디"],
+        ["It suddenly froze.", "갑자기 멈췄어요.", "문제"],
+        ["First, I restarted it.", "먼저 재부팅했어요.", "대처 1"],
+        ["Then I called the IT support team.", "그다음 IT 지원팀에 전화했어요.", "대처 2"],
+        ["They fixed it in an hour.", "한 시간 만에 고쳐 줬어요.", "결과"],
+        ["I was relieved.", "안심했어요.", "느낌"],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "집 · 묘사",
+      t: "14 우리 집 묘사 (추정)",
+      tag: "복기",
+      q: [
+        "Describe the home you live in now. What does it look like, and what kind of rooms do you have?",
+        "지금 사는 집을 묘사해 주세요. 어떻게 생겼고 어떤 방들이 있나요?",
+      ],
+      s: [
+        ["Let me tell you about {my apartment}.", "제 아파트에 대해 말할게요.", "도입"],
+        ["I live alone on the 15th floor.", "15층에 혼자 살아요.", "위치"],
+        ["The building has 25 floors.", "건물은 25층이에요.", "건물"],
+        ["I have a living room and a bedroom.", "거실과 침실이 있어요.", "방"],
+        ["My living room is the biggest.", "거실이 가장 커요.", "강조"],
+        ["It has an audio system and a sofa.", "오디오 시스템과 소파가 있어요.", "물건"],
+        ["It's comfortable for me.", "저에게 편안해요.", "느낌"],
+        ["That's all about my home.", "제 집 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "집 · 경험",
+      t: "15 집에서의 기억 (추정)",
+      tag: "복기",
+      q: [
+        "Tell me about a memorable experience you had at home. What happened and why do you remember it?",
+        "집에서 있었던 기억에 남는 경험을 말해 주세요. 무슨 일이 있었고 왜 기억에 남나요?",
+      ],
+      s: [
+        [
+          "Two months ago, I decorated my living room.",
+          "두 달 전에 거실을 꾸몄어요.",
+          "언제 · 무엇",
+        ],
+        ["My living room was big and empty.", "거실이 크고 비어 있었어요.", "배경"],
+        [
+          "First, I searched for audio systems online.",
+          "먼저 오디오 시스템을 온라인에서 찾았어요.",
+          "한 일 1",
+        ],
+        ["Then I bought a good one.", "그다음 좋은 걸 샀어요.", "한 일 2"],
+        ["After that, I set it up myself.", "그 후 직접 설치했어요.", "한 일 3"],
+        ["Now I listen to music every day.", "지금은 매일 음악을 들어요.", "결과"],
+        ["That's why I remember it.", "그래서 기억에 남아요.", "이유"],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+  ],
+};
+const REPLAY11_CATS = [
+  "survey",
+  "surprise",
+  "surprise",
+  "surprise",
+  "survey",
+  "survey",
+  "survey",
+  "surprise",
+  "surprise",
+  "surprise",
+  "rp",
+  "rp",
+  "rp",
+  "survey",
+  "survey",
+];
+REPLAY11.qs.forEach((q, i) => {
+  q.cat = REPLAY11_CATS[i];
+});
 const MOCK_SETS = [
   REPLAY,
   REPLAY2,
@@ -8398,6 +8763,7 @@ const MOCK_SETS = [
   REPLAY8,
   REPLAY9,
   REPLAY10,
+  REPLAY11,
 ];
 
 /* 발화 노트(날짜별 복기 기록). 시험 후 평가를 여기에 추가하면 모의고사 화면의 발화 노트에 나타난다.
