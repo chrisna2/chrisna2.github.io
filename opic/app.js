@@ -1785,6 +1785,33 @@ const RP_PRESETS7 = [
   ],
 ];
 seedSets("opic_phr_seed10", RP_PRESETS7);
+// 연결어로 이어 말하기 틀: 짧은 문장을 끊지 않고 and then / so / but / because로 이어 간다 (어려운 문법은 뺀다)
+const RP_PRESETS8 = [
+  [
+    "연결 틀 (경험 이야기)",
+    [
+      "It happened about … ago",
+      "When I …, I …",
+      "…, and then …",
+      "…, so …",
+      "…, but …",
+      "That's why I remember it",
+      "That's my story",
+    ],
+  ],
+  [
+    "연결 틀 (이유·설명)",
+    [
+      "Let me tell you about",
+      "…, because …",
+      "…, so …",
+      "…, but …",
+      "That's why I like it",
+      "That's my answer",
+    ],
+  ],
+];
+seedSets("opic_phr_seed11", RP_PRESETS8);
 const phrClean = (t) => t.replace(/\.{3}/g, ", ");
 const phrItem = (id) => {
   const [g, i] = id.split(".");
@@ -2129,22 +2156,26 @@ function renderPhr() {
     '>한글 → 내가 영어로 말하기</option><option value="full"' +
     (phr.mode === "full" ? " selected" : "") +
     '>풀코스 (뜻 → 표현 → 예문)</option></select><select id="phGrp"><option value="all">전체</option>' +
-    PHRASES.map(
-      (g, gi) =>
-        '<option value="' +
-        gi +
-        '"' +
-        (phr.grp === String(gi) ? " selected" : "") +
-        ">" +
-        esc(g.grp) +
-        "</option>",
-    ).join("") +
+    PHRASES.map((g, gi) => (g.items.some((it) => !it.hidden) ? [g, gi] : null))
+      .filter(Boolean)
+      .map(
+        ([g, gi]) =>
+          '<option value="' +
+          gi +
+          '"' +
+          (phr.grp === String(gi) ? " selected" : "") +
+          ">" +
+          esc(g.grp) +
+          "</option>",
+      )
+      .join("") +
     '</select><label class="ck"><input type="checkbox" id="phLoop"' +
     (phr.loop ? " checked" : "") +
     '> 끝나면 처음부터 반복</label><button class="mini pri" id="phPlay">' +
     (phrRunning() ? "■ 정지" : "▶ 시작") +
     "</button></div>";
   PHRASES.forEach((g, gi) => {
+    if (!g.items.some((it) => !it.hidden)) return;
     h += '<div class="lbl" style="margin:12px 0 6px">' + esc(g.grp) + '</div><div class="list">';
     g.items.forEach((it, ii) => {
       if (it.hidden) return;
