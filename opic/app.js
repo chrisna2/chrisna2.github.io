@@ -1812,6 +1812,34 @@ const RP_PRESETS8 = [
   ],
 ];
 seedSets("opic_phr_seed11", RP_PRESETS8);
+// 시험 당일 요약: 자기소개 + 연결어·끝맺음 (나머지 틀은 위의 기존 세트를 그대로 쓴다)
+const RP_PRESETS9 = [
+  [
+    "당일 1 자기소개",
+    [
+      "Hi, my name is",
+      "I'm a software developer at",
+      "I've worked in the IT field for about",
+      "I live alone in",
+      "In my free time, I like",
+      "I'll do my best",
+      "That's all about me",
+    ],
+  ],
+  [
+    "당일 2 연결어·끝맺음",
+    [
+      "…, and then …",
+      "…, so …",
+      "…, but …",
+      "…, because …",
+      "That's why I like it",
+      "That's my answer",
+      "That's my story",
+    ],
+  ],
+];
+seedSets("opic_phr_seed12", RP_PRESETS9);
 const phrClean = (t) => t.replace(/\.{3}/g, ", ");
 const phrItem = (id) => {
   const [g, i] = id.split(".");
