@@ -10436,6 +10436,487 @@ const REPLAY13_CATS = [
 REPLAY13.qs.forEach((q, i) => {
   q.cat = REPLAY13_CATS[i];
 });
+const REPLAY14 = {
+  name: "11/1 시험 당일 연습 (14문제)",
+  note: "기록된 14문제를 연결형으로 다시 정리 (자기소개는 녹취에 없음)",
+  qs: [
+    {
+      kind: "집 · 구조",
+      t: "1 집 구조와 방 수",
+      tag: "복기",
+      q: [
+        "Describe what your home looks like. Explain the floor plan and the number of rooms.",
+        "집이 어떻게 생겼는지 묘사해 주세요. 구조와 방 개수를 설명해 주세요.",
+      ],
+      s: [
+        [
+          "I live alone in an apartment, and it's not very big.",
+          "아파트에 혼자 사는데 아주 크진 않아요.",
+          "도입",
+        ],
+        [
+          "It has one living room, one bedroom, one bathroom, and one balcony.",
+          "거실, 침실, 욕실, 발코니가 하나씩 있어요.",
+          "구성",
+        ],
+        [
+          "My favorite room is the living room, because I have my computer and a big screen there.",
+          "컴퓨터와 큰 화면이 있어서 거실이 제일 좋아요.",
+          "좋아하는 방",
+        ],
+        [
+          "I'm really into online games, so I spend most of my time there.",
+          "온라인 게임에 빠져 있어서 대부분의 시간을 거기서 보내요.",
+          "이유",
+        ],
+        ["That's all about my home.", "제 집 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "집 · 루틴",
+      t: "2 집에서의 평일·주말 루틴",
+      tag: "복기",
+      q: [
+        "What is your typical routine at home during the week and on the weekends?",
+        "집에서 평일과 주말에 보통 어떻게 보내나요?",
+      ],
+      s: [
+        [
+          "On weekdays, I'm busy with work, so my routine is simple.",
+          "평일에는 일로 바빠서 루틴이 단순해요.",
+          "평일 도입",
+        ],
+        [
+          "I wake up, make a simple breakfast, and drink coffee.",
+          "일어나서 간단히 아침을 만들고 커피를 마셔요.",
+          "아침",
+        ],
+        [
+          "After work, I come back home, make dinner, and play online games.",
+          "퇴근 후 집에 와서 저녁을 만들고 온라인 게임을 해요.",
+          "저녁",
+        ],
+        [
+          "On weekends, I wake up late, and then I play games or listen to music all day.",
+          "주말에는 늦게 일어나 하루 종일 게임을 하거나 음악을 들어요.",
+          "주말",
+        ],
+        [
+          "It's not a special routine, but it helps me relax.",
+          "특별하진 않지만 쉬는 데 도움이 돼요.",
+          "생각",
+        ],
+        ["That's my routine.", "제 루틴은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "집 · 문제",
+      t: "3 집에서 생긴 문제",
+      tag: "복기",
+      q: [
+        "Problems often happen in homes, like unfinished projects or plumbing issues. Discuss some of the issues in your home.",
+        "집에서는 문제가 자주 생겨요. 집에서 생긴 문제를 이야기해 주세요.",
+      ],
+      s: [
+        [
+          "My home is cozy, but I sometimes feel lonely because I live alone.",
+          "집은 아늑하지만 혼자 살아서 가끔 외로워요.",
+          "도입 · 문제",
+        ],
+        ["That is the only problem in my home.", "그게 우리 집의 유일한 문제예요.", "정리"],
+        [
+          "So I want to meet a good person and get married.",
+          "그래서 좋은 사람을 만나 결혼하고 싶어요.",
+          "해결 바람",
+        ],
+        [
+          "Then I want to make a family and live here for a long time.",
+          "그러면 가족을 이루고 여기서 오래 살고 싶어요.",
+          "미래",
+        ],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "재활용 · 제도",
+      t: "4 우리나라 재활용 제도",
+      tag: "복기",
+      q: [
+        "Discuss a few things about the recycling system in your country. When do you usually recycle? What are the requirements?",
+        "우리나라의 재활용 제도에 대해 말해 주세요. 보통 언제 재활용하나요? 지켜야 할 조건은 무엇인가요?",
+      ],
+      s: [
+        [
+          "In Korea, we have to separate our trash before we throw it away.",
+          "한국에서는 쓰레기를 버리기 전에 분리해야 해요.",
+          "도입",
+        ],
+        [
+          "We separate plastic, paper, cans, and general trash.",
+          "플라스틱, 종이, 캔, 일반 쓰레기를 나눠요.",
+          "규칙",
+        ],
+        [
+          "I recycle once a week on the recycling day of my apartment.",
+          "아파트 분리수거 날인 일주일에 한 번 재활용해요.",
+          "언제",
+        ],
+        [
+          "I don't know every detail of the system, but I think it's good for the environment.",
+          "제도의 세부 내용은 다 모르지만 환경에 좋다고 생각해요.",
+          "모를 때 안전 문장",
+        ],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "재활용 · 단계",
+      t: "5 재활용하는 순서",
+      tag: "복기",
+      q: [
+        "Explain the steps you take when you recycle. Tell me about the normal routine.",
+        "재활용할 때 하는 순서를 설명해 주세요.",
+      ],
+      s: [
+        [
+          "First, I keep my recyclables in a box at home.",
+          "먼저 집에서 재활용품을 상자에 모아요.",
+          "1단계",
+        ],
+        [
+          "Then, on recycling day, I bring the box to the recycling spot of my apartment.",
+          "그다음 분리수거 날 상자를 아파트 분리수거장에 가져가요.",
+          "2단계",
+        ],
+        [
+          "I separate plastic, paper, and cans, and I put each one in the right place.",
+          "플라스틱, 종이, 캔을 나눠 맞는 곳에 넣어요.",
+          "3단계",
+        ],
+        [
+          "After that, I come back home and clean the box.",
+          "그 후 집에 와서 상자를 정리해요.",
+          "4단계",
+        ],
+        [
+          "It's not simple, but it's a good way to protect the environment.",
+          "간단하진 않지만 환경을 지키는 좋은 방법이에요.",
+          "생각",
+        ],
+        ["That's my routine.", "제 순서는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "재활용 · 기억에 남는 경험",
+      t: "6 재활용 중 기억에 남는 일",
+      tag: "복기",
+      q: [
+        "Tell me about a memorable experience while recycling. Where and when did it happen, and what made it memorable?",
+        "재활용하다가 기억에 남는 경험을 말해 주세요. 언제 어디서 있었고 왜 기억에 남나요?",
+      ],
+      s: [
+        [
+          "Seven years ago, I lived in my old house, and I went to the recycling spot to throw away my trash.",
+          "7년 전 옛집에 살 때 쓰레기를 버리러 분리수거장에 갔어요.",
+          "언제 · 어디",
+        ],
+        [
+          "Someone had thrown all kinds of trash into one plastic bin without separating it.",
+          "누군가 분리하지 않고 모든 쓰레기를 플라스틱 통에 한꺼번에 버려 놓았어요.",
+          "상황",
+        ],
+        [
+          "Then the manager of the recycling spot got angry and looked for the person.",
+          "그러자 분리수거장 관리인이 화가 나서 그 사람을 찾았어요.",
+          "사건",
+        ],
+        [
+          "I heard the manager's warning, and I was surprised.",
+          "관리인의 경고를 듣고 놀랐어요.",
+          "반응",
+        ],
+        [
+          "It was memorable because it was a strange and tense moment.",
+          "이상하고 긴장된 순간이라 기억에 남아요.",
+          "이유",
+        ],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "음악 · 좋아하는 음악",
+      t: "7 좋아하는 음악과 가수",
+      tag: "복기",
+      q: [
+        "Explain the types of music you enjoy. Discuss some of your favorite bands or musicians.",
+        "좋아하는 음악 종류와 좋아하는 밴드나 음악가에 대해 말해 주세요.",
+      ],
+      s: [
+        ["I'm really into music, especially rock.", "음악, 특히 록을 정말 좋아해요.", "장르"],
+        [
+          "I'm a big fan of Silica Gel, a Korean band, because their music is energetic and powerful.",
+          "한국 밴드 실리카겔의 열렬한 팬인데 음악이 에너지 넘치고 강렬해서예요.",
+          "가수 · 이유",
+        ],
+        [
+          "I also listen to jazz sometimes, especially jazz from the 1980s.",
+          "가끔 재즈, 특히 1980년대 재즈도 들어요.",
+          "두 번째 장르",
+        ],
+        [
+          "Music is an easy way to relax and relieve my stress.",
+          "음악은 쉬고 스트레스를 푸는 쉬운 방법이에요.",
+          "효과",
+        ],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "음악 · 관심의 변화",
+      t: "8 음악에 대한 관심 변화",
+      tag: "복기",
+      q: [
+        "When did you first become interested in music? What did you enjoy first? Trace your interest from childhood until now.",
+        "음악에 언제 관심이 생겼나요? 처음엔 어떤 음악을 즐겼나요? 어릴 때부터 지금까지 말해 주세요.",
+      ],
+      s: [
+        [
+          "When I was young, I listened to pop music for fun.",
+          "어릴 때는 재미로 팝 음악을 들었어요.",
+          "어린 시절",
+        ],
+        [
+          "When I was a high school student, I had to study a lot for the college entrance exam.",
+          "고등학생 때는 입시 때문에 공부를 많이 해야 했어요.",
+          "고등학교",
+        ],
+        [
+          "I needed a good environment to focus, so I started listening to jazz and classical music.",
+          "집중할 환경이 필요해서 재즈와 클래식을 듣기 시작했어요.",
+          "계기",
+        ],
+        [
+          "Those songs were relaxing, so I could study well.",
+          "마음이 편해져서 공부를 잘할 수 있었어요.",
+          "효과",
+        ],
+        [
+          "These days, I listen to rock on weekends to release my stress from work.",
+          "요즘은 주말에 일 스트레스를 풀려고 록을 들어요.",
+          "지금",
+        ],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "음악 · 라이브",
+      t: "9 기억에 남는 라이브 음악",
+      tag: "복기",
+      q: [
+        "Do you recall a memorable occasion where you heard live music? When, where, with whom, and what made it unforgettable?",
+        "기억에 남는 라이브 음악 경험이 있나요? 언제, 어디서, 누구와, 무엇이 특별했나요?",
+      ],
+      s: [
+        [
+          "Two years ago, I went to a Silica Gel concert, because I'm a big fan.",
+          "2년 전 팬이라 실리카겔 콘서트에 갔어요.",
+          "언제 · 이유",
+        ],
+        [
+          "I went alone, because none of my family or friends likes their music.",
+          "가족이나 친구 중 팬이 없어서 혼자 갔어요.",
+          "누구와",
+        ],
+        [
+          "I felt a little lonely at first, but their music was so exciting that I forgot it.",
+          "처음엔 좀 외로웠지만 음악이 너무 신나서 잊었어요.",
+          "느낌",
+        ],
+        [
+          "The concert hall was huge, and the sound system was great.",
+          "공연장은 아주 컸고 음향이 훌륭했어요.",
+          "장소",
+        ],
+        [
+          "It was unforgettable, and I want to go to their concert again.",
+          "잊을 수 없었고 그들의 콘서트에 또 가고 싶어요.",
+          "결과",
+        ],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "롤플레이 · 질문하기 (조깅 약속)",
+      t: "10 친구와 조깅 계획 질문",
+      tag: "복기",
+      q: [
+        "A friend has asked you to go for a jog. Ask your friend three or four questions about the plan.",
+        "친구가 조깅을 같이 가자고 했어요. 계획에 대해 친구에게 3~4개 질문해 보세요. (시험에서 'job'으로 잘못 들어 직업 조언을 했음)",
+      ],
+      s: [
+        ["Hi, thanks for inviting me to go for a jog.", "안녕, 조깅에 초대해 줘서 고마워.", "도입"],
+        [
+          "Where are we going to jog, and what time should we meet?",
+          "어디서 조깅하고 몇 시에 만날까?",
+          "질문 1 · 2",
+        ],
+        [
+          "How long are we going to jog, and how far?",
+          "얼마나 오래, 얼마나 멀리 뛸 거야?",
+          "질문 3",
+        ],
+        [
+          "Should I bring anything, like water or a towel?",
+          "물이나 수건 같은 걸 가져가야 해?",
+          "질문 4",
+        ],
+        ["Thank you, and I'm looking forward to it.", "고마워, 기대돼.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "롤플레이 · 문제 + 대안 (못 가게 됨)",
+      t: "11 못 가게 된 이유와 대안",
+      tag: "복기",
+      q: [
+        "Unfortunately you will be unable to join your friend as planned. Explain why, and offer two or three options.",
+        "갑자기 같이 못 가게 됐어요. 이유를 설명하고 대안을 두세 가지 제시하세요.",
+      ],
+      s: [
+        [
+          "Hi, I'm really sorry, but I can't join you today.",
+          "안녕, 정말 미안한데 오늘은 같이 못 가.",
+          "도입",
+        ],
+        [
+          "I had a small car accident, so I have to fix my car now.",
+          "작은 접촉 사고가 나서 지금 차를 고쳐야 해.",
+          "이유",
+        ],
+        ["I have two ideas.", "두 가지 생각이 있어.", "대안 소개"],
+        [
+          "First, we can meet next Saturday at the same time.",
+          "첫째, 다음 주 토요일 같은 시간에 만날 수 있어.",
+          "대안 1",
+        ],
+        [
+          "Second, if I fix my car quickly, I can meet you later today.",
+          "둘째, 차를 빨리 고치면 오늘 늦게 만날 수 있어.",
+          "대안 2",
+        ],
+        [
+          "Which one do you prefer? I'm sorry again.",
+          "어느 쪽이 좋아? 다시 한번 미안해.",
+          "선택 요청",
+        ],
+      ],
+    },
+    {
+      kind: "롤플레이 · 비슷한 경험 (조깅)",
+      t: "12 조깅에서 기억에 남는 경험",
+      tag: "복기",
+      q: [
+        "Is there a particular jogging experience that stands out? When and where was it, and what made it memorable?",
+        "기억에 남는 조깅 경험이 있나요? 언제 어디서였고 왜 기억에 남나요?",
+      ],
+      s: [
+        [
+          "I don't jog often, but I remember one time when I jogged along the Han River near Yeouido.",
+          "자주 뛰진 않지만 여의도 한강을 따라 뛴 적이 기억나요.",
+          "언제 · 어디",
+        ],
+        [
+          "It was a nice evening, and many people were walking and cycling there.",
+          "날씨 좋은 저녁이었고 많은 사람이 걷고 자전거를 탔어요.",
+          "상황",
+        ],
+        [
+          "I was tired after ten minutes, but I kept running slowly.",
+          "10분 뒤 지쳤지만 천천히 계속 뛰었어요.",
+          "사건",
+        ],
+        [
+          "After that, I felt fresh, and my stress was gone.",
+          "그 후 개운했고 스트레스가 사라졌어요.",
+          "결과",
+        ],
+        ["That's why I remember it.", "그래서 기억에 남아요.", "이유"],
+        ["That's my story.", "제 이야기는 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "여행 · 좋아하는 여행지",
+      t: "13 좋아하는 여행지",
+      tag: "복기",
+      q: [
+        "Discuss a few of the places you enjoy traveling to and why you like going there.",
+        "즐겨 가는 여행지와 그 이유를 말해 주세요.",
+      ],
+      s: [
+        [
+          "Korea has many beautiful places, and my favorite is Jeju Island.",
+          "한국에는 아름다운 곳이 많은데 제일 좋아하는 곳은 제주도예요.",
+          "도입",
+        ],
+        ["I go there once or twice a month.", "한 달에 한두 번 가요.", "빈도"],
+        [
+          "Jeju has beautiful landscapes, like Hallasan Mountain and the seashore.",
+          "한라산과 바닷가 같은 아름다운 풍경이 있어요.",
+          "이유 1",
+        ],
+        [
+          "It also has delicious food, and my favorite is omegi tteok.",
+          "맛있는 음식도 있는데 제가 좋아하는 건 오메기떡이에요.",
+          "이유 2",
+        ],
+        ["It's a good place to relax.", "쉬기 좋은 곳이에요.", "효과"],
+        ["That's my answer.", "제 대답은 여기까지예요.", "끝맺음"],
+      ],
+    },
+    {
+      kind: "롤플레이 · 면접관에게 질문하기",
+      t: "14 미국 여행에 대해 질문",
+      tag: "복기",
+      q: [
+        "I like to travel around my own country as well. Please ask me three questions about why I like traveling in America.",
+        "저도 우리나라를 여행하는 걸 좋아해요. 제가 왜 미국을 여행하는 걸 좋아하는지 3개 질문해 보세요.",
+      ],
+      s: [
+        ["Oh, you like traveling in America?", "오, 미국 여행을 좋아하세요?", "도입"],
+        ["Why do you like traveling there?", "왜 거기서 여행하는 걸 좋아하세요?", "질문 1"],
+        [
+          "Where is the best place to visit in America?",
+          "미국에서 가장 가 볼 만한 곳은 어디예요?",
+          "질문 2",
+        ],
+        [
+          "How do you plan your trip, since America is such a big country?",
+          "미국은 아주 큰 나라인데 여행은 어떻게 계획하세요?",
+          "질문 3",
+        ],
+        ["Thank you for your answers.", "대답 감사합니다.", "끝맺음"],
+      ],
+    },
+  ],
+};
+const REPLAY14_CATS = [
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "survey",
+  "rp",
+  "rp",
+  "rp",
+  "survey",
+  "rp",
+];
+REPLAY14.qs.forEach((q, i) => {
+  q.cat = REPLAY14_CATS[i];
+});
 const MOCK_SETS = [
   REPLAY,
   REPLAY2,
@@ -10450,6 +10931,7 @@ const MOCK_SETS = [
   REPLAY11,
   REPLAY12,
   REPLAY13,
+  REPLAY14,
 ];
 
 /* 발화 노트(날짜별 복기 기록). 시험 후 평가를 여기에 추가하면 모의고사 화면의 발화 노트에 나타난다.
@@ -11255,6 +11737,75 @@ const MOCK_REVIEWS = [
       "모르는 단어가 나오면 이해 못 했다고 말하지 말고 쉬운 말로 바꿔 바로 답하기",
       "끝맺음은 That's my answer / That's my story / That's all about … 중 하나로 확실하게 맺기",
       "속도는 평소보다 약간 느리게, 일정하게. 시작 전에 마이크와 소리 크기 확인하기",
+    ],
+  },
+  {
+    date: "2026-11-01",
+    title: "시험 당일 오전 모의시험 (14문제)",
+    set: 13,
+    grade: "IL ~ IM1 하단 추정 (소리 평가 불가, 오차 큼)",
+    summary:
+      "어제보다 크게 달라지진 않았다. 음악 3문제(Q7~Q9)와 제주 여행(Q13)은 이유와 순서가 있고 길이도 충분해 가장 좋았다. 반면 Q12는 '관심이 없어서 건너뛴다'고 답을 포기했고, Q10은 'go for a jog'를 'a job'으로 알아듣고 직업 조언을 해 과제에서 벗어났다. Q4(재활용 제도)도 '잘 모른다'로 끝나 내용이 비었다. 문법은 'I made'(현재 습관에 과거), 'I listening', 'good to be live alone'처럼 어제와 같은 오류가 남아 있고, 같은 말을 되풀이하며 다시 시작하는 습관도 그대로다. 글자 기록 기준이라 소리 평가는 못 했고 STT 오인식은 감점하지 않았다. 답을 포기한 문제가 있으면 AI 채점에서 불리할 가능성이 크다.",
+    good: [
+      "Q7~Q9 음악: 장르 → 실리카겔 → 효과, 고등학교 때 재즈·클래식으로 집중 → 지금은 록으로 스트레스 해소, 콘서트에 혼자 간 이유와 느낌까지 이어짐",
+      "Q13 제주: 빈도, 한라산·바다, 오메기떡까지 이유가 두 가지로 구체적임",
+      "Q11 못 가게 됨: 사과 → 이유(차 사고) → 대안 둘(다음 토요일, 오늘 늦게) → 선택 요청의 틀을 지킴",
+      "Q1 집 묘사: 방 개수와 좋아하는 방, 이유가 순서대로 나옴",
+    ],
+    problems: [
+      {
+        q: "Q12 조깅 경험",
+        cat: "롤플레이",
+        issue: "'관심이 없어서 대답할 수 없다, 건너뛴다'고 답을 포기함. 시험에서 가장 큰 감점 요인",
+        fix: "경험이 없어도 '자주 뛰진 않지만 한 번 …'처럼 짧게 지어서라도 끝까지 말하기 (복기 세트 Q12)",
+      },
+      {
+        q: "Q10 조깅 약속 질문",
+        cat: "롤플레이",
+        issue:
+          "'go for a jog'를 'a job'으로 알아들어 직업 조언을 함. 질문 3~4개 요구는 채우지 못함",
+        fix: "친구와의 약속 질문은 When/Where/How long/What to bring 틀로 고정. 헷갈리면 활동 이름이 뭐든 쓸 수 있는 질문(어디서, 몇 시에, 무엇을 가져갈지)을 하기 (복기 세트 Q10)",
+      },
+      {
+        q: "Q4 재활용 제도",
+        cat: "서베이",
+        issue:
+          "'제도를 잘 몰랐다, 그래서 설명할 수 없다'고 말하며 시간을 씀. 'trashy' 같은 어휘 문제도 있음",
+        fix: "모를 때는 '분리해서 버린다 / 일주일에 한 번 / 환경에 좋다' 세 가지로 일반적인 내용을 말하기 (복기 세트 Q4)",
+      },
+      {
+        q: "Q3 집의 문제",
+        cat: "서베이",
+        issue:
+          "외로움은 괜찮은 소재지만 'I need a girlfriend or my wife'처럼 표현이 어색하고 결론이 길어짐",
+        fix: "문제 → 이유 → 바람 순서로 짧게. 'I want to meet a good person and get married.'",
+      },
+      {
+        q: "공통 · 시제와 문법",
+        cat: "공통",
+        issue:
+          "'I made a simple meal'(현재 습관), 'I listening', 'good to be live alone', 'it can be easy listening'이 반복됨",
+        fix: "습관은 현재형 I make / I listen, 과거 이야기만 과거형 I went / I felt",
+      },
+      {
+        q: "공통 · 끊김과 재시작",
+        cat: "공통",
+        issue: "'is, is', 'I, I', 'we, we'처럼 같은 말을 반복하고 다시 시작함",
+        fix: "틀려도 그 문장을 끝내고 and then / so / because로 이어 가기",
+      },
+      {
+        q: "공통 · 끝이 약함",
+        cat: "공통",
+        issue: "Q6과 Q10은 마지막 문장이 이야기를 마무리하지 못하고 끊김",
+        fix: "That's my story / That's my answer 중 하나로 확실히 맺기",
+      },
+    ],
+    actions: [
+      "절대 건너뛰지 않기. 모르거나 경험이 없으면 짧게 지어서라도 3~4문장 말하기",
+      "롤플레이 질문은 When / Where / How long / What to bring 틀로 고정하기",
+      "모르는 주제는 '일반적인 규칙 + 주 1회 같은 내 습관 + 좋은 점' 세 가지로 말하기",
+      "습관은 현재형, 이야기는 과거형으로 구분하기",
+      "끝맺음은 That's my answer / story 중 하나로 마치기",
     ],
   },
 ];
