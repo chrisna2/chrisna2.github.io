@@ -3814,14 +3814,9 @@ const REPLAY = {
           "취미",
         ],
         [
-          "I live alone in {an apartment in Seoul}.",
-          "저는 서울의 아파트에서 혼자 살아요.",
-          "사는 곳",
-        ],
-        [
-          "I'm taking this test because {my company wants me to reach a certain grade}, so I'll do my best.",
-          "회사가 요구하는 등급이 있어서 이 시험을 보게 됐고, 최선을 다할게요.",
-          "시험 이유",
+          "I live alone in {an apartment in Seoul}, and I'm taking this test because {my company wants me to reach a certain grade}, so I'll do my best.",
+          "저는 서울의 아파트에서 혼자 살아요. 회사가 요구하는 등급이 있어서 이 시험을 보게 됐고, 최선을 다할게요.",
+          "사는 곳 · and",
         ],
       ],
     },
@@ -3840,14 +3835,9 @@ const REPLAY = {
           "누구와",
         ],
         [
-          "We make plans through {a group chat on our phones}, and we decide the date and place together.",
-          "휴대폰 단체 채팅방으로 약속을 잡고, 날짜와 장소를 함께 정해요.",
-          "방법",
-        ],
-        [
-          "We often go to {a restaurant} and {have some soju and food}.",
-          "우리는 자주 식당에 가서 소주와 음식을 먹어요.",
-          "활동",
+          "We make plans through {a group chat on our phones}, and we decide the date and place together, and then we often go to {a restaurant} and {have some soju and food}.",
+          "휴대폰 단체 채팅방으로 약속을 잡고, 날짜와 장소를 함께 정해요. 우리는 자주 식당에 가서 소주와 음식을 먹어요.",
+          "방법 · and then",
         ],
         [
           "While we eat, we talk about {our jobs, our future, and our favorite food}.",
@@ -3891,14 +3881,9 @@ const REPLAY = {
           "감정",
         ],
         [
-          "The dentist {checked my teeth and treated a cavity}, and it was {a little painful}.",
-          "치과 의사 선생님이 이를 살펴보고 충치를 치료했는데 조금 아팠어요.",
-          "진행",
-        ],
-        [
-          "After that, the dentist told me to {brush my teeth carefully and eat fewer sweets}.",
-          "그 후 선생님은 이를 꼼꼼히 닦고 단 걸 줄이라고 했어요.",
-          "결과",
+          "The dentist {checked my teeth and treated a cavity}, and it was {a little painful}, and then the dentist told me to {brush my teeth carefully and eat fewer sweets}.",
+          "치과 의사 선생님이 이를 살펴보고 충치를 치료했는데 조금 아팠어요. 그 후 선생님은 이를 꼼꼼히 닦고 단 걸 줄이라고 했어요.",
+          "진행 · and then",
         ],
         [
           "Since then, I've been careful about my teeth, and I go to the dentist regularly.",
@@ -3927,24 +3912,14 @@ const REPLAY = {
           "상황",
         ],
         [
-          "When I got home, I realized that {I had left my wallet at the restaurant}.",
-          "집에 도착해서 식당에 지갑을 두고 온 걸 알았어요.",
-          "문제",
+          "When I got home, I realized that {I had left my wallet at the restaurant}, so I was very embarrassed and stressed because {my cards and ID were in it}.",
+          "집에 도착해서 식당에 지갑을 두고 온 걸 알았어요. 카드와 신분증이 들어 있어서 매우 당황하고 스트레스를 받았어요.",
+          "문제 · so",
         ],
         [
-          "I was very embarrassed and stressed because {my cards and ID were in it}.",
-          "카드와 신분증이 들어 있어서 매우 당황하고 스트레스를 받았어요.",
-          "감정",
-        ],
-        [
-          "So I immediately {went back to the restaurant}, and luckily {the staff had kept my wallet}.",
-          "그래서 바로 식당으로 돌아갔고, 다행히 직원이 지갑을 보관하고 있었어요.",
-          "해결",
-        ],
-        [
-          "I was so relieved, and I learned to {always check my belongings before leaving}.",
-          "정말 안도했고, 나갈 때 소지품을 꼭 확인하는 법을 배웠어요.",
-          "교훈",
+          "So I immediately {went back to the restaurant}, and luckily {the staff had kept my wallet}, and I was so relieved, and I learned to {always check my belongings before leaving}.",
+          "그래서 바로 식당으로 돌아갔고, 다행히 직원이 지갑을 보관하고 있었어요. 정말 안도했고, 나갈 때 소지품을 꼭 확인하는 법을 배웠어요.",
+          "해결 · and",
         ],
       ],
     },
@@ -3958,24 +3933,14 @@ const REPLAY = {
       ],
       s: [
         [
-          "I live alone in {an apartment on the 15th floor}.",
-          "저는 15층 아파트에서 혼자 살아요.",
-          "집",
+          "I live alone in {an apartment on the 15th floor}, and my home has {a living room, a bedroom, a kitchen, and a small balcony}.",
+          "저는 15층 아파트에서 혼자 살아요. 집에는 거실, 침실, 주방, 작은 발코니가 있어요.",
+          "집 · and",
         ],
         [
-          "My home has {a living room, a bedroom, a kitchen, and a small balcony}.",
-          "집에는 거실, 침실, 주방, 작은 발코니가 있어요.",
-          "방 구성",
-        ],
-        [
-          "My favorite room is {the living room}, because I spend most of my time there.",
-          "가장 좋아하는 방은 거실인데, 대부분의 시간을 거기서 보내기 때문이에요.",
-          "좋아하는 방",
-        ],
-        [
-          "There's {a big TV and my computer}, and I enjoy {playing online games} there.",
-          "큰 TV와 컴퓨터가 있고, 거기서 온라인 게임을 즐겨요.",
-          "물건 · 활동",
+          "My favorite room is {the living room}, because I spend most of my time there, and there's {a big TV and my computer}, and I enjoy {playing online games} there.",
+          "가장 좋아하는 방은 거실인데, 대부분의 시간을 거기서 보내기 때문이에요. 큰 TV와 컴퓨터가 있고, 거기서 온라인 게임을 즐겨요.",
+          "좋아하는 방 · and",
         ],
         [
           "It's {clean, cozy, and comfortable}, so I can relax after work.",
@@ -4004,20 +3969,14 @@ const REPLAY = {
           "집",
         ],
         [
-          "There was {a small park} near my old house, and I often {walked around it}.",
-          "옛집 근처에 작은 공원이 있었고, 자주 그 주변을 걸었어요.",
-          "주변",
+          "There was {a small park} near my old house, and I often {walked around it}, and I used to meet my friends there and {play after school}.",
+          "옛집 근처에 작은 공원이 있었고, 자주 그 주변을 걸었어요. 거기서 친구들을 만나 방과 후에 놀곤 했어요.",
+          "주변 · and",
         ],
         [
-          "I used to meet my friends there and {play after school}.",
-          "거기서 친구들을 만나 방과 후에 놀곤 했어요.",
-          "추억",
-        ],
-        ["The neighborhood was {quiet and friendly}.", "동네는 조용하고 정겨웠어요.", "분위기"],
-        [
-          "Now it has changed a lot, and there are {more buildings and shops}.",
-          "지금은 많이 변해서 건물과 가게가 더 많아졌어요.",
-          "변화",
+          "The neighborhood was {quiet and friendly}, but now it has changed a lot, and there are {more buildings and shops}.",
+          "동네는 조용하고 정겨웠어요. 지금은 많이 변해서 건물과 가게가 더 많아졌어요.",
+          "분위기 · but",
         ],
         [
           "I don't remember everything, but I still miss that place.",
@@ -4051,14 +4010,9 @@ const REPLAY = {
           "특정한 날",
         ],
         [
-          "My mother has {great recipes}, and she always cooked delicious food for me.",
-          "어머니는 훌륭한 레시피가 있고 항상 맛있는 음식을 해 주셨어요.",
-          "어머니",
-        ],
-        [
-          "Now I live alone, so I often miss {my mother's cooking}.",
-          "지금은 혼자 살아서 어머니 음식이 자주 그리워요.",
-          "현재",
+          "My mother has {great recipes}, and she always cooked delicious food for me, but now I live alone, so I often miss {my mother's cooking}.",
+          "어머니는 훌륭한 레시피가 있고 항상 맛있는 음식을 해 주셨어요. 지금은 혼자 살아서 어머니 음식이 자주 그리워요.",
+          "어머니 · but",
         ],
         [
           "That's why I visit my old house and {eat her food} whenever I can.",
@@ -4087,14 +4041,9 @@ const REPLAY = {
           "공간",
         ],
         [
-          "Behind the counter, there are {shelves full of bottles} under {warm lights}.",
-          "카운터 뒤에는 따뜻한 조명 아래 병이 가득한 선반이 있어요.",
-          "뒤쪽",
-        ],
-        [
-          "The bartender {shakes cocktails}, and the tools like {shakers and glasses} are neatly arranged.",
-          "바텐더가 칵테일을 흔들어 만들고, 셰이커와 잔 같은 도구가 깔끔하게 놓여 있어요.",
-          "도구",
+          "Behind the counter, there are {shelves full of bottles} under {warm lights}, and the bartender {shakes cocktails}, and the tools like {shakers and glasses} are neatly arranged.",
+          "카운터 뒤에는 따뜻한 조명 아래 병이 가득한 선반이 있어요. 바텐더가 칵테일을 흔들어 만들고, 셰이커와 잔 같은 도구가 깔끔하게 놓여 있어요.",
+          "뒤쪽 · and",
         ],
         [
           "In front of the counter, there are {high stools}, so you can watch the bartender.",
@@ -4128,14 +4077,9 @@ const REPLAY = {
           "외관",
         ],
         [
-          "The menu had {many expensive drinks}, but I usually only drink soju.",
-          "메뉴에는 비싼 술이 많았지만 저는 보통 소주만 마셔요.",
-          "메뉴",
-        ],
-        [
-          "So I told the bartender, and he made me {a cocktail with soju}.",
-          "그래서 바텐더에게 말했더니 소주로 칵테일을 만들어 줬어요.",
-          "사건",
+          "The menu had {many expensive drinks}, but I usually only drink soju, so I told the bartender, and he made me {a cocktail with soju}.",
+          "메뉴에는 비싼 술이 많았지만 저는 보통 소주만 마셔요. 그래서 바텐더에게 말했더니 소주로 칵테일을 만들어 줬어요.",
+          "메뉴 · so",
         ],
         [
           "It was my first cocktail, and it was {surprisingly delicious}.",
@@ -4164,29 +4108,14 @@ const REPLAY = {
           "도입",
         ],
         [
-          "Before the party, I {bought a gift and met other friends at the station}.",
-          "파티 전에 선물을 사고 역에서 다른 친구들을 만났어요.",
-          "방문 전",
+          "Before the party, I {bought a gift and met other friends at the station}, and then at the pub, we {ordered food and drinks and sang happy birthday}, and we talked about {our jobs and old memories} for hours.",
+          "파티 전에 선물을 사고 역에서 다른 친구들을 만났어요. 펍에서 음식과 술을 시키고 생일 축하 노래를 불렀어요. 일과 옛 추억에 대해 몇 시간 동안 이야기했어요.",
+          "방문 전 · and then · and",
         ],
         [
-          "At the pub, we {ordered food and drinks and sang happy birthday}.",
-          "펍에서 음식과 술을 시키고 생일 축하 노래를 불렀어요.",
-          "바에서",
-        ],
-        [
-          "We talked about {our jobs and old memories} for hours.",
-          "일과 옛 추억에 대해 몇 시간 동안 이야기했어요.",
-          "대화",
-        ],
-        [
-          "After that, we {took a group photo and went home by taxi}.",
-          "그 후 단체 사진을 찍고 택시로 집에 갔어요.",
-          "방문 후",
-        ],
-        [
-          "It was a fun night, and my friend was really happy.",
-          "즐거운 밤이었고 친구도 정말 기뻐했어요.",
-          "마무리",
+          "After that, we {took a group photo and went home by taxi}, and it was a fun night, and my friend was really happy.",
+          "그 후 단체 사진을 찍고 택시로 집에 갔어요. 즐거운 밤이었고 친구도 정말 기뻐했어요.",
+          "방문 후 · and",
         ],
       ],
     },
@@ -4297,14 +4226,9 @@ const REPLAY = {
           "행동",
         ],
         [
-          "Luckily, they had {one room left} for the right day, so I booked it again.",
-          "다행히 맞는 날짜에 방이 하나 남아 있어서 다시 예약했어요.",
-          "해결",
-        ],
-        [
-          "It was a big relief, and the trip went well.",
-          "정말 안도했고 여행도 잘 다녀왔어요.",
-          "결과",
+          "Luckily, they had {one room left} for the right day, so I booked it again, and it was a big relief, and the trip went well.",
+          "다행히 맞는 날짜에 방이 하나 남아 있어서 다시 예약했어요. 정말 안도했고 여행도 잘 다녀왔어요.",
+          "해결 · and",
         ],
         [
           "Since then, I always {double-check the date before I confirm a reservation}.",
@@ -4324,24 +4248,14 @@ const REPLAY = {
       s: [
         ["A country close to Korea is {Japan}.", "한국과 가까운 나라는 일본이에요.", "도입"],
         [
-          "When I was young, I felt that {Japan had a strong economy}, and it seemed {clean and polite}.",
-          "어렸을 때 일본은 경제가 강하고 깨끗하고 예의 바른 나라로 보였어요.",
-          "예전",
+          "When I was young, I felt that {Japan had a strong economy}, and it seemed {clean and polite}, but in recent years, I've heard that {its economy has slowed down and the yen has been weak}.",
+          "어렸을 때 일본은 경제가 강하고 깨끗하고 예의 바른 나라로 보였어요. 최근에는 경제가 둔화하고 엔화가 약세라고 들었어요.",
+          "예전 · but",
         ],
         [
-          "In recent years, I've heard that {its economy has slowed down and the yen has been weak}.",
-          "최근에는 경제가 둔화하고 엔화가 약세라고 들었어요.",
-          "경제 변화",
-        ],
-        [
-          "At the same time, {many Koreans travel to Japan}, because {it has become cheaper to visit}.",
-          "동시에 방문하기 저렴해져서 많은 한국인이 일본을 여행해요.",
-          "영향",
-        ],
-        [
-          "I also see {more cultural exchange}, such as {music, food, and games}.",
-          "음악, 음식, 게임 같은 문화 교류도 더 늘었어요.",
-          "문화",
+          "At the same time, {many Koreans travel to Japan}, because {it has become cheaper to visit}, and I also see {more cultural exchange}, such as {music, food, and games}.",
+          "동시에 방문하기 저렴해져서 많은 한국인이 일본을 여행해요. 음악, 음식, 게임 같은 문화 교류도 더 늘었어요.",
+          "영향 · and",
         ],
         [
           "Overall, both countries have changed, and I hope we keep a good relationship.",
@@ -4365,14 +4279,9 @@ const REPLAY = {
           "도입",
         ],
         [
-          "The report said that {the Japanese yen is weak compared to the Korean won}.",
-          "보도는 엔화가 원화에 비해 약하다고 했어요.",
-          "내용",
-        ],
-        [
-          "Because of that, {more Korean tourists visit Japan}, and {prices feel cheaper to them}.",
-          "그 때문에 일본을 찾는 한국인 관광객이 늘고 물가가 싸게 느껴진다고 해요.",
-          "영향",
+          "The report said that {the Japanese yen is weak compared to the Korean won}, so {more Korean tourists visit Japan}, and {prices feel cheaper to them}.",
+          "보도는 엔화가 원화에 비해 약하다고 했어요. 그 때문에 일본을 찾는 한국인 관광객이 늘고 물가가 싸게 느껴진다고 해요.",
+          "내용 · so",
         ],
         [
           "It's important because {it affects the economy, travel, and shopping of both countries}.",
@@ -4423,14 +4332,9 @@ const REPLAY2 = {
           "직업",
         ],
         [
-          "I live alone in {an apartment in Seoul}, and in my free time I enjoy {playing online games and listening to music}.",
-          "저는 서울의 아파트에서 혼자 살고, 여가 시간에는 온라인 게임과 음악 듣기를 즐겨요.",
-          "집 · 취미",
-        ],
-        [
-          "I'm taking this test because {my company requires a certain grade}.",
-          "회사에서 요구하는 등급이 있어서 이 시험을 보게 됐어요.",
-          "시험 이유",
+          "I live alone in {an apartment in Seoul}, and in my free time I enjoy {playing online games and listening to music}, and I'm taking this test because {my company requires a certain grade}.",
+          "저는 서울의 아파트에서 혼자 살고, 여가 시간에는 온라인 게임과 음악 듣기를 즐겨요. 회사에서 요구하는 등급이 있어서 이 시험을 보게 됐어요.",
+          "집 · and",
         ],
         [
           "I'm a little nervous, but I studied a lot, so I'll do my best.",
@@ -4493,14 +4397,9 @@ const REPLAY2 = {
           "염색 안 하는 이유",
         ],
         [
-          "First, I sit on the sofa and wait for my turn. Then the stylist washes and cuts my hair.",
-          "먼저 소파에 앉아 차례를 기다리고, 그다음 미용사가 머리를 감기고 잘라요.",
-          "순서",
-        ],
-        [
-          "She is good at styling, so I'm usually satisfied with the result.",
-          "스타일링을 잘해서 보통 결과에 만족해요.",
-          "만족",
+          "First, I sit on the sofa and wait for my turn. Then the stylist washes and cuts my hair, and she is good at styling, so I'm usually satisfied with the result.",
+          "먼저 소파에 앉아 차례를 기다리고, 그다음 미용사가 머리를 감기고 잘라요. 스타일링을 잘해서 보통 결과에 만족해요.",
+          "순서 · and",
         ],
         [
           "After that, I check the style in the mirror and pay.",
@@ -4525,14 +4424,9 @@ const REPLAY2 = {
           "도입",
         ],
         [
-          "My regular salon near my old house was closed, so I went to another one.",
-          "옛집 근처 단골 미용실이 문을 닫아서 다른 곳에 갔어요.",
-          "상황",
-        ],
-        [
-          "I asked for {a two-block cut}, but the stylist wasn't good at it, and my hair looked terrible.",
-          "투블럭으로 해 달라고 했는데 미용사가 서툴러서 머리가 엉망이 됐어요.",
-          "문제",
+          "My regular salon near my old house was closed, so I went to another one, and then I asked for {a two-block cut}, but the stylist wasn't good at it, and my hair looked terrible.",
+          "옛집 근처 단골 미용실이 문을 닫아서 다른 곳에 갔어요. 투블럭으로 해 달라고 했는데 미용사가 서툴러서 머리가 엉망이 됐어요.",
+          "상황 · and then",
         ],
         [
           "I didn't want to pay, but it was my choice to go there, so I paid.",
@@ -4572,14 +4466,9 @@ const REPLAY2 = {
           "방 구성",
         ],
         [
-          "My favorite room is the living room, because it has {a big TV and my computer}.",
-          "제일 좋아하는 방은 거실이에요. 큰 TV와 컴퓨터가 있거든요.",
-          "좋아하는 방",
-        ],
-        [
-          "I play online games there, and since I live alone, I really enjoy my freedom.",
-          "거기서 온라인 게임을 하고, 혼자 살아서 자유를 정말 즐겨요.",
-          "이유",
+          "My favorite room is the living room, because it has {a big TV and my computer}, and I play online games there, and since I live alone, I really enjoy my freedom.",
+          "제일 좋아하는 방은 거실이에요. 큰 TV와 컴퓨터가 있거든요. 거기서 온라인 게임을 하고, 혼자 살아서 자유를 정말 즐겨요.",
+          "좋아하는 방 · and",
         ],
       ],
       cat: "survey",
@@ -4594,25 +4483,19 @@ const REPLAY2 = {
       ],
       s: [
         [
-          "Recently, I bought {a new audio system} because I love listening to music.",
-          "최근에 음악 듣는 걸 좋아해서 새 오디오 시스템을 샀어요.",
-          "바꾼 것 · 이유",
-        ],
-        [
-          "It was big, so I changed {the layout of my living room}.",
-          "크기가 커서 거실 배치를 바꿨어요.",
-          "변화",
+          "Recently, I bought {a new audio system} because I love listening to music, and it was big, so I changed {the layout of my living room}.",
+          "최근에 음악 듣는 걸 좋아해서 새 오디오 시스템을 샀어요. 크기가 커서 거실 배치를 바꿨어요.",
+          "바꾼 것 · and",
         ],
         [
           "The sound is great, and it makes me really happy and excited.",
           "소리가 훌륭하고 저를 정말 행복하고 신나게 해 줘요.",
           "좋은 점",
         ],
-        ["I'm very satisfied with it.", "아주 만족해요.", "만족"],
         [
-          "I think it was one of the best things I've ever bought.",
-          "제가 산 것 중 가장 잘한 것 중 하나라고 생각해요.",
-          "마무리",
+          "I'm very satisfied with it, and I think it was one of the best things I've ever bought.",
+          "아주 만족해요. 제가 산 것 중 가장 잘한 것 중 하나라고 생각해요.",
+          "만족 · and",
         ],
       ],
       cat: "survey",
@@ -4627,21 +4510,15 @@ const REPLAY2 = {
       ],
       s: [
         [
-          "I haven't had many big problems at home, but once {my TV stopped working}.",
-          "집에서 큰 문제는 많지 않았지만, 한 번은 TV가 멈춘 적이 있어요.",
-          "도입",
+          "I haven't had many big problems at home, but once {my TV stopped working}, so I checked {the power and the cable}, but it still didn't work.",
+          "집에서 큰 문제는 많지 않았지만, 한 번은 TV가 멈춘 적이 있어요. 전원과 케이블을 확인했지만 그래도 안 됐어요.",
+          "도입 · so",
         ],
         [
-          "I checked {the power and the cable}, but it still didn't work.",
-          "전원과 케이블을 확인했지만 그래도 안 됐어요.",
-          "시도",
+          "So I contacted the manufacturer's service center, and they fixed it, and now it works well.",
+          "그래서 제조사 서비스 센터에 연락했고 고쳐 줬어요. 지금은 잘 작동해요.",
+          "해결 · and",
         ],
-        [
-          "So I contacted the manufacturer's service center, and they fixed it.",
-          "그래서 제조사 서비스 센터에 연락했고 고쳐 줬어요.",
-          "해결",
-        ],
-        ["Now it works well.", "지금은 잘 작동해요.", "결과"],
         [
           "The only other problem is that my home feels a little empty, because I live alone.",
           "그 밖의 문제라면 혼자 살아서 집이 조금 허전하다는 거예요.",
@@ -4665,24 +4542,14 @@ const REPLAY2 = {
           "전체 모습",
         ],
         [
-          "There's a Starbucks near my house, and its interior is well maintained.",
-          "집 근처에 스타벅스가 있는데 인테리어가 잘 관리돼 있어요.",
-          "예시",
+          "There's a Starbucks near my house, and its interior is well maintained, and many people go there to {study, work, or chat with friends}.",
+          "집 근처에 스타벅스가 있는데 인테리어가 잘 관리돼 있어요. 많은 사람들이 공부하거나 일하거나 친구와 수다를 떨러 가요.",
+          "예시 · and",
         ],
         [
-          "Many people go there to {study, work, or chat with friends}.",
-          "많은 사람들이 공부하거나 일하거나 친구와 수다를 떨러 가요.",
-          "사람들",
-        ],
-        [
-          "Some cafes also hold community events like {meetings or small celebrations}.",
-          "어떤 카페는 모임이나 작은 축하 행사 같은 지역 행사도 열어요.",
-          "행사",
-        ],
-        [
-          "I'm not a big cafe person, but I like a quiet cafe where I can focus.",
-          "카페를 아주 좋아하진 않지만 집중할 수 있는 조용한 카페는 좋아해요.",
-          "마무리",
+          "Some cafes also hold community events like {meetings or small celebrations}, but I'm not a big cafe person, but I like a quiet cafe where I can focus.",
+          "어떤 카페는 모임이나 작은 축하 행사 같은 지역 행사도 열어요. 카페를 아주 좋아하진 않지만 집중할 수 있는 조용한 카페는 좋아해요.",
+          "행사 · but",
         ],
       ],
       cat: "survey",
@@ -4697,16 +4564,10 @@ const REPLAY2 = {
       ],
       s: [
         [
-          "The first time I remember going to a cafe was when {I was a high school student}.",
-          "제가 기억하는 첫 카페는 고등학생 때예요.",
-          "도입",
+          "The first time I remember going to a cafe was when {I was a high school student} because I couldn't focus on studying in my room at my old house, so I went to a small cafe near my house.",
+          "제가 기억하는 첫 카페는 고등학생 때예요. 옛집 제 방에서는 공부에 집중이 안 됐어요. 그래서 집 근처 작은 카페에 갔어요.",
+          "도입 · because · so",
         ],
-        [
-          "I couldn't focus on studying in my room at my old house.",
-          "옛집 제 방에서는 공부에 집중이 안 됐어요.",
-          "이유",
-        ],
-        ["So I went to a small cafe near my house.", "그래서 집 근처 작은 카페에 갔어요.", "행동"],
         [
           "It was quiet, and I could really focus on my studies.",
           "조용해서 공부에 정말 집중할 수 있었어요.",
@@ -4735,14 +4596,9 @@ const REPLAY2 = {
           "도입",
         ],
         [
-          "I had been {studying there with a friend}, and I left it on the table.",
-          "거기서 친구와 공부하다가 테이블에 두고 왔어요.",
-          "상황",
-        ],
-        [
-          "I didn't notice until I got home, and I felt very worried.",
-          "집에 와서야 알았고 아주 걱정됐어요.",
-          "깨달음",
+          "I had been {studying there with a friend}, and I left it on the table, and then I didn't notice until I got home, and I felt very worried.",
+          "거기서 친구와 공부하다가 테이블에 두고 왔어요. 집에 와서야 알았고 아주 걱정됐어요.",
+          "상황 · and then",
         ],
         [
           "I went back to the cafe right away, but the wallet couldn't be found.",
@@ -4809,14 +4665,9 @@ const REPLAY2 = {
           "도입 · 사과",
         ],
         [
-          "I dropped it when {I had a small car accident}, and now it won't turn on.",
-          "작은 교통사고가 났을 때 떨어뜨렸고, 지금은 켜지지 않아.",
-          "상황 · 상태",
-        ],
-        [
-          "I have three ideas. First, I can take it to a repair shop and pay for it.",
-          "해결책이 세 가지 있어. 첫째, 수리점에 가져가서 내가 비용을 낼게.",
-          "해결책 1",
+          "I dropped it when {I had a small car accident}, and now it won't turn on, so I have three ideas. First, I can take it to a repair shop and pay for it.",
+          "작은 교통사고가 났을 때 떨어뜨렸고, 지금은 켜지지 않아. 해결책이 세 가지 있어. 첫째, 수리점에 가져가서 내가 비용을 낼게.",
+          "상황 · so",
         ],
         [
           "Second, if it can't be fixed, I'll buy you the same model.",
@@ -4846,14 +4697,9 @@ const REPLAY2 = {
           "도입",
         ],
         [
-          "I had bought it {one year ago}, so it was still under warranty.",
-          "1년 전에 산 거라 아직 보증 기간이었어요.",
-          "배경",
-        ],
-        [
-          "I contacted the manufacturer's service center, and they sent a technician.",
-          "제조사 서비스 센터에 연락했고 기사님이 왔어요.",
-          "해결 요청",
+          "I had bought it {one year ago}, so it was still under warranty, and I contacted the manufacturer's service center, and they sent a technician.",
+          "1년 전에 산 거라 아직 보증 기간이었어요. 제조사 서비스 센터에 연락했고 기사님이 왔어요.",
+          "배경 · and",
         ],
         ["He repaired it, and now it works well.", "수리해 줬고 지금은 잘 작동해요.", "결과"],
         [
@@ -4889,11 +4735,10 @@ const REPLAY2 = {
           "차이 2",
         ],
         [
-          "So young people use it for social networking, while older people use it for information.",
-          "그래서 젊은 사람은 소셜 활동에, 나이 든 사람은 정보에 써요.",
-          "정리",
+          "So young people use it for social networking, while older people use it for information, and I think that's the main difference.",
+          "그래서 젊은 사람은 소셜 활동에, 나이 든 사람은 정보에 써요. 그게 가장 큰 차이라고 생각해요.",
+          "정리 · and",
         ],
-        ["I think that's the main difference.", "그게 가장 큰 차이라고 생각해요.", "마무리"],
       ],
       cat: "surprise",
     },
@@ -4962,14 +4807,9 @@ const REPLAY3 = {
           "직업",
         ],
         [
-          "I live alone in {an apartment in Seoul}, and I enjoy {playing online games and listening to music}.",
-          "저는 서울의 아파트에서 혼자 살고, 온라인 게임과 음악 듣기를 즐겨요.",
-          "집 · 취미",
-        ],
-        [
-          "I'm taking this test because {my company requires a certain grade}.",
-          "회사에서 요구하는 등급이 있어서 이 시험을 보게 됐어요.",
-          "시험 이유",
+          "I live alone in {an apartment in Seoul}, and I enjoy {playing online games and listening to music}, and I'm taking this test because {my company requires a certain grade}.",
+          "저는 서울의 아파트에서 혼자 살고, 온라인 게임과 음악 듣기를 즐겨요. 회사에서 요구하는 등급이 있어서 이 시험을 보게 됐어요.",
+          "집 · and",
         ],
         [
           "I'm a little nervous, but I studied hard, so I'll do my best.",
@@ -4989,14 +4829,9 @@ const REPLAY3 = {
       ],
       s: [
         [
-          "Korea has a very convenient public transportation system.",
-          "한국은 대중교통이 아주 편리해요.",
-          "도입",
-        ],
-        [
-          "People mostly use {the subway and buses}, and many also use {public bicycles and electric kickboards}.",
-          "사람들은 주로 지하철과 버스를 타고, 공공 자전거와 전동 킥보드도 많이 써요.",
-          "종류",
+          "Korea has a very convenient public transportation system, and people mostly use {the subway and buses}, and many also use {public bicycles and electric kickboards}.",
+          "한국은 대중교통이 아주 편리해요. 사람들은 주로 지하철과 버스를 타고, 공공 자전거와 전동 킥보드도 많이 써요.",
+          "도입 · and",
         ],
         [
           "The subway is {fast and cheap}, and it's easy to transfer to a bus.",
@@ -5004,14 +4839,9 @@ const REPLAY3 = {
           "지하철",
         ],
         [
-          "In big cities, many people don't drive because {parking is expensive and traffic is heavy}.",
-          "대도시에서는 주차비가 비싸고 교통이 막혀서 운전을 안 하는 사람이 많아요.",
-          "자가용",
-        ],
-        [
-          "Also, {ferries} are used to travel to islands like Jeju.",
-          "또 섬에 갈 때는 배도 이용해요.",
-          "그 밖에",
+          "In big cities, many people don't drive because {parking is expensive and traffic is heavy}, and also, {ferries} are used to travel to islands like Jeju.",
+          "대도시에서는 주차비가 비싸고 교통이 막혀서 운전을 안 하는 사람이 많아요. 또 섬에 갈 때는 배도 이용해요.",
+          "자가용 · and",
         ],
       ],
       cat: "surprise",
@@ -5025,21 +4855,15 @@ const REPLAY3 = {
         "이동할 때 어떤 교통수단을 쓰나요? 대중교통인가요, 운전인가요?",
       ],
       s: [
-        ["I usually take the subway to work.", "저는 보통 지하철로 출근해요.", "수단"],
         [
-          "I can't stand waiting, and the subway comes often.",
-          "저는 기다리는 걸 못 참는데, 지하철은 자주 와요.",
-          "이유 1",
+          "I usually take the subway to work because I can't stand waiting, and the subway comes often.",
+          "저는 보통 지하철로 출근해요. 저는 기다리는 걸 못 참는데, 지하철은 자주 와요.",
+          "수단 · because",
         ],
         [
-          "Korea's public transportation is well maintained, cheap, and comfortable.",
-          "한국 대중교통은 잘 관리되고 싸고 편해요.",
-          "이유 2",
-        ],
-        [
-          "I don't drive to work because {parking is difficult and traffic is heavy}.",
-          "주차가 어렵고 교통이 막혀서 운전해서 출근하진 않아요.",
-          "운전",
+          "Korea's public transportation is well maintained, cheap, and comfortable, and I don't drive to work because {parking is difficult and traffic is heavy}.",
+          "한국 대중교통은 잘 관리되고 싸고 편해요. 주차가 어렵고 교통이 막혀서 운전해서 출근하진 않아요.",
+          "이유 2 · and",
         ],
         ["So I prefer public transportation.", "그래서 대중교통을 선호해요.", "마무리"],
       ],
@@ -5060,24 +4884,14 @@ const REPLAY3 = {
           "도입",
         ],
         [
-          "One morning, {the train was so crowded} that I couldn't even move.",
-          "어느 날 아침 열차가 너무 붐벼서 움직일 수도 없었어요.",
-          "상황",
+          "One morning, {the train was so crowded} that I couldn't even move, so I had to stand for {thirty minutes}, and I felt very tired.",
+          "어느 날 아침 열차가 너무 붐벼서 움직일 수도 없었어요. 30분 동안 서 있어야 했고 너무 피곤했어요.",
+          "상황 · so",
         ],
         [
-          "I had to stand for {thirty minutes}, and I felt very tired.",
-          "30분 동안 서 있어야 했고 너무 피곤했어요.",
-          "결과",
-        ],
-        [
-          "Sometimes I get lucky and find a seat, and that makes my day.",
-          "가끔 운 좋게 자리를 찾으면 하루가 좋아져요.",
-          "좋은 점",
-        ],
-        [
-          "I wish the trains were less crowded at that time.",
-          "그 시간 열차가 덜 붐비면 좋겠어요.",
-          "바람",
+          "Sometimes I get lucky and find a seat, and that makes my day, but I wish the trains were less crowded at that time.",
+          "가끔 운 좋게 자리를 찾으면 하루가 좋아져요. 그 시간 열차가 덜 붐비면 좋겠어요.",
+          "좋은 점 · but",
         ],
       ],
       cat: "surprise",
@@ -5092,14 +4906,9 @@ const REPLAY3 = {
       ],
       s: [
         [
-          "I live alone in {an apartment on the 15th floor}.",
-          "저는 15층 아파트에서 혼자 살아요.",
-          "집 (층수는 하나로 고정)",
-        ],
-        [
-          "It has {one bedroom, a living room, a kitchen, a bathroom, and a small balcony}.",
-          "침실, 거실, 주방, 욕실, 작은 발코니가 있어요.",
-          "방 구성",
+          "I live alone in {an apartment on the 15th floor}, and it has {one bedroom, a living room, a kitchen, a bathroom, and a small balcony}.",
+          "저는 15층 아파트에서 혼자 살아요. 침실, 거실, 주방, 욕실, 작은 발코니가 있어요.",
+          "집 (층수는 하나로 고정) · and",
         ],
         [
           "My favorite room is the living room, because I have {a big TV, a computer, and an audio system}.",
@@ -5162,19 +4971,9 @@ const REPLAY3 = {
       ],
       s: [
         [
-          "When I was young, I lived in an apartment with my family.",
-          "어릴 때는 가족과 아파트에 살았어요.",
-          "도입",
-        ],
-        [
-          "It was bigger than my current home, with {four rooms and a big living room}.",
-          "지금 집보다 커서 방이 네 개에 큰 거실이 있었어요.",
-          "차이 1: 크기",
-        ],
-        [
-          "It also had {two bathrooms and a big TV}.",
-          "화장실도 두 개, 큰 TV도 있었어요.",
-          "차이 2: 시설",
+          "When I was young, I lived in an apartment with my family, and it was bigger than my current home, with {four rooms and a big living room}, and it also had {two bathrooms and a big TV}.",
+          "어릴 때는 가족과 아파트에 살았어요. 지금 집보다 커서 방이 네 개에 큰 거실이 있었어요. 화장실도 두 개, 큰 TV도 있었어요.",
+          "도입 · and · and",
         ],
         [
           "There was a small park near my old house, so I often walked there to refresh myself.",
@@ -5199,24 +4998,14 @@ const REPLAY3 = {
       ],
       s: [
         [
-          "My favorite place in Korea is {Jeju Island}.",
-          "제가 한국에서 가장 좋아하는 곳은 제주도예요.",
-          "도입",
+          "My favorite place in Korea is {Jeju Island}, and I went there {two years ago}, and it has beautiful nature and delicious food.",
+          "제가 한국에서 가장 좋아하는 곳은 제주도예요. 2년 전에 갔는데 아름다운 자연과 맛있는 음식이 있어요.",
+          "도입 · and",
         ],
         [
-          "I went there {two years ago}, and it has beautiful nature and delicious food.",
-          "2년 전에 갔는데 아름다운 자연과 맛있는 음식이 있어요.",
-          "이유",
-        ],
-        [
-          "I stayed at {a hotel in Seogwipo}, which was clean and comfortable.",
-          "서귀포의 호텔에 묵었는데 깨끗하고 편했어요.",
-          "숙소",
-        ],
-        [
-          "During the day, I {walked along the coast and visited well-known spots}.",
-          "낮에는 해안을 걷고 유명한 곳을 구경했어요.",
-          "한 일",
+          "I stayed at {a hotel in Seogwipo}, which was clean and comfortable, and then during the day, I {walked along the coast and visited well-known spots}.",
+          "서귀포의 호텔에 묵었는데 깨끗하고 편했어요. 낮에는 해안을 걷고 유명한 곳을 구경했어요.",
+          "숙소 · and then",
         ],
         [
           "It was a great choice, so I recommend Jeju Island to everyone.",
@@ -5236,19 +5025,9 @@ const REPLAY3 = {
       ],
       s: [
         [
-          "When I was young, I traveled to {Jeonju} with my family.",
-          "어릴 때 가족과 전주로 여행을 갔어요.",
-          "누구와 · 어디",
-        ],
-        [
-          "We stayed in {a hanok}, which is a traditional Korean house.",
-          "한옥이라는 전통 가옥에서 묵었어요.",
-          "숙소",
-        ],
-        [
-          "We tried {a cultural experience} and walked around the village.",
-          "문화 체험도 하고 마을을 걸어 다녔어요.",
-          "한 일",
+          "When I was young, I traveled to {Jeonju} with my family, and we stayed in {a hanok}, which is a traditional Korean house, and then we tried {a cultural experience} and walked around the village.",
+          "어릴 때 가족과 전주로 여행을 갔어요. 한옥이라는 전통 가옥에서 묵었어요. 문화 체험도 하고 마을을 걸어 다녔어요.",
+          "누구와 · and · and then",
         ],
         [
           "The most memorable thing was {Hanjeongsik}, a traditional Korean full-course meal.",
@@ -5273,24 +5052,14 @@ const REPLAY3 = {
       ],
       s: [
         [
-          "When I was a college student, I went to {Mt. Jiri} with {five college friends}.",
-          "대학생 때 대학 친구 다섯 명과 지리산에 갔어요.",
-          "도입",
+          "When I was a college student, I went to {Mt. Jiri} with {five college friends}, and we brought {a lot of food} and climbed the mountain together.",
+          "대학생 때 대학 친구 다섯 명과 지리산에 갔어요. 음식을 많이 챙겨서 함께 산을 올랐어요.",
+          "도입 · and",
         ],
         [
-          "We brought {a lot of food} and climbed the mountain together.",
-          "음식을 많이 챙겨서 함께 산을 올랐어요.",
-          "행동",
-        ],
-        [
-          "It was tiring, but we kept going and encouraged each other.",
-          "힘들었지만 서로 격려하며 계속 올라갔어요.",
-          "과정",
-        ],
-        [
-          "At the top, we watched the sunrise, and it was beautiful and fantastic.",
-          "정상에서 일출을 봤는데 아름답고 환상적이었어요.",
-          "절정",
+          "It was tiring, but we kept going and encouraged each other, and then at the top, we watched the sunrise, and it was beautiful and fantastic.",
+          "힘들었지만 서로 격려하며 계속 올라갔어요. 정상에서 일출을 봤는데 아름답고 환상적이었어요.",
+          "과정 · and then",
         ],
         [
           "It's my favorite memory of traveling in Korea.",
@@ -5385,24 +5154,14 @@ const REPLAY3 = {
           "도입",
         ],
         [
-          "We were on our way, but the traffic was so bad that we couldn't arrive in time.",
-          "이동 중이었는데 교통이 너무 막혀서 시간에 맞출 수 없었어요.",
-          "문제",
+          "We were on our way, but the traffic was so bad that we couldn't arrive in time, so we called the restaurant and asked to cancel.",
+          "이동 중이었는데 교통이 너무 막혀서 시간에 맞출 수 없었어요. 그래서 식당에 전화해 취소를 요청했어요.",
+          "문제 · so",
         ],
         [
-          "So we called the restaurant and asked to cancel.",
-          "그래서 식당에 전화해 취소를 요청했어요.",
-          "행동",
-        ],
-        [
-          "Luckily, the owner understood and accepted it, and we paid only {a 30% cancellation fee}.",
-          "다행히 사장님이 이해해 주셔서 취소 수수료만 냈어요.",
-          "결과",
-        ],
-        [
-          "We ate at another restaurant near our hotel, and I learned to leave earlier.",
-          "호텔 근처 다른 식당에서 먹었고, 더 일찍 출발해야 한다는 걸 배웠어요.",
-          "교훈",
+          "Luckily, the owner understood and accepted it, and we paid only {a 30% cancellation fee}, and then we ate at another restaurant near our hotel, and I learned to leave earlier.",
+          "다행히 사장님이 이해해 주셔서 취소 수수료만 냈어요. 호텔 근처 다른 식당에서 먹었고, 더 일찍 출발해야 한다는 걸 배웠어요.",
+          "결과 · and then",
         ],
       ],
       cat: "rp",
@@ -5422,24 +5181,14 @@ const REPLAY3 = {
           "전체",
         ],
         [
-          "There are big franchises, and there are also small local cafes.",
-          "큰 프랜차이즈도 있고 작은 동네 카페도 있어요.",
-          "종류",
+          "There are big franchises, and there are also small local cafes, and many people go there to {study, work, or meet friends}.",
+          "큰 프랜차이즈도 있고 작은 동네 카페도 있어요. 많은 사람이 공부하거나 일하거나 친구를 만나러 가요.",
+          "종류 · and",
         ],
         [
-          "Many people go there to {study, work, or meet friends}.",
-          "많은 사람이 공부하거나 일하거나 친구를 만나러 가요.",
-          "사람들",
-        ],
-        [
-          "I often go to {a small cafe near my house}, which is five minutes away on foot.",
-          "저는 집에서 걸어서 5분 거리인 작은 카페에 자주 가요.",
-          "내가 가는 곳",
-        ],
-        [
-          "I love it because it's quiet and the coffee is cheap.",
-          "조용하고 커피가 싸서 좋아해요.",
-          "마무리",
+          "I often go to {a small cafe near my house}, which is five minutes away on foot, so I love it because it's quiet and the coffee is cheap.",
+          "저는 집에서 걸어서 5분 거리인 작은 카페에 자주 가요. 조용하고 커피가 싸서 좋아해요.",
+          "내가 가는 곳 · so",
         ],
       ],
       cat: "surprise",
@@ -5512,14 +5261,9 @@ const REPLAY4 = {
           "직업",
         ],
         [
-          "I live alone in {an apartment in Seoul}, and I enjoy {playing online games and listening to music}.",
-          "저는 서울의 아파트에서 혼자 살고, 온라인 게임과 음악 듣기를 즐겨요.",
-          "집 · 취미",
-        ],
-        [
-          "I'm taking this test because {my company requires a certain grade}.",
-          "회사에서 요구하는 등급이 있어서 이 시험을 보게 됐어요.",
-          "시험 이유",
+          "I live alone in {an apartment in Seoul}, and I enjoy {playing online games and listening to music}, and I'm taking this test because {my company requires a certain grade}.",
+          "저는 서울의 아파트에서 혼자 살고, 온라인 게임과 음악 듣기를 즐겨요. 회사에서 요구하는 등급이 있어서 이 시험을 보게 됐어요.",
+          "집 · and",
         ],
         [
           "I'm a little nervous, but I studied hard, so I'll do my best.",
@@ -5543,24 +5287,14 @@ const REPLAY4 = {
           "집 · 전망",
         ],
         [
-          "From the outside, it looks like {a tall, modern apartment building}.",
-          "겉에서 보면 높고 현대적인 아파트 건물이에요.",
-          "겉모습",
+          "From the outside, it looks like {a tall, modern apartment building}, and inside, it's modern, cozy, and simple, and it has {one bedroom, a living room, a bathroom, and a balcony}.",
+          "겉에서 보면 높고 현대적인 아파트 건물이에요. 안은 현대적이고 아늑하고 단순하며 침실, 거실, 욕실, 발코니가 있어요.",
+          "겉모습 · and",
         ],
         [
-          "Inside, it's modern, cozy, and simple, and it has {one bedroom, a living room, a bathroom, and a balcony}.",
-          "안은 현대적이고 아늑하고 단순하며 침실, 거실, 욕실, 발코니가 있어요.",
-          "내부 · 방 수",
-        ],
-        [
-          "My favorite room is the living room, because I have {a big TV and a computer} there.",
-          "제일 좋아하는 방은 거실이에요. 큰 TV와 컴퓨터가 있거든요.",
-          "좋아하는 방 · 이유",
-        ],
-        [
-          "I spend most of my free time playing games there, so it's a great place for me.",
-          "여가 시간 대부분을 거기서 게임을 하며 보내서 저한테 아주 좋은 곳이에요.",
-          "마무리",
+          "My favorite room is the living room, because I have {a big TV and a computer} there, and I spend most of my free time playing games there, so it's a great place for me.",
+          "제일 좋아하는 방은 거실이에요. 큰 TV와 컴퓨터가 있거든요. 여가 시간 대부분을 거기서 게임을 하며 보내서 저한테 아주 좋은 곳이에요.",
+          "좋아하는 방 · and",
         ],
       ],
     },
@@ -5584,14 +5318,9 @@ const REPLAY4 = {
           "평일 저녁",
         ],
         [
-          "On weekends, my routine isn't fixed, because it depends on my schedule and how I feel.",
-          "주말은 일정과 기분에 따라 달라서 정해진 일과가 없어요.",
-          "주말 특징",
-        ],
-        [
-          "Usually, I sleep in, play online games, and meet {my friends} in the evening.",
-          "보통 늦잠을 자고 온라인 게임을 하고 저녁에는 친구를 만나요.",
-          "주말 활동",
+          "On weekends, my routine isn't fixed, because it depends on my schedule and how I feel, but usually, I sleep in, play online games, and meet {my friends} in the evening.",
+          "주말은 일정과 기분에 따라 달라서 정해진 일과가 없어요. 보통 늦잠을 자고 온라인 게임을 하고 저녁에는 친구를 만나요.",
+          "주말 특징 · but",
         ],
         ["That's what my days at home look like.", "이게 제가 집에서 보내는 하루예요.", "마무리"],
       ],
@@ -5606,14 +5335,9 @@ const REPLAY4 = {
       ],
       s: [
         [
-          "When I was young, I lived in an apartment with my family.",
-          "어릴 때는 가족과 아파트에 살았어요.",
-          "도입",
-        ],
-        [
-          "It was bigger than my current home, with {five rooms and a big living room}.",
-          "지금 집보다 커서 방이 다섯 개에 큰 거실이 있었어요.",
-          "차이 1: 크기",
+          "When I was young, I lived in an apartment with my family, and it was bigger than my current home, with {five rooms and a big living room}.",
+          "어릴 때는 가족과 아파트에 살았어요. 지금 집보다 커서 방이 다섯 개에 큰 거실이 있었어요.",
+          "도입 · and",
         ],
         [
           "My room is still there, but nobody uses it now.",
@@ -5621,14 +5345,9 @@ const REPLAY4 = {
           "현재 상태",
         ],
         [
-          "There was a park near my old house, so I often went there to refresh myself.",
-          "옛집 근처에 공원이 있어서 기분 전환하러 자주 갔어요.",
-          "주변",
-        ],
-        [
-          "I miss that house because it holds so many good memories.",
-          "좋은 추억이 많아서 그 집이 그리워요.",
-          "마무리",
+          "There was a park near my old house, so I often went there to refresh myself, and I miss that house because it holds so many good memories.",
+          "옛집 근처에 공원이 있어서 기분 전환하러 자주 갔어요. 좋은 추억이 많아서 그 집이 그리워요.",
+          "주변 · and",
         ],
       ],
     },
@@ -5647,14 +5366,9 @@ const REPLAY4 = {
           "도입",
         ],
         [
-          "What I like most is that it's portable: when it's folded, it fits easily in my pocket.",
-          "가장 좋은 점은 휴대하기 편한 거예요. 접으면 주머니에 쏙 들어가요.",
-          "가장 좋은 점",
-        ],
-        [
-          "I also use it for {watching videos while running on the treadmill}.",
-          "러닝머신에서 달리면서 영상을 보는 데도 써요.",
-          "쓰임 1",
+          "What I like most is that it's portable: when it's folded, it fits easily in my pocket, and I also use it for {watching videos while running on the treadmill}.",
+          "가장 좋은 점은 휴대하기 편한 거예요. 접으면 주머니에 쏙 들어가요. 러닝머신에서 달리면서 영상을 보는 데도 써요.",
+          "가장 좋은 점 · and",
         ],
         [
           "When it's unfolded, the screen is big, so I can watch movies and check my photos easily.",
@@ -5674,16 +5388,10 @@ const REPLAY4 = {
       ],
       s: [
         [
-          "My first phone wasn't a smartphone; it was a basic cell phone.",
-          "제 첫 휴대폰은 스마트폰이 아니라 일반 휴대폰이었어요.",
-          "도입",
+          "My first phone wasn't a smartphone; it was a basic cell phone, and it was very small and had {a simple, nice design}, and it could only make calls and take pictures.",
+          "제 첫 휴대폰은 스마트폰이 아니라 일반 휴대폰이었어요. 아주 작고 단순하고 예쁜 디자인이었어요. 전화와 사진 촬영만 됐어요.",
+          "도입 · and · and",
         ],
-        [
-          "It was very small and had {a simple, nice design}.",
-          "아주 작고 단순하고 예쁜 디자인이었어요.",
-          "외관",
-        ],
-        ["It could only make calls and take pictures.", "전화와 사진 촬영만 됐어요.", "기능"],
         [
           "It couldn't connect to the internet, YouTube, or social media.",
           "인터넷, 유튜브, SNS는 안 됐어요.",
@@ -5706,24 +5414,14 @@ const REPLAY4 = {
       ],
       s: [
         [
-          "I haven't had many big problems with my phone, but one time {the screen cracked}.",
-          "큰 문제는 많지 않았지만, 한 번은 화면이 깨졌어요.",
-          "도입",
+          "I haven't had many big problems with my phone, but one time {the screen cracked} because I dropped it on {the street} on my way to work.",
+          "큰 문제는 많지 않았지만, 한 번은 화면이 깨졌어요. 출근길에 길에서 떨어뜨렸어요.",
+          "도입 · because",
         ],
         [
-          "I dropped it on {the street} on my way to work.",
-          "출근길에 길에서 떨어뜨렸어요.",
-          "상황",
-        ],
-        [
-          "I was upset, so I searched for a service center and went there after work.",
-          "속상해서 서비스센터를 찾아 퇴근 후에 갔어요.",
-          "행동",
-        ],
-        [
-          "They replaced the screen in {about an hour}, and it cost {about 150,000 won}.",
-          "한 시간쯤 걸려 화면을 교체해 줬고 15만 원쯤 들었어요.",
-          "결과",
+          "I was upset, so I searched for a service center and went there after work, and then they replaced the screen in {about an hour}, and it cost {about 150,000 won}.",
+          "속상해서 서비스센터를 찾아 퇴근 후에 갔어요. 한 시간쯤 걸려 화면을 교체해 줬고 15만 원쯤 들었어요.",
+          "행동 · and then",
         ],
         [
           "Since then, I use a case and a screen protector.",
@@ -5774,24 +5472,14 @@ const REPLAY4 = {
       ],
       s: [
         [
-          "When I was a high school student, I needed to focus on studying for the college entrance exam.",
-          "고등학생 때 대입 시험 공부에 집중해야 했어요.",
-          "계기 1",
+          "When I was a high school student, I needed to focus on studying for the college entrance exam, and I couldn't study in a noisy place, so I started listening to music to focus.",
+          "고등학생 때 대입 시험 공부에 집중해야 했어요. 시끄러운 곳에서는 공부를 못 해서 집중하려고 음악을 듣기 시작했어요.",
+          "계기 1 · and",
         ],
         [
-          "I couldn't study in a noisy place, so I started listening to music to focus.",
-          "시끄러운 곳에서는 공부를 못 해서 집중하려고 음악을 듣기 시작했어요.",
-          "계기 2",
-        ],
-        [
-          "At first, I listened to hip-hop because it's powerful and has strong messages.",
-          "처음엔 힙합이 강렬하고 메시지가 있어서 들었어요.",
-          "처음 취향",
-        ],
-        [
-          "But it distracted me, so I changed to classical music and jazz.",
-          "하지만 집중이 안 돼서 클래식과 재즈로 바꿨어요.",
-          "변화",
+          "At first, I listened to hip-hop because it's powerful and has strong messages, but it distracted me, so I changed to classical music and jazz.",
+          "처음엔 힙합이 강렬하고 메시지가 있어서 들었어요. 하지만 집중이 안 돼서 클래식과 재즈로 바꿨어요.",
+          "처음 취향 · but",
         ],
         [
           "Now my taste is calmer, and I listen to jazz when I want to relax.",
@@ -5825,14 +5513,9 @@ const REPLAY4 = {
           "누구와",
         ],
         [
-          "The performance was fantastic, and the sound system was perfect.",
-          "공연이 환상적이었고 음향이 완벽했어요.",
-          "특별한 점",
-        ],
-        [
-          "I can't forget it, and I want to go to their concert again.",
-          "잊을 수 없어서 다시 가고 싶어요.",
-          "마무리",
+          "The performance was fantastic, and the sound system was perfect, so I can't forget it, and I want to go to their concert again.",
+          "공연이 환상적이었고 음향이 완벽했어요. 잊을 수 없어서 다시 가고 싶어요.",
+          "특별한 점 · so",
         ],
       ],
     },
@@ -5924,14 +5607,9 @@ const REPLAY4 = {
           "문제",
         ],
         [
-          "I couldn't travel, so I stayed at home and rested.",
-          "여행을 못 해서 집에서 쉬었어요.",
-          "행동",
-        ],
-        [
-          "I called my relatives and apologized, and they were very understanding.",
-          "친척들에게 전화해 사과했고 모두 이해해 주셨어요.",
-          "해결",
+          "I couldn't travel, so I stayed at home and rested, and then I called my relatives and apologized, and they were very understanding.",
+          "여행을 못 해서 집에서 쉬었어요. 친척들에게 전화해 사과했고 모두 이해해 주셨어요.",
+          "행동 · and then",
         ],
         [
           "I learned that plans can change, so it's good to be flexible.",
@@ -5965,14 +5643,9 @@ const REPLAY4 = {
           "차이점",
         ],
         [
-          "In {Seoul Forest}, you can walk for hours, but in {the small park}, you can just sit and relax.",
-          "서울숲에서는 몇 시간씩 걸을 수 있고, 작은 공원에서는 그냥 앉아 쉴 수 있어요.",
-          "차이점 2",
-        ],
-        [
-          "I like {the small park} better because it holds good memories for me.",
-          "좋은 추억이 있어서 작은 공원이 더 좋아요.",
-          "선택 · 이유",
+          "In {Seoul Forest}, you can walk for hours, but in {the small park}, you can just sit and relax, so I like {the small park} better because it holds good memories for me.",
+          "서울숲에서는 몇 시간씩 걸을 수 있고, 작은 공원에서는 그냥 앉아 쉴 수 있어요. 좋은 추억이 있어서 작은 공원이 더 좋아요.",
+          "차이점 2 · so",
         ],
       ],
     },
@@ -5986,24 +5659,14 @@ const REPLAY4 = {
       ],
       s: [
         [
-          "The biggest problem with public parks in my town is the lack of parking.",
-          "우리 동네 공원의 가장 큰 문제는 주차 공간이 부족하다는 거예요.",
-          "문제",
+          "The biggest problem with public parks in my town is the lack of parking because many people drive, and there are too many cars for the small parking area.",
+          "우리 동네 공원의 가장 큰 문제는 주차 공간이 부족하다는 거예요. 많은 사람이 운전해서 좁은 주차장에 비해 차가 너무 많아요.",
+          "문제 · because",
         ],
         [
-          "Many people drive, and there are too many cars for the small parking area.",
-          "많은 사람이 운전해서 좁은 주차장에 비해 차가 너무 많아요.",
-          "원인",
-        ],
-        [
-          "Seoul is crowded, so it's hard to build new parking lots.",
-          "서울은 복잡해서 새 주차장을 짓기 어려워요.",
-          "제약",
-        ],
-        [
-          "One solution is to build a parking building near the park.",
-          "한 가지 해결책은 공원 근처에 주차 건물을 짓는 거예요.",
-          "해결 1",
+          "Seoul is crowded, so it's hard to build new parking lots, so one solution is to build a parking building near the park.",
+          "서울은 복잡해서 새 주차장을 짓기 어려워요. 한 가지 해결책은 공원 근처에 주차 건물을 짓는 거예요.",
+          "제약 · so",
         ],
         [
           "Another is to encourage people to use public transportation, so there are fewer cars.",
@@ -6040,14 +5703,9 @@ const REPLAY5 = {
           "직업",
         ],
         [
-          "I live alone in {an apartment on the 15th floor}, and I enjoy {playing games and taking landscape photos}.",
-          "저는 15층 아파트에 혼자 살고, 게임과 풍경 사진 찍기를 즐겨요.",
-          "집 · 취미",
-        ],
-        [
-          "I'm taking this test because {my company requires a certain grade}.",
-          "회사에서 요구하는 등급이 있어서 이 시험을 보게 됐어요.",
-          "시험 이유",
+          "I live alone in {an apartment on the 15th floor}, and I enjoy {playing games and taking landscape photos}, and I'm taking this test because {my company requires a certain grade}.",
+          "저는 15층 아파트에 혼자 살고, 게임과 풍경 사진 찍기를 즐겨요. 회사에서 요구하는 등급이 있어서 이 시험을 보게 됐어요.",
+          "집 · and",
         ],
         [
           "This is my first OPIc, so I'm a little nervous, but I'll do my best.",
@@ -6072,24 +5730,14 @@ const REPLAY5 = {
           "집 · 전망",
         ],
         [
-          "From the outside, it looks like {a tall, modern apartment building}.",
-          "겉에서 보면 높고 현대적인 아파트 건물이에요.",
-          "겉모습",
+          "From the outside, it looks like {a tall, modern apartment building}, and inside, it's modern, cozy, and simple, and it has {one bedroom, a living room, a bathroom, and a balcony}.",
+          "겉에서 보면 높고 현대적인 아파트 건물이에요. 안은 현대적이고 아늑하고 단순하며 침실, 거실, 욕실, 발코니가 있어요.",
+          "겉모습 · and",
         ],
         [
-          "Inside, it's modern, cozy, and simple, and it has {one bedroom, a living room, a bathroom, and a balcony}.",
-          "안은 현대적이고 아늑하고 단순하며 침실, 거실, 욕실, 발코니가 있어요.",
-          "내부 · 방 수",
-        ],
-        [
-          "My favorite room is the living room, because I have {a big TV and a computer} there.",
-          "제일 좋아하는 방은 거실이에요. 큰 TV와 컴퓨터가 있거든요.",
-          "좋아하는 방 · 이유",
-        ],
-        [
-          "I spend most of my free time playing games there, so it's a great place for me.",
-          "여가 시간 대부분을 거기서 게임을 하며 보내서 저한테 아주 좋은 곳이에요.",
-          "마무리",
+          "My favorite room is the living room, because I have {a big TV and a computer} there, and I spend most of my free time playing games there, so it's a great place for me.",
+          "제일 좋아하는 방은 거실이에요. 큰 TV와 컴퓨터가 있거든요. 여가 시간 대부분을 거기서 게임을 하며 보내서 저한테 아주 좋은 곳이에요.",
+          "좋아하는 방 · and",
         ],
       ],
       cat: "survey",
@@ -6104,24 +5752,14 @@ const REPLAY5 = {
       ],
       s: [
         [
-          "I live alone, so I spend most of my time at home by myself.",
-          "혼자 살아서 집에서는 대부분 혼자 시간을 보내요.",
-          "누구와",
+          "I live alone, so I spend most of my time at home by myself, and after work, I usually play online games in my living room, such as {Cyberpunk}.",
+          "혼자 살아서 집에서는 대부분 혼자 시간을 보내요. 퇴근 후에는 보통 거실에서 사이버펑크 같은 온라인 게임을 해요.",
+          "누구와 · and",
         ],
         [
-          "After work, I usually play online games in my living room, such as {Cyberpunk}.",
-          "퇴근 후에는 보통 거실에서 사이버펑크 같은 온라인 게임을 해요.",
-          "활동 1",
-        ],
-        [
-          "On weekends, I also watch movies and sometimes edit the photos I took.",
-          "주말에는 영화를 보거나 찍은 사진을 편집하기도 해요.",
-          "활동 2",
-        ],
-        [
-          "Sometimes I feel lonely, so I hope to meet a girlfriend and live with her someday.",
-          "가끔 외로워서 언젠가 여자친구를 만나 함께 살고 싶어요.",
-          "바람",
+          "On weekends, I also watch movies and sometimes edit the photos I took, and sometimes I feel lonely, so I hope to meet a girlfriend and live with her someday.",
+          "주말에는 영화를 보거나 찍은 사진을 편집하기도 해요. 가끔 외로워서 언젠가 여자친구를 만나 함께 살고 싶어요.",
+          "활동 2 · and",
         ],
         [
           "That's why I want to share my time at home with someone special.",
@@ -6141,14 +5779,9 @@ const REPLAY5 = {
       ],
       s: [
         [
-          "When I was young, I lived in an apartment with my family.",
-          "어릴 때는 가족과 아파트에 살았어요.",
-          "도입",
-        ],
-        [
-          "It was bigger than my current home, with {five rooms and a big living room}.",
-          "지금 집보다 커서 방이 다섯 개에 큰 거실이 있었어요.",
-          "차이 1: 크기",
+          "When I was young, I lived in an apartment with my family, and it was bigger than my current home, with {five rooms and a big living room}.",
+          "어릴 때는 가족과 아파트에 살았어요. 지금 집보다 커서 방이 다섯 개에 큰 거실이 있었어요.",
+          "도입 · and",
         ],
         [
           "My room is still there, but nobody uses it now.",
@@ -6156,14 +5789,9 @@ const REPLAY5 = {
           "현재 상태",
         ],
         [
-          "There was a park near my old house, so I often went there to refresh myself.",
-          "옛집 근처에 공원이 있어서 기분 전환하러 자주 갔어요.",
-          "주변",
-        ],
-        [
-          "I miss that house because it holds so many good memories.",
-          "좋은 추억이 많아서 그 집이 그리워요.",
-          "마무리",
+          "There was a park near my old house, so I often went there to refresh myself, and I miss that house because it holds so many good memories.",
+          "옛집 근처에 공원이 있어서 기분 전환하러 자주 갔어요. 좋은 추억이 많아서 그 집이 그리워요.",
+          "주변 · and",
         ],
       ],
       cat: "survey",
@@ -6188,14 +5816,9 @@ const REPLAY5 = {
           "가장 좋은 점",
         ],
         [
-          "For example, I study machine learning on it while I'm walking on the treadmill, and I watch movies.",
-          "예를 들어 러닝머신에서 걸으며 머신러닝을 공부하고 영화도 봐요.",
-          "쓰임 1",
-        ],
-        [
-          "The camera is also great, so I take landscape photos, which is my new hobby.",
-          "카메라도 좋아서 풍경 사진을 찍는데, 요즘 새로 생긴 취미예요.",
-          "쓰임 2",
+          "For example, I study machine learning on it while I'm walking on the treadmill, and I watch movies, and the camera is also great, so I take landscape photos, which is my new hobby.",
+          "예를 들어 러닝머신에서 걸으며 머신러닝을 공부하고 영화도 봐요. 카메라도 좋아서 풍경 사진을 찍는데, 요즘 새로 생긴 취미예요.",
+          "쓰임 1 · and",
         ],
         [
           "That's why I'm really satisfied with my phone.",
@@ -6215,16 +5838,10 @@ const REPLAY5 = {
       ],
       s: [
         [
-          "My first phone wasn't a smartphone; it was a basic cell phone.",
-          "제 첫 휴대폰은 스마트폰이 아니라 일반 휴대폰이었어요.",
-          "도입",
+          "My first phone wasn't a smartphone; it was a basic cell phone, and it was very small and had {a simple, nice design}, and it could only make calls and take pictures.",
+          "제 첫 휴대폰은 스마트폰이 아니라 일반 휴대폰이었어요. 아주 작고 단순하고 예쁜 디자인이었어요. 전화와 사진 촬영만 됐어요.",
+          "도입 · and · and",
         ],
-        [
-          "It was very small and had {a simple, nice design}.",
-          "아주 작고 단순하고 예쁜 디자인이었어요.",
-          "외관",
-        ],
-        ["It could only make calls and take pictures.", "전화와 사진 촬영만 됐어요.", "기능"],
         [
           "It couldn't connect to the internet, YouTube, or social media.",
           "인터넷, 유튜브, SNS는 안 됐어요.",
@@ -6253,14 +5870,9 @@ const REPLAY5 = {
           "상황",
         ],
         [
-          "I couldn't use it properly, so I called the service center of the manufacturer.",
-          "제대로 쓸 수 없어서 제조사 서비스센터에 전화했어요.",
-          "행동",
-        ],
-        [
-          "They picked up my phone, fixed it, and sent it back to my home.",
-          "휴대폰을 가져가 수리해서 집으로 보내줬어요.",
-          "결과 1",
+          "I couldn't use it properly, so I called the service center of the manufacturer, and then they picked up my phone, fixed it, and sent it back to my home.",
+          "제대로 쓸 수 없어서 제조사 서비스센터에 전화했어요. 휴대폰을 가져가 수리해서 집으로 보내줬어요.",
+          "행동 · and then",
         ],
         [
           "Luckily, it was still under warranty, so I didn't have to pay much.",
@@ -6285,24 +5897,14 @@ const REPLAY5 = {
       ],
       s: [
         [
-          "I love listening to music, and these days I'm really into a rock band called {Silica Gel}.",
-          "음악 듣는 걸 좋아하고, 요즘은 실리카겔이라는 록밴드에 푹 빠져 있어요.",
-          "도입",
+          "I love listening to music, and these days I'm really into a rock band called {Silica Gel} because their music is energetic and fun, and it makes me feel better when I'm tired.",
+          "음악 듣는 걸 좋아하고, 요즘은 실리카겔이라는 록밴드에 푹 빠져 있어요. 음악이 에너지 넘치고 재밌어서 피곤할 때 기분이 좋아져요.",
+          "도입 · because",
         ],
         [
-          "Their music is energetic and fun, and it makes me feel better when I'm tired.",
-          "음악이 에너지 넘치고 재밌어서 피곤할 때 기분이 좋아져요.",
-          "이유",
-        ],
-        [
-          "I listen to their songs on my way to work and while I play games.",
-          "출근길이나 게임할 때 그 노래를 들어요.",
-          "언제",
-        ],
-        [
-          "I'm a big fan of them, and I want to listen to more of their albums.",
-          "열렬한 팬이고 앨범을 더 들어보고 싶어요.",
-          "팬심",
+          "I listen to their songs on my way to work and while I play games, and I'm a big fan of them, and I want to listen to more of their albums.",
+          "출근길이나 게임할 때 그 노래를 들어요. 열렬한 팬이고 앨범을 더 들어보고 싶어요.",
+          "언제 · and",
         ],
         [
           "That's why Silica Gel is my favorite band.",
@@ -6322,24 +5924,14 @@ const REPLAY5 = {
       ],
       s: [
         [
-          "When I was a high school student, I needed to focus on studying for the college entrance exam.",
-          "고등학생 때 대입 시험 공부에 집중해야 했어요.",
-          "계기 1",
+          "When I was a high school student, I needed to focus on studying for the college entrance exam, and I couldn't study in a noisy place, so I started listening to music to focus.",
+          "고등학생 때 대입 시험 공부에 집중해야 했어요. 시끄러운 곳에서는 공부를 못 해서 집중하려고 음악을 듣기 시작했어요.",
+          "계기 1 · and",
         ],
         [
-          "I couldn't study in a noisy place, so I started listening to music to focus.",
-          "시끄러운 곳에서는 공부를 못 해서 집중하려고 음악을 듣기 시작했어요.",
-          "계기 2",
-        ],
-        [
-          "At first, I listened to hip-hop because it's powerful and has strong messages.",
-          "처음엔 힙합이 강렬하고 메시지가 있어서 들었어요.",
-          "처음 취향",
-        ],
-        [
-          "But it distracted me, so I changed to classical music and jazz.",
-          "하지만 집중이 안 돼서 클래식과 재즈로 바꿨어요.",
-          "변화",
+          "At first, I listened to hip-hop because it's powerful and has strong messages, but it distracted me, so I changed to classical music and jazz.",
+          "처음엔 힙합이 강렬하고 메시지가 있어서 들었어요. 하지만 집중이 안 돼서 클래식과 재즈로 바꿨어요.",
+          "처음 취향 · but",
         ],
         [
           "Now my taste is calmer, and I listen to jazz when I want to relax.",
@@ -6359,14 +5951,9 @@ const REPLAY5 = {
       ],
       s: [
         [
-          "About {one year ago}, I went to a concert of {Silica Gel}, a band I really like.",
-          "약 1년 전 정말 좋아하는 실리카겔의 콘서트에 갔어요.",
-          "언제 · 누구",
-        ],
-        [
-          "I went alone, because my friends' schedules didn't match mine.",
-          "친구들과 일정이 맞지 않아 혼자 갔어요.",
-          "누구와",
+          "About {one year ago}, I went to a concert of {Silica Gel}, a band I really like, and I went alone, because my friends' schedules didn't match mine.",
+          "약 1년 전 정말 좋아하는 실리카겔의 콘서트에 갔어요. 친구들과 일정이 맞지 않아 혼자 갔어요.",
+          "언제 · and",
         ],
         [
           "The concert hall was very big and the sound system was great.",
@@ -6374,14 +5961,9 @@ const REPLAY5 = {
           "어디서 · 특별한 점",
         ],
         [
-          "The performance was so energetic that I sang along and jumped with the crowd.",
-          "공연이 너무 에너지 넘쳐서 떼창하고 관객들과 뛰었어요.",
-          "특별한 점",
-        ],
-        [
-          "It was a great experience, and I want to go again.",
-          "정말 좋은 경험이었고 또 가고 싶어요.",
-          "마무리",
+          "The performance was so energetic that I sang along and jumped with the crowd, so it was a great experience, and I want to go again.",
+          "공연이 너무 에너지 넘쳐서 떼창하고 관객들과 뛰었어요. 정말 좋은 경험이었고 또 가고 싶어요.",
+          "특별한 점 · so",
         ],
       ],
       cat: "survey",
@@ -6476,14 +6058,9 @@ const REPLAY5 = {
           "문제",
         ],
         [
-          "I couldn't travel, so I stayed at home and rested.",
-          "여행을 못 해서 집에서 쉬었어요.",
-          "행동",
-        ],
-        [
-          "I called my relatives and apologized, and they were very understanding.",
-          "친척들에게 전화해 사과했고 모두 이해해 주셨어요.",
-          "해결",
+          "I couldn't travel, so I stayed at home and rested, and then I called my relatives and apologized, and they were very understanding.",
+          "여행을 못 해서 집에서 쉬었어요. 친척들에게 전화해 사과했고 모두 이해해 주셨어요.",
+          "행동 · and then",
         ],
         [
           "I learned that plans can change, so it's good to be flexible.",
@@ -6518,14 +6095,9 @@ const REPLAY5 = {
           "차이점",
         ],
         [
-          "I go to the small park for exercise, and I visit the big park to take photos.",
-          "운동은 작은 공원에서 하고, 사진은 큰 공원에서 찍어요.",
-          "차이점 2",
-        ],
-        [
-          "I like the small park better, because I can go there anytime to refresh and lose weight.",
-          "언제든 가서 기분 전환하고 살도 뺄 수 있어서 작은 공원이 더 좋아요.",
-          "선택 · 이유",
+          "I go to the small park for exercise, and I visit the big park to take photos, so I like the small park better, because I can go there anytime to refresh and lose weight.",
+          "운동은 작은 공원에서 하고, 사진은 큰 공원에서 찍어요. 언제든 가서 기분 전환하고 살도 뺄 수 있어서 작은 공원이 더 좋아요.",
+          "차이점 2 · so",
         ],
       ],
       cat: "surprise",
@@ -6540,24 +6112,14 @@ const REPLAY5 = {
       ],
       s: [
         [
-          "The biggest problem with public parks in my town is the lack of parking.",
-          "우리 동네 공원의 가장 큰 문제는 주차 공간이 부족하다는 거예요.",
-          "문제",
+          "The biggest problem with public parks in my town is the lack of parking because many people drive, and there are too many cars for the small parking area.",
+          "우리 동네 공원의 가장 큰 문제는 주차 공간이 부족하다는 거예요. 많은 사람이 운전해서 좁은 주차장에 비해 차가 너무 많아요.",
+          "문제 · because",
         ],
         [
-          "Many people drive, and there are too many cars for the small parking area.",
-          "많은 사람이 운전해서 좁은 주차장에 비해 차가 너무 많아요.",
-          "원인",
-        ],
-        [
-          "Seoul is crowded, so it's hard to build new parking lots.",
-          "서울은 복잡해서 새 주차장을 짓기 어려워요.",
-          "제약",
-        ],
-        [
-          "One solution is to build a parking building near the park.",
-          "한 가지 해결책은 공원 근처에 주차 건물을 짓는 거예요.",
-          "해결 1",
+          "Seoul is crowded, so it's hard to build new parking lots, so one solution is to build a parking building near the park.",
+          "서울은 복잡해서 새 주차장을 짓기 어려워요. 한 가지 해결책은 공원 근처에 주차 건물을 짓는 거예요.",
+          "제약 · so",
         ],
         [
           "Another is to encourage people to use public transportation, so there are fewer cars.",
@@ -6590,14 +6152,9 @@ const REPLAY6 = {
           "인사",
         ],
         [
-          "I'm a software developer at {Hanna System}.",
-          "저는 한나시스템의 소프트웨어 개발자예요.",
-          "직업",
-        ],
-        [
-          "I live alone in {an apartment}, and I like {games, music, and photos}.",
-          "저는 아파트에 혼자 살고 게임, 음악, 사진을 좋아해요.",
-          "집 · 취미",
+          "I'm a software developer at {Hanna System}, and I live alone in {an apartment}, and I like {games, music, and photos}.",
+          "저는 한나시스템의 소프트웨어 개발자예요. 저는 아파트에 혼자 살고 게임, 음악, 사진을 좋아해요.",
+          "직업 · and",
         ],
         [
           "I'm taking this test because my company needs a grade.",
@@ -6620,9 +6177,11 @@ const REPLAY6 = {
         "설문에서 음악 듣기를 좋아한다고 하셨어요. 어떤 음악을 좋아하나요? 가장 좋아하는 음악가는 누구인가요?",
       ],
       s: [
-        ["I like rock music.", "저는 록 음악을 좋아해요.", "장르"],
-        ["My favorite band is {Silica Gel}.", "제일 좋아하는 밴드는 실리카겔이에요.", "가수"],
-        ["Their music is energetic and fun.", "그들의 음악은 에너지 넘치고 재밌어요.", "이유 1"],
+        [
+          "I like rock music, and my favorite band is {Silica Gel} because their music is energetic and fun.",
+          "저는 록 음악을 좋아해요. 제일 좋아하는 밴드는 실리카겔이에요. 그들의 음악은 에너지 넘치고 재밌어요.",
+          "장르 · and · because",
+        ],
         [
           "When I feel sad or nervous, it makes me feel better.",
           "슬프거나 긴장될 때 기분이 나아져요.",
@@ -6641,24 +6200,14 @@ const REPLAY6 = {
       ],
       s: [
         [
-          "I usually listen to music alone in my living room.",
-          "저는 보통 거실에서 혼자 음악을 들어요.",
-          "어디서",
+          "I usually listen to music alone in my living room, and I have a good sound system, so I can listen anytime.",
+          "저는 보통 거실에서 혼자 음악을 들어요. 음향 장비가 좋아서 언제든 들을 수 있어요.",
+          "어디서 · and",
         ],
         [
-          "I have a good sound system, so I can listen anytime.",
-          "음향 장비가 좋아서 언제든 들을 수 있어요.",
-          "언제",
-        ],
-        [
-          "Sometimes I go to concerts, and I've seen Silica Gel several times.",
-          "가끔 콘서트에 가고 실리카겔은 여러 번 봤어요.",
-          "콘서트",
-        ],
-        [
-          "I also go to a jazz club, where I can enjoy music and have a drink.",
-          "재즈 클럽에도 가는데, 음악을 즐기며 술도 마실 수 있어요.",
-          "재즈 클럽",
+          "Sometimes I go to concerts, and I've seen Silica Gel several times, and I also go to a jazz club, where I can enjoy music and have a drink.",
+          "가끔 콘서트에 가고 실리카겔은 여러 번 봤어요. 재즈 클럽에도 가는데, 음악을 즐기며 술도 마실 수 있어요.",
+          "콘서트 · and",
         ],
         [
           "That's why I enjoy music in many ways.",
@@ -6677,21 +6226,15 @@ const REPLAY6 = {
       ],
       s: [
         [
-          "I started listening to music in high school.",
-          "고등학교 때 음악을 듣기 시작했어요.",
-          "계기",
+          "I started listening to music in high school because I had to study hard for the college exam, so I needed to focus.",
+          "고등학교 때 음악을 듣기 시작했어요. 대학 입시 때문에 열심히 공부해야 해서 집중이 필요했어요.",
+          "계기 · because",
         ],
         [
-          "I had to study hard for the college exam, so I needed to focus.",
-          "대학 입시 때문에 열심히 공부해야 해서 집중이 필요했어요.",
-          "이유",
+          "So I listened to calm music, such as jazz and classical music, but now I listen to rock music for fun.",
+          "그래서 재즈와 클래식 같은 잔잔한 음악을 들었어요. 지금은 재미로 록을 들어요.",
+          "과거 취향 · but",
         ],
-        [
-          "So I listened to calm music, such as jazz and classical music.",
-          "그래서 재즈와 클래식 같은 잔잔한 음악을 들었어요.",
-          "과거 취향",
-        ],
-        ["Now I listen to rock music for fun.", "지금은 재미로 록을 들어요.", "현재 취향"],
         ["That's how my taste has changed.", "그렇게 취향이 바뀌었어요.", "마무리"],
       ],
     },
@@ -6705,21 +6248,15 @@ const REPLAY6 = {
       ],
       s: [
         [
-          "Healthy people usually eat balanced food.",
-          "건강한 사람들은 보통 균형 잡힌 음식을 먹어요.",
-          "음식 1",
+          "Healthy people usually eat balanced food, and they eat vegetables, meat, and fish.",
+          "건강한 사람들은 보통 균형 잡힌 음식을 먹어요. 채소, 고기, 생선을 먹어요.",
+          "음식 1 · and",
         ],
-        ["They eat vegetables, meat, and fish.", "채소, 고기, 생선을 먹어요.", "음식 2"],
         ["They also exercise regularly.", "그리고 규칙적으로 운동해요.", "운동"],
         [
-          "In my opinion, good health means a healthy body and a happy mind.",
-          "제 생각에 좋은 건강은 건강한 몸과 행복한 마음이에요.",
-          "의견",
-        ],
-        [
-          "That's why food and exercise are both important.",
-          "그래서 음식과 운동 둘 다 중요해요.",
-          "마무리",
+          "In my opinion, good health means a healthy body and a happy mind, so food and exercise are both important.",
+          "제 생각에 좋은 건강은 건강한 몸과 행복한 마음이에요. 그래서 음식과 운동 둘 다 중요해요.",
+          "의견 · so",
         ],
       ],
     },
@@ -6733,20 +6270,14 @@ const REPLAY6 = {
       ],
       s: [
         [
-          "When I was young, I loved sweets, so I gained weight.",
-          "어릴 때 단 걸 좋아해서 살이 쪘어요.",
-          "과거",
-        ],
-        ["I didn't think about health then.", "그땐 건강을 생각하지 않았어요.", "과거 생각"],
-        [
-          "Now I know that food and exercise are important, so I stopped eating sweets.",
-          "지금은 음식과 운동이 중요하다는 걸 알아서 단 걸 끊었어요.",
-          "변화",
+          "When I was young, I loved sweets, so I gained weight, and I didn't think about health then.",
+          "어릴 때 단 걸 좋아해서 살이 쪘어요. 그땐 건강을 생각하지 않았어요.",
+          "과거 · and",
         ],
         [
-          "I exercise twice a week and eat a lot of protein.",
-          "일주일에 두 번 운동하고 단백질을 많이 먹어요.",
-          "지금 관리",
+          "Now I know that food and exercise are important, so I stopped eating sweets, and I exercise twice a week and eat a lot of protein.",
+          "지금은 음식과 운동이 중요하다는 걸 알아서 단 걸 끊었어요. 일주일에 두 번 운동하고 단백질을 많이 먹어요.",
+          "변화 · and",
         ],
         ["That's how I stay healthy.", "그렇게 건강을 유지해요.", "마무리"],
       ],
@@ -6760,18 +6291,16 @@ const REPLAY6 = {
         "건강과 관련해 기억에 남는 일을 말해 주세요. 무슨 일이 있었고 건강에 대한 생각이 어떻게 바뀌었나요?",
       ],
       s: [
-        ["Two years ago, I got COVID-19.", "2년 전에 코로나에 걸렸어요.", "언제 · 무슨 일"],
         [
-          "I couldn't taste or eat anything, and I had to stay in my room alone.",
-          "맛을 못 느끼고 먹지도 못해서 방에서 혼자 지내야 했어요.",
-          "상황",
+          "Two years ago, I got COVID-19, so I couldn't taste or eat anything, and I had to stay in my room alone.",
+          "2년 전에 코로나에 걸렸어요. 맛을 못 느끼고 먹지도 못해서 방에서 혼자 지내야 했어요.",
+          "언제 · so",
         ],
         [
-          "It was lonely and boring, but I rested and drank a lot of water.",
-          "외롭고 지루했지만 쉬고 물을 많이 마셨어요.",
-          "행동",
+          "It was lonely and boring, but I rested and drank a lot of water, and then after a week, I got better.",
+          "외롭고 지루했지만 쉬고 물을 많이 마셨어요. 일주일 뒤에 나았어요.",
+          "행동 · and then",
         ],
-        ["After a week, I got better.", "일주일 뒤에 나았어요.", "결과"],
         [
           "Since then, I think health is the most important thing.",
           "그 뒤로 건강이 가장 중요하다고 생각해요.",
@@ -6788,19 +6317,16 @@ const REPLAY6 = {
         "휴가로 다녀온 도시나 나라를 이야기해 주세요. 어떻게 생겼고, 어디에 있고, 사람들은 어떻고, 특별한 점은 무엇인가요?",
       ],
       s: [
-        ["I visited Jeju Island two years ago.", "2년 전에 제주도에 갔어요.", "어디 · 언제"],
-        ["It's an island in the south of Korea.", "한국 남쪽에 있는 섬이에요.", "위치"],
         [
-          "It has beautiful nature, and there were many tourists.",
-          "자연이 아름답고 관광객이 많았어요.",
-          "모습 · 사람들",
+          "I visited Jeju Island two years ago, and it's an island in the south of Korea, and it has beautiful nature, and there were many tourists.",
+          "2년 전에 제주도에 갔어요. 한국 남쪽에 있는 섬이에요. 자연이 아름답고 관광객이 많았어요.",
+          "어디 · and · and",
         ],
         [
-          "The food was delicious, and the roads were great for driving.",
-          "음식이 맛있고 드라이브하기 좋은 도로가 있었어요.",
-          "특별한 점",
+          "The food was delicious, and the roads were great for driving, so I want to go there again.",
+          "음식이 맛있고 드라이브하기 좋은 도로가 있었어요. 그래서 또 가고 싶어요.",
+          "특별한 점 · so",
         ],
-        ["That's why I want to go there again.", "그래서 또 가고 싶어요.", "마무리"],
       ],
     },
     {
@@ -6813,15 +6339,9 @@ const REPLAY6 = {
       ],
       s: [
         [
-          "My first trip abroad was when I was in elementary school.",
-          "첫 해외여행은 초등학생 때였어요.",
-          "언제",
-        ],
-        ["I went to Europe with my mother.", "어머니와 유럽에 갔어요.", "누구와 · 어디"],
-        [
-          "We visited Italy, France, and Switzerland.",
-          "이탈리아, 프랑스, 스위스를 갔어요.",
-          "여행지",
+          "My first trip abroad was when I was in elementary school, and I went to Europe with my mother, and then we visited Italy, France, and Switzerland.",
+          "첫 해외여행은 초등학생 때였어요. 어머니와 유럽에 갔어요. 이탈리아, 프랑스, 스위스를 갔어요.",
+          "언제 · and · and then",
         ],
         [
           "I loved Italy because of the old buildings, pizza, and spaghetti.",
@@ -6845,14 +6365,9 @@ const REPLAY6 = {
       ],
       s: [
         [
-          "Two years ago, I went to Japan to watch a beatbox contest.",
-          "2년 전 비트박스 대회를 보러 일본에 갔어요.",
-          "언제 · 어디",
-        ],
-        [
-          "Teams from many countries joined, and a Korean team was there too.",
-          "여러 나라 팀이 참가했고 한국 팀도 있었어요.",
-          "무슨 일",
+          "Two years ago, I went to Japan to watch a beatbox contest, and teams from many countries joined, and a Korean team was there too.",
+          "2년 전 비트박스 대회를 보러 일본에 갔어요. 여러 나라 팀이 참가했고 한국 팀도 있었어요.",
+          "언제 · and",
         ],
         [
           "I cheered for the Korean team with all my heart.",
@@ -6860,14 +6375,9 @@ const REPLAY6 = {
           "한 일",
         ],
         [
-          "Sadly, they didn't win, but the show was amazing.",
-          "아쉽게도 우승은 못 했지만 공연은 대단했어요.",
-          "결과",
-        ],
-        [
-          "That's why it's my most memorable trip.",
-          "그래서 가장 기억에 남는 여행이에요.",
-          "마무리",
+          "Sadly, they didn't win, but the show was amazing, so it's my most memorable trip.",
+          "아쉽게도 우승은 못 했지만 공연은 대단했어요. 그래서 가장 기억에 남는 여행이에요.",
+          "결과 · so",
         ],
       ],
     },
@@ -6917,14 +6427,9 @@ const REPLAY6 = {
       ],
       s: [
         [
-          "Hi, it's {Hyun-gi}. I'm sorry, but I can't come to lunch today.",
-          "안녕, 현기야. 미안하지만 오늘 점심에 못 가.",
-          "도입 · 상황",
-        ],
-        [
-          "My brother got sick this morning, and I need to take care of him.",
-          "오늘 아침 동생이 아파서 내가 돌봐야 해.",
-          "이유",
+          "Hi, it's {Hyun-gi}. I'm sorry, but I can't come to lunch today because my brother got sick this morning, and I need to take care of him.",
+          "안녕, 현기야. 미안하지만 오늘 점심에 못 가. 오늘 아침 동생이 아파서 내가 돌봐야 해.",
+          "도입 · because",
         ],
         [
           "I have two ideas. First, we can have lunch next Saturday.",
@@ -6953,20 +6458,14 @@ const REPLAY6 = {
       ],
       s: [
         [
-          "Two years ago, I went to Jeju Island with my family.",
-          "2년 전 가족과 제주도에 갔어요.",
-          "언제 · 어디",
+          "Two years ago, I went to Jeju Island with my family, but my brother had a stomachache, so we canceled our dinner reservation.",
+          "2년 전 가족과 제주도에 갔어요. 동생이 배가 아파서 저녁 예약을 취소했어요.",
+          "언제 · but",
         ],
         [
-          "My brother had a stomachache, so we canceled our dinner reservation.",
-          "동생이 배가 아파서 저녁 예약을 취소했어요.",
-          "상황",
-        ],
-        ["I called the restaurant and said sorry.", "식당에 전화해서 사과했어요.", "대처"],
-        [
-          "Instead, we bought pork cutlets from a famous restaurant and ate them at the hotel.",
-          "대신 유명한 식당에서 돈가스를 사서 호텔에서 먹었어요.",
-          "대안",
+          "I called the restaurant and said sorry, and instead, we bought pork cutlets from a famous restaurant and ate them at the hotel.",
+          "식당에 전화해서 사과했어요. 대신 유명한 식당에서 돈가스를 사서 호텔에서 먹었어요.",
+          "대처 · and",
         ],
         [
           "It was delicious, and it became a memorable trip.",
@@ -6985,24 +6484,14 @@ const REPLAY6 = {
       ],
       s: [
         [
-          "In a small town, everyone celebrates together.",
-          "작은 마을에서는 모두 함께 축하해요.",
-          "마을",
+          "In a small town, everyone celebrates together, but in a big city, people are busy, so events are smaller.",
+          "작은 마을에서는 모두 함께 축하해요. 대도시에서는 사람들이 바빠서 행사가 더 작아요.",
+          "마을 · but",
         ],
         [
-          "In a big city, people are busy, so events are smaller.",
-          "대도시에서는 사람들이 바빠서 행사가 더 작아요.",
-          "도시",
-        ],
-        [
-          "Both are similar because people want to enjoy time together.",
-          "둘 다 함께 시간을 즐기고 싶어 한다는 점은 비슷해요.",
-          "공통점",
-        ],
-        [
-          "I prefer a small town because it feels warm and friendly.",
-          "저는 따뜻하고 친근해서 작은 마을이 더 좋아요.",
-          "선택",
+          "Both are similar because people want to enjoy time together, but I prefer a small town because it feels warm and friendly.",
+          "둘 다 함께 시간을 즐기고 싶어 한다는 점은 비슷해요. 저는 따뜻하고 친근해서 작은 마을이 더 좋아요.",
+          "공통점 · but",
         ],
         [
           "That's why I like small town celebrations.",
@@ -7022,11 +6511,10 @@ const REPLAY6 = {
       s: [
         ["Yes, I think there are some problems.", "네, 몇 가지 문제가 있다고 생각해요.", "도입"],
         [
-          "First, it's hard to find a time when everyone is free.",
-          "첫째, 모두가 시간이 되는 때를 찾기 어려워요.",
-          "문제 1",
+          "First, it's hard to find a time when everyone is free, and second, some gatherings are too expensive.",
+          "첫째, 모두가 시간이 되는 때를 찾기 어려워요. 둘째, 어떤 모임은 너무 비싸요.",
+          "문제 1 · and",
         ],
-        ["Second, some gatherings are too expensive.", "둘째, 어떤 모임은 너무 비싸요.", "문제 2"],
         [
           "People usually use a group chat to decide the date and share the cost.",
           "사람들은 보통 단체 채팅으로 날짜를 정하고 비용을 나눠요.",
