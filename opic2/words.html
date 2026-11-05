@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OPIc 단어 카드</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><a class="switch-ver" href="./">← 틀 연습</a><h1>단어 카드</h1><p class="sub">영어를 보고 뜻을 떠올려 보세요. 눌러서 뒤집기</p></header>
+<main>
+  <section class="card">
+    <div class="row">
+      <label>주제 <select id="selTopic"></select></label>
+      <label>보기 <select id="selMode"><option value="all">전체</option><option value="unk">모르는 단어만</option></select></label>
+    </div>
+    <div class="row"><button id="btnShuffle">섞기</button><button id="btnDir">영어 → 뜻</button><span class="muted" id="prog"></span></div>
+  </section>
+  <section class="card">
+    <div id="cardface" class="flip" role="button" tabindex="0"><div id="front" class="big"></div><div id="back" class="muted" hidden></div><div class="muted tiny" id="tap">눌러서 뜻 보기</div></div>
+    <div class="row">
+      <button id="btnPrev">이전</button><button id="btnSay">발음 듣기</button><button id="btnNext">다음</button>
+    </div>
+    <div class="row">
+      <button id="btnKnow" class="primary">알아요</button><button id="btnUnk">모르겠어요</button>
+    </div>
+    <p class="muted" id="stat"></p>
+  </section>
+  <section class="card"><h2>기본 단어 바꿔 쓰기</h2><ul class="up" id="up"></ul></section>
+</main>
+<script src="vocab.js"></script>
+<script src="words.js"></script>
+</body>
+</html>

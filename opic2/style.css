@@ -25,3 +25,5 @@ textarea{width:100%;margin:8px 0;resize:vertical}
 .switch-ver{float:right;margin-top:4px;padding:6px 12px;border:1px solid var(--line);border-radius:8px;font-size:.85rem;text-decoration:none;color:var(--fg);background:var(--card)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}.chip{border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:.9rem}.chip small{color:var(--muted);margin-left:6px}.chips.hide small{display:none}
 button.small{padding:2px 8px;font-size:.8rem;margin-left:8px}.up{margin:4px 0;padding-left:1.1rem;font-size:.9rem}
+.flip{min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;border:1px solid var(--line);border-radius:12px;padding:20px;cursor:pointer;user-select:none}
+.big{font-size:1.6rem;font-weight:700}.tiny{font-size:.8rem}
