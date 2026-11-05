@@ -1,0 +1,25 @@
+:root{--bg:#f6f7f9;--fg:#1c2128;--muted:#6b7480;--card:#fff;--line:#dde1e6;--accent:#2563eb;--ok:#15803d;--warn:#b45309;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1317;--fg:#e6e9ee;--muted:#98a2b0;--card:#181d23;--line:#2a323b;--accent:#6ea0ff;--ok:#4ade80;--warn:#fbbf24;--bad:#f87171}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+header,main{max-width:720px;margin:0 auto;padding:0 16px}
+header{padding-top:20px}h1{margin:0;font-size:1.4rem}.sub{margin:.2rem 0 1rem;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px}
+h2{font-size:1rem;margin:18px 0 8px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+label{display:flex;gap:6px;align-items:center;color:var(--muted);font-size:.9rem}
+select,button,textarea{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+select{max-width:100%}
+button{cursor:pointer}button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+button.rec{background:var(--bad);border-color:var(--bad);color:#fff}
+textarea{width:100%;margin:8px 0;resize:vertical}
+.muted,.hint{color:var(--muted);font-size:.9rem}.q{font-size:1.1rem;font-weight:600;margin:.4rem 0}
+.tag{background:var(--line);border-radius:6px;padding:2px 8px;font-size:.8rem;margin-right:8px}
+.frame{padding-left:1.3rem}.frame li{margin:4px 0}
+.timer{font-variant-numeric:tabular-nums;font-weight:600}
+.stats{list-style:none;padding:0;margin:0}.stats li{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--line)}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}
+.verdict{font-weight:600}
+#model p{margin:.35rem 0}#model .ko{color:var(--muted);font-size:.9rem}
+#hist{padding-left:1.1rem}#hist li{margin:4px 0;font-size:.9rem}
+.switch-ver{float:right;margin-top:4px;padding:6px 12px;border:1px solid var(--line);border-radius:8px;font-size:.85rem;text-decoration:none;color:var(--fg);background:var(--card)}

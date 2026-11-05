@@ -917,3 +917,15 @@ mark {
   outline-offset: 2px;
   border-radius: 10px;
 }
+
+.switch-ver {
+  float: right;
+  margin-top: 2px;
+  padding: 4px 10px;
+  border: 1px solid var(--border, currentColor);
+  border-radius: 8px;
+  font-size: 13px;
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.85;
+}

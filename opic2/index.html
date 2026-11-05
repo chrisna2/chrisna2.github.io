@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OPIc 틀 연습</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><a class="switch-ver" href="../opic/">← 반복 발화 플레이어</a><h1>OPIc 틀 연습</h1><p class="sub">문장이 아니라 순서만 외우고, 매번 다르게 말하기</p></header>
+<main>
+  <section class="card" id="pick">
+    <div class="row">
+      <label>세트 <select id="selSet"></select></label>
+      <label>유형 <select id="selCat"><option value="all">전체</option><option value="survey">서베이</option><option value="rp">롤플레이</option><option value="surprise">돌발</option></select></label>
+    </div>
+    <div class="row">
+      <button id="btnRandom" class="primary">랜덤 한 문제</button>
+      <button id="btnNext">다음 문제</button>
+    </div>
+    <p class="muted" id="count"></p>
+  </section>
+
+  <section class="card" id="work" hidden>
+    <div class="qhead"><span class="tag" id="qkind"></span><span class="muted" id="qt"></span></div>
+    <p class="q" id="qen"></p>
+    <p class="muted" id="qko" hidden></p>
+    <div class="row">
+      <button id="btnSpeak">문제 듣기</button>
+      <button id="btnKo">한글 보기</button>
+    </div>
+
+    <h2>1. 틀 (순서만 보기)</h2>
+    <ol class="frame" id="frame"></ol>
+    <p class="hint">연결어: <b>and then</b> (순서) · <b>so</b> (이유→결과) · <b>because</b> (이유 붙이기) · <b>but</b> (반대)</p>
+
+    <h2>2. 말하기</h2>
+    <div class="row">
+      <button id="btnRec" class="primary">말하기 시작</button>
+      <span class="timer" id="timer">0:00</span>
+      <span class="muted" id="srNote"></span>
+    </div>
+    <textarea id="txt" rows="6" placeholder="말한 내용이 여기에 적혀요. 음성 인식이 안 되면 직접 쓰거나 클로바노트 텍스트를 붙여 넣으세요."></textarea>
+    <button id="btnCheck" class="primary">점검하기</button>
+
+    <div id="result" hidden>
+      <h2>3. 점검</h2>
+      <ul class="stats" id="stats"></ul>
+      <p id="verdict" class="verdict"></p>
+      <button id="btnModel">참고 답안 보기</button>
+      <div id="model" hidden></div>
+    </div>
+  </section>
+
+  <section class="card" id="histBox" hidden>
+    <h2>최근 연습</h2>
+    <ul id="hist"></ul>
+  </section>
+</main>
+<script src="data2.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
