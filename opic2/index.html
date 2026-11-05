@@ -34,7 +34,13 @@
     <ol class="frame" id="frame"></ol>
     <p class="hint">연결어: <b>and then</b> (순서) · <b>so</b> (이유→결과) · <b>because</b> (이유 붙이기) · <b>but</b> (반대)</p>
 
-    <h2>2. 말하기</h2>
+    <h2>2. 이 주제 단어 <button id="btnVocab" class="small">뜻 가리기</button></h2>
+    <div class="chips" id="vocab"></div>
+    <p class="hint">기본 단어 바꿔 쓰기</p>
+    <ul class="up" id="upgrade"></ul>
+    <p class="hint">막힐 때: <span id="stall"></span></p>
+
+    <h2>3. 말하기</h2>
     <div class="row">
       <button id="btnRec" class="primary">말하기 시작</button>
       <span class="timer" id="timer">0:00</span>
@@ -44,7 +50,7 @@
     <button id="btnCheck" class="primary">점검하기</button>
 
     <div id="result" hidden>
-      <h2>3. 점검</h2>
+      <h2>4. 점검</h2>
       <ul class="stats" id="stats"></ul>
       <p id="verdict" class="verdict"></p>
       <button id="btnModel">참고 답안 보기</button>
@@ -58,6 +64,7 @@
   </section>
 </main>
 <script src="data2.js"></script>
+<script src="vocab.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

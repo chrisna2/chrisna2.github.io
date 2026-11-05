@@ -41,10 +41,25 @@
     $("qen").textContent = q.q[0]; $("qko").textContent = q.q[1]; $("qko").hidden = true; $("btnKo").textContent = "한글 보기";
     var ol = $("frame"); ol.innerHTML = "";
     frameOf(q).forEach(function (k) { var li = document.createElement("li"); li.textContent = k; ol.appendChild(li); });
+    renderVocab();
     $("txt").value = ""; $("result").hidden = true; $("model").hidden = true; $("model").innerHTML = "";
     $("timer").textContent = "0:00"; stopRec();
     $("work").scrollIntoView({ behavior: "smooth", block: "start" });
   }
+
+  function topicOf(q) {
+    var t = (q.kind + " " + q.q[0]).toLowerCase();
+    for (var i = 0; i < TOPICS.length; i++) if (TOPICS[i].re.test(t)) return TOPICS[i];
+    return null;
+  }
+  function renderVocab() {
+    var tp = topicOf(cur.q), box = $("vocab"); box.innerHTML = ""; box.classList.remove("hide"); $("btnVocab").textContent = "뜻 가리기";
+    if (tp) tp.w.forEach(function (x) { var d = document.createElement("span"); d.className = "chip"; d.innerHTML = x[0] + "<small>" + x[1] + "</small>"; box.appendChild(d); });
+    else box.textContent = "이 문제는 주제 단어가 없어요.";
+    $("upgrade").innerHTML = UPGRADE.map(function (u) { return "<li><b>" + u[0] + "</b> → " + u[1] + "</li>"; }).join("");
+    $("stall").textContent = STALL.join(" / ");
+  }
+  $("btnVocab").onclick = function () { var b = $("vocab"); b.classList.toggle("hide"); this.textContent = b.classList.contains("hide") ? "뜻 보기" : "뜻 가리기"; };
 
   $("btnRandom").onclick = pick;
   $("btnNext").onclick = pick;
@@ -104,6 +119,11 @@
     h += row("같은 말 되풀이 (I, I)", restarts + "번", restarts === 0 ? "ok" : restarts <= 2 ? "warn" : "bad");
     h += row("uh / um", fillers + "번", fillers <= 2 ? "ok" : fillers <= 5 ? "warn" : "bad");
     h += row("참고 답안과 겹침 (4단어 묶음)", Math.round(sim * 100) + "%", sim < 0.25 ? "ok" : sim < 0.45 ? "warn" : "bad");
+    var tp = topicOf(cur.q), lt = text.toLowerCase(), used = [];
+    if (tp) tp.w.forEach(function (x) { var e = x[0].toLowerCase().replace(/ ~ing| ~/g, "").replace(/^be (a )?/, ""); if (e.length > 2 && lt.indexOf(e) > -1) used.push(x[0]); });
+    var basic = count(/\b(good|great|really|very|nice)\b/gi, text);
+    h += row("주제 단어 사용", used.length + "개" + (used.length ? " (" + used.slice(0, 5).join(", ") + ")" : ""), used.length >= 3 ? "ok" : used.length >= 1 ? "warn" : "bad");
+    h += row("기본 단어 (good, great, really, very, nice)", basic + "번", basic <= 2 ? "ok" : basic <= 4 ? "warn" : "bad");
     $("stats").innerHTML = h;
     var v = [];
     if (sim >= 0.45) v.push("참고 답안을 거의 그대로 말했어요. 시험에서 암기로 보일 수 있으니 같은 틀로 다른 문장을 만들어 다시 말해 보세요.");
@@ -111,6 +131,8 @@
     else v.push("참고 답안을 외운 티가 거의 없어요. 좋아요.");
     if (ctotal < 2) v.push("연결어가 적어요. 문장 사이에 and then / so / because를 넣어 보세요.");
     if (restarts > 2) v.push("같은 말을 되풀이했어요. 꼬이면 그 문장을 짧게 끝내고 다음으로 가요.");
+    if (basic > 4) v.push("good / great / really / very를 많이 썼어요. 위의 바꿔 쓰기 단어로 바꿔 보세요.");
+    if (tp && !used.length) v.push("이 주제 단어를 하나도 쓰지 않았어요. 위 단어 중 3개를 골라 넣어 보세요.");
     if (w < 35) v.push("조금 짧아요. 이유와 느낌을 한 문장씩 더 붙여 보세요.");
     $("verdict").textContent = v.join(" ");
     $("result").hidden = false; $("model").hidden = true;
