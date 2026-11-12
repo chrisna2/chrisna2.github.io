@@ -3794,8 +3794,8 @@ const REPLAY = {
       ],
       s: [
         [
-          "Hello, my name is {Hyun-gi}. It's nice to meet you.",
-          "안녕하세요, 제 이름은 현기예요. 만나서 반갑습니다.",
+          "Hello, my name is {Mark}. It's nice to meet you.",
+          "안녕하세요, 제 이름은 마크예요. 만나서 반갑습니다.",
           "인사",
         ],
         [
@@ -4322,8 +4322,8 @@ const REPLAY2 = {
       ],
       s: [
         [
-          "Hello, my name is {Hyun-gi}. It's nice to meet you.",
-          "안녕하세요, 제 이름은 현기예요. 만나서 반갑습니다.",
+          "Hello, my name is {Mark}. It's nice to meet you.",
+          "안녕하세요, 제 이름은 마크예요. 만나서 반갑습니다.",
           "인사",
         ],
         [
@@ -4623,8 +4623,8 @@ const REPLAY2 = {
       ],
       s: [
         [
-          "Hi, it's {Hyun-gi}. I'm thinking about buying an MP3 player, and I need your help.",
-          "안녕, 나 현기야. MP3 플레이어를 사려는데 네 도움이 필요해.",
+          "Hi, it's {Mark}. I'm thinking about buying an MP3 player, and I need your help.",
+          "안녕, 나 마크야. MP3 플레이어를 사려는데 네 도움이 필요해.",
           "도입",
         ],
         [
@@ -4660,8 +4660,8 @@ const REPLAY2 = {
       ],
       s: [
         [
-          "Hi, it's {Hyun-gi}. I have some bad news. I'm so sorry, but I broke your MP3 player.",
-          "안녕, 나 현기야. 안 좋은 소식이 있어. 정말 미안한데 네 MP3 플레이어를 망가뜨렸어.",
+          "Hi, it's {Mark}. I have some bad news. I'm so sorry, but I broke your MP3 player.",
+          "안녕, 나 마크야. 안 좋은 소식이 있어. 정말 미안한데 네 MP3 플레이어를 망가뜨렸어.",
           "도입 · 사과",
         ],
         [
@@ -4797,8 +4797,8 @@ const REPLAY3 = {
       ],
       s: [
         [
-          "Hi, my name is {Hyun-gi}. It's nice to meet you.",
-          "안녕하세요, 제 이름은 현기예요. 만나서 반갑습니다.",
+          "Hi, my name is {Mark}. It's nice to meet you.",
+          "안녕하세요, 제 이름은 마크예요. 만나서 반갑습니다.",
           "인사",
         ],
         [
@@ -5079,8 +5079,8 @@ const REPLAY3 = {
       ],
       s: [
         [
-          "Hi, it's {Hyun-gi}. I heard you're planning a birthday party, and I'd love to help.",
-          "안녕, 나 현기야. 생일 파티를 준비한다고 들었는데 도와주고 싶어.",
+          "Hi, it's {Mark}. I heard you're planning a birthday party, and I'd love to help.",
+          "안녕, 나 마크야. 생일 파티를 준비한다고 들었는데 도와주고 싶어.",
           "도입",
         ],
         [
@@ -5112,8 +5112,8 @@ const REPLAY3 = {
       ],
       s: [
         [
-          "Hi, it's {Hyun-gi}. I'm really sorry, but I can't come to your birthday party.",
-          "안녕, 나 현기야. 정말 미안한데 네 생일 파티에 못 갈 것 같아.",
+          "Hi, it's {Mark}. I'm really sorry, but I can't come to your birthday party.",
+          "안녕, 나 마크야. 정말 미안한데 네 생일 파티에 못 갈 것 같아.",
           "도입 · 사과",
         ],
         [
@@ -5203,8 +5203,8 @@ const REPLAY3 = {
       ],
       s: [
         [
-          "Hi, nice to meet you. I'm {Hyun-gi}. I'd like to ask a few questions about your cafe.",
-          "안녕하세요, 현기예요. 카페에 대해 몇 가지 여쭤보고 싶어요.",
+          "Hi, nice to meet you. I'm {Mark}. I'd like to ask a few questions about your cafe.",
+          "안녕하세요, 마크예요. 카페에 대해 몇 가지 여쭤보고 싶어요.",
           "도입",
         ],
         ["What do you do here every day?", "여기서 매일 어떤 일을 하세요?", "질문 1"],
@@ -5251,8 +5251,8 @@ const REPLAY4 = {
       ],
       s: [
         [
-          "Hi, my name is {Hyun-gi}. It's nice to meet you.",
-          "안녕하세요, 제 이름은 현기예요. 만나서 반갑습니다.",
+          "Hi, my name is {Mark}. It's nice to meet you.",
+          "안녕하세요, 제 이름은 마크예요. 만나서 반갑습니다.",
           "인사",
         ],
         [
@@ -5529,8 +5529,8 @@ const REPLAY4 = {
       ],
       s: [
         [
-          "Hi, it's {Hyun-gi}. Thank you for inviting me to your holiday gathering.",
-          "안녕, 나 현기야. 명절 모임에 초대해 줘서 고마워.",
+          "Hi, it's {Mark}. Thank you for inviting me to your holiday gathering.",
+          "안녕, 나 마크야. 명절 모임에 초대해 줘서 고마워.",
           "도입",
         ],
         [
@@ -5561,8 +5561,8 @@ const REPLAY4 = {
       ],
       s: [
         [
-          "Hi, it's {Hyun-gi}. I'm on my way, but my car broke down, so I'll be late.",
-          "안녕, 나 현기야. 가는 중인데 차가 고장 나서 늦을 것 같아.",
+          "Hi, it's {Mark}. I'm on my way, but my car broke down, so I'll be late.",
+          "안녕, 나 마크야. 가는 중인데 차가 고장 나서 늦을 것 같아.",
           "도입 · 상황",
         ],
         [
@@ -5693,13 +5693,13 @@ const REPLAY5 = {
       ],
       s: [
         [
-          "Hi, my name is {Hyun-gi}. It's nice to meet you.",
-          "안녕하세요, 제 이름은 현기예요. 만나서 반갑습니다.",
+          "Hi, my name is {Mark}. It's nice to meet you.",
+          "안녕하세요, 제 이름은 마크예요. 만나서 반갑습니다.",
           "인사",
         ],
         [
-          "I'm a software developer at {Hanna System}, and I've worked in the IT field for about eight years.",
-          "저는 한나시스템의 소프트웨어 개발자이고 IT 분야에서 약 8년 일했어요.",
+          "I'm a software developer at {an IT company}, and I've worked in the IT field for about eight years.",
+          "저는 IT 회사의 소프트웨어 개발자이고 IT 분야에서 약 8년 일했어요.",
           "직업",
         ],
         [
@@ -5978,8 +5978,8 @@ const REPLAY5 = {
       ],
       s: [
         [
-          "Hi, it's {Hyun-gi}. Thank you for inviting me to your holiday gathering.",
-          "안녕, 나 현기야. 명절 모임에 초대해 줘서 고마워.",
+          "Hi, it's {Mark}. Thank you for inviting me to your holiday gathering.",
+          "안녕, 나 마크야. 명절 모임에 초대해 줘서 고마워.",
           "도입",
         ],
         [
@@ -6011,8 +6011,8 @@ const REPLAY5 = {
       ],
       s: [
         [
-          "Hi, it's {Hyun-gi}. I'm on my way, but my car broke down, so I'll be late.",
-          "안녕, 현기야. 가는 중인데 차가 고장 나서 늦을 것 같아.",
+          "Hi, it's {Mark}. I'm on my way, but my car broke down, so I'll be late.",
+          "안녕, 마크야. 가는 중인데 차가 고장 나서 늦을 것 같아.",
           "도입 · 상황",
         ],
         [
@@ -6147,13 +6147,13 @@ const REPLAY6 = {
       ],
       s: [
         [
-          "Hi, my name is {Hyun-gi}. Nice to meet you.",
-          "안녕하세요, 제 이름은 현기예요. 만나서 반갑습니다.",
+          "Hi, my name is {Mark}. Nice to meet you.",
+          "안녕하세요, 제 이름은 마크예요. 만나서 반갑습니다.",
           "인사",
         ],
         [
-          "I'm a software developer at {Hanna System}, and I live alone in {an apartment}, and I like {games, music, and photos}.",
-          "저는 한나시스템의 소프트웨어 개발자예요. 저는 아파트에 혼자 살고 게임, 음악, 사진을 좋아해요.",
+          "I'm a software developer at {an IT company}, and I live alone in {an apartment}, and I like {games, music, and photos}.",
+          "저는 IT 회사의 소프트웨어 개발자예요. 저는 아파트에 혼자 살고 게임, 음악, 사진을 좋아해요.",
           "직업 · and",
         ],
         [
@@ -6391,8 +6391,8 @@ const REPLAY6 = {
       ],
       s: [
         [
-          "Hi, it's {Hyun-gi}. I'd like to invite your family to my house for lunch.",
-          "안녕하세요, 현기예요. 가족분들을 집으로 점심에 초대하고 싶어요.",
+          "Hi, it's {Mark}. I'd like to invite your family to my house for lunch.",
+          "안녕하세요, 마크예요. 가족분들을 집으로 점심에 초대하고 싶어요.",
           "도입",
         ],
         [
@@ -6427,8 +6427,8 @@ const REPLAY6 = {
       ],
       s: [
         [
-          "Hi, it's {Hyun-gi}. I'm sorry, but I can't come to lunch today because my brother got sick this morning, and I need to take care of him.",
-          "안녕, 현기야. 미안하지만 오늘 점심에 못 가. 오늘 아침 동생이 아파서 내가 돌봐야 해.",
+          "Hi, it's {Mark}. I'm sorry, but I can't come to lunch today because my brother got sick this morning, and I need to take care of him.",
+          "안녕, 마크야. 미안하지만 오늘 점심에 못 가. 오늘 아침 동생이 아파서 내가 돌봐야 해.",
           "도입 · because",
         ],
         [
@@ -6541,8 +6541,8 @@ const REPLAY7 = {
       ],
       s: [
         [
-          "Hi, my name is {Hyun-gi}, and I'm a software developer at {Hanwha System}.",
-          "안녕하세요, 제 이름은 현기이고 한화시스템의 소프트웨어 개발자예요.",
+          "Hi, my name is {Mark}, and I'm a software developer at {an IT company}.",
+          "안녕하세요, 제 이름은 마크이고 IT 회사의 소프트웨어 개발자예요.",
           "인사 · 직업",
         ],
         [
@@ -6896,8 +6896,8 @@ const REPLAY7 = {
       ],
       s: [
         [
-          "Hi, this is {Hyun-gi}, and I'd like to invite your family for lunch.",
-          "안녕하세요, 현기예요. 가족 점심에 초대하고 싶어요.",
+          "Hi, this is {Mark}, and I'd like to invite your family for lunch.",
+          "안녕하세요, 마크예요. 가족 점심에 초대하고 싶어요.",
           "도입",
         ],
         [
@@ -6926,8 +6926,8 @@ const REPLAY7 = {
       ],
       s: [
         [
-          "Hi, this is {Hyun-gi}, and I'm really sorry, but I can't come to lunch today.",
-          "현기예요. 정말 죄송하지만 오늘 점심에 못 가요.",
+          "Hi, this is {Mark}, and I'm really sorry, but I can't come to lunch today.",
+          "마크예요. 정말 죄송하지만 오늘 점심에 못 가요.",
           "도입 · 사과",
         ],
         [
@@ -7082,8 +7082,8 @@ const REPLAY8 = {
       ],
       s: [
         [
-          "Hi, my name is {Hyun-gi}, and I'm a software developer at {Hanwha System}.",
-          "안녕하세요, 제 이름은 현기이고 한화시스템의 소프트웨어 개발자예요.",
+          "Hi, my name is {Mark}, and I'm a software developer at {an IT company}.",
+          "안녕하세요, 제 이름은 마크이고 IT 회사의 소프트웨어 개발자예요.",
           "인사 · 직업",
         ],
         [
@@ -7543,8 +7543,8 @@ const REPLAY9 = {
       q: ["Tell me something about yourself.", "자기소개를 해 주세요."],
       s: [
         [
-          "Hi, my name is {Hyun-gi}, and I'm a software developer at {Hanwha System}.",
-          "안녕하세요, 제 이름은 현기이고 한화시스템의 소프트웨어 개발자예요.",
+          "Hi, my name is {Mark}, and I'm a software developer at {an IT company}.",
+          "안녕하세요, 제 이름은 마크이고 IT 회사의 소프트웨어 개발자예요.",
           "인사 · 직업",
         ],
         [
@@ -7868,8 +7868,8 @@ const REPLAY9 = {
       ],
       s: [
         [
-          "Hi, it's {Hyun-gi}, and I heard you know about a great new website.",
-          "안녕, 현기야. 멋진 새 웹사이트를 안다고 들었어.",
+          "Hi, it's {Mark}, and I heard you know about a great new website.",
+          "안녕, 마크야. 멋진 새 웹사이트를 안다고 들었어.",
           "도입",
         ],
         [
@@ -7897,8 +7897,8 @@ const REPLAY9 = {
       ],
       s: [
         [
-          "Hello, my name is {Hyun-gi}, and I'm a customer of your service.",
-          "안녕하세요, 현기입니다. 고객이에요.",
+          "Hello, my name is {Mark}, and I'm a customer of your service.",
+          "안녕하세요, 마크입니다. 고객이에요.",
           "도입",
         ],
         [
@@ -8042,8 +8042,8 @@ const REPLAY10 = {
       ],
       s: [
         [
-          "Hi, my name is {Hyun-gi}, and I'm a software developer at {Hanwha System}.",
-          "안녕하세요, 제 이름은 현기이고 한화시스템의 소프트웨어 개발자예요.",
+          "Hi, my name is {Mark}, and I'm a software developer at {an IT company}.",
+          "안녕하세요, 제 이름은 마크이고 IT 회사의 소프트웨어 개발자예요.",
           "인사 · 직업",
         ],
         [
@@ -8498,8 +8498,8 @@ const REPLAY11 = {
       ],
       s: [
         [
-          "Hi, my name is {Hyun-gi}, and I'm a software developer at {Hanwha System}.",
-          "안녕하세요, 제 이름은 현기이고 한화시스템의 소프트웨어 개발자예요.",
+          "Hi, my name is {Mark}, and I'm a software developer at {an IT company}.",
+          "안녕하세요, 제 이름은 마크이고 IT 회사의 소프트웨어 개발자예요.",
           "인사 · 직업",
         ],
         [
@@ -8962,8 +8962,8 @@ const REPLAY12 = {
       ],
       s: [
         [
-          "Hi, my name is {Hyun-gi}, and I'm a software developer at {Hanwha System}.",
-          "안녕하세요, 제 이름은 현기이고 한화시스템의 소프트웨어 개발자예요.",
+          "Hi, my name is {Mark}, and I'm a software developer at {an IT company}.",
+          "안녕하세요, 제 이름은 마크이고 IT 회사의 소프트웨어 개발자예요.",
           "인사 · 직업",
         ],
         [
@@ -9415,8 +9415,8 @@ const REPLAY13 = {
       ],
       s: [
         [
-          "Hi, my name is {Hyun-gi}, and I'm a software developer at {Hanwha System}.",
-          "안녕하세요, 제 이름은 현기이고 한화시스템의 소프트웨어 개발자예요.",
+          "Hi, my name is {Mark}, and I'm a software developer at {an IT company}.",
+          "안녕하세요, 제 이름은 마크이고 IT 회사의 소프트웨어 개발자예요.",
           "인사 · 직업",
         ],
         [
@@ -10762,7 +10762,7 @@ const MOCK_REVIEWS = [
         q: "Q1 자기소개",
         cat: "서베이",
         issue:
-          "이름이 'Hyun Kina'로 들림. 직업 외에 집·취미 소개가 없고 '시험이 첫 시험이라 긴장된다'만 말함. 이번에는 점수를 봐 달라는 부탁은 하지 않음(개선)",
+          "이름이 다르게 들림. 직업 외에 집·취미 소개가 없고 '시험이 첫 시험이라 긴장된다'만 말함. 이번에는 점수를 봐 달라는 부탁은 하지 않음(개선)",
         fix: "인사 → 직업 → 집·취미 → 시험 이유 → 각오 5문장 (복기 세트 Q1)",
       },
       {
@@ -10970,7 +10970,7 @@ const MOCK_REVIEWS = [
     set: 9,
     grade: "IM1 후반 (IM2 경계 아래쪽) — 길이와 구조는 있는데, 질문 맞춤과 구체성이 흔들림",
     summary:
-      "문제당 3~6문장으로 길이는 충분했고, 질문 틀은 일부에서 잘 작동함. Q12 잘못 나온 주문은 '문제 → 두 가지 해결안(바꿔 주기 / 할인)'으로 롤플레이 틀을 정확히 썼고, Q14 두 장르는 '공통점 → First / Second 차이' 틀로 완결됨. Q8 대중교통도 '지하철 → 자가용이 적은 이유(혼잡·주차) → 편리함'으로 이유까지 설명함. 약점은 세 가지: ① 질문이 묻는 것과 다른 것을 답함(Q3 '이 산업이 개인적으로 어떻게 도움이 됐나'에 '전자 산업이 좋다'는 취향만, Q6 '최근'인데 '2년 전', Q9 '지금과 어떻게 다른지'가 없음) ② 개인 경험이 흐릿함(Q13 카페 문제 '7년 전, 주문이 틀렸다'로 끝나 무슨 일이 있었고 어떻게 해결했는지 없음, Q2는 '삼성에 입사하고 싶었다'고 해서 한화시스템 개발자라는 본인 정보와 어긋남) ③ 마무리 신호가 흔들림('That is all about that, can I say', 'It is good', 'I think'). Q11은 전화인데 '맛이 좋다'며 매장 안에서 말하는 것처럼 진행함. 녹취록 기준 평가라 발음·억양·침묵은 반영되지 않았고 'Hanhwa', 'OPPIC', 'cairatete(cafe latte)', 'Jang(genre)' 같은 STT 오인식은 감점하지 않음.",
+      "문제당 3~6문장으로 길이는 충분했고, 질문 틀은 일부에서 잘 작동함. Q12 잘못 나온 주문은 '문제 → 두 가지 해결안(바꿔 주기 / 할인)'으로 롤플레이 틀을 정확히 썼고, Q14 두 장르는 '공통점 → First / Second 차이' 틀로 완결됨. Q8 대중교통도 '지하철 → 자가용이 적은 이유(혼잡·주차) → 편리함'으로 이유까지 설명함. 약점은 세 가지: ① 질문이 묻는 것과 다른 것을 답함(Q3 '이 산업이 개인적으로 어떻게 도움이 됐나'에 '전자 산업이 좋다'는 취향만, Q6 '최근'인데 '2년 전', Q9 '지금과 어떻게 다른지'가 없음) ② 개인 경험이 흐릿함(Q13 카페 문제 '7년 전, 주문이 틀렸다'로 끝나 무슨 일이 있었고 어떻게 해결했는지 없음, Q2는 '삼성에 입사하고 싶었다'고 해서 IT 회사 개발자라는 본인 정보와 어긋남) ③ 마무리 신호가 흔들림('That is all about that, can I say', 'It is good', 'I think'). Q11은 전화인데 '맛이 좋다'며 매장 안에서 말하는 것처럼 진행함. 녹취록 기준 평가라 발음·억양·침묵은 반영되지 않았고 'Hanhwa', 'OPPIC', 'cairatete(cafe latte)', 'Jang(genre)' 같은 STT 오인식은 감점하지 않음.",
     good: [
       "Q12 잘못 나온 주문: 'Excuse me → I have a problem → 주문과 다른 메뉴 → 두 가지 해결안'이라는 롤플레이 해결 틀을 정확히 사용. 두 안 중 하나를 고르는 마무리도 좋음",
       "Q14 두 장르: 'They are similar … there are two differences. First … Second …'로 공통점과 차이점을 모두 다룸. 록은 기분 전환·스트레스 해소, 재즈는 집중으로 이유가 분명함",
@@ -10991,7 +10991,7 @@ const MOCK_REVIEWS = [
         q: "Q2 유망 산업",
         cat: "돌발",
         issue:
-          "'삼성에 들어가고 싶었다'고 말해 현재 직장(한화시스템 개발자)과 어긋남. 끝은 'Duck, work with the company / That is all about that. I can say'로 흐려짐",
+          "'삼성에 들어가고 싶었다'고 말해 현재 직장(IT 회사 개발자)과 어긋남. 끝은 'Duck, work with the company / That is all about that. I can say'로 흐려짐",
         fix: "'I'm proud of it'처럼 현재 나의 생각으로 닫고 'That's all about this industry.'로 끝내기 (복기 세트 Q2)",
       },
       {
@@ -12404,8 +12404,8 @@ const PHRASES = [
         en: "Hi, it's … I'm calling about",
         ko: "첫마디: 인사 + 용건",
         ex: [
-          "Hi, it's Hyun-gi. I'm calling about the trip.",
-          "안녕, 현기야. 여행 때문에 전화했어.",
+          "Hi, it's Mark. I'm calling about the trip.",
+          "안녕, 마크야. 여행 때문에 전화했어.",
         ],
       },
       {
@@ -12457,8 +12457,8 @@ const PHRASES = [
         en: "I'm sorry, but I have a problem",
         ko: "첫마디: 사과 + 문제 알리기",
         ex: [
-          "Hi, it's Hyun-gi. I'm sorry, but I have a problem.",
-          "안녕, 현기야. 미안한데 문제가 생겼어.",
+          "Hi, it's Mark. I'm sorry, but I have a problem.",
+          "안녕, 마크야. 미안한데 문제가 생겼어.",
         ],
       },
       {
@@ -12784,7 +12784,7 @@ const PHRASES = [
       {
         en: "Hi, my name is",
         ko: "인사 + 이름",
-        ex: ["Hi, my name is Hyun-gi.", "안녕하세요, 제 이름은 현기예요."],
+        ex: ["Hi, my name is Mark.", "안녕하세요, 제 이름은 마크예요."],
       },
       {
         en: "Nice to meet you",
@@ -12795,8 +12795,8 @@ const PHRASES = [
         en: "I'm a software developer at",
         ko: "직업·회사",
         ex: [
-          "I'm a software developer at Hanna System.",
-          "저는 한나시스템의 소프트웨어 개발자예요.",
+          "I'm a software developer at an IT company.",
+          "저는 IT 회사의 소프트웨어 개발자예요.",
         ],
       },
       {
