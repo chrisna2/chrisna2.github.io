@@ -1,0 +1,121 @@
+{
+  "name": "OPIc 스크립트 평가 (OpenAI)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "opic-eval",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "https://YOUR-APP-ORIGIN"
+        }
+      },
+      "id": "a1000000-0000-4000-8000-000000000001",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 300],
+      "webhookId": "opic-eval-webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 입력 검증 + OpenAI 요청 본문 구성\nconst MODEL = 'gpt-4.1-mini';\nconst MAX_CHARS = 4000;\n\nconst body = $input.first().json.body || {};\nconst transcript = String(body.transcript || '').trim();\nconst question = String(body.question || '').slice(0, 500);\nconst kind = String(body.kind || '');\nconst words = transcript ? transcript.split(/\\s+/).filter(Boolean).length : 0;\n\nif (!transcript) {\n  return [{ json: { ok: false, error: '스크립트가 비어 있어요.' } }];\n}\nif (words < 8) {\n  return [{ json: { ok: false, error: '문장이 너무 짧아 평가할 수 없어요. 8단어 이상 말해 보세요.' } }];\n}\nif (transcript.length > MAX_CHARS) {\n  return [{ json: { ok: false, error: '스크립트가 너무 길어요(4000자 이하).' } }];\n}\n\nconst system = [\n  'You are an OPIc (ACTFL Oral Proficiency Interview) rater for a Korean learner.',\n  'Evaluate ONLY the written transcript. You cannot judge pronunciation, intonation, or pauses.',\n  'Judge: task completion, tense consistency, connectors and organization, vocabulary range, sentence length and fluency signals (written form), and fit to the question type (survey / surprise / roleplay).',\n  'Write all feedback in Korean. Keep English examples inside quotes.',\n  'Return ONLY a JSON object with this exact shape:',\n  '{\"grade\": string (estimated OPIc grade, e.g. \"IM1\"), \"summary\": string, \"good\": string[], \"problems\": [{\"issue\": string, \"fix\": string}], \"actions\": string[]}',\n  'good: 2-3 concrete strengths. problems: 2-5 concrete issues tied to the transcript. actions: 3 priorities for the next attempt, concrete and actionable.'\n].join('\\n');\n\nconst user = [\n  'Question type: ' + kind,\n  'Question (English): ' + question,\n  'Transcript (' + words + ' words):',\n  transcript\n].join('\\n');\n\nconst openaiBody = {\n  model: MODEL,\n  temperature: 0.3,\n  response_format: { type: 'json_object' },\n  messages: [\n    { role: 'system', content: system },\n    { role: 'user', content: user }\n  ]\n};\n\nreturn [{ json: { ok: true, openaiBody } }];"
+      },
+      "id": "a1000000-0000-4000-8000-000000000002",
+      "name": "Validate and Build Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.ok }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "a1000000-0000-4000-8000-000000000003",
+      "name": "Is Valid",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.openaiBody }}",
+        "options": {
+          "timeout": 45000
+        }
+      },
+      "id": "a1000000-0000-4000-8000-000000000004",
+      "name": "OpenAI Chat",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [720, 200],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REPLACE_WITH_YOUR_CREDENTIAL_ID",
+          "name": "OpenAI API Key (Header Auth: name Authorization, value Bearer sk-...)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// OpenAI 응답 해석 + 기록 형식 보정 (MOCK_REVIEWS와 같은 필드)\nif ($json.error) {\n  const msg = $json.error.message || 'OpenAI API 오류';\n  return [{ json: { error: 'AI 평가 오류: ' + msg } }];\n}\nif (!$json.choices || !$json.choices[0]) {\n  return [{ json: { error: 'AI 응답이 비어 있어요. 잠시 후 다시 시도해 주세요.' } }];\n}\nlet r;\ntry {\n  r = JSON.parse($json.choices[0].message.content || '{}');\n} catch (e) {\n  return [{ json: { error: 'AI 응답을 해석하지 못했어요. 다시 시도해 주세요.' } }];\n}\nconst arr = (v) => (Array.isArray(v) ? v.map((x) => String(x)) : []);\nconst problems = Array.isArray(r.problems)\n  ? r.problems.map((p) => ({ issue: String((p && p.issue) || ''), fix: String((p && p.fix) || '') }))\n  : [];\nreturn [{\n  json: {\n    result: {\n      grade: String(r.grade || ''),\n      summary: String(r.summary || ''),\n      good: arr(r.good),\n      problems,\n      actions: arr(r.actions)\n    }\n  }\n}];"
+      },
+      "id": "a1000000-0000-4000-8000-000000000005",
+      "name": "Parse Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [960, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {}
+      },
+      "id": "a1000000-0000-4000-8000-000000000006",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1200, 300]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Validate and Build Prompt", "type": "main", "index": 0 }]]
+    },
+    "Validate and Build Prompt": {
+      "main": [[{ "node": "Is Valid", "type": "main", "index": 0 }]]
+    },
+    "Is Valid": {
+      "main": [
+        [{ "node": "OpenAI Chat", "type": "main", "index": 0 }],
+        [{ "node": "Respond to Webhook", "type": "main", "index": 0 }]
+      ]
+    },
+    "OpenAI Chat": {
+      "main": [[{ "node": "Parse Result", "type": "main", "index": 0 }]]
+    },
+    "Parse Result": {
+      "main": [[{ "node": "Respond to Webhook", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "3"
+}

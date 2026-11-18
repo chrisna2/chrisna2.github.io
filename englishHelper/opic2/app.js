@@ -43,6 +43,7 @@
     frameOf(q).forEach(function (k) { var li = document.createElement("li"); li.textContent = k; ol.appendChild(li); });
     renderVocab();
     $("txt").value = ""; $("result").hidden = true; $("model").hidden = true; $("model").innerHTML = "";
+    $("ai").hidden = true; $("aiBody").innerHTML = ""; $("aiStatus").textContent = "";
     $("timer").textContent = "0:00"; stopRec();
     $("work").scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -136,7 +137,7 @@
     if (w < 35) v.push("조금 짧아요. 이유와 느낌을 한 문장씩 더 붙여 보세요.");
     $("verdict").textContent = v.join(" ");
     $("result").hidden = false; $("model").hidden = true;
-    var hist = store(true); hist.unshift({ d: new Date().toISOString().slice(0, 16).replace("T", " "), q: cur.q.t, w: w, c: ctotal, sim: Math.round(sim * 100) });
+    var hist = store(true); hist.unshift({ d: nowLocal(), q: cur.q.t, w: w, c: ctotal, sim: Math.round(sim * 100) });
     store(false, hist.slice(0, 20)); renderHist();
   };
 
@@ -149,5 +150,79 @@
     var h = store(true); $("histBox").hidden = !h.length;
     $("hist").innerHTML = h.map(function (x) { return "<li>" + x.d + " · " + x.q + " · " + x.w + "단어 · 연결어 " + x.c + " · 겹침 " + x.sim + "%</li>"; }).join("");
   }
-  buildPool(); renderHist();
+  // 로컬 시간 기록용 (YYYY-MM-DD HH:MM)
+  function nowLocal() {
+    var d = new Date(), p = function (n) { return String(n).padStart(2, "0"); };
+    return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + " " + p(d.getHours()) + ":" + p(d.getMinutes());
+  }
+
+  // ===== AI 평가: 스크립트 → n8n 웹훅 → OpenAI → 결과 표시·기록 =====
+  var AI_KEY = "opic2_ai", aiBusy = false;
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function aiLoad() { try { return JSON.parse(localStorage.getItem(AI_KEY) || "[]"); } catch (e) { return []; } }
+  function aiSave(list) { try { localStorage.setItem(AI_KEY, JSON.stringify(list.slice(0, 30))); } catch (e) {} }
+  function aiHtml(r) {
+    var li = function (a) { return (a || []).map(function (x) { return "<li>" + esc(x) + "</li>"; }).join(""); };
+    var probs = (r.problems || []).map(function (p) {
+      return '<div class="rvp"><div>' + esc(p.issue) + '</div><div class="k">→ ' + esc(p.fix) + "</div></div>";
+    }).join("");
+    return '<p class="verdict">예상 등급: ' + esc(r.grade) + "</p>" +
+      "<p>" + esc(r.summary) + "</p>" +
+      '<div class="lbl">잘한 점</div><ul class="rv">' + li(r.good) + "</ul>" +
+      '<div class="lbl">문제점과 고칠 점</div>' + probs +
+      '<div class="lbl">다음 시도 우선순위</div><ol class="rv">' + li(r.actions) + "</ol>";
+  }
+  function renderAI() {
+    var list = aiLoad();
+    $("aiHistBox").hidden = !list.length;
+    $("aiHist").innerHTML = list.map(function (x) {
+      return '<details class="ai-item"><summary>' + esc(x.d) + " · " + esc(x.q) + " · 예상 등급 " + esc(x.result.grade) + "</summary>" +
+        '<div class="lbl">내 스크립트</div><p class="tx">' + esc(x.transcript) + "</p>" + aiHtml(x.result) + "</details>";
+    }).join("");
+  }
+
+  $("btnAI").onclick = function () {
+    var btn = this, text = $("txt").value.trim(), box = $("ai"), st = $("aiStatus"), body = $("aiBody");
+    box.hidden = false; body.innerHTML = "";
+    if (!cur) { st.textContent = "먼저 문제를 뽑아 주세요."; return; }
+    if (!text) { st.textContent = "먼저 말하거나 스크립트를 적어 주세요."; return; }
+    if (!window.N8N_EVAL_URL) { st.textContent = "설정 필요: opic2/config.js에 n8n 웹훅 주소를 넣어 주세요."; return; }
+    if (aiBusy) return;
+    if (recOn) stopRec();
+    aiBusy = true; btn.disabled = true; btn.textContent = "평가 중…";
+    st.textContent = "n8n → OpenAI로 평가를 요청하고 있어요. 보통 10~30초 걸려요.";
+    var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 60000);
+    var payload = {
+      question: cur.q.q[0], kind: cur.q.kind, transcript: text,
+      seconds: t0 ? Math.max(1, Math.round((Date.now() - t0) / 1000)) : 0
+    };
+    fetch(window.N8N_EVAL_URL, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload), signal: ctrl ? ctrl.signal : undefined
+    })
+      .then(function (res) { if (!res.ok) throw new Error("서버 응답 " + res.status); return res.json(); })
+      .then(function (data) {
+        if (data.error || !data.result) throw new Error(data.error || "응답 형식이 올바르지 않아요.");
+        var r = data.result;
+        st.textContent = "평가 완료";
+        body.innerHTML = aiHtml(r);
+        var list = aiLoad();
+        list.unshift({ d: nowLocal(), q: cur.q.t, kind: cur.q.kind, transcript: text, result: r });
+        aiSave(list); renderAI();
+      })
+      .catch(function (err) {
+        var why = err && err.name === "AbortError" ? "시간 초과(60초)" : (err && err.message) || "알 수 없는 오류";
+        st.textContent = "평가에 실패했어요: " + why + ". 다시 눌러 보세요.";
+      })
+      .then(function () {
+        clearTimeout(timer); aiBusy = false; btn.disabled = false; btn.textContent = "AI 평가";
+      });
+  };
+
+  buildPool(); renderHist(); renderAI();
 })();

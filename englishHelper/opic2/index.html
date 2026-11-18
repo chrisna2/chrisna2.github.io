@@ -48,7 +48,11 @@
       <span class="muted" id="srNote"></span>
     </div>
     <textarea id="txt" rows="6" placeholder="말한 내용이 여기에 적혀요. 음성 인식이 안 되면 직접 쓰거나 클로바노트 텍스트를 붙여 넣으세요."></textarea>
-    <button id="btnCheck" class="primary">점검하기</button>
+    <div class="row">
+      <button id="btnCheck" class="primary">점검하기</button>
+      <button id="btnAI">AI 평가</button>
+    </div>
+    <p class="hint">AI 평가는 스크립트 글을 n8n을 거쳐 OpenAI로 보냅니다. 발음과 억양은 평가하지 않아요.</p>
 
     <div id="result" hidden>
       <h2>4. 점검</h2>
@@ -57,15 +61,27 @@
       <button id="btnModel">참고 답안 보기</button>
       <div id="model" hidden></div>
     </div>
+
+    <div id="ai" hidden>
+      <h2>5. AI 평가</h2>
+      <p class="muted" id="aiStatus"></p>
+      <div id="aiBody"></div>
+    </div>
   </section>
 
   <section class="card" id="histBox" hidden>
     <h2>최근 연습</h2>
     <ul id="hist"></ul>
   </section>
+
+  <section class="card" id="aiHistBox" hidden>
+    <div class="lbl">AI 평가 기록 · 날짜별 평가와 복기</div>
+    <div id="aiHist"></div>
+  </section>
 </main>
 <script src="data2.js"></script>
 <script src="vocab.js"></script>
+<script src="config.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

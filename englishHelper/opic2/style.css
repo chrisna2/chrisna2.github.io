@@ -21,6 +21,14 @@ textarea{width:100%;margin:8px 0;resize:vertical}
 .stats{list-style:none;padding:0;margin:0}.stats li{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--line)}
 .ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}
 .verdict{font-weight:600}
+.lbl{font-size:.85rem;color:var(--muted);font-weight:600;margin:10px 0 4px}
+.rv{margin:0 0 4px;padding-left:20px;font-size:.92rem}.rv li{margin-bottom:3px}
+.rvp{background:var(--line);border-radius:10px;padding:8px 10px;margin-bottom:6px;font-size:.92rem}.rvp .k{color:var(--accent);margin-top:2px}
+.ai-item{border:1px solid var(--line);border-radius:12px;padding:4px 12px;margin-bottom:8px}
+.ai-item summary{cursor:pointer;padding-block:8px;font-size:.92rem;font-weight:500}
+.ai-item .tx{font-size:.9rem;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere}
+#aiHistBox .lbl{margin-top:0}
+#aiStatus{margin:6px 0}
 #model p{margin:.35rem 0}#model .ko{color:var(--muted);font-size:.9rem}
 #hist{padding-left:1.1rem}#hist li{margin:4px 0;font-size:.9rem}
 .topnav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
