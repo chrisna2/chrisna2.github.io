@@ -2,6 +2,7 @@
   "use strict";
   var $ = function (id) { return document.getElementById(id); };
   var cur = null, pool = [], rec = null, recOn = false, t0 = 0, tick = null, baseText = "";
+  var seq = -1; // 다음 문제 순서용: 현재 pool에서 몇 번째인지 (-1이면 아직 시작 전)
   var HKEY = "opic2_hist";
 
   function store(get, v) {
@@ -20,13 +21,28 @@
       if (sv !== "all" && String(s.id) !== sv) return;
       s.qs.forEach(function (q) { if (cv === "all" || q.cat === cv) pool.push({ set: s, q: q }); });
     });
+    seq = -1;
+    var sn = $("selNum"); sn.innerHTML = "";
+    pool.forEach(function (p, i) {
+      var o = document.createElement("option");
+      o.value = i; o.textContent = (i + 1) + ". " + p.q.t; sn.appendChild(o);
+    });
     $("count").textContent = "해당 문제 " + pool.length + "개";
   }
   selSet.onchange = $("selCat").onchange = buildPool;
 
-  function pick() {
+  // 랜덤 한 문제
+  function pickRandom() {
     if (!pool.length) return;
-    cur = pool[Math.floor(Math.random() * pool.length)];
+    seq = Math.floor(Math.random() * pool.length);
+    cur = pool[seq];
+    show();
+  }
+  // 다음 문제: 목록 순서대로 넘어가고, 끝에 도달하면 처음으로 돌아감
+  function pickNext() {
+    if (!pool.length) return;
+    seq = (seq + 1) % pool.length;
+    cur = pool[seq];
     show();
   }
 
@@ -37,6 +53,7 @@
   function show() {
     var q = cur.q;
     $("work").hidden = false;
+    if (seq >= 0) $("selNum").value = String(seq);
     $("qkind").textContent = q.kind; $("qt").textContent = cur.set.name + " · " + q.t;
     $("qen").textContent = q.q[0]; $("qko").textContent = q.q[1]; $("qko").hidden = true; $("btnKo").textContent = "한글 보기";
     var ol = $("frame"); ol.innerHTML = "";
@@ -62,8 +79,12 @@
   }
   $("btnVocab").onclick = function () { var b = $("vocab"); b.classList.toggle("hide"); this.textContent = b.classList.contains("hide") ? "뜻 보기" : "뜻 가리기"; };
 
-  $("btnRandom").onclick = pick;
-  $("btnNext").onclick = pick;
+  $("btnRandom").onclick = pickRandom;
+  $("btnNext").onclick = pickNext;
+  $("selNum").onchange = function () {
+    if (!pool.length) return;
+    seq = +this.value; cur = pool[seq]; show();
+  };
   $("btnKo").onclick = function () { var h = $("qko").hidden; $("qko").hidden = !h; this.textContent = h ? "한글 숨기기" : "한글 보기"; };
   $("btnSpeak").onclick = function () {
     try { speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(cur.q.q[0]); u.lang = "en-US"; u.rate = 0.95; speechSynthesis.speak(u); } catch (e) {}
