@@ -1,0 +1,191 @@
+{
+  "name": "OPIc 스크립트 평가 (OpenAI)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "opic-eval",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "https://chrisna2.github.io"
+        }
+      },
+      "id": "acb16fdd-ab36-4af2-8c77-c8d5ce90b9e6",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        224,
+        -96
+      ],
+      "webhookId": "opic-eval-webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 입력 검증 + OpenAI 요청 본문 구성\nconst MODEL = 'gpt-4.1-mini';\nconst MAX_CHARS = 4000;\n\nconst body = $input.first().json.body || {};\nconst transcript = String(body.transcript || '').trim();\nconst question = String(body.question || '').slice(0, 500);\nconst kind = String(body.kind || '');\nconst words = transcript ? transcript.split(/\\s+/).filter(Boolean).length : 0;\n\nif (!transcript) {\n  return [{ json: { ok: false, error: '스크립트가 비어 있어요.' } }];\n}\nif (words < 8) {\n  return [{ json: { ok: false, error: '문장이 너무 짧아 평가할 수 없어요. 8단어 이상 말해 보세요.' } }];\n}\nif (transcript.length > MAX_CHARS) {\n  return [{ json: { ok: false, error: '스크립트가 너무 길어요(4000자 이하).' } }];\n}\n\nconst system = [\n  'You are an OPIc (ACTFL Oral Proficiency Interview) rater for a Korean learner.',\n  'Evaluate ONLY the written transcript. You cannot judge pronunciation, intonation, or pauses.',\n  'Judge: task completion, tense consistency, connectors and organization, vocabulary range, sentence length and fluency signals (written form), and fit to the question type (survey / surprise / roleplay).',\n  'Write all feedback in Korean. Keep English examples inside quotes.',\n  'Return ONLY a JSON object with this exact shape:',\n  '{\"grade\": string (estimated OPIc grade, e.g. \"IM1\"), \"summary\": string, \"good\": string[], \"problems\": [{\"issue\": string, \"fix\": string}], \"actions\": string[]}',\n  'good: 2-3 concrete strengths. problems: 2-5 concrete issues tied to the transcript. actions: 3 priorities for the next attempt, concrete and actionable.'\n].join('\\n');\n\nconst user = [\n  'Question type: ' + kind,\n  'Question (English): ' + question,\n  'Transcript (' + words + ' words):',\n  transcript\n].join('\\n');\n\nconst openaiBody = {\n  model: MODEL,\n  temperature: 0.3,\n  response_format: { type: 'json_object' },\n  messages: [\n    { role: 'system', content: system },\n    { role: 'user', content: user }\n  ]\n};\n\nreturn [{ json: { ok: true, openaiBody } }];"
+      },
+      "id": "79be5650-1b2d-4980-a6c4-2e18db8031d8",
+      "name": "Validate and Build Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        464,
+        -96
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.ok }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "a25f53e5-df20-40b0-8845-cb66f5f5b0f8",
+      "name": "Is Valid",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        704,
+        -96
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "openAiApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.openaiBody }}",
+        "options": {
+          "timeout": 45000
+        }
+      },
+      "id": "7e675b68-656b-4a51-8c51-b3aba1e4504e",
+      "name": "OpenAI Chat",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        944,
+        -208
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "520pZdEfB2iZb14g",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// OpenAI 응답 해석 + 기록 형식 보정 (MOCK_REVIEWS와 같은 필드)\nif ($json.error) {\n  const msg = $json.error.message || 'OpenAI API 오류';\n  return [{ json: { error: 'AI 평가 오류: ' + msg } }];\n}\nif (!$json.choices || !$json.choices[0]) {\n  return [{ json: { error: 'AI 응답이 비어 있어요. 잠시 후 다시 시도해 주세요.' } }];\n}\nlet r;\ntry {\n  r = JSON.parse($json.choices[0].message.content || '{}');\n} catch (e) {\n  return [{ json: { error: 'AI 응답을 해석하지 못했어요. 다시 시도해 주세요.' } }];\n}\nconst arr = (v) => (Array.isArray(v) ? v.map((x) => String(x)) : []);\nconst problems = Array.isArray(r.problems)\n  ? r.problems.map((p) => ({ issue: String((p && p.issue) || ''), fix: String((p && p.fix) || '') }))\n  : [];\nreturn [{\n  json: {\n    result: {\n      grade: String(r.grade || ''),\n      summary: String(r.summary || ''),\n      good: arr(r.good),\n      problems,\n      actions: arr(r.actions)\n    }\n  }\n}];"
+      },
+      "id": "20c43731-467f-4b25-b9d9-a5bb32ce60a5",
+      "name": "Parse Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1184,
+        -208
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {}
+      },
+      "id": "7f4483bb-3d71-4b07-a00a-7a368a825048",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1424,
+        -96
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Validate and Build Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate and Build Prompt": {
+      "main": [
+        [
+          {
+            "node": "Is Valid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Valid": {
+      "main": [
+        [
+          {
+            "node": "OpenAI Chat",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat": {
+      "main": [
+        [
+          {
+            "node": "Parse Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Result": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true
+  },
+  "versionId": "379e70f7-a1e7-49bc-9534-40cffc88ba99",
+  "meta": {
+    "instanceId": "8c8294eae62f38de3d522192e5d729c250a8b286d3b9cea4309aab41f41faf40"
+  },
+  "nodeGroups": [],
+  "id": "QAjmQdZwS7XGzgip",
+  "tags": []
+}
