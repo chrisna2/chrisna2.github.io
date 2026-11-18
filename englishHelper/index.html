@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Helper - 영단어 암기</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 English Helper</h1>
+        </header>
+
+        <main>
+            <!-- 레벨 선택 -->
+            <div class="level-tabs">
+                <button class="level-tab active" data-level="middle">
+                    <span class="level-icon">📚</span> 중학생
+                </button>
+                <button class="level-tab" data-level="high">
+                    <span class="level-icon">📖</span> 고등학생
+                </button>
+                <button class="level-tab" data-level="opic">
+                    <span class="level-icon">🎯</span> OPIC
+                </button>
+            </div>
+
+            <!-- 플래시카드 (중학생/고등학생) -->
+            <div class="flash-app" id="flashApp">
+                <!-- 진행 상황 -->
+                <div class="progress-section">
+                    <div class="progress-info">
+                        <span class="progress-text">진행률</span>
+                        <span class="progress-count"><span id="currentCard">1</span> / <span id="totalCards">0</span></span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <!-- 카드 영역 -->
+                <div class="card-container">
+                    <div class="card" id="card">
+                        <div class="card-inner" id="cardInner">
+                            <div class="card-front">
+                                <div class="card-word" id="cardWord">English</div>
+                                <div class="card-hint">클릭 또는 스페이스바를 눌러 뜻을 보세요</div>
+                            </div>
+                            <div class="card-back">
+                                <div class="card-meaning" id="cardMeaning">뜻</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 학습 상태 버튼 -->
+                <div class="status-buttons">
+                    <button class="btn btn-learned" id="learnedBtn" title="이 단어 외웠어요">
+                        😊 외웠어요
+                    </button>
+                    <button class="btn btn-notlearned" id="notlearnedBtn" title="이 단어 못 외웠어요">
+                        🤔 못 외웠어요
+                    </button>
+                </div>
+
+                <!-- 컨트롤 버튼 -->
+                <div class="controls">
+                    <button class="btn btn-secondary" id="speakBtn" title="발음 듣기">
+                        🔊 발음 듣기
+                    </button>
+                    <button class="btn btn-primary" id="flipBtn" title="앞뒤 보기">
+                        🔄 뜻 보기
+                    </button>
+                    <button class="btn btn-secondary" id="repeatBtn" title="반복">
+                        🔁 반복
+                    </button>
+                </div>
+
+                <!-- 모드 선택 -->
+                <div class="mode-buttons">
+                    <button class="btn btn-mode active" id="allModeBtn" data-mode="all">
+                        📚 전체 단어
+                    </button>
+                    <button class="btn btn-mode" id="reviewModeBtn" data-mode="review">
+                        🔄 복습하기 (<span id="reviewCount">0</span>)
+                    </button>
+                </div>
+
+                <!-- 네비게이션 -->
+                <div class="navigation">
+                    <button class="btn btn-nav" id="prevBtn">← 이전</button>
+                    <button class="btn btn-nav" id="nextBtn">다음 →</button>
+                </div>
+
+                <!-- 옵션 -->
+                <div class="options">
+                    <label>
+                        <input type="checkbox" id="autoPlaySound" checked>
+                        새 카드마다 자동으로 발음 재생
+                    </label>
+                    <label>
+                        <input type="checkbox" id="showMeaningOnLoad">
+                        카드 로드 시 뜻 자동 표시
+                    </label>
+                </div>
+
+                <!-- 통계 -->
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label">외운 단어</span>
+                        <span class="stat-value stat-learned" id="learnedCount">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">못 외운 단어</span>
+                        <span class="stat-value stat-notlearned" id="notlearnedCount">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">학습률</span>
+                        <span class="stat-value stat-rate" id="learnRate">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OPIc 실전 연습 (OPIC 탭에서만 표시) -->
+            <section class="practice" id="opicPractice" hidden>
+                <div class="sub-tabs-row">
+                    <div class="sub-tabs">
+                        <button class="sub-tab" data-sub="survey">📝 서베이</button>
+                        <button class="sub-tab" data-sub="rp">🎭 롤플레이</button>
+                        <button class="sub-tab" data-sub="surprise">⚡ 돌발</button>
+                        <button class="sub-tab" data-sub="phr">💬 표현</button>
+                        <button class="sub-tab" data-sub="mock">⏱️ 모의고사</button>
+                        <button class="sub-tab" data-sub="frame">🧩 틀 연습</button>
+                        <button class="sub-tab" data-sub="words">🃏 단어 카드 <span class="practice-badge" id="opicUnkBadge" hidden></span></button>
+                        <a class="sub-full" id="opicFull" href="opic/index.html" target="_blank" rel="noopener">↗ 전체 화면</a>
+                    </div>
+                </div>
+                <iframe class="opic-frame" id="opicFrame" title="OPIc 실전 연습" allow="microphone; autoplay"></iframe>
+            </section>
+        </main>
+    </div>
+
+    <script src="words.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,466 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #FF8C42 0%, #FF6B6B 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    width: 100%;
+    padding: 40px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #666;
+    font-size: 1.1em;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* 레벨 탭 */
+.level-tabs {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.level-tab {
+    padding: 12px 20px;
+    border: 2px solid #e0e0e0;
+    background: white;
+    color: #666;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.level-tab:hover {
+    border-color: #FF8C42;
+    color: #FF8C42;
+}
+
+.level-tab.active {
+    background: linear-gradient(135deg, #FF8C42 0%, #FF6B6B 100%);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 5px 15px rgba(255, 140, 66, 0.3);
+}
+
+.level-icon {
+    font-size: 1.2em;
+}
+
+/* 진행 상황 */
+.progress-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95em;
+    color: #666;
+}
+
+.progress-text {
+    font-weight: 600;
+}
+
+.progress-count {
+    background: #f0f0f0;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #FF8C42 0%, #FF6B6B 100%);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+/* 카드 */
+.card-container {
+    display: flex;
+    justify-content: center;
+    min-height: 300px;
+    perspective: 1000px;
+}
+
+.card {
+    width: 100%;
+    height: 300px;
+    cursor: pointer;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+}
+
+.card-front {
+    background: linear-gradient(135deg, #FF8C42 0%, #FF6B6B 100%);
+    color: white;
+}
+
+.card-back {
+    background: linear-gradient(135deg, #FFB84D 0%, #FF8C42 100%);
+    color: white;
+    transform: rotateY(180deg);
+}
+
+.card-word {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.card-hint {
+    font-size: 0.9em;
+    opacity: 0.8;
+    margin-top: 20px;
+}
+
+.card-meaning {
+    font-size: 2.5em;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* 버튼 */
+.status-buttons,
+.controls,
+.mode-buttons,
+.navigation {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #FF8C42 0%, #FF6B6B 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255, 140, 66, 0.3);
+}
+
+.btn-secondary {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+.btn-nav {
+    background: #f0f0f0;
+    color: #333;
+    padding: 10px 20px;
+    flex: 1;
+}
+
+.btn-nav:hover {
+    background: #e0e0e0;
+}
+
+.btn-learned {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn-learned:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+}
+
+.btn-notlearned {
+    background: #9E9E9E;
+    color: white;
+}
+
+.btn-notlearned:hover {
+    background: #858585;
+    transform: translateY(-2px);
+}
+
+.btn-mode {
+    background: #f0f0f0;
+    color: #333;
+    padding: 10px 20px;
+}
+
+.btn-mode:hover {
+    background: #e0e0e0;
+}
+
+.btn-mode.active {
+    background: linear-gradient(135deg, #FF8C42 0%, #FF6B6B 100%);
+    color: white;
+    box-shadow: 0 5px 15px rgba(255, 140, 66, 0.3);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* 옵션 */
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 10px;
+}
+
+.options label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.95em;
+    color: #666;
+}
+
+.options input[type="checkbox"] {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+}
+
+/* 통계 */
+.stats {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    min-width: 120px;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 2em;
+    font-weight: bold;
+    color: #FF8C42;
+}
+
+.stat-learned {
+    color: #4CAF50;
+}
+
+.stat-notlearned {
+    color: #9E9E9E;
+}
+
+.stat-rate {
+    color: #FF8C42;
+}
+
+/* OPIc 바로가기 */
+[hidden] {
+    display: none !important;
+}
+
+.flash-app {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* OPIc 실전 연습: 하위 탭 + 임베드 화면 */
+.practice {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sub-tabs-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.sub-tabs {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.sub-tab {
+    padding: 8px 12px;
+    border: 2px solid #f0d9c6;
+    background: #fff8f2;
+    color: #666;
+    border-radius: 999px;
+    font-size: 0.88em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sub-tab:hover {
+    border-color: #FF8C42;
+    color: #C8430A;
+}
+
+.sub-tab.active {
+    background: linear-gradient(135deg, #FF8C42 0%, #FF6B6B 100%);
+    color: white;
+    border-color: transparent;
+}
+
+.sub-full {
+    margin-left: auto;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #C8430A;
+    text-decoration: none;
+}
+
+.sub-full:hover {
+    text-decoration: underline;
+}
+
+.practice-badge {
+    margin-left: 4px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #FF8C42;
+    color: white;
+    font-size: 0.8em;
+}
+
+.sub-tab.active .practice-badge {
+    background: white;
+    color: #FF6B6B;
+}
+
+.opic-frame {
+    width: 100%;
+    height: 75vh;
+    min-height: 520px;
+    border: 1px solid #f0d9c6;
+    border-radius: 12px;
+    background: white;
+}
+
+/* 반응형 */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+
+    .card-word,
+    .card-meaning {
+        font-size: 2em;
+    }
+
+    .btn {
+        padding: 10px 16px;
+        font-size: 0.9em;
+    }
+}

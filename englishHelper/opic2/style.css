@@ -1,0 +1,37 @@
+:root{--fg:#2d2620;--muted:#7a6a5c;--card:#fff;--line:#f0d9c6;--accent:#c8430a;--accent-ink:#fff;--accent-fill:linear-gradient(135deg,#ff8c42 0%,#ff6b6b 100%);--page-bg:linear-gradient(135deg,#ff8c42 0%,#ff6b6b 100%);--shadow:0 20px 60px rgba(0,0,0,.3);--ok:#15803d;--warn:#b45309;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--fg:#f5ebe0;--muted:#b8a594;--card:#221a14;--line:#3d2f25;--accent:#ff9a5c;--accent-ink:#1f1007;--page-bg:linear-gradient(135deg,#2b1708 0%,#3b1c1c 100%);--shadow:0 20px 60px rgba(0,0,0,.6);--ok:#4ade80;--warn:#fbbf24;--bad:#f87171;color-scheme:dark}}
+*{box-sizing:border-box}
+html{background:var(--page-bg);background-attachment:fixed;min-height:100%}
+body{max-width:720px;width:calc(100% - 32px);margin:16px auto;padding:24px 16px;background:var(--card);color:var(--fg);border-radius:20px;box-shadow:var(--shadow);font:16px/1.55 system-ui,-apple-system,"Segoe UI","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif}
+header,main{margin:0;padding:0}
+h1{margin:0;font-size:1.4rem}.sub{margin:.2rem 0 1rem;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px}
+h2{font-size:1rem;margin:18px 0 8px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+label{display:flex;gap:6px;align-items:center;color:var(--muted);font-size:.9rem}
+select,button,textarea{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+select{max-width:100%}
+button{cursor:pointer}button.primary{background:var(--accent-fill);color:var(--accent-ink);border-color:transparent;font-weight:600}
+button.rec{background:var(--bad);border-color:var(--bad);color:#fff}
+textarea{width:100%;margin:8px 0;resize:vertical}
+.muted,.hint{color:var(--muted);font-size:.9rem}.q{font-size:1.1rem;font-weight:600;margin:.4rem 0}
+.tag{background:var(--line);border-radius:6px;padding:2px 8px;font-size:.8rem;margin-right:8px}
+.frame{padding-left:1.3rem}.frame li{margin:4px 0}
+.timer{font-variant-numeric:tabular-nums;font-weight:600}
+.stats{list-style:none;padding:0;margin:0}.stats li{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--line)}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}
+.verdict{font-weight:600}
+#model p{margin:.35rem 0}#model .ko{color:var(--muted);font-size:.9rem}
+#hist{padding-left:1.1rem}#hist li{margin:4px 0;font-size:.9rem}
+.topnav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.switch-ver{padding:6px 12px;border:1px solid var(--line);border-radius:999px;font-size:.85rem;font-weight:600;text-decoration:none;color:var(--accent);background:var(--card)}
+.switch-ver:hover,.switch-ver.on{background:var(--accent-fill);color:var(--accent-ink);border-color:transparent}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:.9rem}.chip small{color:var(--muted);margin-left:6px}.chips.hide small{display:none}
+button.small{padding:2px 8px;font-size:.8rem;margin-left:8px}.up{margin:4px 0;padding-left:1.1rem;font-size:.9rem}
+.flip{min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;background:var(--accent-fill);color:var(--accent-ink);border:0;border-radius:12px;padding:20px;cursor:pointer;user-select:none}
+.flip .muted{color:inherit;opacity:.9}
+.big{font-size:1.6rem;font-weight:700}.tiny{font-size:.8rem}
+/* 메인 페이지 안에 임베드될 때 (?embed=1): 바깥 배경·카드·상단 메뉴를 숨긴다 */
+html.embed{background:transparent}
+.embed body{max-width:none;width:100%;margin:0;padding:8px 10px;background:transparent;box-shadow:none;border-radius:0}
+.embed .topnav{display:none}
